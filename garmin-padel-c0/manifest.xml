@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<iq:manifest xmlns:iq="http://www.garmin.com/xml/connectiq" version="3">
+    <iq:application
+        id="e6b2455dd36646098e6f53e16d77df8f"
+        type="watch-app"
+        name="@Strings.AppName"
+        entry="PadelApp"
+        launcherIcon="@Drawables.LauncherIcon"
+        minApiLevel="4.1.6">
+        <iq:products>
+            <iq:product id="fr265"/>
+        </iq:products>
+        <iq:languages>
+            <iq:language>hun</iq:language>
+            <iq:language>eng</iq:language>
+        </iq:languages>
+        <iq:barrels/>
+    </iq:application>
+</iq:manifest>
