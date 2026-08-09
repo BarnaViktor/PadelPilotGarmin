@@ -20,6 +20,13 @@ Az első fejlesztési checkpoint elkészült:
 - szerváló csapat és csapaton belüli szerváló sorszám követése;
 - utolsó pont visszavonása;
 - pont-, game-, szett- és meccsvégi rezgéses visszajelzés;
+- aktív meccs automatikus helyi mentése és alkalmazás-újraindítás utáni
+  folytatása;
+- legfeljebb 20 lezárt meccset mutató helyi előzmény;
+- sérült aktív mentések és előzményrekordok biztonságos kiszűrése;
+- Garmin FIT-aktivitás `racket/padel` besorolással;
+- pulzus-, kalória- és aktivitásidő-rögzítés;
+- pontesemények, szetteredmények és győztes egyedi FIT-mezőkben;
 - Monkey C egységtesztek a C1 pontozási és szervarend szabályokra.
 
 A hőtérkép, az Americano, a Mexicano, a FIT-aktivitás és a szerveres
@@ -57,26 +64,63 @@ eszköz, 416 x 416 pixeles kerek AMOLED kijelzővel. Részletek:
 
 Beállítás:
 
-- UP/DOWN: mező kiválasztása;
-- MENU és BACK: érték módosítása;
-- START/STOP: meccs indítása.
+- UP/DOWN: menüpont kiválasztása;
+- START: a kiválasztott beállítás megnyitása;
+- a beállításon belül UP/DOWN: érték módosítása;
+- a beállításon belül START: mentés, BACK: módosítás elvetése;
+- START GAME menüponton START: meccs indítása.
+- MATCH HISTORY menüponton START: a legutóbbi lezárt meccsek megnyitása.
+
+Alkalmazás-újraindítás után:
+
+- érvényes aktív mentésnél START és a zöld pipa folytatja a meccset;
+- DOWN és a piros X elveti az aktív mentést;
+- a folytatott meccs szüneteltetett állapotban nyílik meg.
 
 Meccs közben:
 
-- UP: pont az 1. csapatnak;
-- DOWN: pont a 2. csapatnak;
+- DOWN: pont a saját csapatnak;
+- UP: pont az ellenfél csapatának;
 - BACK: utolsó pont visszavonása.
+- START/STOP: szünetmenü megnyitása.
 
-Az érintés csak kiegészítő lehetőség; az alkalmazás teljesen használható
-gombokkal.
+A meccs indításakor egy Garmin FIT-aktivitás is elindul. Szünetben a FIT-időzítő
+megáll, folytatáskor újraindul. A meccs mentése a FIT-aktivitást is menti, az
+elvetés pedig a FIT-rögzítést is eldobja.
+
+Szünet közben:
+
+- UP/DOWN: választás a szerváló oldal módosítása és a meccs leállítása között;
+- START a szerváló oldal módosításán: négy pályanegyedes választó megnyitása;
+- a megérintett negyed meghatározza a szerváló csapatot és a jobb/bal oldalt,
+  majd a játék azonnal folytatódik;
+- START a meccs leállításán: megerősítő kérdés megnyitása;
+- a megerősítésnél START és a zöld pipa leállítja, DOWN és a piros X
+  visszalép a szünetmenübe;
+- BACK: folytatás.
+
+## Meccskijelző
+
+- az oszlopok rendre a szettet (`S`), game-et (`G`) és pontot (`P`) mutatják;
+- a felső piros sor az ellenfél, az alsó zöld sor a saját csapat eredménye;
+- a külső színes negyedív jelzi a szerváló csapatot és az automatikusan
+  váltakozó jobb/bal szervaoldalt;
+- a meccs végén lapozható összegzés mutatja a végeredményt, az időtartamot és
+  a szettenkénti bontást.
+- az összegzésen START nyitja meg a mentési kérdést; a kijelzőszéli zöld pipa
+  a START gombnál menti helyben, a piros X a DOWN gombnál elveti a meccset,
+  majd mindkét művelet visszatér a beállításokhoz.
+
+Az érintés a szünetmenü négy pályanegyedes szervaválasztójában szükséges;
+a többi alapművelet gombokkal használható.
 
 ## Következő checkpoint
 
-Helyi mentés és visszaállítás:
+Valós órás MVP:
 
-- meccsállapot tartós mentése;
-- alkalmazás bezárása utáni folytatás;
-- lezárt meccsek rövid előzménye;
-- hibás vagy félbemaradt mentés kezelése.
+- valós meccsek tesztelése;
+- FIT-fájl és Garmin Connect megjelenítés ellenőrzése;
+- olvashatóság, memória és akkumulátor mérése;
+- Connect IQ Store előkészítése.
 
 Részletek: [docs/development-roadmap.md](docs/development-roadmap.md)

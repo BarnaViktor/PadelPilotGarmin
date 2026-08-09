@@ -9,6 +9,8 @@ class MatchSnapshot {
     var nextGameServerTeam;
     var tieBreakFirstServerTeam;
     var teamServerSlots;
+    var completedSets;
+    var serveSideOffset;
 
     function initialize(engine) {
         points = engine.getPoints().slice(0, 2);
@@ -21,5 +23,7 @@ class MatchSnapshot {
         nextGameServerTeam = engine.getNextGameServerTeam();
         tieBreakFirstServerTeam = engine.getTieBreakFirstServerTeam();
         teamServerSlots = engine.getTeamServerSlots().slice(0, 2);
+        completedSets = engine.getCompletedSets().slice(0, engine.getCompletedSets().size());
+        serveSideOffset = engine.getServeSideOffset();
     }
 }

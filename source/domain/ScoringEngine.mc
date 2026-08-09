@@ -1,3 +1,5 @@
+using Toybox.Lang as Lang;
+
 class ScoringEngine {
     var _config;
     var _points;
@@ -11,6 +13,8 @@ class ScoringEngine {
     var _nextGameServerTeam;
     var _tieBreakFirstServerTeam;
     var _teamServerSlots;
+    var _completedSets;
+    var _serveSideOffset;
 
     function initialize(config) {
         _config = config;
@@ -25,6 +29,8 @@ class ScoringEngine {
         _nextGameServerTeam = config.startingServerTeam;
         _tieBreakFirstServerTeam = null;
         _teamServerSlots = [0, 0];
+        _completedSets = [];
+        _serveSideOffset = 0;
     }
 
     function awardPoint(team) {
@@ -60,6 +66,8 @@ class ScoringEngine {
         _nextGameServerTeam = snapshot.nextGameServerTeam;
         _tieBreakFirstServerTeam = snapshot.tieBreakFirstServerTeam;
         _teamServerSlots = snapshot.teamServerSlots;
+        _completedSets = snapshot.completedSets;
+        _serveSideOffset = snapshot.serveSideOffset;
 
         return true;
     }
@@ -98,6 +106,7 @@ class ScoringEngine {
     function completeGame(team) {
         _games[team] += 1;
         _points = [0, 0];
+        _serveSideOffset = 0;
         advanceGameServer();
 
         var opponent = 1 - team;
@@ -134,12 +143,19 @@ class ScoringEngine {
         var completedTieBreak = _isTieBreak;
         var completedTieBreakFirstServerTeam = _tieBreakFirstServerTeam;
 
+        if (_isDecidingMatchTieBreak) {
+            _completedSets.add([_points[0], _points[1], true]);
+        } else {
+            _completedSets.add([_games[0], _games[1], false]);
+        }
+
         _sets[team] += 1;
         _games = [0, 0];
         _points = [0, 0];
         _isTieBreak = false;
         _isDecidingMatchTieBreak = false;
         _tieBreakFirstServerTeam = null;
+        _serveSideOffset = 0;
 
         if (completedTieBreak && completedTieBreakFirstServerTeam != null) {
             _serverTeam = 1 - completedTieBreakFirstServerTeam;
@@ -199,6 +215,10 @@ class ScoringEngine {
         return _points;
     }
 
+    function getConfig() {
+        return _config;
+    }
+
     function getGames() {
         return _games;
     }
@@ -235,7 +255,132 @@ class ScoringEngine {
         return _teamServerSlots;
     }
 
+    function getCompletedSets() {
+        return _completedSets;
+    }
+
+    function getServeSide() {
+        var playedPoints = _points[0] + _points[1];
+        return (playedPoints + _serveSideOffset) % 2;
+    }
+
+    function getServeSideOffset() {
+        return _serveSideOffset;
+    }
+
+    function setServeSide(side) {
+        if (side != 0 && side != 1) {
+            return false;
+        }
+
+        var playedPoints = _points[0] + _points[1];
+        _serveSideOffset = (side - (playedPoints % 2) + 2) % 2;
+        return true;
+    }
+
+    function setServerTeam(team) {
+        if (team != 0 && team != 1) {
+            return false;
+        }
+
+        _serverTeam = team;
+        _nextGameServerTeam = team;
+
+        if (_isTieBreak) {
+            var servedPoints = _points[0] + _points[1];
+            if (servedPoints == 0) {
+                _tieBreakFirstServerTeam = team;
+            } else {
+                var blocksAfterFirst = ((servedPoints + 1) / 2).toNumber();
+                _tieBreakFirstServerTeam = (blocksAfterFirst % 2 == 0)
+                    ? team
+                    : 1 - team;
+            }
+        }
+
+        return true;
+    }
+
     function serverLabel() {
-        return "T" + (_serverTeam + 1) + "-" + (_teamServerSlots[_serverTeam] + 1);
+        var teamName = _serverTeam == 0 ? "MY" : "OPP";
+        return teamName + "-" + (_teamServerSlots[_serverTeam] + 1);
+    }
+
+    function exportState() {
+        var completedSets = [];
+        for (var index = 0; index < _completedSets.size(); index += 1) {
+            completedSets.add(_completedSets[index].slice(0, 3));
+        }
+
+        return [
+            _points.slice(0, 2),
+            _games.slice(0, 2),
+            _sets.slice(0, 2),
+            _isTieBreak,
+            _isDecidingMatchTieBreak,
+            _matchWinner == null ? -1 : _matchWinner,
+            _serverTeam,
+            _nextGameServerTeam,
+            _tieBreakFirstServerTeam == null ? -1 : _tieBreakFirstServerTeam,
+            _teamServerSlots.slice(0, 2),
+            completedSets,
+            _serveSideOffset
+        ];
+    }
+
+    function restoreState(state) {
+        if (!(state instanceof Lang.Array) || state.size() != 12
+                || !isScorePair(state[0]) || !isScorePair(state[1])
+                || !isScorePair(state[2]) || !isScorePair(state[9])
+                || !(state[3] instanceof Lang.Boolean)
+                || !(state[4] instanceof Lang.Boolean)
+                || !isTeamOrNone(state[5]) || !isTeam(state[6])
+                || !isTeam(state[7]) || !isTeamOrNone(state[8])
+                || !(state[10] instanceof Lang.Array)
+                || !isTeam(state[11])) {
+            return false;
+        }
+
+        var restoredSets = [];
+        for (var index = 0; index < state[10].size(); index += 1) {
+            var completedSet = state[10][index];
+            if (!(completedSet instanceof Lang.Array) || completedSet.size() != 3
+                    || !(completedSet[0] instanceof Lang.Number)
+                    || !(completedSet[1] instanceof Lang.Number)
+                    || !(completedSet[2] instanceof Lang.Boolean)
+                    || completedSet[0] < 0 || completedSet[1] < 0) {
+                return false;
+            }
+            restoredSets.add(completedSet.slice(0, 3));
+        }
+
+        _points = state[0].slice(0, 2);
+        _games = state[1].slice(0, 2);
+        _sets = state[2].slice(0, 2);
+        _isTieBreak = state[3];
+        _isDecidingMatchTieBreak = state[4];
+        _matchWinner = state[5] == -1 ? null : state[5];
+        _serverTeam = state[6];
+        _nextGameServerTeam = state[7];
+        _tieBreakFirstServerTeam = state[8] == -1 ? null : state[8];
+        _teamServerSlots = state[9].slice(0, 2);
+        _completedSets = restoredSets;
+        _serveSideOffset = state[11];
+        _history = [];
+        return true;
+    }
+
+    function isScorePair(value) {
+        return value instanceof Lang.Array && value.size() == 2
+            && value[0] instanceof Lang.Number && value[1] instanceof Lang.Number
+            && value[0] >= 0 && value[1] >= 0;
+    }
+
+    function isTeam(value) {
+        return value instanceof Lang.Number && (value == 0 || value == 1);
+    }
+
+    function isTeamOrNone(value) {
+        return value instanceof Lang.Number && (value == -1 || value == 0 || value == 1);
     }
 }

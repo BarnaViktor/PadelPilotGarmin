@@ -1,4 +1,7 @@
 <drawables>
     <bitmap id="LauncherIcon" filename="launcher_icon.svg"/>
+    <bitmap id="ActionConfirm" filename="action_confirm.png"/>
+    <bitmap id="ActionCancel" filename="action_cancel.png"/>
+    <bitmap id="TrophyMyTeam" filename="trophy_my_team.png"/>
+    <bitmap id="TrophyOpponent" filename="trophy_opponent.png"/>
 </drawables>
-

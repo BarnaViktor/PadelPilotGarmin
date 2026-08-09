@@ -14,6 +14,11 @@
             <iq:language>hun</iq:language>
             <iq:language>eng</iq:language>
         </iq:languages>
+        <iq:permissions>
+            <iq:uses-permission id="Fit"/>
+            <iq:uses-permission id="FitContributor"/>
+            <iq:uses-permission id="Sensor"/>
+        </iq:permissions>
         <iq:barrels/>
     </iq:application>
 </iq:manifest>

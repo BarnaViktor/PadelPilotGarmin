@@ -12,15 +12,32 @@ class SetupInputDelegate extends WatchUi.BehaviorDelegate {
         var key = event.getKey();
 
         if (key == WatchUi.KEY_UP) {
-            _setup.moveSelection(-1);
+            if (_setup.editing) {
+                _setup.changeSelected(1);
+            } else {
+                _setup.moveSelection(-1);
+            }
         } else if (key == WatchUi.KEY_DOWN) {
-            _setup.moveSelection(1);
+            if (_setup.editing) {
+                _setup.changeSelected(-1);
+            } else {
+                _setup.moveSelection(1);
+            }
         } else if (key == WatchUi.KEY_ESC) {
-            _setup.changeSelected(-1);
-        } else if (key == WatchUi.KEY_MENU) {
-            _setup.changeSelected(1);
+            if (!_setup.editing) {
+                return false;
+            }
+            _setup.cancelEditing();
         } else if (key == WatchUi.KEY_ENTER) {
-            startMatch();
+            if (_setup.editing) {
+                _setup.saveEditing();
+            } else if (_setup.isStartGameSelected()) {
+                startMatch();
+            } else if (_setup.isHistorySelected()) {
+                openHistory();
+            } else {
+                _setup.beginEditing();
+            }
         } else {
             return false;
         }
@@ -30,7 +47,15 @@ class SetupInputDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onTap(clickEvent) {
-        _setup.moveSelection(1);
+        if (_setup.editing) {
+            _setup.saveEditing();
+        } else if (_setup.isStartGameSelected()) {
+            startMatch();
+        } else if (_setup.isHistorySelected()) {
+            openHistory();
+        } else {
+            _setup.beginEditing();
+        }
         WatchUi.requestUpdate();
         return true;
     }
@@ -38,13 +63,27 @@ class SetupInputDelegate extends WatchUi.BehaviorDelegate {
     function onSwipe(swipeEvent) {
         var direction = swipeEvent.getDirection();
         if (direction == WatchUi.SWIPE_UP) {
-            _setup.moveSelection(1);
+            if (_setup.editing) {
+                _setup.changeSelected(-1);
+            } else {
+                _setup.moveSelection(1);
+            }
         } else if (direction == WatchUi.SWIPE_DOWN) {
-            _setup.moveSelection(-1);
+            if (_setup.editing) {
+                _setup.changeSelected(1);
+            } else {
+                _setup.moveSelection(-1);
+            }
         } else if (direction == WatchUi.SWIPE_LEFT) {
-            _setup.changeSelected(1);
+            if (!_setup.editing) {
+                return false;
+            }
+            _setup.saveEditing();
         } else if (direction == WatchUi.SWIPE_RIGHT) {
-            _setup.changeSelected(-1);
+            if (!_setup.editing) {
+                return false;
+            }
+            _setup.cancelEditing();
         } else {
             return false;
         }
@@ -55,7 +94,14 @@ class SetupInputDelegate extends WatchUi.BehaviorDelegate {
 
     function startMatch() {
         var engine = new ScoringEngine(_setup.toConfig());
-        var view = new ScoreView(engine);
-        WatchUi.pushView(view, new ScoreInputDelegate(view, engine), WatchUi.SLIDE_IMMEDIATE);
+        var view = new ScoreView(engine, 0);
+        ActiveMatchSession.attach(engine, view);
+        PadelActivityRecorder.start(engine);
+        WatchUi.pushView(view, new ScoreInputDelegate(view, engine, false), WatchUi.SLIDE_IMMEDIATE);
+    }
+
+    function openHistory() {
+        var view = new MatchHistoryView();
+        WatchUi.pushView(view, new MatchHistoryInputDelegate(view), WatchUi.SLIDE_IMMEDIATE);
     }
 }

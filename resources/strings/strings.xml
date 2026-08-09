@@ -1,4 +1,15 @@
 <strings>
     <string id="AppName">Garmin Padel</string>
+    <string id="FitPointEvent">Point event</string>
+    <string id="FitPointEventUnit">code</string>
+    <string id="FitMySetScore">My games</string>
+    <string id="FitOpponentSetScore">Opponent games</string>
+    <string id="FitGamesUnit">games</string>
+    <string id="FitMySets">My sets</string>
+    <string id="FitOpponentSets">Opponent sets</string>
+    <string id="FitSetsUnit">sets</string>
+    <string id="FitWinner">Winner</string>
+    <string id="FitWinnerUnit">team</string>
+    <string id="FitSetScores">Set scores</string>
+    <string id="FitNoUnit">score</string>
 </strings>
-

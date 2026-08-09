@@ -14,10 +14,15 @@ class SetupView extends WatchUi.View {
         dc.clear();
 
         var centerX = dc.getWidth() / 2;
+        if (_setup.editing) {
+            drawEditor(dc, centerX);
+            return;
+        }
+
         dc.drawText(
             centerX,
-            24,
-            Graphics.FONT_SMALL,
+            42,
+            Graphics.FONT_TINY,
             "MATCH SETUP",
             Graphics.TEXT_JUSTIFY_CENTER
         );
@@ -26,19 +31,22 @@ class SetupView extends WatchUi.View {
         if (firstField < 0) {
             firstField = 0;
         }
-        if (firstField > _setup.fieldCount() - 5) {
-            firstField = _setup.fieldCount() - 5;
+        if (firstField > _setup.itemCount() - 5) {
+            firstField = _setup.itemCount() - 5;
         }
 
         for (var row = 0; row < 5; row += 1) {
             var index = firstField + row;
-            var y = 72 + row * 42;
+            var y = 84 + row * 42;
             var selected = index == _setup.selectedField;
+            var isHistory = index == _setup.fieldCount();
 
-            dc.setColor(selected ? Graphics.COLOR_BLACK : Graphics.COLOR_WHITE,
+            dc.setColor(selected ? Graphics.COLOR_BLACK
+                    : (index == _setup.itemCount() - 1 ? Graphics.COLOR_GREEN
+                    : (isHistory ? Graphics.COLOR_LT_GRAY : Graphics.COLOR_WHITE)),
                 selected ? Graphics.COLOR_WHITE : Graphics.COLOR_BLACK);
             if (selected) {
-                dc.fillRectangle(34, y - 5, dc.getWidth() - 68, 34);
+                dc.fillRectangle(46, y - 4, dc.getWidth() - 92, 32);
             }
             dc.drawText(
                 centerX,
@@ -49,20 +57,24 @@ class SetupView extends WatchUi.View {
             );
         }
 
-        dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_BLACK);
+    }
+
+    function drawEditor(dc, centerX) {
         dc.drawText(
             centerX,
-            dc.getHeight() - 46,
+            58,
             Graphics.FONT_TINY,
-            "UP/DOWN field  START edit/start",
+            _setup.titleFor(_setup.selectedField),
             Graphics.TEXT_JUSTIFY_CENTER
         );
+
         dc.drawText(
             centerX,
-            dc.getHeight() - 24,
-            Graphics.FONT_TINY,
-            "MENU/BACK value",
+            138,
+            Graphics.FONT_MEDIUM,
+            _setup.valueLabelFor(_setup.selectedField),
             Graphics.TEXT_JUSTIFY_CENTER
         );
+
     }
 }

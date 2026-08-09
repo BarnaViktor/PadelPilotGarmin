@@ -7,6 +7,8 @@ class MatchSetupState {
     var decidingTieBreakTarget;
     var requireTwoPointTieBreakMargin;
     var selectedField;
+    var editing;
+    var _originalValue;
 
     function initialize() {
         bestOfSets = 3;
@@ -17,14 +19,53 @@ class MatchSetupState {
         decidingTieBreakTarget = 10;
         requireTwoPointTieBreakMargin = true;
         selectedField = 0;
+        editing = false;
+        _originalValue = null;
     }
 
     function fieldCount() {
         return 7;
     }
 
+    function itemCount() {
+        return fieldCount() + 2;
+    }
+
     function moveSelection(delta) {
-        selectedField = (selectedField + delta + fieldCount()) % fieldCount();
+        selectedField = (selectedField + delta + itemCount()) % itemCount();
+    }
+
+    function isStartGameSelected() {
+        return selectedField == fieldCount() + 1;
+    }
+
+    function isHistorySelected() {
+        return selectedField == fieldCount();
+    }
+
+    function beginEditing() {
+        if (isStartGameSelected() || isHistorySelected()) {
+            return false;
+        }
+
+        _originalValue = valueFor(selectedField);
+        editing = true;
+        return true;
+    }
+
+    function saveEditing() {
+        editing = false;
+        _originalValue = null;
+    }
+
+    function cancelEditing() {
+        if (!editing) {
+            return;
+        }
+
+        setValueFor(selectedField, _originalValue);
+        editing = false;
+        _originalValue = null;
     }
 
     function changeSelected(delta) {
@@ -64,20 +105,95 @@ class MatchSetupState {
 
     function labelFor(index) {
         if (index == 0) {
-            return "Sets: best of " + bestOfSets;
+            return "Best of " + bestOfSets;
         } else if (index == 1) {
             return "Scoring: " + (scoringMode == ScoringMode.ADVANTAGE ? "Adv" : "No-ad");
         } else if (index == 2) {
-            return "First serve: Team " + (startingServerTeam + 1);
+            return "First serve: " + (startingServerTeam == 0 ? "Me" : "Opponent");
         } else if (index == 3) {
             return "Decider: " + (decidingSetMode == DecidingSetMode.FULL_SET ? "Full" : "MTB");
         } else if (index == 4) {
-            return "TB target: " + regularTieBreakTarget;
+            return "Tie-break to " + regularTieBreakTarget;
         } else if (index == 5) {
-            return "MTB target: " + decidingTieBreakTarget;
+            return "Match TB to " + decidingTieBreakTarget;
         }
 
-        return "Win by 2: " + (requireTwoPointTieBreakMargin ? "On" : "Off");
+        if (index == 6) {
+            return "Win by 2: " + (requireTwoPointTieBreakMargin ? "On" : "Off");
+        }
+
+        if (index == fieldCount()) {
+            return "MATCH HISTORY";
+        }
+
+        return "START GAME";
+    }
+
+    function titleFor(index) {
+        var titles = [
+            "MATCH LENGTH",
+            "SCORING",
+            "FIRST SERVE",
+            "DECIDING SET",
+            "TIE-BREAK TARGET",
+            "MATCH TB TARGET",
+            "TIE-BREAK MARGIN"
+        ];
+        return titles[index];
+    }
+
+    function valueLabelFor(index) {
+        if (index == 0) {
+            return "Best of " + bestOfSets;
+        } else if (index == 1) {
+            return scoringMode == ScoringMode.ADVANTAGE ? "Advantage" : "No-ad";
+        } else if (index == 2) {
+            return startingServerTeam == 0 ? "My team" : "Opponent";
+        } else if (index == 3) {
+            return decidingSetMode == DecidingSetMode.FULL_SET ? "Full set" : "Match tie-break";
+        } else if (index == 4) {
+            return regularTieBreakTarget.toString();
+        } else if (index == 5) {
+            return decidingTieBreakTarget.toString();
+        }
+
+        return requireTwoPointTieBreakMargin ? "On" : "Off";
+    }
+
+    function valueFor(index) {
+        if (index == 0) {
+            return bestOfSets;
+        } else if (index == 1) {
+            return scoringMode;
+        } else if (index == 2) {
+            return startingServerTeam;
+        } else if (index == 3) {
+            return decidingSetMode;
+        } else if (index == 4) {
+            return regularTieBreakTarget;
+        } else if (index == 5) {
+            return decidingTieBreakTarget;
+        }
+
+        return requireTwoPointTieBreakMargin;
+    }
+
+    function setValueFor(index, value) {
+        if (index == 0) {
+            bestOfSets = value;
+        } else if (index == 1) {
+            scoringMode = value;
+        } else if (index == 2) {
+            startingServerTeam = value;
+        } else if (index == 3) {
+            decidingSetMode = value;
+        } else if (index == 4) {
+            regularTieBreakTarget = value;
+        } else if (index == 5) {
+            decidingTieBreakTarget = value;
+        } else if (index == 6) {
+            requireTwoPointTieBreakMargin = value;
+        }
     }
 
     function cycleValue(values, current, delta) {

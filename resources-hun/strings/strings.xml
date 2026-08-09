@@ -1,4 +1,15 @@
 <strings>
     <string id="AppName">Garmin Padel</string>
+    <string id="FitPointEvent">Pontesemény</string>
+    <string id="FitPointEventUnit">kód</string>
+    <string id="FitMySetScore">Saját game</string>
+    <string id="FitOpponentSetScore">Ellenfél game</string>
+    <string id="FitGamesUnit">game</string>
+    <string id="FitMySets">Saját szett</string>
+    <string id="FitOpponentSets">Ellenfél szett</string>
+    <string id="FitSetsUnit">szett</string>
+    <string id="FitWinner">Győztes</string>
+    <string id="FitWinnerUnit">csapat</string>
+    <string id="FitSetScores">Szetteredmények</string>
+    <string id="FitNoUnit">eredmény</string>
 </strings>
-

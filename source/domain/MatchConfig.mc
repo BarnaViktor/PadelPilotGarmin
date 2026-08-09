@@ -1,11 +1,15 @@
-enum ScoringMode {
-    ADVANTAGE,
-    NO_AD
+module ScoringMode {
+    enum {
+        ADVANTAGE,
+        NO_AD
+    }
 }
 
-enum DecidingSetMode {
-    FULL_SET,
-    MATCH_TIEBREAK
+module DecidingSetMode {
+    enum {
+        FULL_SET,
+        MATCH_TIEBREAK
+    }
 }
 
 class MatchConfig {
