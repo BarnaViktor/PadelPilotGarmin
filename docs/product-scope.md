@@ -61,7 +61,8 @@ majd őrizze meg a végeredményt és a később definiált alapstatisztikákat.
 1. A Forerunner 265 mellett a 265S és más 416 x 416 AMOLED órák is támogatottak
    legyenek-e az MVP-ben?
 2. Az 1 szettes meccsnél értelmezhető legyen-e külön döntőszett-mód?
-3. A no-ad fogadóoldalát csak kijelezzük, vagy rögzítsük is?
+3. Eldöntve: no-ad 40–40-nél nincs külön fogadóoldal-választás; a
+   következő pont megszakítás nélkül lezárja a game-et.
 4. A „labdamenet ideje” a megelőző pont lezárásától vagy külön indítással
    számolódjon?
 5. Kell-e a pontbevitelhez azonnali, rövid visszavonási képernyő?

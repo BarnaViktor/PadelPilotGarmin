@@ -38,9 +38,8 @@ class RecoveryInputDelegate extends WatchUi.BehaviorDelegate {
 
     function discardMatch() {
         ActiveMatchSession.clear();
-        var setup = new MatchSetupState();
-        var setupView = new SetupView(setup);
-        WatchUi.switchToView(setupView,
-            new SetupInputDelegate(setup), WatchUi.SLIDE_IMMEDIATE);
+        var homeView = new HomeView();
+        WatchUi.switchToView(homeView,
+            new HomeInputDelegate(homeView), WatchUi.SLIDE_IMMEDIATE);
     }
 }

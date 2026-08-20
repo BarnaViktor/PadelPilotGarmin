@@ -1,4 +1,4 @@
-# Garmin Padel
+# Padel Pilot
 
 Garmin Connect IQ óraalkalmazás, amely a kiválasztott szabályok alapján
 végigvezeti és rögzíti egy padelmérkőzés eredményét.
@@ -19,6 +19,7 @@ Az első fejlesztési checkpoint elkészült:
 - kezdő adogató csapat;
 - szerváló csapat és csapaton belüli szerváló sorszám követése;
 - utolsó pont visszavonása;
+- legfeljebb 20 pontnyi, memóriában korlátozott undo-előzmény;
 - pont-, game-, szett- és meccsvégi rezgéses visszajelzés;
 - aktív meccs automatikus helyi mentése és alkalmazás-újraindítás utáni
   folytatása;
@@ -84,6 +85,10 @@ Meccs közben:
 - BACK: utolsó pont visszavonása.
 - START/STOP: szünetmenü megnyitása.
 
+A pontbevitel game, szett, oldalcsere-helyzet és no-ad 40–40 után is
+megszakítás nélkül folytatódik. A szerváló csapat vagy oldal csak a
+szünetmenüből, opcionálisan bírálható felül.
+
 A meccs indításakor egy Garmin FIT-aktivitás is elindul. Szünetben a FIT-időzítő
 megáll, folytatáskor újraindul. A meccs mentése a FIT-aktivitást is menti, az
 elvetés pedig a FIT-rögzítést is eldobja.
@@ -92,8 +97,8 @@ Szünet közben:
 
 - UP/DOWN: választás a szerváló oldal módosítása és a meccs leállítása között;
 - START a szerváló oldal módosításán: négy pályanegyedes választó megnyitása;
-- a megérintett negyed meghatározza a szerváló csapatot és a jobb/bal oldalt,
-  majd a játék azonnal folytatódik;
+- UP/DOWN választ pályanegyedet, START menti a szerváló csapatot és a
+  jobb/bal oldalt, majd a játék azonnal folytatódik;
 - START a meccs leállításán: megerősítő kérdés megnyitása;
 - a megerősítésnél START és a zöld pipa leállítja, DOWN és a piros X
   visszalép a szünetmenübe;
@@ -101,18 +106,18 @@ Szünet közben:
 
 ## Meccskijelző
 
-- az oszlopok rendre a szettet (`S`), game-et (`G`) és pontot (`P`) mutatják;
-- a felső piros sor az ellenfél, az alsó zöld sor a saját csapat eredménye;
-- a külső színes negyedív jelzi a szerváló csapatot és az automatikusan
-  váltakozó jobb/bal szervaoldalt;
+- a cián A és piros B oldal nagy számokkal mutatja a pontállást;
+- felül a lezárt szettek, alul az aktuális set/game állás látható;
+- a lime labdajelölés mutatja a szerváló csapatot;
 - a meccs végén lapozható összegzés mutatja a végeredményt, az időtartamot és
   a szettenkénti bontást.
 - az összegzésen START nyitja meg a mentési kérdést; a kijelzőszéli zöld pipa
   a START gombnál menti helyben, a piros X a DOWN gombnál elveti a meccset,
   majd mindkét művelet visszatér a beállításokhoz.
 
-Az érintés a szünetmenü négy pályanegyedes szervaválasztójában szükséges;
-a többi alapművelet gombokkal használható.
+Meccs közben az érintés szándékosan nem módosít állapotot: minden művelet
+fizikai gombbal végezhető. A gyorsan ismétlődő pontgomb-események közül csak
+az első kerül feldolgozásra.
 
 ## Következő checkpoint
 

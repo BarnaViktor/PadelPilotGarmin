@@ -6,12 +6,14 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
     var _view;
     var _engine;
     var _returnToFreshSetup;
+    var _pointInputGuard;
 
     function initialize(view, engine, returnToFreshSetup) {
         BehaviorDelegate.initialize();
         _view = view;
         _engine = engine;
         _returnToFreshSetup = returnToFreshSetup;
+        _pointInputGuard = new PointInputGuard(500);
     }
 
     function onKey(event) {
@@ -31,6 +33,7 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
             awardPoint(0);
         } else if (key == WatchUi.KEY_ESC) {
             if (_engine.undoLastPoint()) {
+                _pointInputGuard.reset();
                 PadelActivityRecorder.recordUndo(_engine);
                 vibrate(25);
             }
@@ -57,7 +60,16 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
                 return false;
             }
         } else if (_view.isPauseServerPicker()) {
-            if (key == WatchUi.KEY_ESC) {
+            if (key == WatchUi.KEY_DOWN) {
+                _view.moveServerPickerSelection(1);
+            } else if (key == WatchUi.KEY_UP) {
+                _view.moveServerPickerSelection(-1);
+            } else if (key == WatchUi.KEY_ENTER) {
+                selectServer(
+                    _view.getSelectedServerTeam(),
+                    _view.getSelectedServeSide()
+                );
+            } else if (key == WatchUi.KEY_ESC) {
                 _view.setPauseServerPicker(false);
             } else {
                 return false;
@@ -112,6 +124,7 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
             _view.setFinishMenu(true);
         } else if (key == WatchUi.KEY_ESC) {
             if (_engine.undoLastPoint()) {
+                _pointInputGuard.reset();
                 _view.resumeMatchAfterUndo();
                 PadelActivityRecorder.resume();
                 PadelActivityRecorder.recordUndo(_engine);
@@ -127,37 +140,12 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onTap(clickEvent) {
-        if (_view.isPaused()) {
-            if (_view.isPauseServerPicker()) {
-                selectServerAt(clickEvent.getCoordinates());
-                WatchUi.requestUpdate();
-            }
-            return true;
-        }
-
-        if (clickEvent.getCoordinates()[0] < System.getDeviceSettings().screenWidth / 2) {
-            awardPoint(1);
-        } else {
-            awardPoint(0);
-        }
-        WatchUi.requestUpdate();
+        // Live match input is intentionally button-only. Consuming touches keeps
+        // sweat, sleeves and accidental taps from changing match state.
         return true;
     }
 
-    function selectServerAt(coordinates) {
-        var screenWidth = System.getDeviceSettings().screenWidth;
-        var screenHeight = System.getDeviceSettings().screenHeight;
-        var isTop = coordinates[1] < screenHeight / 2;
-        var isLeft = coordinates[0] < screenWidth / 2;
-        var team = isTop ? 1 : 0;
-        var side;
-
-        if (team == 1) {
-            side = isLeft ? 0 : 1;
-        } else {
-            side = isLeft ? 1 : 0;
-        }
-
+    function selectServer(team, side) {
         _engine.setServerTeam(team);
         _engine.setServeSide(side);
         _view.setPaused(false);
@@ -167,6 +155,10 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function awardPoint(team) {
+        if (!_pointInputGuard.accept(System.getTimer())) {
+            return;
+        }
+
         var oldGames = _engine.getGames().slice(0, 2);
         var oldSets = _engine.getSets().slice(0, 2);
         var oldWinner = _engine.getMatchWinner();
@@ -196,9 +188,8 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
     function exitMatch() {
         ActiveMatchSession.clear();
         if (_returnToFreshSetup) {
-            var setup = new MatchSetupState();
-            var setupView = new SetupView(setup);
-            WatchUi.switchToView(setupView, new SetupInputDelegate(setup), WatchUi.SLIDE_IMMEDIATE);
+            var homeView = new HomeView();
+            WatchUi.switchToView(homeView, new HomeInputDelegate(homeView), WatchUi.SLIDE_IMMEDIATE);
         } else {
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
         }

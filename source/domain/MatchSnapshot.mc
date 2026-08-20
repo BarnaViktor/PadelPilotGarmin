@@ -11,6 +11,9 @@ class MatchSnapshot {
     var teamServerSlots;
     var completedSets;
     var serveSideOffset;
+    var sideChangePending;
+    var receiverSideSelectionPending;
+    var receiverSide;
 
     function initialize(engine) {
         points = engine.getPoints().slice(0, 2);
@@ -25,5 +28,8 @@ class MatchSnapshot {
         teamServerSlots = engine.getTeamServerSlots().slice(0, 2);
         completedSets = engine.getCompletedSets().slice(0, engine.getCompletedSets().size());
         serveSideOffset = engine.getServeSideOffset();
+        sideChangePending = false;
+        receiverSideSelectionPending = false;
+        receiverSide = null;
     }
 }

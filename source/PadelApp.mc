@@ -13,10 +13,8 @@ class PadelApp extends Application.AppBase {
             return [recoveryView, new RecoveryInputDelegate(recoveryView)];
         }
 
-        var setup = new MatchSetupState();
-        var view = new SetupView(setup);
-
-        return [view, new SetupInputDelegate(setup)];
+        var view = new HomeView();
+        return [view, new HomeInputDelegate(view)];
     }
 
     function onStop(state) {

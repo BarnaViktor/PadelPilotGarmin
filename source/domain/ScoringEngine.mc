@@ -1,6 +1,8 @@
 using Toybox.Lang as Lang;
 
 class ScoringEngine {
+    const MAX_UNDO_HISTORY = 20;
+
     var _config;
     var _points;
     var _games;
@@ -15,6 +17,9 @@ class ScoringEngine {
     var _teamServerSlots;
     var _completedSets;
     var _serveSideOffset;
+    var _sideChangePending;
+    var _receiverSideSelectionPending;
+    var _receiverSide;
 
     function initialize(config) {
         _config = config;
@@ -31,6 +36,9 @@ class ScoringEngine {
         _teamServerSlots = [0, 0];
         _completedSets = [];
         _serveSideOffset = 0;
+        _sideChangePending = false;
+        _receiverSideSelectionPending = false;
+        _receiverSide = null;
     }
 
     function awardPoint(team) {
@@ -39,6 +47,9 @@ class ScoringEngine {
         }
 
         _history.add(new MatchSnapshot(self));
+        if (_history.size() > MAX_UNDO_HISTORY) {
+            _history.remove(_history[0]);
+        }
 
         if (_isTieBreak) {
             awardTieBreakPoint(team);
@@ -68,6 +79,9 @@ class ScoringEngine {
         _teamServerSlots = snapshot.teamServerSlots;
         _completedSets = snapshot.completedSets;
         _serveSideOffset = snapshot.serveSideOffset;
+        _sideChangePending = snapshot.sideChangePending;
+        _receiverSideSelectionPending = snapshot.receiverSideSelectionPending;
+        _receiverSide = snapshot.receiverSide;
 
         return true;
     }
@@ -107,7 +121,13 @@ class ScoringEngine {
         _games[team] += 1;
         _points = [0, 0];
         _serveSideOffset = 0;
+        _receiverSideSelectionPending = false;
+        _receiverSide = null;
         advanceGameServer();
+
+        // Scoring continues without an acknowledgement screen. Court changes
+        // are handled by the players and do not block point entry.
+        _sideChangePending = false;
 
         var opponent = 1 - team;
         if (_games[team] >= 6 && (_games[team] - _games[opponent]) >= 2) {
@@ -132,10 +152,12 @@ class ScoringEngine {
         if (_points[team] >= target && hasMargin) {
             if (!_isDecidingMatchTieBreak) {
                 _games[team] += 1;
+                _sideChangePending = false;
             }
             completeSet(team);
         } else {
             updateTieBreakServer();
+            _sideChangePending = false;
         }
     }
 
@@ -268,6 +290,40 @@ class ScoringEngine {
         return _serveSideOffset;
     }
 
+    function isSideChangePending() {
+        return _sideChangePending;
+    }
+
+    function acknowledgeSideChange() {
+        if (!_sideChangePending) {
+            return false;
+        }
+
+        _sideChangePending = false;
+        return true;
+    }
+
+    function isReceiverSideSelectionPending() {
+        return _receiverSideSelectionPending;
+    }
+
+    function getReceiverSide() {
+        return _receiverSide;
+    }
+
+    function selectReceiverSide(side) {
+        if (!_receiverSideSelectionPending || (side != 0 && side != 1)) {
+            return false;
+        }
+
+        // The receiver stands diagonally opposite the server, so the chosen
+        // receiver side is the inverse of the server's service side.
+        setServeSide(1 - side);
+        _receiverSide = side;
+        _receiverSideSelectionPending = false;
+        return true;
+    }
+
     function setServeSide(side) {
         if (side != 0 && side != 1) {
             return false;
@@ -324,12 +380,16 @@ class ScoringEngine {
             _tieBreakFirstServerTeam == null ? -1 : _tieBreakFirstServerTeam,
             _teamServerSlots.slice(0, 2),
             completedSets,
-            _serveSideOffset
+            _serveSideOffset,
+            _sideChangePending,
+            _receiverSideSelectionPending,
+            _receiverSide == null ? -1 : _receiverSide
         ];
     }
 
     function restoreState(state) {
-        if (!(state instanceof Lang.Array) || state.size() != 12
+        if (!(state instanceof Lang.Array)
+                || (state.size() != 12 && state.size() != 13 && state.size() != 15)
                 || !isScorePair(state[0]) || !isScorePair(state[1])
                 || !isScorePair(state[2]) || !isScorePair(state[9])
                 || !(state[3] instanceof Lang.Boolean)
@@ -337,7 +397,10 @@ class ScoringEngine {
                 || !isTeamOrNone(state[5]) || !isTeam(state[6])
                 || !isTeam(state[7]) || !isTeamOrNone(state[8])
                 || !(state[10] instanceof Lang.Array)
-                || !isTeam(state[11])) {
+                || !isTeam(state[11])
+                || (state.size() >= 13 && !(state[12] instanceof Lang.Boolean))
+                || (state.size() == 15 && (!(state[13] instanceof Lang.Boolean)
+                    || !isTeamOrNone(state[14])))) {
             return false;
         }
 
@@ -366,6 +429,11 @@ class ScoringEngine {
         _teamServerSlots = state[9].slice(0, 2);
         _completedSets = restoredSets;
         _serveSideOffset = state[11];
+        // Older saves may contain UI-blocking side-change or receiver-choice
+        // flags. They are deliberately ignored so restored matches continue.
+        _sideChangePending = false;
+        _receiverSideSelectionPending = false;
+        _receiverSide = null;
         _history = [];
         return true;
     }

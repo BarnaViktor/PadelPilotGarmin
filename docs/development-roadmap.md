@@ -28,9 +28,9 @@ két gombbal végigjátszható.
 - pontozási edge case-ek teljes tesztkészlete.
 
 C1 kiegészítésként elkészült a kétlépcsős beállítási felület, a saját/ellenfél
-szemléletű pontbevitel, valamint a szünet/folytatás, kézi szerválócsapat-váltás
-és megerősített meccsleállítás. Még nem készült el: oldalcsere és no-ad
-fogadóoldal-választás.
+szemléletű pontbevitel, valamint a szünet/folytatás, opcionális kézi
+szerválócsapat- és szervaoldal-váltás, valamint a megerősített
+meccsleállítás. A pontbevitel game és no-ad 40–40 után is folyamatos.
 
 ## C2 – Helyi mentés és visszaállítás
 
@@ -75,6 +75,11 @@ folyamatosan helyreáll.
 ## C4 – Valós órás MVP
 
 Becsült idő: 1–2 hét.
+
+Aktuális megjegyzés: az alkalmazás dizájnja átdolgozás alatt áll. A
+vizuális finomhangolás, a Store-képek, az ikon és a verziózott kiadási
+csomag elkészítése a dizájn jóváhagyásáig szünetel. Nincs kijelölt `1.0`
+verzió.
 
 - valós meccsek tesztelése;
 - véletlen gombnyomások és izzadt kéz kezelése;

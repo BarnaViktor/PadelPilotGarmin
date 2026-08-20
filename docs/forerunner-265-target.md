@@ -52,19 +52,28 @@ Meccs képernyő:
 - DOWN: pont a 2. csapatnak;
 - BACK: utolsó pont visszavonása.
 
-Érintés kiegészítő:
+Érintés a beállítás során:
 
 - a beállító képernyőn koppintás a következő mezőre lép;
 - húzás fel/le mezőt vált;
-- húzás bal/jobbra értéket vált;
-- a meccs képernyő bal fele az 1. csapatnak, jobb fele a 2. csapatnak ad
-  pontot.
+- húzás bal/jobbra értéket vált.
+
+## C4 beviteli védelem
+
+- Aktív meccs közben az érintés nem módosít állapotot, így izzadság vagy ruha
+  sem tud véletlen pontot bevinni.
+- A pontbevitel game és no-ad 40–40 után is automatikusan folytatódik.
+- A kézi szerválóváltás opcionálisan, fizikai gombokkal érhető el.
+- A négy pályanegyedes szervaválasztóban UP/DOWN mozgatja a kijelölést, START
+  menti azt, BACK pedig visszalép.
+- Az 500 ms-on belül ismétlődő pontgomb-eseményekből csak az első érvényes;
+  undo után a védelem azonnal alaphelyzetbe áll.
 
 ## Ismert C1 korlátozások
 
 - A csapaton belüli szerváló játékos csak 1/2 sorszámként jelenik meg, nincs
   játékosnév.
-- A no-ad fogadóoldal nincs külön rögzítve, csak a döntő pont szabálya működik.
+- No-ad 40–40-nél nincs külön fogadóoldal-választó.
 - Nincs tartós mentés, aktivitásrögzítés, backend, webalkalmazás,
   szinkronizáció vagy hőtérkép.
 - Fordítás és szimulátoros ellenőrzés csak telepített Connect IQ SDK-val

@@ -28,7 +28,7 @@ class MatchSetupState {
     }
 
     function itemCount() {
-        return fieldCount() + 2;
+        return fieldCount() + 1;
     }
 
     function moveSelection(delta) {
@@ -36,11 +36,11 @@ class MatchSetupState {
     }
 
     function isStartGameSelected() {
-        return selectedField == fieldCount() + 1;
+        return selectedField == fieldCount();
     }
 
     function isHistorySelected() {
-        return selectedField == fieldCount();
+        return false;
     }
 
     function beginEditing() {
@@ -120,10 +120,6 @@ class MatchSetupState {
 
         if (index == 6) {
             return "Win by 2: " + (requireTwoPointTieBreakMargin ? "On" : "Off");
-        }
-
-        if (index == fieldCount()) {
-            return "MATCH HISTORY";
         }
 
         return "START GAME";

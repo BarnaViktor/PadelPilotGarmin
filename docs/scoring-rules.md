@@ -25,8 +25,7 @@ szimulátor vagy akár mobilalkalmazás is használja.
 
 - 0 → 15 → 30 → 40;
 - 40–40-nél a következő pont megnyeri a game-et;
-- a fogadóoldal kiválasztását a felület külön eseményként kezeli majd, mert az
-  nem változtatja meg a pontozási eredményt.
+- nincs külön fogadóoldal-választó vagy megszakító képernyő.
 
 ## Normál szett
 
@@ -51,6 +50,12 @@ beállított célpontszámú tie-break indul.
   majd két pontonként vált a szerváló csapat.
 - Normál tie-break után a következő szettet az a csapat kezdi adogatással,
   amelyik a tie-break első pontját fogadta.
+
+## Folyamatos meccsvezetés
+
+- Game, szett és tie-break közben nincs kötelező oldalcsere-nyugtázás.
+- A pontbevitel automatikusan folytatható; a szervarendet a motor kezeli.
+- A szerváló csapat és szervaoldal a szünetmenüből opcionálisan javítható.
 
 ## Undo
 
