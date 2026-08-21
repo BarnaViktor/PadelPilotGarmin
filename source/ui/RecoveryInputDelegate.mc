@@ -23,7 +23,7 @@ class RecoveryInputDelegate extends WatchUi.BehaviorDelegate {
     function resumeMatch() {
         var loaded = _view.getLoadedMatch();
         var engine = loaded[0];
-        var scoreView = new ScoreView(engine, loaded[1]);
+        var scoreView = new ScoreView(engine, loaded[1], loaded[2]);
         if (engine.getMatchWinner() == null) {
             scoreView.setPaused(true);
         } else {

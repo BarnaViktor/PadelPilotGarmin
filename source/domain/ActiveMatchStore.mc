@@ -3,9 +3,9 @@ using Toybox.Lang as Lang;
 
 module ActiveMatchStore {
     const ACTIVE_KEY = "activeMatch";
-    const SCHEMA_VERSION = 1;
+    const SCHEMA_VERSION = 2;
 
-    function save(engine, elapsedSeconds) {
+    function save(engine, elapsedSeconds, setEndTimes) {
         var config = engine.getConfig();
         Storage.setValue(ACTIVE_KEY, [
             SCHEMA_VERSION,
@@ -19,7 +19,8 @@ module ActiveMatchStore {
                 config.decidingTieBreakTarget,
                 config.requireTwoPointTieBreakMargin
             ],
-            engine.exportState()
+            engine.exportState(),
+            setEndTimes
         ]);
     }
 
@@ -30,8 +31,10 @@ module ActiveMatchStore {
         }
 
         try {
-            if (!(stored instanceof Lang.Array) || stored.size() != 4
-                    || stored[0] != SCHEMA_VERSION
+            if (!(stored instanceof Lang.Array)
+                    || (stored[0] == 1 && stored.size() != 4)
+                    || (stored[0] == SCHEMA_VERSION && stored.size() != 5)
+                    || (stored[0] != 1 && stored[0] != SCHEMA_VERSION)
                     || !(stored[1] instanceof Lang.Number) || stored[1] < 0
                     || !isValidConfig(stored[2])) {
                 clear();
@@ -48,7 +51,16 @@ module ActiveMatchStore {
                 clear();
                 return null;
             }
-            return [engine, stored[1]];
+            var setEndTimes = [];
+            if (stored[0] == SCHEMA_VERSION) {
+                if (!isValidSetEndTimes(stored[4], stored[1],
+                        engine.getCompletedSets().size())) {
+                    clear();
+                    return null;
+                }
+                setEndTimes = stored[4].slice(0, stored[4].size());
+            }
+            return [engine, stored[1], setEndTimes];
         } catch (error) {
             clear();
             return null;
@@ -76,6 +88,23 @@ module ActiveMatchStore {
             && value[4] >= 5 && value[4] <= 21
             && value[5] >= 7 && value[5] <= 21;
     }
+
+    function isValidSetEndTimes(value, elapsedSeconds, completedSetCount) {
+        if (!(value instanceof Lang.Array)
+                || value.size() != completedSetCount) {
+            return false;
+        }
+        var previous = 0;
+        for (var index = 0; index < value.size(); index += 1) {
+            if (!(value[index] instanceof Lang.Number)
+                    || value[index] < previous
+                    || value[index] > elapsedSeconds) {
+                return false;
+            }
+            previous = value[index];
+        }
+        return true;
+    }
 }
 
 module ActiveMatchSession {
@@ -90,7 +119,8 @@ module ActiveMatchSession {
 
     function persist() {
         if (_engine != null && _view != null) {
-            ActiveMatchStore.save(_engine, _view.getDurationSeconds());
+            ActiveMatchStore.save(_engine, _view.getDurationSeconds(),
+                _view.getSetEndTimes());
         }
     }
 

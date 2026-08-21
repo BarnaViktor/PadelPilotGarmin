@@ -1,0 +1,109 @@
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 1; @symbol_moduledef = [ScoringMode,1,7,18]; ]
+module ScoringMode {
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 1; ]
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 2; ]
+    enum {
+        [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 3; @position = 8; @symbol_enumdec = [ADVANTAGE,3,8,17]; ]
+        ADVANTAGE,
+        [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 4; @position = 8; @symbol_enumdec = [NO_AD,4,8,13]; ]
+        NO_AD
+    }
+}
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 8; @symbol_moduledef = [DecidingSetMode,8,7,22]; ]
+module DecidingSetMode {
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 8; ]
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 9; ]
+    enum {
+        [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 10; @position = 8; @symbol_enumdec = [FULL_SET,10,8,16]; ]
+        FULL_SET,
+        [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 11; @position = 8; @symbol_enumdec = [MATCH_TIEBREAK,11,8,22]; ]
+        MATCH_TIEBREAK
+    }
+}
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 15; @symbol_classdef = [MatchConfig,15,6,17]; ]
+class MatchConfig {
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 15; ]
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 15; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 16; @position = 8; @symbol_vardef = [bestOfSets,16,8,18]; ]
+    var bestOfSets;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 17; @position = 8; @symbol_vardef = [scoringMode,17,8,19]; ]
+    var scoringMode;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 18; @position = 8; @symbol_vardef = [decidingSetMode,18,8,23]; ]
+    var decidingSetMode;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 19; @position = 8; @symbol_vardef = [startingServerTeam,19,8,26]; ]
+    var startingServerTeam;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 20; @position = 8; @symbol_vardef = [regularTieBreakTarget,20,8,29]; ]
+    var regularTieBreakTarget;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 21; @position = 8; @symbol_vardef = [decidingTieBreakTarget,21,8,30]; ]
+    var decidingTieBreakTarget;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 22; @position = 8; @symbol_vardef = [requireTwoPointTieBreakMargin,22,8,37]; ]
+    var requireTwoPointTieBreakMargin;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 24; @symbol_functiondef = [initialize,24,13,23]; @symbol_param<0> = [selectedBestOfSets,25,8,26]; @symbol_param<1> = [selectedScoringMode,26,8,27]; @symbol_param<2> = [selectedDecidingSetMode,27,8,31]; @symbol_param<3> = [selectedStartingServerTeam,28,8,34]; @symbol_param<4> = [selectedRegularTieBreakTarget,29,8,37]; @symbol_param<5> = [selectedDecidingTieBreakTarget,30,8,38]; @symbol_param<6> = [selectedRequireTwoPointTieBreakMargin,31,8,45]; ]
+    function initialize(selectedBestOfSets, selectedScoringMode, selectedDecidingSetMode, selectedStartingServerTeam, selectedRegularTieBreakTarget, selectedDecidingTieBreakTarget, selectedRequireTwoPointTieBreakMargin) as Void {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchConfig_mc_32_6_40_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc" 33 8 ]
+        %tmp.1 = lgetv %selectedBestOfSets;
+        symbol [ selectedBestOfSets %tmp.1 33 21 39 ];
+        symbol [ bestOfSets ? 33 8 18 ];
+        putv self :bestOfSets %tmp.1;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc" 34 8 ]
+        %tmp.2 = lgetv %selectedScoringMode;
+        symbol [ selectedScoringMode %tmp.2 34 22 41 ];
+        symbol [ scoringMode ? 34 8 19 ];
+        putv self :scoringMode %tmp.2;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc" 35 8 ]
+        %tmp.3 = lgetv %selectedDecidingSetMode;
+        symbol [ selectedDecidingSetMode %tmp.3 35 26 49 ];
+        symbol [ decidingSetMode ? 35 8 23 ];
+        putv self :decidingSetMode %tmp.3;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc" 36 8 ]
+        %tmp.4 = lgetv %selectedStartingServerTeam;
+        symbol [ selectedStartingServerTeam %tmp.4 36 29 55 ];
+        symbol [ startingServerTeam ? 36 8 26 ];
+        putv self :startingServerTeam %tmp.4;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc" 37 8 ]
+        %tmp.5 = lgetv %selectedRegularTieBreakTarget;
+        symbol [ selectedRegularTieBreakTarget %tmp.5 37 32 61 ];
+        symbol [ regularTieBreakTarget ? 37 8 29 ];
+        putv self :regularTieBreakTarget %tmp.5;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc" 38 8 ]
+        %tmp.6 = lgetv %selectedDecidingTieBreakTarget;
+        symbol [ selectedDecidingTieBreakTarget %tmp.6 38 33 63 ];
+        symbol [ decidingTieBreakTarget ? 38 8 30 ];
+        putv self :decidingTieBreakTarget %tmp.6;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc" 39 8 ]
+        %tmp.7 = lgetv %selectedRequireTwoPointTieBreakMargin;
+        symbol [ selectedRequireTwoPointTieBreakMargin %tmp.7 39 40 77 ];
+        symbol [ requireTwoPointTieBreakMargin ? 39 8 37 ];
+        putv self :requireTwoPointTieBreakMargin %tmp.7;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchConfig_mc_32_6_40_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 42; @symbol_functiondef = [setsToWin,42,13,22]; ]
+    function setsToWin() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchConfig_mc_42_25_44_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc" 43 8 ]
+        symbol [ bestOfSets %tmp.2 43 16 26 ];
+        %tmp.2 = getv ? :bestOfSets;
+        %tmp.3 = 2;
+        %tmp.4 = div %tmp.2 %tmp.3;
+        symbol [ toNumber %tmp.5 43 32 40 ];
+        %tmp.5 = getv function %tmp.4 :toNumber;
+        %tmp.6 = invoke %tmp.4 %tmp.5();
+        %tmp.7 = 1;
+        %tmp.8 = add %tmp.6 %tmp.7;
+        ret %tmp.8;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchConfig_mc_42_25_44_4_stop:
+    }
+}
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchConfig.mc"; @line = 1; ]
+<init> {
+}

@@ -74,12 +74,9 @@ folyamatosan helyreáll.
 
 ## C4 – Valós órás MVP
 
-Becsült idő: 1–2 hét.
-
-Aktuális megjegyzés: az alkalmazás dizájnja átdolgozás alatt áll. A
-vizuális finomhangolás, a Store-képek, az ikon és a verziózott kiadási
-csomag elkészítése a dizájn jóváhagyásáig szünetel. Nincs kijelölt `1.0`
-verzió.
+Állapot: az `1.1.0` helyi tesztverzió elkészült; valós Forerunner 265
+készülékteszt következik. A Connect IQ Store-csomag és Store-beállítások nem
+részei ennek a helyi kiadásnak.
 
 - valós meccsek tesztelése;
 - véletlen gombnyomások és izzadt kéz kezelése;
@@ -87,6 +84,53 @@ verzió.
 - memória- és akkumulátormérés;
 - támogatott készüléklista;
 - Connect IQ Store előkészítés.
+
+## C5 – Kibővített aktivitásmérés és eredményszinkron
+
+Állapot: implementálva, 42 egységteszttel és Forerunner 265 szimulátorban
+ellenőrizve, majd valós órára telepítve. A FIT-fájl tartalmának és a Garmin
+Connect-megjelenítésnek a valós meccses ellenőrzése még hátravan.
+
+### Több aktivitásadat rögzítése
+
+- megtett távolság rögzítése a Garmin natív FIT-mezőiben;
+- aktuális, átlagos és maximális sebesség rögzítése;
+- GPS-nyomvonal rögzítése folyamatos helyadatokkal;
+- a Forerunner 265 és a támogatni kívánt további órák által elérhető natív
+  aktivitás- és szenzoradatok felmérése;
+- az aktuális, átlagos és maximális pulzus, kalória, aktivitásidő és az órán
+  elérhető kadenciaadatok natív rögzítése;
+- meccsvégi aktivitásoldal a távolság, átlagos és maximális sebesség,
+  átlagos és maximális pulzus, valamint kalória megjelenítésére;
+- a mérések pontosságának összehasonlítása a Garmin natív padelaktivitásával,
+  különösen beltéri pályán, ahol a GPS-alapú távolság és sebesség pontatlan
+  lehet;
+- a `Positioning` jogosultság felvéve; a valós memória-, akkumulátor- és
+  beltéri pontosságmérés még elvégzendő.
+
+### Meccseredmény szinkronizálása és megjelenítése
+
+- valós órán ellenőrizni, hogy a már rögzített egyedi FIT-mezők — győztes,
+  szettarány és szettenkénti eredmény — bekerülnek-e a szinkronizált
+  aktivitásba;
+- ellenőrizni, hogy ezek az adatok megjelennek-e a Garmin Connect mobil- és
+  webes aktivitásnézetében;
+- ha a Garmin Connect nem jeleníti meg megfelelően az egyedi mezőket, felmérni
+  a támogatott alternatív megjelenítési lehetőségeket;
+- a Garmin Connect developer-mezők ellenőrzéséhez béta- vagy Store-alkalmazás
+  feltöltése és onnan történő telepítése szükséges; a közvetlenül USB-n
+  telepített PRG önmagában ezt nem teszi lehetővé;
+- későbbi saját API-s szinkron esetén a végeredményt, a szettenkénti eredményt
+  és a meccs alapstatisztikáit is továbbítani, majd az alkalmazásban vagy a
+  webes felületen megjeleníteni;
+- a sikertelen vagy megszakadt szinkron felismerése és biztonságos
+  újrapróbálása.
+
+Elfogadási feltétel: egy valós órán rögzített tesztmeccs után a kiválasztott
+új metrikák a FIT-aktivitásban ellenőrizhetők, a meccseredmény pedig legalább
+egy támogatott szinkronizált felületen egyértelműen megjelenik. A nem
+támogatható vagy nem kellően pontos mérések dokumentált döntéssel kerülnek ki
+a fejlesztési körből.
 
 ## Későbbi ágak
 

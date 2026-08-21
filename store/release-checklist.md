@@ -10,7 +10,7 @@ must not be prepared until the new design is final.
 - [ ] Final release `.iq` exported with the selected version number.
 - [x] Manifest contains only the intended MVP device (`fr265`).
 - [x] Hungarian and English languages declared.
-- [x] FIT, FitContributor and Sensor permissions declared.
+- [x] FIT, FitContributor, Positioning and Sensor permissions declared.
 - [ ] Full real-watch match test passes.
 - [ ] FIT file and Garmin Connect display verified.
 - [ ] Final `.iq` exported after the real-watch fixes.

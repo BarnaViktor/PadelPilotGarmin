@@ -1,0 +1,700 @@
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [Graphics,1,13,21]; @symbol_usingAlias = [Graphics,1,25,33]; ]
+using Toybox.Graphics as :Graphics;
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [WatchUi,2,13,20]; @symbol_usingAlias = [WatchUi,2,24,31]; ]
+using Toybox.WatchUi as :WatchUi;
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 4; @symbol_classdef = [MatchHistoryView,4,6,22]; @symbol_extends<0> = [WatchUi,4,31,38]; @symbol_extends<1> = [View,4,39,43]; ]
+class MatchHistoryView extends WatchUi.View {
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 4; ]
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 4; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 5; @position = 8; @symbol_vardef = [_history,5,8,16]; ]
+    var _history;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 6; @position = 8; @symbol_vardef = [_selected,6,8,17]; ]
+    var _selected;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 8; @symbol_functiondef = [initialize,8,13,23]; ]
+    function initialize() as Void {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_8_26_12_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 9 8 ]
+        symbol [ View %tmp.2 9 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ initialize %tmp.3 9 13 23 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 10 8 ]
+        symbol [ MatchHistoryStore %tmp.5 10 19 36 ];
+        %tmp.5 = getv ? :MatchHistoryStore;
+        symbol [ load %tmp.6 10 37 41 ];
+        %tmp.6 = getv function %tmp.5 :load;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        symbol [ _history ? 10 8 16 ];
+        putv self :_history %tmp.7;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 11 8 ]
+        %tmp.8 = 0;
+        symbol [ _selected ? 11 8 17 ];
+        putv self :_selected %tmp.8;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_8_26_12_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 14; @symbol_functiondef = [moveSelection,14,13,26]; @symbol_param<0> = [delta,14,27,32]; ]
+    function moveSelection(delta) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_14_34_18_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 15 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_15_8_17_8_if_stmt:
+        symbol [ _history %tmp.2 15 12 20 ];
+        %tmp.2 = getv ? :_history;
+        symbol [ size %tmp.3 15 21 25 ];
+        %tmp.3 = getv function %tmp.2 :size;
+        %tmp.4 = invoke %tmp.2 %tmp.3();
+        %tmp.5 = 0;
+        %tmp.6 = gt %tmp.4 %tmp.5;
+        bf %tmp.6 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_15_8_17_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_15_8_17_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_15_33_17_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 16 12 ]
+        symbol [ _selected %tmp.8 16 25 34 ];
+        %tmp.8 = getv ? :_selected;
+        %tmp.9 = lgetv %delta;
+        symbol [ delta %tmp.9 16 37 42 ];
+        %tmp.10 = add %tmp.8 %tmp.9;
+        symbol [ _history %tmp.12 16 45 53 ];
+        %tmp.12 = getv ? :_history;
+        symbol [ size %tmp.13 16 54 58 ];
+        %tmp.13 = getv function %tmp.12 :size;
+        %tmp.14 = invoke %tmp.12 %tmp.13();
+        %tmp.15 = add %tmp.10 %tmp.14;
+        symbol [ _history %tmp.17 16 64 72 ];
+        %tmp.17 = getv ? :_history;
+        symbol [ size %tmp.18 16 73 77 ];
+        %tmp.18 = getv function %tmp.17 :size;
+        %tmp.19 = invoke %tmp.17 %tmp.18();
+        %tmp.20 = mod %tmp.15 %tmp.19;
+        symbol [ _selected ? 16 12 21 ];
+        putv self :_selected %tmp.20;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_15_33_17_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_15_8_17_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_15_8_17_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_14_34_18_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 20; @symbol_functiondef = [getSelectedRecord,20,13,30]; ]
+    function getSelectedRecord() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_20_33_25_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 21 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_21_8_23_8_if_stmt:
+        symbol [ _history %tmp.2 21 12 20 ];
+        %tmp.2 = getv ? :_history;
+        symbol [ size %tmp.3 21 21 25 ];
+        %tmp.3 = getv function %tmp.2 :size;
+        %tmp.4 = invoke %tmp.2 %tmp.3();
+        %tmp.5 = 0;
+        %tmp.6 = eq %tmp.4 %tmp.5;
+        bf %tmp.6 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_21_8_23_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_21_8_23_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_21_34_23_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 22 12 ]
+        %tmp.7 = null;
+        ret %tmp.7;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_21_34_23_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_21_8_23_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_21_8_23_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 24 8 ]
+        symbol [ _history %tmp.9 24 15 23 ];
+        %tmp.9 = getv ? :_history;
+        symbol [ _history %tmp.11 24 24 32 ];
+        %tmp.11 = getv ? :_history;
+        symbol [ size %tmp.12 24 33 37 ];
+        %tmp.12 = getv function %tmp.11 :size;
+        %tmp.13 = invoke %tmp.11 %tmp.12();
+        %tmp.14 = 1;
+        %tmp.15 = sub %tmp.13 %tmp.14;
+        symbol [ _selected %tmp.17 24 46 55 ];
+        %tmp.17 = getv ? :_selected;
+        %tmp.18 = sub %tmp.15 %tmp.17;
+        %tmp.19 = agetv %tmp.9 %tmp.18;
+        ret %tmp.19;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_20_33_25_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 27; @symbol_functiondef = [onUpdate,27,13,21]; @symbol_param<0> = [dc,27,22,24]; ]
+    function onUpdate(dc) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_27_26_54_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 28 8 ]
+        symbol [ PadelTheme %tmp.2 28 8 18 ];
+        %tmp.2 = getv ? :PadelTheme;
+        symbol [ clear %tmp.3 28 19 24 ];
+        %tmp.3 = getv function %tmp.2 :clear;
+        %tmp.4 = lgetv %dc;
+        symbol [ dc %tmp.4 28 25 27 ];
+        invoke %tmp.2 %tmp.3(%tmp.4);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 29 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_27_26_54_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_27_26_54_4_stop" ]
+        %centerX.1 = local;
+        symbol [ centerX %centerX.1 29 12 19 ];
+        %tmp.5 = lgetv %dc;
+        symbol [ dc %tmp.5 29 22 24 ];
+        symbol [ getWidth %tmp.6 29 25 33 ];
+        %tmp.6 = getv function %tmp.5 :getWidth;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        %tmp.8 = 2;
+        %tmp.9 = div %tmp.7 %tmp.8;
+        lputv %centerX.1 %tmp.9;
+        symbol [ centerX %centerX.1 29 12 19 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 30 8 ]
+        symbol [ PadelTheme %tmp.11 30 8 18 ];
+        %tmp.11 = getv ? :PadelTheme;
+        symbol [ drawHeader %tmp.12 30 19 29 ];
+        %tmp.12 = getv function %tmp.11 :drawHeader;
+        %tmp.13 = lgetv %dc;
+        symbol [ dc %tmp.13 30 30 32 ];
+        %tmp.14 = "MATCH HISTORY";
+        invoke %tmp.11 %tmp.12(%tmp.13, %tmp.14);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 32 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_32_8_37_8_if_stmt:
+        symbol [ _history %tmp.16 32 12 20 ];
+        %tmp.16 = getv ? :_history;
+        symbol [ size %tmp.17 32 21 25 ];
+        %tmp.17 = getv function %tmp.16 :size;
+        %tmp.18 = invoke %tmp.16 %tmp.17();
+        %tmp.19 = 0;
+        %tmp.20 = eq %tmp.18 %tmp.19;
+        bf %tmp.20 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_32_8_37_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_32_8_37_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_32_34_37_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 33 12 ]
+        %tmp.21 = lgetv %dc;
+        symbol [ dc %tmp.21 33 12 14 ];
+        symbol [ setColor %tmp.22 33 15 23 ];
+        %tmp.22 = getv function %tmp.21 :setColor;
+        symbol [ PadelTheme %tmp.24 33 24 34 ];
+        %tmp.24 = getv ? :PadelTheme;
+        symbol [ MUTED %tmp.25 33 35 40 ];
+        %tmp.25 = getv %tmp.24 :MUTED;
+        symbol [ Graphics %tmp.26 33 42 50 ];
+        %tmp.26 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.27 33 51 62 ];
+        %tmp.27 = getv %tmp.26 :COLOR_BLACK;
+        invoke %tmp.21 %tmp.22(%tmp.25, %tmp.27);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 34 12 ]
+        %tmp.28 = lgetv %dc;
+        symbol [ dc %tmp.28 34 12 14 ];
+        symbol [ drawText %tmp.29 34 15 23 ];
+        %tmp.29 = getv function %tmp.28 :drawText;
+        %tmp.30 = lgetv %centerX.1;
+        symbol [ centerX %tmp.30 34 24 31 ];
+        %tmp.31 = 196;
+        symbol [ Graphics %tmp.32 34 38 46 ];
+        %tmp.32 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.33 34 47 57 ];
+        %tmp.33 = getv %tmp.32 :FONT_XTINY;
+        %tmp.34 = "NO MATCHES YET";
+        symbol [ Graphics %tmp.35 35 16 24 ];
+        %tmp.35 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.36 35 25 44 ];
+        %tmp.36 = getv %tmp.35 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.28 %tmp.29(%tmp.30, %tmp.31, %tmp.33, %tmp.34, %tmp.36);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 36 12 ]
+        ret ?;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_32_34_37_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_32_8_37_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_32_8_37_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 39 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_27_26_54_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_27_26_54_4_stop" ]
+        %first.2 = local;
+        symbol [ first %first.2 39 12 17 ];
+        symbol [ _selected %tmp.38 39 20 29 ];
+        %tmp.38 = getv ? :_selected;
+        %tmp.39 = 1;
+        %tmp.40 = sub %tmp.38 %tmp.39;
+        lputv %first.2 %tmp.40;
+        symbol [ first %first.2 39 12 17 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 40 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_40_8_42_8_if_stmt:
+        %tmp.41 = lgetv %first.2;
+        symbol [ first %tmp.41 40 12 17 ];
+        %tmp.42 = 0;
+        %tmp.43 = lt %tmp.41 %tmp.42;
+        bf %tmp.43 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_40_8_42_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_40_8_42_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_40_23_42_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 41 12 ]
+        %tmp.44 = 0;
+        lputv %first.2 %tmp.44;
+        symbol [ first %first.2 41 12 17 ];
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_40_23_42_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_40_8_42_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_40_8_42_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 43 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_43_8_45_8_if_stmt:
+        %tmp.45 = lgetv %first.2;
+        symbol [ first %tmp.45 43 12 17 ];
+        symbol [ _history %tmp.47 43 20 28 ];
+        %tmp.47 = getv ? :_history;
+        symbol [ size %tmp.48 43 29 33 ];
+        %tmp.48 = getv function %tmp.47 :size;
+        %tmp.49 = invoke %tmp.47 %tmp.48();
+        %tmp.50 = 3;
+        %tmp.51 = sub %tmp.49 %tmp.50;
+        %tmp.52 = gt %tmp.45 %tmp.51;
+        bf %tmp.52 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_43_8_45_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_43_8_45_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_43_41_45_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 44 12 ]
+        symbol [ _history %tmp.54 44 20 28 ];
+        %tmp.54 = getv ? :_history;
+        symbol [ size %tmp.55 44 29 33 ];
+        %tmp.55 = getv function %tmp.54 :size;
+        %tmp.56 = invoke %tmp.54 %tmp.55();
+        %tmp.57 = 3;
+        %tmp.58 = sub %tmp.56 %tmp.57;
+        lputv %first.2 %tmp.58;
+        symbol [ first %first.2 44 12 17 ];
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_43_41_45_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_43_8_45_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_43_8_45_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 46 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_46_8_48_8_if_stmt:
+        %tmp.59 = lgetv %first.2;
+        symbol [ first %tmp.59 46 12 17 ];
+        %tmp.60 = 0;
+        %tmp.61 = lt %tmp.59 %tmp.60;
+        bf %tmp.61 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_46_8_48_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_46_8_48_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_46_23_48_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 47 12 ]
+        %tmp.62 = 0;
+        lputv %first.2 %tmp.62;
+        symbol [ first %first.2 47 12 17 ];
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_46_23_48_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_46_8_48_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_46_8_48_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 50 8 ]
+        for @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_8_52_8_for_test @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_8_52_8_for_incr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_8_52_8_for_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_8_52_8_for_init:
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_8_52_8_for_begin" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_8_52_8_for_end" ]
+        %row.3 = local;
+        symbol [ row %row.3 50 17 20 ];
+        %tmp.63 = 0;
+        lputv %row.3 %tmp.63;
+        symbol [ row %row.3 50 17 20 ];
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_8_52_8_for_test:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_26_50_65_begin:
+        %tmp.64 = lgetv %row.3;
+        symbol [ row %tmp.64 50 26 29 ];
+        %tmp.65 = 3;
+        %tmp.66 = lt %tmp.64 %tmp.65;
+        %tmp.67 = dup %tmp.66;
+        bf %tmp.67 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_37_50_65_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_37_50_65_true:
+        %tmp.68 = lgetv %first.2;
+        symbol [ first %tmp.68 50 37 42 ];
+        %tmp.69 = lgetv %row.3;
+        symbol [ row %tmp.69 50 45 48 ];
+        %tmp.70 = add %tmp.68 %tmp.69;
+        symbol [ _history %tmp.72 50 51 59 ];
+        %tmp.72 = getv ? :_history;
+        symbol [ size %tmp.73 50 60 64 ];
+        %tmp.73 = getv function %tmp.72 :size;
+        %tmp.74 = invoke %tmp.72 %tmp.73();
+        %tmp.75 = lt %tmp.70 %tmp.74;
+        %tmp.76 = and %tmp.66 %tmp.75;
+        push %tmp.76;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_37_50_65_end:
+        %tmp.77 = phi [%tmp.67 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_26_50_65_begin] [%tmp.76 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_37_50_65_true] [%tmp.77 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_37_50_65_end];
+        bf %tmp.77 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_8_52_8_for_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_8_52_8_for_begin:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_78_52_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 51 12 ]
+        %tmp.78 = self;
+        symbol [ drawRecord %tmp.79 51 12 22 ];
+        %tmp.79 = getv function %tmp.78 :drawRecord;
+        %tmp.80 = lgetv %dc;
+        symbol [ dc %tmp.80 51 23 25 ];
+        %tmp.81 = lgetv %first.2;
+        symbol [ first %tmp.81 51 27 32 ];
+        %tmp.82 = lgetv %row.3;
+        symbol [ row %tmp.82 51 35 38 ];
+        %tmp.83 = add %tmp.81 %tmp.82;
+        %tmp.84 = 103;
+        %tmp.85 = lgetv %row.3;
+        symbol [ row %tmp.85 51 46 49 ];
+        %tmp.86 = 78;
+        %tmp.87 = mul %tmp.85 %tmp.86;
+        %tmp.88 = add %tmp.84 %tmp.87;
+        invoke %tmp.78 %tmp.79(%tmp.80, %tmp.83, %tmp.88);
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_78_52_8_stop:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_8_52_8_for_incr:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 50 ]
+        %tmp.89 = lgetv %row.3;
+        symbol [ row %tmp.89 50 68 71 ];
+        %tmp.90 = 1;
+        %tmp.91 = add %tmp.89 %tmp.90;
+        lputv %row.3 %tmp.91;
+        symbol [ row %row.3 50 68 71 ];
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_8_52_8_for_test;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_50_8_52_8_for_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 53 8 ]
+        symbol [ PadelTheme %tmp.93 53 8 18 ];
+        %tmp.93 = getv ? :PadelTheme;
+        symbol [ drawPageDots %tmp.94 53 19 31 ];
+        %tmp.94 = getv function %tmp.93 :drawPageDots;
+        %tmp.95 = lgetv %dc;
+        symbol [ dc %tmp.95 53 32 34 ];
+        symbol [ _selected %tmp.97 53 36 45 ];
+        %tmp.97 = getv ? :_selected;
+        symbol [ _history %tmp.99 53 47 55 ];
+        %tmp.99 = getv ? :_history;
+        symbol [ size %tmp.100 53 56 60 ];
+        %tmp.100 = getv function %tmp.99 :size;
+        %tmp.101 = invoke %tmp.99 %tmp.100();
+        %tmp.102 = 376;
+        invoke %tmp.93 %tmp.94(%tmp.95, %tmp.97, %tmp.101, %tmp.102);
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_27_26_54_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 56; @symbol_functiondef = [drawRecord,56,13,23]; @symbol_param<0> = [dc,56,24,26]; @symbol_param<1> = [displayIndex,56,28,40]; @symbol_param<2> = [y,56,42,43]; ]
+    function drawRecord(dc, displayIndex, y) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_56_45_74_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 57 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_56_45_74_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_56_45_74_4_stop" ]
+        %record.1 = local;
+        symbol [ record %record.1 57 12 18 ];
+        symbol [ _history %tmp.2 57 21 29 ];
+        %tmp.2 = getv ? :_history;
+        symbol [ _history %tmp.4 57 30 38 ];
+        %tmp.4 = getv ? :_history;
+        symbol [ size %tmp.5 57 39 43 ];
+        %tmp.5 = getv function %tmp.4 :size;
+        %tmp.6 = invoke %tmp.4 %tmp.5();
+        %tmp.7 = 1;
+        %tmp.8 = sub %tmp.6 %tmp.7;
+        %tmp.9 = lgetv %displayIndex;
+        symbol [ displayIndex %tmp.9 57 52 64 ];
+        %tmp.10 = sub %tmp.8 %tmp.9;
+        %tmp.11 = agetv %tmp.2 %tmp.10;
+        lputv %record.1 %tmp.11;
+        symbol [ record %record.1 57 12 18 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 58 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_56_45_74_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_56_45_74_4_stop" ]
+        %selected.2 = local;
+        symbol [ selected %selected.2 58 12 20 ];
+        %tmp.12 = lgetv %displayIndex;
+        symbol [ displayIndex %tmp.12 58 23 35 ];
+        symbol [ _selected %tmp.14 58 39 48 ];
+        %tmp.14 = getv ? :_selected;
+        %tmp.15 = eq %tmp.12 %tmp.14;
+        lputv %selected.2 %tmp.15;
+        symbol [ selected %selected.2 58 12 20 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 59 8 ]
+        symbol [ PadelTheme %tmp.17 59 8 18 ];
+        %tmp.17 = getv ? :PadelTheme;
+        symbol [ drawCard %tmp.18 59 19 27 ];
+        %tmp.18 = getv function %tmp.17 :drawCard;
+        %tmp.19 = lgetv %dc;
+        symbol [ dc %tmp.19 59 28 30 ];
+        %tmp.20 = 52;
+        %tmp.21 = lgetv %y;
+        symbol [ y %tmp.21 59 36 37 ];
+        %tmp.22 = 312;
+        %tmp.23 = 64;
+        %tmp.24 = lgetv %selected.2;
+        symbol [ selected %tmp.24 59 48 56 ];
+        symbol [ PadelTheme %tmp.26 59 58 68 ];
+        %tmp.26 = getv ? :PadelTheme;
+        symbol [ CYAN %tmp.27 59 69 73 ];
+        %tmp.27 = getv %tmp.26 :CYAN;
+        invoke %tmp.17 %tmp.18(%tmp.19, %tmp.20, %tmp.21, %tmp.22, %tmp.23, %tmp.24, %tmp.27);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 60 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_56_45_74_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_56_45_74_4_stop" ]
+        %centerY.3 = local;
+        symbol [ centerY %centerY.3 60 12 19 ];
+        %tmp.28 = lgetv %y;
+        symbol [ y %tmp.28 60 22 23 ];
+        %tmp.29 = 32;
+        %tmp.30 = add %tmp.28 %tmp.29;
+        lputv %centerY.3 %tmp.30;
+        symbol [ centerY %centerY.3 60 12 19 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 62 8 ]
+        %tmp.31 = lgetv %dc;
+        symbol [ dc %tmp.31 62 8 10 ];
+        symbol [ setColor %tmp.32 62 11 19 ];
+        %tmp.32 = getv function %tmp.31 :setColor;
+        symbol [ PadelTheme %tmp.34 62 20 30 ];
+        %tmp.34 = getv ? :PadelTheme;
+        symbol [ CYAN %tmp.35 62 31 35 ];
+        %tmp.35 = getv %tmp.34 :CYAN;
+        symbol [ Graphics %tmp.36 62 37 45 ];
+        %tmp.36 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.37 62 46 57 ];
+        %tmp.37 = getv %tmp.36 :COLOR_BLACK;
+        invoke %tmp.31 %tmp.32(%tmp.35, %tmp.37);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 63 8 ]
+        %tmp.38 = lgetv %dc;
+        symbol [ dc %tmp.38 63 8 10 ];
+        symbol [ drawText %tmp.39 63 11 19 ];
+        %tmp.39 = getv function %tmp.38 :drawText;
+        %tmp.40 = 126;
+        %tmp.41 = lgetv %centerY.3;
+        symbol [ centerY %tmp.41 63 25 32 ];
+        symbol [ Graphics %tmp.42 63 34 42 ];
+        %tmp.42 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.43 63 43 53 ];
+        %tmp.43 = getv %tmp.42 :FONT_XTINY;
+        %tmp.44 = lgetv %record.1;
+        symbol [ record %tmp.44 63 55 61 ];
+        %tmp.45 = 0;
+        %tmp.46 = agetv %tmp.44 %tmp.45;
+        symbol [ Graphics %tmp.47 64 12 20 ];
+        %tmp.47 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.48 64 21 40 ];
+        %tmp.48 = getv %tmp.47 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.49 64 43 51 ];
+        %tmp.49 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.50 64 52 72 ];
+        %tmp.50 = getv %tmp.49 :TEXT_JUSTIFY_VCENTER;
+        %tmp.51 = bitor %tmp.48 %tmp.50;
+        invoke %tmp.38 %tmp.39(%tmp.40, %tmp.41, %tmp.43, %tmp.46, %tmp.51);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 65 8 ]
+        %tmp.52 = lgetv %dc;
+        symbol [ dc %tmp.52 65 8 10 ];
+        symbol [ setColor %tmp.53 65 11 19 ];
+        %tmp.53 = getv function %tmp.52 :setColor;
+        symbol [ PadelTheme %tmp.55 65 20 30 ];
+        %tmp.55 = getv ? :PadelTheme;
+        symbol [ MUTED %tmp.56 65 31 36 ];
+        %tmp.56 = getv %tmp.55 :MUTED;
+        symbol [ Graphics %tmp.57 65 38 46 ];
+        %tmp.57 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.58 65 47 58 ];
+        %tmp.58 = getv %tmp.57 :COLOR_BLACK;
+        invoke %tmp.52 %tmp.53(%tmp.56, %tmp.58);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 66 8 ]
+        %tmp.59 = lgetv %dc;
+        symbol [ dc %tmp.59 66 8 10 ];
+        symbol [ drawText %tmp.60 66 11 19 ];
+        %tmp.60 = getv function %tmp.59 :drawText;
+        %tmp.61 = 172;
+        %tmp.62 = lgetv %centerY.3;
+        symbol [ centerY %tmp.62 66 25 32 ];
+        symbol [ Graphics %tmp.63 66 34 42 ];
+        %tmp.63 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.64 66 43 53 ];
+        %tmp.64 = getv %tmp.63 :FONT_XTINY;
+        %tmp.65 = "–";
+        symbol [ Graphics %tmp.66 67 12 20 ];
+        %tmp.66 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.67 67 21 40 ];
+        %tmp.67 = getv %tmp.66 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.68 67 43 51 ];
+        %tmp.68 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.69 67 52 72 ];
+        %tmp.69 = getv %tmp.68 :TEXT_JUSTIFY_VCENTER;
+        %tmp.70 = bitor %tmp.67 %tmp.69;
+        invoke %tmp.59 %tmp.60(%tmp.61, %tmp.62, %tmp.64, %tmp.65, %tmp.70);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 68 8 ]
+        %tmp.71 = lgetv %dc;
+        symbol [ dc %tmp.71 68 8 10 ];
+        symbol [ setColor %tmp.72 68 11 19 ];
+        %tmp.72 = getv function %tmp.71 :setColor;
+        symbol [ PadelTheme %tmp.74 68 20 30 ];
+        %tmp.74 = getv ? :PadelTheme;
+        symbol [ RED %tmp.75 68 31 34 ];
+        %tmp.75 = getv %tmp.74 :RED;
+        symbol [ Graphics %tmp.76 68 36 44 ];
+        %tmp.76 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.77 68 45 56 ];
+        %tmp.77 = getv %tmp.76 :COLOR_BLACK;
+        invoke %tmp.71 %tmp.72(%tmp.75, %tmp.77);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 69 8 ]
+        %tmp.78 = lgetv %dc;
+        symbol [ dc %tmp.78 69 8 10 ];
+        symbol [ drawText %tmp.79 69 11 19 ];
+        %tmp.79 = getv function %tmp.78 :drawText;
+        %tmp.80 = 218;
+        %tmp.81 = lgetv %centerY.3;
+        symbol [ centerY %tmp.81 69 25 32 ];
+        symbol [ Graphics %tmp.82 69 34 42 ];
+        %tmp.82 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.83 69 43 53 ];
+        %tmp.83 = getv %tmp.82 :FONT_XTINY;
+        %tmp.84 = lgetv %record.1;
+        symbol [ record %tmp.84 69 55 61 ];
+        %tmp.85 = 1;
+        %tmp.86 = agetv %tmp.84 %tmp.85;
+        symbol [ Graphics %tmp.87 70 12 20 ];
+        %tmp.87 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.88 70 21 40 ];
+        %tmp.88 = getv %tmp.87 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.89 70 43 51 ];
+        %tmp.89 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.90 70 52 72 ];
+        %tmp.90 = getv %tmp.89 :TEXT_JUSTIFY_VCENTER;
+        %tmp.91 = bitor %tmp.88 %tmp.90;
+        invoke %tmp.78 %tmp.79(%tmp.80, %tmp.81, %tmp.83, %tmp.86, %tmp.91);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 71 8 ]
+        %tmp.92 = lgetv %dc;
+        symbol [ dc %tmp.92 71 8 10 ];
+        symbol [ setColor %tmp.93 71 11 19 ];
+        %tmp.93 = getv function %tmp.92 :setColor;
+        symbol [ PadelTheme %tmp.95 71 20 30 ];
+        %tmp.95 = getv ? :PadelTheme;
+        symbol [ MUTED %tmp.96 71 31 36 ];
+        %tmp.96 = getv %tmp.95 :MUTED;
+        symbol [ Graphics %tmp.97 71 38 46 ];
+        %tmp.97 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.98 71 47 58 ];
+        %tmp.98 = getv %tmp.97 :COLOR_BLACK;
+        invoke %tmp.92 %tmp.93(%tmp.96, %tmp.98);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 72 8 ]
+        %tmp.99 = lgetv %dc;
+        symbol [ dc %tmp.99 72 8 10 ];
+        symbol [ drawText %tmp.100 72 11 19 ];
+        %tmp.100 = getv function %tmp.99 :drawText;
+        %tmp.101 = 312;
+        %tmp.102 = lgetv %centerY.3;
+        symbol [ centerY %tmp.102 72 25 32 ];
+        symbol [ Graphics %tmp.103 72 34 42 ];
+        %tmp.103 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.104 72 43 53 ];
+        %tmp.104 = getv %tmp.103 :FONT_XTINY;
+        %tmp.105 = self;
+        symbol [ durationLabel %tmp.106 72 55 68 ];
+        %tmp.106 = getv function %tmp.105 :durationLabel;
+        %tmp.107 = lgetv %record.1;
+        symbol [ record %tmp.107 72 69 75 ];
+        %tmp.108 = 3;
+        %tmp.109 = agetv %tmp.107 %tmp.108;
+        %tmp.110 = invoke %tmp.105 %tmp.106(%tmp.109);
+        symbol [ Graphics %tmp.111 73 12 20 ];
+        %tmp.111 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.112 73 21 40 ];
+        %tmp.112 = getv %tmp.111 :TEXT_JUSTIFY_CENTER;
+        symbol [ Graphics %tmp.113 73 43 51 ];
+        %tmp.113 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_VCENTER %tmp.114 73 52 72 ];
+        %tmp.114 = getv %tmp.113 :TEXT_JUSTIFY_VCENTER;
+        %tmp.115 = bitor %tmp.112 %tmp.114;
+        invoke %tmp.99 %tmp.100(%tmp.101, %tmp.102, %tmp.104, %tmp.110, %tmp.115);
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_56_45_74_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 76; @symbol_functiondef = [durationLabel,76,13,26]; @symbol_param<0> = [totalSeconds,76,27,39]; ]
+    function durationLabel(totalSeconds) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_76_41_84_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 77 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_76_41_84_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_76_41_84_4_stop" ]
+        %hours.1 = local;
+        symbol [ hours %hours.1 77 12 17 ];
+        %tmp.1 = lgetv %totalSeconds;
+        symbol [ totalSeconds %tmp.1 77 21 33 ];
+        %tmp.2 = 3600;
+        %tmp.3 = div %tmp.1 %tmp.2;
+        symbol [ toNumber %tmp.4 77 42 50 ];
+        %tmp.4 = getv function %tmp.3 :toNumber;
+        %tmp.5 = invoke %tmp.3 %tmp.4();
+        lputv %hours.1 %tmp.5;
+        symbol [ hours %hours.1 77 12 17 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 78 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_76_41_84_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_76_41_84_4_stop" ]
+        %minutes.2 = local;
+        symbol [ minutes %minutes.2 78 12 19 ];
+        %tmp.6 = lgetv %totalSeconds;
+        symbol [ totalSeconds %tmp.6 78 24 36 ];
+        %tmp.7 = 3600;
+        %tmp.8 = mod %tmp.6 %tmp.7;
+        %tmp.9 = 60;
+        %tmp.10 = div %tmp.8 %tmp.9;
+        symbol [ toNumber %tmp.11 78 51 59 ];
+        %tmp.11 = getv function %tmp.10 :toNumber;
+        %tmp.12 = invoke %tmp.10 %tmp.11();
+        lputv %minutes.2 %tmp.12;
+        symbol [ minutes %minutes.2 78 12 19 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 79 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_76_41_84_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_76_41_84_4_stop" ]
+        %seconds.3 = local;
+        symbol [ seconds %seconds.3 79 12 19 ];
+        %tmp.13 = lgetv %totalSeconds;
+        symbol [ totalSeconds %tmp.13 79 22 34 ];
+        %tmp.14 = 60;
+        %tmp.15 = mod %tmp.13 %tmp.14;
+        lputv %seconds.3 %tmp.15;
+        symbol [ seconds %seconds.3 79 12 19 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 80 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_80_8_82_8_if_stmt:
+        %tmp.16 = lgetv %hours.1;
+        symbol [ hours %tmp.16 80 12 17 ];
+        %tmp.17 = 0;
+        %tmp.18 = gt %tmp.16 %tmp.17;
+        bf %tmp.18 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_80_8_82_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_80_8_82_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_80_23_82_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 81 12 ]
+        %tmp.19 = self;
+        symbol [ padTwo %tmp.20 81 19 25 ];
+        %tmp.20 = getv function %tmp.19 :padTwo;
+        %tmp.21 = lgetv %hours.1;
+        symbol [ hours %tmp.21 81 26 31 ];
+        %tmp.22 = invoke %tmp.19 %tmp.20(%tmp.21);
+        %tmp.23 = ":";
+        %tmp.24 = add %tmp.22 %tmp.23;
+        %tmp.25 = self;
+        symbol [ padTwo %tmp.26 81 41 47 ];
+        %tmp.26 = getv function %tmp.25 :padTwo;
+        %tmp.27 = lgetv %minutes.2;
+        symbol [ minutes %tmp.27 81 48 55 ];
+        %tmp.28 = invoke %tmp.25 %tmp.26(%tmp.27);
+        %tmp.29 = add %tmp.24 %tmp.28;
+        ret %tmp.29;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_80_23_82_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_80_8_82_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_80_8_82_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 83 8 ]
+        %tmp.30 = self;
+        symbol [ padTwo %tmp.31 83 15 21 ];
+        %tmp.31 = getv function %tmp.30 :padTwo;
+        %tmp.32 = lgetv %minutes.2;
+        symbol [ minutes %tmp.32 83 22 29 ];
+        %tmp.33 = invoke %tmp.30 %tmp.31(%tmp.32);
+        %tmp.34 = ":";
+        %tmp.35 = add %tmp.33 %tmp.34;
+        %tmp.36 = self;
+        symbol [ padTwo %tmp.37 83 39 45 ];
+        %tmp.37 = getv function %tmp.36 :padTwo;
+        %tmp.38 = lgetv %seconds.3;
+        symbol [ seconds %tmp.38 83 46 53 ];
+        %tmp.39 = invoke %tmp.36 %tmp.37(%tmp.38);
+        %tmp.40 = add %tmp.35 %tmp.39;
+        ret %tmp.40;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_76_41_84_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 86; @symbol_functiondef = [padTwo,86,13,19]; @symbol_param<0> = [value,86,20,25]; ]
+    function padTwo(value) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_86_27_88_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc" 87 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_87_15_87_57_begin:
+        %tmp.1 = lgetv %value;
+        symbol [ value %tmp.1 87 15 20 ];
+        %tmp.2 = 10;
+        %tmp.3 = lt %tmp.1 %tmp.2;
+        bf %tmp.3 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_87_15_87_57_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_87_15_87_57_true:
+        %tmp.4 = "0";
+        %tmp.5 = lgetv %value;
+        symbol [ value %tmp.5 87 34 39 ];
+        %tmp.6 = add %tmp.4 %tmp.5;
+        push %tmp.6;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_87_15_87_57_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_87_15_87_57_else_false:
+        %tmp.7 = lgetv %value;
+        symbol [ value %tmp.7 87 42 47 ];
+        symbol [ toString %tmp.8 87 48 56 ];
+        %tmp.8 = getv function %tmp.7 :toString;
+        %tmp.9 = invoke %tmp.7 %tmp.8();
+        push %tmp.9;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_87_15_87_57_end:
+        %tmp.10 = phi [%tmp.3 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_87_15_87_57_begin] [%tmp.6 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_87_15_87_57_true] [%tmp.9 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_87_15_87_57_else_false] [%tmp.10 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_87_15_87_57_end];
+        ret %tmp.10;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryView_mc_86_27_88_4_stop:
+    }
+}
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryView.mc"; @line = 1; ]
+<init> {
+}

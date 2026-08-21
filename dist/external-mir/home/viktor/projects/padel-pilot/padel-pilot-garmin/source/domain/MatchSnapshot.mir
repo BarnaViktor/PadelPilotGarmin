@@ -1,0 +1,188 @@
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 1; @symbol_classdef = [MatchSnapshot,1,6,19]; ]
+class MatchSnapshot {
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 1; ]
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 1; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 2; @position = 8; @symbol_vardef = [points,2,8,14]; ]
+    var points;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 3; @position = 8; @symbol_vardef = [games,3,8,13]; ]
+    var games;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 4; @position = 8; @symbol_vardef = [sets,4,8,12]; ]
+    var sets;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 5; @position = 8; @symbol_vardef = [tieBreak,5,8,16]; ]
+    var tieBreak;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 6; @position = 8; @symbol_vardef = [decidingMatchTieBreak,6,8,29]; ]
+    var decidingMatchTieBreak;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 7; @position = 8; @symbol_vardef = [matchWinner,7,8,19]; ]
+    var matchWinner;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 8; @position = 8; @symbol_vardef = [serverTeam,8,8,18]; ]
+    var serverTeam;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 9; @position = 8; @symbol_vardef = [nextGameServerTeam,9,8,26]; ]
+    var nextGameServerTeam;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 10; @position = 8; @symbol_vardef = [tieBreakFirstServerTeam,10,8,31]; ]
+    var tieBreakFirstServerTeam;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 11; @position = 8; @symbol_vardef = [teamServerSlots,11,8,23]; ]
+    var teamServerSlots;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 12; @position = 8; @symbol_vardef = [completedSets,12,8,21]; ]
+    var completedSets;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 13; @position = 8; @symbol_vardef = [serveSideOffset,13,8,23]; ]
+    var serveSideOffset;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 14; @position = 8; @symbol_vardef = [sideChangePending,14,8,25]; ]
+    var sideChangePending;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 15; @position = 8; @symbol_vardef = [receiverSideSelectionPending,15,8,36]; ]
+    var receiverSideSelectionPending;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 16; @position = 8; @symbol_vardef = [receiverSide,16,8,20]; ]
+    var receiverSide;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 18; @symbol_functiondef = [initialize,18,13,23]; @symbol_param<0> = [engine,18,24,30]; ]
+    function initialize(engine) as Void {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSnapshot_mc_18_32_34_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 19 8 ]
+        %tmp.1 = lgetv %engine;
+        symbol [ engine %tmp.1 19 17 23 ];
+        symbol [ getPoints %tmp.2 19 24 33 ];
+        %tmp.2 = getv function %tmp.1 :getPoints;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        symbol [ slice %tmp.4 19 36 41 ];
+        %tmp.4 = getv function %tmp.3 :slice;
+        %tmp.5 = 0;
+        %tmp.6 = 2;
+        %tmp.7 = invoke %tmp.3 %tmp.4(%tmp.5, %tmp.6);
+        symbol [ points ? 19 8 14 ];
+        putv self :points %tmp.7;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 20 8 ]
+        %tmp.8 = lgetv %engine;
+        symbol [ engine %tmp.8 20 16 22 ];
+        symbol [ getGames %tmp.9 20 23 31 ];
+        %tmp.9 = getv function %tmp.8 :getGames;
+        %tmp.10 = invoke %tmp.8 %tmp.9();
+        symbol [ slice %tmp.11 20 34 39 ];
+        %tmp.11 = getv function %tmp.10 :slice;
+        %tmp.12 = 0;
+        %tmp.13 = 2;
+        %tmp.14 = invoke %tmp.10 %tmp.11(%tmp.12, %tmp.13);
+        symbol [ games ? 20 8 13 ];
+        putv self :games %tmp.14;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 21 8 ]
+        %tmp.15 = lgetv %engine;
+        symbol [ engine %tmp.15 21 15 21 ];
+        symbol [ getSets %tmp.16 21 22 29 ];
+        %tmp.16 = getv function %tmp.15 :getSets;
+        %tmp.17 = invoke %tmp.15 %tmp.16();
+        symbol [ slice %tmp.18 21 32 37 ];
+        %tmp.18 = getv function %tmp.17 :slice;
+        %tmp.19 = 0;
+        %tmp.20 = 2;
+        %tmp.21 = invoke %tmp.17 %tmp.18(%tmp.19, %tmp.20);
+        symbol [ sets ? 21 8 12 ];
+        putv self :sets %tmp.21;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 22 8 ]
+        %tmp.22 = lgetv %engine;
+        symbol [ engine %tmp.22 22 19 25 ];
+        symbol [ isTieBreak %tmp.23 22 26 36 ];
+        %tmp.23 = getv function %tmp.22 :isTieBreak;
+        %tmp.24 = invoke %tmp.22 %tmp.23();
+        symbol [ tieBreak ? 22 8 16 ];
+        putv self :tieBreak %tmp.24;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 23 8 ]
+        %tmp.25 = lgetv %engine;
+        symbol [ engine %tmp.25 23 32 38 ];
+        symbol [ isDecidingMatchTieBreak %tmp.26 23 39 62 ];
+        %tmp.26 = getv function %tmp.25 :isDecidingMatchTieBreak;
+        %tmp.27 = invoke %tmp.25 %tmp.26();
+        symbol [ decidingMatchTieBreak ? 23 8 29 ];
+        putv self :decidingMatchTieBreak %tmp.27;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 24 8 ]
+        %tmp.28 = lgetv %engine;
+        symbol [ engine %tmp.28 24 22 28 ];
+        symbol [ getMatchWinner %tmp.29 24 29 43 ];
+        %tmp.29 = getv function %tmp.28 :getMatchWinner;
+        %tmp.30 = invoke %tmp.28 %tmp.29();
+        symbol [ matchWinner ? 24 8 19 ];
+        putv self :matchWinner %tmp.30;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 25 8 ]
+        %tmp.31 = lgetv %engine;
+        symbol [ engine %tmp.31 25 21 27 ];
+        symbol [ getServerTeam %tmp.32 25 28 41 ];
+        %tmp.32 = getv function %tmp.31 :getServerTeam;
+        %tmp.33 = invoke %tmp.31 %tmp.32();
+        symbol [ serverTeam ? 25 8 18 ];
+        putv self :serverTeam %tmp.33;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 26 8 ]
+        %tmp.34 = lgetv %engine;
+        symbol [ engine %tmp.34 26 29 35 ];
+        symbol [ getNextGameServerTeam %tmp.35 26 36 57 ];
+        %tmp.35 = getv function %tmp.34 :getNextGameServerTeam;
+        %tmp.36 = invoke %tmp.34 %tmp.35();
+        symbol [ nextGameServerTeam ? 26 8 26 ];
+        putv self :nextGameServerTeam %tmp.36;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 27 8 ]
+        %tmp.37 = lgetv %engine;
+        symbol [ engine %tmp.37 27 34 40 ];
+        symbol [ getTieBreakFirstServerTeam %tmp.38 27 41 67 ];
+        %tmp.38 = getv function %tmp.37 :getTieBreakFirstServerTeam;
+        %tmp.39 = invoke %tmp.37 %tmp.38();
+        symbol [ tieBreakFirstServerTeam ? 27 8 31 ];
+        putv self :tieBreakFirstServerTeam %tmp.39;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 28 8 ]
+        %tmp.40 = lgetv %engine;
+        symbol [ engine %tmp.40 28 26 32 ];
+        symbol [ getTeamServerSlots %tmp.41 28 33 51 ];
+        %tmp.41 = getv function %tmp.40 :getTeamServerSlots;
+        %tmp.42 = invoke %tmp.40 %tmp.41();
+        symbol [ slice %tmp.43 28 54 59 ];
+        %tmp.43 = getv function %tmp.42 :slice;
+        %tmp.44 = 0;
+        %tmp.45 = 2;
+        %tmp.46 = invoke %tmp.42 %tmp.43(%tmp.44, %tmp.45);
+        symbol [ teamServerSlots ? 28 8 23 ];
+        putv self :teamServerSlots %tmp.46;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 29 8 ]
+        %tmp.47 = lgetv %engine;
+        symbol [ engine %tmp.47 29 24 30 ];
+        symbol [ getCompletedSets %tmp.48 29 31 47 ];
+        %tmp.48 = getv function %tmp.47 :getCompletedSets;
+        %tmp.49 = invoke %tmp.47 %tmp.48();
+        symbol [ slice %tmp.50 29 50 55 ];
+        %tmp.50 = getv function %tmp.49 :slice;
+        %tmp.51 = 0;
+        %tmp.52 = lgetv %engine;
+        symbol [ engine %tmp.52 29 59 65 ];
+        symbol [ getCompletedSets %tmp.53 29 66 82 ];
+        %tmp.53 = getv function %tmp.52 :getCompletedSets;
+        %tmp.54 = invoke %tmp.52 %tmp.53();
+        symbol [ size %tmp.55 29 85 89 ];
+        %tmp.55 = getv function %tmp.54 :size;
+        %tmp.56 = invoke %tmp.54 %tmp.55();
+        %tmp.57 = invoke %tmp.49 %tmp.50(%tmp.51, %tmp.56);
+        symbol [ completedSets ? 29 8 21 ];
+        putv self :completedSets %tmp.57;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 30 8 ]
+        %tmp.58 = lgetv %engine;
+        symbol [ engine %tmp.58 30 26 32 ];
+        symbol [ getServeSideOffset %tmp.59 30 33 51 ];
+        %tmp.59 = getv function %tmp.58 :getServeSideOffset;
+        %tmp.60 = invoke %tmp.58 %tmp.59();
+        symbol [ serveSideOffset ? 30 8 23 ];
+        putv self :serveSideOffset %tmp.60;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 31 8 ]
+        %tmp.61 = false;
+        symbol [ sideChangePending ? 31 8 25 ];
+        putv self :sideChangePending %tmp.61;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 32 8 ]
+        %tmp.62 = false;
+        symbol [ receiverSideSelectionPending ? 32 8 36 ];
+        putv self :receiverSideSelectionPending %tmp.62;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc" 33 8 ]
+        %tmp.63 = null;
+        symbol [ receiverSide ? 33 8 20 ];
+        putv self :receiverSide %tmp.63;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSnapshot_mc_18_32_34_4_stop:
+    }
+}
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSnapshot.mc"; @line = 1; ]
+<init> {
+}

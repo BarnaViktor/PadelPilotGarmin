@@ -1,0 +1,138 @@
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [WatchUi,1,13,20]; @symbol_usingAlias = [WatchUi,1,24,31]; ]
+using Toybox.WatchUi as :WatchUi;
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc"; @line = 3; @symbol_classdef = [MatchHistoryDetailInputDelegate,3,6,37]; @symbol_extends<0> = [WatchUi,3,46,53]; @symbol_extends<1> = [BehaviorDelegate,3,54,70]; ]
+class MatchHistoryDetailInputDelegate extends WatchUi.BehaviorDelegate {
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc"; @line = 3; ]
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc"; @line = 3; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc"; @line = 4; @position = 8; @symbol_vardef = [_view,4,8,13]; ]
+    var _view;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc"; @line = 6; @symbol_functiondef = [initialize,6,13,23]; @symbol_param<0> = [view,6,24,28]; ]
+    function initialize(view) as Void {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_6_30_9_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc" 7 8 ]
+        symbol [ BehaviorDelegate %tmp.2 7 8 24 ];
+        %tmp.2 = getv ? :BehaviorDelegate;
+        symbol [ initialize %tmp.3 7 25 35 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc" 8 8 ]
+        %tmp.4 = lgetv %view;
+        symbol [ view %tmp.4 8 16 20 ];
+        symbol [ _view ? 8 8 13 ];
+        putv self :_view %tmp.4;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_6_30_9_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc"; @line = 11; @symbol_functiondef = [onKey,11,13,18]; @symbol_param<0> = [event,11,19,24]; ]
+    function onKey(event) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_11_26_25_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc" 12 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_11_26_25_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_11_26_25_4_stop" ]
+        %key.1 = local;
+        symbol [ key %key.1 12 12 15 ];
+        %tmp.1 = lgetv %event;
+        symbol [ event %tmp.1 12 18 23 ];
+        symbol [ getKey %tmp.2 12 24 30 ];
+        %tmp.2 = getv function %tmp.1 :getKey;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %key.1 %tmp.3;
+        symbol [ key %key.1 12 12 15 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc" 13 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_13_8_22_8_if_stmt:
+        %tmp.4 = lgetv %key.1;
+        symbol [ key %tmp.4 13 12 15 ];
+        symbol [ WatchUi %tmp.5 13 19 26 ];
+        %tmp.5 = getm $.Toybox.WatchUi;
+        symbol [ KEY_UP %tmp.6 13 27 33 ];
+        %tmp.6 = getv %tmp.5 :KEY_UP;
+        %tmp.7 = eq %tmp.4 %tmp.6;
+        bf %tmp.7 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_13_8_22_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_13_8_22_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_13_35_15_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc" 14 12 ]
+        symbol [ _view %tmp.9 14 12 17 ];
+        %tmp.9 = getv ? :_view;
+        symbol [ movePage %tmp.10 14 18 26 ];
+        %tmp.10 = getv function %tmp.9 :movePage;
+        %tmp.11 = -1;
+        invoke %tmp.9 %tmp.10(%tmp.11);
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_13_35_15_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_13_8_22_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_13_8_22_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc" 15 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_15_15_22_8_if_stmt:
+        %tmp.12 = lgetv %key.1;
+        symbol [ key %tmp.12 15 19 22 ];
+        symbol [ WatchUi %tmp.13 15 26 33 ];
+        %tmp.13 = getm $.Toybox.WatchUi;
+        symbol [ KEY_DOWN %tmp.14 15 34 42 ];
+        %tmp.14 = getv %tmp.13 :KEY_DOWN;
+        %tmp.15 = eq %tmp.12 %tmp.14;
+        bf %tmp.15 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_15_15_22_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_15_15_22_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_15_44_17_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc" 16 12 ]
+        symbol [ _view %tmp.17 16 12 17 ];
+        %tmp.17 = getv ? :_view;
+        symbol [ movePage %tmp.18 16 18 26 ];
+        %tmp.18 = getv function %tmp.17 :movePage;
+        %tmp.19 = 1;
+        invoke %tmp.17 %tmp.18(%tmp.19);
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_15_44_17_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_15_15_22_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_15_15_22_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc" 17 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_17_15_22_8_if_stmt:
+        %tmp.20 = lgetv %key.1;
+        symbol [ key %tmp.20 17 19 22 ];
+        symbol [ WatchUi %tmp.21 17 26 33 ];
+        %tmp.21 = getm $.Toybox.WatchUi;
+        symbol [ KEY_ESC %tmp.22 17 34 41 ];
+        %tmp.22 = getv %tmp.21 :KEY_ESC;
+        %tmp.23 = eq %tmp.20 %tmp.22;
+        bf %tmp.23 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_17_15_22_8_if_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_17_15_22_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_17_43_20_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc" 18 12 ]
+        symbol [ WatchUi %tmp.24 18 12 19 ];
+        %tmp.24 = getm $.Toybox.WatchUi;
+        symbol [ popView %tmp.25 18 20 27 ];
+        %tmp.25 = getv function %tmp.24 :popView;
+        symbol [ WatchUi %tmp.26 18 28 35 ];
+        %tmp.26 = getm $.Toybox.WatchUi;
+        symbol [ SLIDE_IMMEDIATE %tmp.27 18 36 51 ];
+        %tmp.27 = getv %tmp.26 :SLIDE_IMMEDIATE;
+        invoke %tmp.24 %tmp.25(%tmp.27);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc" 19 12 ]
+        %tmp.28 = true;
+        ret %tmp.28;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_17_43_20_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_17_15_22_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_17_15_22_8_if_else_false:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_20_15_22_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc" 21 12 ]
+        %tmp.29 = false;
+        ret %tmp.29;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_20_15_22_8_stop:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_17_15_22_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_15_15_22_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_13_8_22_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc" 23 8 ]
+        symbol [ WatchUi %tmp.30 23 8 15 ];
+        %tmp.30 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.31 23 16 29 ];
+        %tmp.31 = getv function %tmp.30 :requestUpdate;
+        invoke %tmp.30 %tmp.31();
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc" 24 8 ]
+        %tmp.32 = true;
+        ret %tmp.32;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_MatchHistoryDetailInputDelegate_mc_11_26_25_4_stop:
+    }
+}
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/MatchHistoryDetailInputDelegate.mc"; @line = 1; ]
+<init> {
+}

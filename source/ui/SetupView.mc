@@ -32,13 +32,13 @@ class SetupView extends WatchUi.View {
 
         for (var row = 0; row < 4; row += 1) {
             var index = first + row;
-            var y = 94 + row * 58;
+            var y = 98 + row * 62;
             var selected = index == _setup.selectedField;
             if (index == _setup.fieldCount()) {
-                PadelTheme.drawActionButton(dc, 72, y, 272, 49, selected,
+                PadelTheme.drawActionButton(dc, 72, y, 272, 48, selected,
                     "START");
             } else {
-                PadelTheme.drawSplitCard(dc, 49, y, 318, 49, selected,
+                PadelTheme.drawSplitCard(dc, 49, y, 318, 48, selected,
                     shortTitle(index), shortValue(index));
             }
         }
@@ -53,19 +53,43 @@ class SetupView extends WatchUi.View {
             return;
         }
 
+        if (index == 1) {
+            drawChoiceEditor(dc,
+                _setup.scoringMode == ScoringMode.ADVANTAGE,
+                "ADVANTAGE", "NO-AD");
+            return;
+        } else if (index == 3) {
+            drawChoiceEditor(dc,
+                _setup.decidingSetMode == DecidingSetMode.FULL_SET,
+                "FULL SET", "MATCH TIE-BREAK");
+            return;
+        } else if (index == 6) {
+            drawChoiceEditor(dc, _setup.requireTwoPointTieBreakMargin,
+                "ON", "OFF");
+            return;
+        }
+
         PadelTheme.drawCard(dc, 48, 139, 320, 92, true, PadelTheme.CYAN);
+        var centerY = 185;
         dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
-        dc.drawText(84, 177, Graphics.FONT_TINY, "−",
-            Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(332, 177, Graphics.FONT_TINY, "+",
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(84, centerY, Graphics.FONT_TINY, "−",
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(332, centerY, Graphics.FONT_TINY, "+",
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.setColor(PadelTheme.LINE, Graphics.COLOR_BLACK);
         dc.drawLine(127, 149, 127, 221);
         dc.drawLine(289, 149, 289, 221);
         dc.setColor(PadelTheme.WHITE, Graphics.COLOR_BLACK);
-        dc.drawText(centerX, 177, Graphics.FONT_XTINY, shortValue(index),
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(centerX, centerY, Graphics.FONT_XTINY, shortValue(index),
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
+    }
+
+    function drawChoiceEditor(dc, firstSelected, firstLabel, secondLabel) {
+        PadelTheme.drawActionButton(dc, 58, 124, 300, 56, firstSelected,
+            firstLabel);
+        PadelTheme.drawActionButton(dc, 58, 202, 300, 56, !firstSelected,
+            secondLabel);
     }
 
     function drawTeamEditor(dc, centerX) {
@@ -77,21 +101,21 @@ class SetupView extends WatchUi.View {
 
         dc.setColor(mine ? PadelTheme.CYAN : PadelTheme.MUTED,
             Graphics.COLOR_BLACK);
-        dc.drawText(124, 188, Graphics.FONT_TINY, "A",
-            Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(124, 224, Graphics.FONT_XTINY, "MY TEAM",
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(124, 181, Graphics.FONT_TINY, "A",
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(124, 217, Graphics.FONT_XTINY, "MY TEAM",
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.setColor(!mine ? PadelTheme.RED : PadelTheme.MUTED,
             Graphics.COLOR_BLACK);
-        dc.drawText(292, 188, Graphics.FONT_TINY, "B",
-            Graphics.TEXT_JUSTIFY_CENTER);
-        dc.drawText(292, 224, Graphics.FONT_XTINY, "OPPONENT",
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(292, 181, Graphics.FONT_TINY, "B",
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.drawText(292, 217, Graphics.FONT_XTINY, "OPPONENT",
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 
     }
 
     function shortTitle(index) {
-        var titles = ["SETS", "SCORING", "FIRST SERVE", "DECIDING SET",
+        var titles = ["SETS", "SCORING", "1ST SERVE", "FINAL SET",
             "TIE-BREAK", "MATCH TB", "WIN BY TWO"];
         return titles[index];
     }
@@ -105,7 +129,7 @@ class SetupView extends WatchUi.View {
             return _setup.startingServerTeam == 0 ? "A TEAM" : "B TEAM";
         } else if (index == 3) {
             return _setup.decidingSetMode == DecidingSetMode.FULL_SET
-                ? "FULL SET" : "MATCH TB";
+                ? "FS" : "MTB";
         } else if (index == 4) {
             return _setup.regularTieBreakTarget.toString();
         } else if (index == 5) {

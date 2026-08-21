@@ -1,0 +1,122 @@
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [Application,1,13,24]; @symbol_usingAlias = [Application,1,28,39]; ]
+using Toybox.Application as :Application;
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [WatchUi,2,13,20]; @symbol_usingAlias = [WatchUi,2,24,31]; ]
+using Toybox.WatchUi as :WatchUi;
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc"; @line = 4; @symbol_classdef = [PadelApp,4,6,14]; @symbol_extends<0> = [Application,4,23,34]; @symbol_extends<1> = [AppBase,4,35,42]; ]
+class PadelApp extends Application.AppBase {
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc"; @line = 4; ]
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc"; @line = 4; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc"; @line = 5; @symbol_functiondef = [initialize,5,13,23]; ]
+    function initialize() as Void {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_5_26_7_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc" 6 8 ]
+        symbol [ AppBase %tmp.2 6 8 15 ];
+        %tmp.2 = getv ? :AppBase;
+        symbol [ initialize %tmp.3 6 16 26 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_5_26_7_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc"; @line = 9; @symbol_functiondef = [getInitialView,9,13,27]; ]
+    function getInitialView() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_9_30_18_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc" 10 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_9_30_18_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_9_30_18_4_stop" ]
+        %loadedMatch.1 = local;
+        symbol [ loadedMatch %loadedMatch.1 10 12 23 ];
+        symbol [ ActiveMatchStore %tmp.2 10 26 42 ];
+        %tmp.2 = getv ? :ActiveMatchStore;
+        symbol [ load %tmp.3 10 43 47 ];
+        %tmp.3 = getv function %tmp.2 :load;
+        %tmp.4 = invoke %tmp.2 %tmp.3();
+        lputv %loadedMatch.1 %tmp.4;
+        symbol [ loadedMatch %loadedMatch.1 10 12 23 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc" 11 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_11_8_14_8_if_stmt:
+        %tmp.5 = lgetv %loadedMatch.1;
+        symbol [ loadedMatch %tmp.5 11 12 23 ];
+        %tmp.6 = null;
+        %tmp.7 = ne %tmp.5 %tmp.6;
+        bf %tmp.7 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_11_8_14_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_11_8_14_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_11_33_14_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc" 12 12 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_11_33_14_8_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_11_33_14_8_stop" ]
+        %recoveryView.2 = local;
+        symbol [ recoveryView %recoveryView.2 12 16 28 ];
+        symbol [ RecoveryView %tmp.11 12 35 47 ];
+        %tmp.11 = getv ? :RecoveryView;
+        %tmp.12 = lgetv %loadedMatch.1;
+        symbol [ loadedMatch %tmp.12 12 48 59 ];
+        %tmp.13 = as %tmp.12 { (!Null) };
+        %tmp.8 = newc %tmp.11 (%tmp.13);
+        lputv %recoveryView.2 %tmp.8;
+        symbol [ recoveryView %recoveryView.2 12 16 28 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc" 13 12 ]
+        %tmp.14 = newa 2;
+        %tmp.15 = lgetv %recoveryView.2;
+        symbol [ recoveryView %tmp.15 13 20 32 ];
+        %tmp.16 = dup %tmp.14;
+        %tmp.17 = aputv %tmp.16 0 %tmp.15;
+        symbol [ RecoveryInputDelegate %tmp.21 13 38 59 ];
+        %tmp.21 = getv ? :RecoveryInputDelegate;
+        %tmp.22 = lgetv %recoveryView.2;
+        symbol [ recoveryView %tmp.22 13 60 72 ];
+        %tmp.18 = newc %tmp.21 (%tmp.22);
+        %tmp.23 = dup %tmp.17;
+        %tmp.24 = aputv %tmp.23 1 %tmp.18;
+        ret %tmp.24;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_11_33_14_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_11_8_14_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_11_8_14_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc" 16 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_9_30_18_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_9_30_18_4_stop" ]
+        %view.3 = local;
+        symbol [ view %view.3 16 12 16 ];
+        symbol [ HomeView %tmp.28 16 23 31 ];
+        %tmp.28 = getv ? :HomeView;
+        %tmp.25 = newc %tmp.28 ();
+        lputv %view.3 %tmp.25;
+        symbol [ view %view.3 16 12 16 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc" 17 8 ]
+        %tmp.29 = newa 2;
+        %tmp.30 = lgetv %view.3;
+        symbol [ view %tmp.30 17 16 20 ];
+        %tmp.31 = dup %tmp.29;
+        %tmp.32 = aputv %tmp.31 0 %tmp.30;
+        symbol [ HomeInputDelegate %tmp.36 17 26 43 ];
+        %tmp.36 = getv ? :HomeInputDelegate;
+        %tmp.37 = lgetv %view.3;
+        symbol [ view %tmp.37 17 44 48 ];
+        %tmp.33 = newc %tmp.36 (%tmp.37);
+        %tmp.38 = dup %tmp.32;
+        %tmp.39 = aputv %tmp.38 1 %tmp.33;
+        ret %tmp.39;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_9_30_18_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc"; @line = 20; @symbol_functiondef = [onStop,20,13,19]; @symbol_param<0> = [state,20,20,25]; ]
+    function onStop(state) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_20_27_23_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc" 21 8 ]
+        symbol [ ActiveMatchSession %tmp.2 21 8 26 ];
+        %tmp.2 = getv ? :ActiveMatchSession;
+        symbol [ persist %tmp.3 21 27 34 ];
+        %tmp.3 = getv function %tmp.2 :persist;
+        invoke %tmp.2 %tmp.3();
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc" 22 8 ]
+        symbol [ PadelActivityRecorder %tmp.5 22 8 29 ];
+        %tmp.5 = getv ? :PadelActivityRecorder;
+        symbol [ handleAppStop %tmp.6 22 30 43 ];
+        %tmp.6 = getv function %tmp.5 :handleAppStop;
+        invoke %tmp.5 %tmp.6();
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_PadelApp_mc_20_27_23_4_stop:
+    }
+}
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/PadelApp.mc"; @line = 1; ]
+<init> {
+}

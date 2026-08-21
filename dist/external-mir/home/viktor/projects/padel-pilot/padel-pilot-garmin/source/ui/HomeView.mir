@@ -1,0 +1,457 @@
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [Graphics,1,13,21]; @symbol_usingAlias = [Graphics,1,25,33]; ]
+using Toybox.Graphics as :Graphics;
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [WatchUi,2,13,20]; @symbol_usingAlias = [WatchUi,2,24,31]; ]
+using Toybox.WatchUi as :WatchUi;
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc"; @line = 4; @symbol_classdef = [HomeView,4,6,14]; @symbol_extends<0> = [WatchUi,4,23,30]; @symbol_extends<1> = [View,4,31,35]; ]
+class HomeView extends WatchUi.View {
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc"; @line = 4; ]
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc"; @line = 4; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc"; @line = 5; @position = 8; @symbol_vardef = [_selected,5,8,17]; ]
+    var _selected;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc"; @line = 7; @symbol_functiondef = [initialize,7,13,23]; ]
+    function initialize() as Void {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_HomeView_mc_7_26_10_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 8 8 ]
+        symbol [ View %tmp.2 8 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ initialize %tmp.3 8 13 23 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 9 8 ]
+        %tmp.4 = 0;
+        symbol [ _selected ? 9 8 17 ];
+        putv self :_selected %tmp.4;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_HomeView_mc_7_26_10_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc"; @line = 12; @symbol_functiondef = [moveSelection,12,13,26]; @symbol_param<0> = [delta,12,27,32]; ]
+    function moveSelection(delta) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_HomeView_mc_12_34_14_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 13 8 ]
+        symbol [ _selected %tmp.2 13 21 30 ];
+        %tmp.2 = getv ? :_selected;
+        %tmp.3 = lgetv %delta;
+        symbol [ delta %tmp.3 13 33 38 ];
+        %tmp.4 = add %tmp.2 %tmp.3;
+        %tmp.5 = 2;
+        %tmp.6 = add %tmp.4 %tmp.5;
+        %tmp.7 = 2;
+        %tmp.8 = mod %tmp.6 %tmp.7;
+        symbol [ _selected ? 13 8 17 ];
+        putv self :_selected %tmp.8;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_HomeView_mc_12_34_14_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc"; @line = 16; @symbol_functiondef = [getSelection,16,13,25]; ]
+    function getSelection() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_HomeView_mc_16_28_18_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 17 8 ]
+        symbol [ _selected %tmp.2 17 15 24 ];
+        %tmp.2 = getv ? :_selected;
+        ret %tmp.2;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_HomeView_mc_16_28_18_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc"; @line = 20; @symbol_functiondef = [onUpdate,20,13,21]; @symbol_param<0> = [dc,20,22,24]; ]
+    function onUpdate(dc) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_HomeView_mc_20_26_34_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 21 8 ]
+        symbol [ PadelTheme %tmp.2 21 8 18 ];
+        %tmp.2 = getv ? :PadelTheme;
+        symbol [ clear %tmp.3 21 19 24 ];
+        %tmp.3 = getv function %tmp.2 :clear;
+        %tmp.4 = lgetv %dc;
+        symbol [ dc %tmp.4 21 25 27 ];
+        invoke %tmp.2 %tmp.3(%tmp.4);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 22 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_HomeView_mc_20_26_34_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_HomeView_mc_20_26_34_4_stop" ]
+        %centerX.1 = local;
+        symbol [ centerX %centerX.1 22 12 19 ];
+        %tmp.5 = lgetv %dc;
+        symbol [ dc %tmp.5 22 22 24 ];
+        symbol [ getWidth %tmp.6 22 25 33 ];
+        %tmp.6 = getv function %tmp.5 :getWidth;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        %tmp.8 = 2;
+        %tmp.9 = div %tmp.7 %tmp.8;
+        lputv %centerX.1 %tmp.9;
+        symbol [ centerX %centerX.1 22 12 19 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 24 8 ]
+        %tmp.10 = lgetv %dc;
+        symbol [ dc %tmp.10 24 8 10 ];
+        symbol [ setColor %tmp.11 24 11 19 ];
+        %tmp.11 = getv function %tmp.10 :setColor;
+        symbol [ PadelTheme %tmp.13 24 20 30 ];
+        %tmp.13 = getv ? :PadelTheme;
+        symbol [ WHITE %tmp.14 24 31 36 ];
+        %tmp.14 = getv %tmp.13 :WHITE;
+        symbol [ Graphics %tmp.15 24 38 46 ];
+        %tmp.15 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.16 24 47 58 ];
+        %tmp.16 = getv %tmp.15 :COLOR_BLACK;
+        invoke %tmp.10 %tmp.11(%tmp.14, %tmp.16);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 25 8 ]
+        %tmp.17 = lgetv %dc;
+        symbol [ dc %tmp.17 25 8 10 ];
+        symbol [ drawText %tmp.18 25 11 19 ];
+        %tmp.18 = getv function %tmp.17 :drawText;
+        %tmp.19 = lgetv %centerX.1;
+        symbol [ centerX %tmp.19 25 20 27 ];
+        %tmp.20 = 62;
+        symbol [ Graphics %tmp.21 25 33 41 ];
+        %tmp.21 = getm $.Toybox.Graphics;
+        symbol [ FONT_XTINY %tmp.22 25 42 52 ];
+        %tmp.22 = getv %tmp.21 :FONT_XTINY;
+        %tmp.23 = "PADEL PILOT";
+        symbol [ Graphics %tmp.24 26 12 20 ];
+        %tmp.24 = getm $.Toybox.Graphics;
+        symbol [ TEXT_JUSTIFY_CENTER %tmp.25 26 21 40 ];
+        %tmp.25 = getv %tmp.24 :TEXT_JUSTIFY_CENTER;
+        invoke %tmp.17 %tmp.18(%tmp.19, %tmp.20, %tmp.22, %tmp.23, %tmp.25);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 27 8 ]
+        %tmp.26 = self;
+        symbol [ drawCourt %tmp.27 27 8 17 ];
+        %tmp.27 = getv function %tmp.26 :drawCourt;
+        %tmp.28 = lgetv %dc;
+        symbol [ dc %tmp.28 27 18 20 ];
+        %tmp.29 = lgetv %centerX.1;
+        symbol [ centerX %tmp.29 27 22 29 ];
+        %tmp.30 = 112;
+        invoke %tmp.26 %tmp.27(%tmp.28, %tmp.29, %tmp.30);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 29 8 ]
+        symbol [ PadelTheme %tmp.32 29 8 18 ];
+        %tmp.32 = getv ? :PadelTheme;
+        symbol [ drawActionButton %tmp.33 29 19 35 ];
+        %tmp.33 = getv function %tmp.32 :drawActionButton;
+        %tmp.34 = lgetv %dc;
+        symbol [ dc %tmp.34 29 36 38 ];
+        %tmp.35 = 68;
+        %tmp.36 = 228;
+        %tmp.37 = 280;
+        %tmp.38 = 58;
+        symbol [ _selected %tmp.40 29 58 67 ];
+        %tmp.40 = getv ? :_selected;
+        %tmp.41 = 0;
+        %tmp.42 = eq %tmp.40 %tmp.41;
+        %tmp.43 = "NEW MATCH";
+        invoke %tmp.32 %tmp.33(%tmp.34, %tmp.35, %tmp.36, %tmp.37, %tmp.38, %tmp.42, %tmp.43);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 31 8 ]
+        symbol [ PadelTheme %tmp.45 31 8 18 ];
+        %tmp.45 = getv ? :PadelTheme;
+        symbol [ drawActionButton %tmp.46 31 19 35 ];
+        %tmp.46 = getv function %tmp.45 :drawActionButton;
+        %tmp.47 = lgetv %dc;
+        symbol [ dc %tmp.47 31 36 38 ];
+        %tmp.48 = 88;
+        %tmp.49 = 306;
+        %tmp.50 = 240;
+        %tmp.51 = 49;
+        symbol [ _selected %tmp.53 31 58 67 ];
+        %tmp.53 = getv ? :_selected;
+        %tmp.54 = 1;
+        %tmp.55 = eq %tmp.53 %tmp.54;
+        %tmp.56 = "HISTORY";
+        invoke %tmp.45 %tmp.46(%tmp.47, %tmp.48, %tmp.49, %tmp.50, %tmp.51, %tmp.55, %tmp.56);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 33 8 ]
+        symbol [ PadelTheme %tmp.58 33 8 18 ];
+        %tmp.58 = getv ? :PadelTheme;
+        symbol [ drawPageDots %tmp.59 33 19 31 ];
+        %tmp.59 = getv function %tmp.58 :drawPageDots;
+        %tmp.60 = lgetv %dc;
+        symbol [ dc %tmp.60 33 32 34 ];
+        symbol [ _selected %tmp.62 33 36 45 ];
+        %tmp.62 = getv ? :_selected;
+        %tmp.63 = 2;
+        %tmp.64 = 378;
+        invoke %tmp.58 %tmp.59(%tmp.60, %tmp.62, %tmp.63, %tmp.64);
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_HomeView_mc_20_26_34_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc"; @line = 36; @symbol_functiondef = [drawCourt,36,13,22]; @symbol_param<0> = [dc,36,23,25]; @symbol_param<1> = [centerX,36,27,34]; @symbol_param<2> = [y,36,36,37]; ]
+    function drawCourt(dc, centerX, y) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_HomeView_mc_36_39_55_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 37 8 ]
+        %tmp.1 = lgetv %dc;
+        symbol [ dc %tmp.1 37 8 10 ];
+        symbol [ setPenWidth %tmp.2 37 11 22 ];
+        %tmp.2 = getv function %tmp.1 :setPenWidth;
+        %tmp.3 = 3;
+        invoke %tmp.1 %tmp.2(%tmp.3);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 38 8 ]
+        %tmp.4 = lgetv %dc;
+        symbol [ dc %tmp.4 38 8 10 ];
+        symbol [ setColor %tmp.5 38 11 19 ];
+        %tmp.5 = getv function %tmp.4 :setColor;
+        symbol [ PadelTheme %tmp.7 38 20 30 ];
+        %tmp.7 = getv ? :PadelTheme;
+        symbol [ CYAN %tmp.8 38 31 35 ];
+        %tmp.8 = getv %tmp.7 :CYAN;
+        symbol [ Graphics %tmp.9 38 37 45 ];
+        %tmp.9 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.10 38 46 57 ];
+        %tmp.10 = getv %tmp.9 :COLOR_BLACK;
+        invoke %tmp.4 %tmp.5(%tmp.8, %tmp.10);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 39 8 ]
+        %tmp.11 = lgetv %dc;
+        symbol [ dc %tmp.11 39 8 10 ];
+        symbol [ drawLine %tmp.12 39 11 19 ];
+        %tmp.12 = getv function %tmp.11 :drawLine;
+        %tmp.13 = lgetv %centerX;
+        symbol [ centerX %tmp.13 39 20 27 ];
+        %tmp.14 = 76;
+        %tmp.15 = sub %tmp.13 %tmp.14;
+        %tmp.16 = lgetv %y;
+        symbol [ y %tmp.16 39 34 35 ];
+        %tmp.17 = lgetv %centerX;
+        symbol [ centerX %tmp.17 39 37 44 ];
+        %tmp.18 = 18;
+        %tmp.19 = sub %tmp.17 %tmp.18;
+        %tmp.20 = lgetv %y;
+        symbol [ y %tmp.20 39 51 52 ];
+        invoke %tmp.11 %tmp.12(%tmp.15, %tmp.16, %tmp.19, %tmp.20);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 40 8 ]
+        %tmp.21 = lgetv %dc;
+        symbol [ dc %tmp.21 40 8 10 ];
+        symbol [ drawLine %tmp.22 40 11 19 ];
+        %tmp.22 = getv function %tmp.21 :drawLine;
+        %tmp.23 = lgetv %centerX;
+        symbol [ centerX %tmp.23 40 20 27 ];
+        %tmp.24 = 76;
+        %tmp.25 = sub %tmp.23 %tmp.24;
+        %tmp.26 = lgetv %y;
+        symbol [ y %tmp.26 40 34 35 ];
+        %tmp.27 = lgetv %centerX;
+        symbol [ centerX %tmp.27 40 37 44 ];
+        %tmp.28 = 88;
+        %tmp.29 = sub %tmp.27 %tmp.28;
+        %tmp.30 = lgetv %y;
+        symbol [ y %tmp.30 40 51 52 ];
+        %tmp.31 = 66;
+        %tmp.32 = add %tmp.30 %tmp.31;
+        invoke %tmp.21 %tmp.22(%tmp.25, %tmp.26, %tmp.29, %tmp.32);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 41 8 ]
+        %tmp.33 = lgetv %dc;
+        symbol [ dc %tmp.33 41 8 10 ];
+        symbol [ drawLine %tmp.34 41 11 19 ];
+        %tmp.34 = getv function %tmp.33 :drawLine;
+        %tmp.35 = lgetv %centerX;
+        symbol [ centerX %tmp.35 41 20 27 ];
+        %tmp.36 = 88;
+        %tmp.37 = sub %tmp.35 %tmp.36;
+        %tmp.38 = lgetv %y;
+        symbol [ y %tmp.38 41 34 35 ];
+        %tmp.39 = 66;
+        %tmp.40 = add %tmp.38 %tmp.39;
+        %tmp.41 = lgetv %centerX;
+        symbol [ centerX %tmp.41 41 42 49 ];
+        %tmp.42 = 18;
+        %tmp.43 = sub %tmp.41 %tmp.42;
+        %tmp.44 = lgetv %y;
+        symbol [ y %tmp.44 41 56 57 ];
+        %tmp.45 = 66;
+        %tmp.46 = add %tmp.44 %tmp.45;
+        invoke %tmp.33 %tmp.34(%tmp.37, %tmp.40, %tmp.43, %tmp.46);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 42 8 ]
+        %tmp.47 = lgetv %dc;
+        symbol [ dc %tmp.47 42 8 10 ];
+        symbol [ drawLine %tmp.48 42 11 19 ];
+        %tmp.48 = getv function %tmp.47 :drawLine;
+        %tmp.49 = lgetv %centerX;
+        symbol [ centerX %tmp.49 42 20 27 ];
+        %tmp.50 = 61;
+        %tmp.51 = sub %tmp.49 %tmp.50;
+        %tmp.52 = lgetv %y;
+        symbol [ y %tmp.52 42 34 35 ];
+        %tmp.53 = lgetv %centerX;
+        symbol [ centerX %tmp.53 42 37 44 ];
+        %tmp.54 = 69;
+        %tmp.55 = sub %tmp.53 %tmp.54;
+        %tmp.56 = lgetv %y;
+        symbol [ y %tmp.56 42 51 52 ];
+        %tmp.57 = 66;
+        %tmp.58 = add %tmp.56 %tmp.57;
+        invoke %tmp.47 %tmp.48(%tmp.51, %tmp.52, %tmp.55, %tmp.58);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 43 8 ]
+        %tmp.59 = lgetv %dc;
+        symbol [ dc %tmp.59 43 8 10 ];
+        symbol [ drawLine %tmp.60 43 11 19 ];
+        %tmp.60 = getv function %tmp.59 :drawLine;
+        %tmp.61 = lgetv %centerX;
+        symbol [ centerX %tmp.61 43 20 27 ];
+        %tmp.62 = 82;
+        %tmp.63 = sub %tmp.61 %tmp.62;
+        %tmp.64 = lgetv %y;
+        symbol [ y %tmp.64 43 34 35 ];
+        %tmp.65 = 33;
+        %tmp.66 = add %tmp.64 %tmp.65;
+        %tmp.67 = lgetv %centerX;
+        symbol [ centerX %tmp.67 43 42 49 ];
+        %tmp.68 = 24;
+        %tmp.69 = sub %tmp.67 %tmp.68;
+        %tmp.70 = lgetv %y;
+        symbol [ y %tmp.70 43 56 57 ];
+        %tmp.71 = 33;
+        %tmp.72 = add %tmp.70 %tmp.71;
+        invoke %tmp.59 %tmp.60(%tmp.63, %tmp.66, %tmp.69, %tmp.72);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 45 8 ]
+        %tmp.73 = lgetv %dc;
+        symbol [ dc %tmp.73 45 8 10 ];
+        symbol [ setColor %tmp.74 45 11 19 ];
+        %tmp.74 = getv function %tmp.73 :setColor;
+        symbol [ PadelTheme %tmp.76 45 20 30 ];
+        %tmp.76 = getv ? :PadelTheme;
+        symbol [ RED %tmp.77 45 31 34 ];
+        %tmp.77 = getv %tmp.76 :RED;
+        symbol [ Graphics %tmp.78 45 36 44 ];
+        %tmp.78 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.79 45 45 56 ];
+        %tmp.79 = getv %tmp.78 :COLOR_BLACK;
+        invoke %tmp.73 %tmp.74(%tmp.77, %tmp.79);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 46 8 ]
+        %tmp.80 = lgetv %dc;
+        symbol [ dc %tmp.80 46 8 10 ];
+        symbol [ drawLine %tmp.81 46 11 19 ];
+        %tmp.81 = getv function %tmp.80 :drawLine;
+        %tmp.82 = lgetv %centerX;
+        symbol [ centerX %tmp.82 46 20 27 ];
+        %tmp.83 = 18;
+        %tmp.84 = add %tmp.82 %tmp.83;
+        %tmp.85 = lgetv %y;
+        symbol [ y %tmp.85 46 34 35 ];
+        %tmp.86 = lgetv %centerX;
+        symbol [ centerX %tmp.86 46 37 44 ];
+        %tmp.87 = 76;
+        %tmp.88 = add %tmp.86 %tmp.87;
+        %tmp.89 = lgetv %y;
+        symbol [ y %tmp.89 46 51 52 ];
+        invoke %tmp.80 %tmp.81(%tmp.84, %tmp.85, %tmp.88, %tmp.89);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 47 8 ]
+        %tmp.90 = lgetv %dc;
+        symbol [ dc %tmp.90 47 8 10 ];
+        symbol [ drawLine %tmp.91 47 11 19 ];
+        %tmp.91 = getv function %tmp.90 :drawLine;
+        %tmp.92 = lgetv %centerX;
+        symbol [ centerX %tmp.92 47 20 27 ];
+        %tmp.93 = 76;
+        %tmp.94 = add %tmp.92 %tmp.93;
+        %tmp.95 = lgetv %y;
+        symbol [ y %tmp.95 47 34 35 ];
+        %tmp.96 = lgetv %centerX;
+        symbol [ centerX %tmp.96 47 37 44 ];
+        %tmp.97 = 88;
+        %tmp.98 = add %tmp.96 %tmp.97;
+        %tmp.99 = lgetv %y;
+        symbol [ y %tmp.99 47 51 52 ];
+        %tmp.100 = 66;
+        %tmp.101 = add %tmp.99 %tmp.100;
+        invoke %tmp.90 %tmp.91(%tmp.94, %tmp.95, %tmp.98, %tmp.101);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 48 8 ]
+        %tmp.102 = lgetv %dc;
+        symbol [ dc %tmp.102 48 8 10 ];
+        symbol [ drawLine %tmp.103 48 11 19 ];
+        %tmp.103 = getv function %tmp.102 :drawLine;
+        %tmp.104 = lgetv %centerX;
+        symbol [ centerX %tmp.104 48 20 27 ];
+        %tmp.105 = 88;
+        %tmp.106 = add %tmp.104 %tmp.105;
+        %tmp.107 = lgetv %y;
+        symbol [ y %tmp.107 48 34 35 ];
+        %tmp.108 = 66;
+        %tmp.109 = add %tmp.107 %tmp.108;
+        %tmp.110 = lgetv %centerX;
+        symbol [ centerX %tmp.110 48 42 49 ];
+        %tmp.111 = 18;
+        %tmp.112 = add %tmp.110 %tmp.111;
+        %tmp.113 = lgetv %y;
+        symbol [ y %tmp.113 48 56 57 ];
+        %tmp.114 = 66;
+        %tmp.115 = add %tmp.113 %tmp.114;
+        invoke %tmp.102 %tmp.103(%tmp.106, %tmp.109, %tmp.112, %tmp.115);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 49 8 ]
+        %tmp.116 = lgetv %dc;
+        symbol [ dc %tmp.116 49 8 10 ];
+        symbol [ drawLine %tmp.117 49 11 19 ];
+        %tmp.117 = getv function %tmp.116 :drawLine;
+        %tmp.118 = lgetv %centerX;
+        symbol [ centerX %tmp.118 49 20 27 ];
+        %tmp.119 = 61;
+        %tmp.120 = add %tmp.118 %tmp.119;
+        %tmp.121 = lgetv %y;
+        symbol [ y %tmp.121 49 34 35 ];
+        %tmp.122 = lgetv %centerX;
+        symbol [ centerX %tmp.122 49 37 44 ];
+        %tmp.123 = 69;
+        %tmp.124 = add %tmp.122 %tmp.123;
+        %tmp.125 = lgetv %y;
+        symbol [ y %tmp.125 49 51 52 ];
+        %tmp.126 = 66;
+        %tmp.127 = add %tmp.125 %tmp.126;
+        invoke %tmp.116 %tmp.117(%tmp.120, %tmp.121, %tmp.124, %tmp.127);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 50 8 ]
+        %tmp.128 = lgetv %dc;
+        symbol [ dc %tmp.128 50 8 10 ];
+        symbol [ drawLine %tmp.129 50 11 19 ];
+        %tmp.129 = getv function %tmp.128 :drawLine;
+        %tmp.130 = lgetv %centerX;
+        symbol [ centerX %tmp.130 50 20 27 ];
+        %tmp.131 = 24;
+        %tmp.132 = add %tmp.130 %tmp.131;
+        %tmp.133 = lgetv %y;
+        symbol [ y %tmp.133 50 34 35 ];
+        %tmp.134 = 33;
+        %tmp.135 = add %tmp.133 %tmp.134;
+        %tmp.136 = lgetv %centerX;
+        symbol [ centerX %tmp.136 50 42 49 ];
+        %tmp.137 = 82;
+        %tmp.138 = add %tmp.136 %tmp.137;
+        %tmp.139 = lgetv %y;
+        symbol [ y %tmp.139 50 56 57 ];
+        %tmp.140 = 33;
+        %tmp.141 = add %tmp.139 %tmp.140;
+        invoke %tmp.128 %tmp.129(%tmp.132, %tmp.135, %tmp.138, %tmp.141);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 52 8 ]
+        %tmp.142 = lgetv %dc;
+        symbol [ dc %tmp.142 52 8 10 ];
+        symbol [ setColor %tmp.143 52 11 19 ];
+        %tmp.143 = getv function %tmp.142 :setColor;
+        symbol [ PadelTheme %tmp.145 52 20 30 ];
+        %tmp.145 = getv ? :PadelTheme;
+        symbol [ WHITE %tmp.146 52 31 36 ];
+        %tmp.146 = getv %tmp.145 :WHITE;
+        symbol [ Graphics %tmp.147 52 38 46 ];
+        %tmp.147 = getm $.Toybox.Graphics;
+        symbol [ COLOR_BLACK %tmp.148 52 47 58 ];
+        %tmp.148 = getv %tmp.147 :COLOR_BLACK;
+        invoke %tmp.142 %tmp.143(%tmp.146, %tmp.148);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 53 8 ]
+        %tmp.149 = lgetv %dc;
+        symbol [ dc %tmp.149 53 8 10 ];
+        symbol [ drawLine %tmp.150 53 11 19 ];
+        %tmp.150 = getv function %tmp.149 :drawLine;
+        %tmp.151 = lgetv %centerX;
+        symbol [ centerX %tmp.151 53 20 27 ];
+        %tmp.152 = lgetv %y;
+        symbol [ y %tmp.152 53 29 30 ];
+        %tmp.153 = 6;
+        %tmp.154 = sub %tmp.152 %tmp.153;
+        %tmp.155 = lgetv %centerX;
+        symbol [ centerX %tmp.155 53 36 43 ];
+        %tmp.156 = lgetv %y;
+        symbol [ y %tmp.156 53 45 46 ];
+        %tmp.157 = 72;
+        %tmp.158 = add %tmp.156 %tmp.157;
+        invoke %tmp.149 %tmp.150(%tmp.151, %tmp.154, %tmp.155, %tmp.158);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc" 54 8 ]
+        %tmp.159 = lgetv %dc;
+        symbol [ dc %tmp.159 54 8 10 ];
+        symbol [ setPenWidth %tmp.160 54 11 22 ];
+        %tmp.160 = getv function %tmp.159 :setPenWidth;
+        %tmp.161 = 1;
+        invoke %tmp.159 %tmp.160(%tmp.161);
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_ui_HomeView_mc_36_39_55_4_stop:
+    }
+}
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/ui/HomeView.mc"; @line = 1; ]
+<init> {
+}

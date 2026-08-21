@@ -1,0 +1,1185 @@
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 1; @symbol_usingdef<0> = [Toybox,1,6,12]; @symbol_usingdef<1> = [Activity,1,13,21]; @symbol_usingAlias = [Activity,1,25,33]; ]
+using Toybox.Activity as :Activity;
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [ActivityRecording,2,13,30]; @symbol_usingAlias = [ActivityRecording,2,34,51]; ]
+using Toybox.ActivityRecording as :ActivityRecording;
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 3; @symbol_usingdef<0> = [Toybox,3,6,12]; @symbol_usingdef<1> = [FitContributor,3,13,27]; @symbol_usingAlias = [FitContributor,3,31,45]; ]
+using Toybox.FitContributor as :FitContributor;
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 4; @symbol_usingdef<0> = [Toybox,4,6,12]; @symbol_usingdef<1> = [Sensor,4,13,19]; @symbol_usingAlias = [Sensor,4,23,29]; ]
+using Toybox.Sensor as :Sensor;
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 6; @symbol_moduledef = [PadelActivityRecorder,6,7,28]; ]
+module PadelActivityRecorder {
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 6; ]
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 7; @position = 10; @symbol_constdef = [FIELD_POINT_EVENT,7,10,27]; ]
+    const FIELD_POINT_EVENT = 0;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 8; @position = 10; @symbol_constdef = [FIELD_MY_SET_SCORE,8,10,28]; ]
+    const FIELD_MY_SET_SCORE = 1;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 9; @position = 10; @symbol_constdef = [FIELD_OPPONENT_SET_SCORE,9,10,34]; ]
+    const FIELD_OPPONENT_SET_SCORE = 2;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 10; @position = 10; @symbol_constdef = [FIELD_MY_SETS,10,10,23]; ]
+    const FIELD_MY_SETS = 3;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 11; @position = 10; @symbol_constdef = [FIELD_OPPONENT_SETS,11,10,29]; ]
+    const FIELD_OPPONENT_SETS = 4;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 12; @position = 10; @symbol_constdef = [FIELD_WINNER,12,10,22]; ]
+    const FIELD_WINNER = 5;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 13; @position = 10; @symbol_constdef = [FIELD_SET_SCORES,13,10,26]; ]
+    const FIELD_SET_SCORES = 6;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 15; @position = 10; @symbol_constdef = [EVENT_MY_POINT,15,10,24]; ]
+    const EVENT_MY_POINT = 1;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 16; @position = 10; @symbol_constdef = [EVENT_OPPONENT_POINT,16,10,30]; ]
+    const EVENT_OPPONENT_POINT = 2;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 17; @position = 10; @symbol_constdef = [EVENT_UNDO,17,10,20]; ]
+    const EVENT_UNDO = 3;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 19; @position = 8; @symbol_vardef = [_session,19,8,16]; ]
+    var _session = null;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 20; @position = 8; @symbol_vardef = [_engine,20,8,15]; ]
+    var _engine = null;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 21; @position = 8; @symbol_vardef = [_pointEventField,21,8,24]; ]
+    var _pointEventField = null;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 22; @position = 8; @symbol_vardef = [_mySetScoreField,22,8,24]; ]
+    var _mySetScoreField = null;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 23; @position = 8; @symbol_vardef = [_opponentSetScoreField,23,8,30]; ]
+    var _opponentSetScoreField = null;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 24; @position = 8; @symbol_vardef = [_mySetsField,24,8,20]; ]
+    var _mySetsField = null;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 25; @position = 8; @symbol_vardef = [_opponentSetsField,25,8,26]; ]
+    var _opponentSetsField = null;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 26; @position = 8; @symbol_vardef = [_winnerField,26,8,20]; ]
+    var _winnerField = null;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 27; @position = 8; @symbol_vardef = [_setScoresField,27,8,23]; ]
+    var _setScoresField = null;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 28; @position = 8; @symbol_vardef = [_recordedSetCount,28,8,25]; ]
+    var _recordedSetCount = 0;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 30; @symbol_functiondef = [start,30,13,18]; @symbol_param<0> = [engine,30,19,25]; ]
+    function start(engine) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_30_27_52_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 31 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_31_8_33_8_if_stmt:
+        symbol [ _session %tmp.2 31 12 20 ];
+        %tmp.2 = getv ? :_session;
+        %tmp.3 = null;
+        %tmp.4 = ne %tmp.2 %tmp.3;
+        bf %tmp.4 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_31_8_33_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_31_8_33_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_31_30_33_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 32 12 ]
+        %tmp.5 = true;
+        ret %tmp.5;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_31_30_33_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_31_8_33_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_31_8_33_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 35 8 ]
+        try @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_beginTry @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_endTry @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_catch @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_finally;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_beginTry:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_12_48_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 36 12 ]
+        symbol [ Sensor %tmp.6 36 12 18 ];
+        %tmp.6 = getm $.Toybox.Sensor;
+        symbol [ setEnabledSensors %tmp.7 36 19 36 ];
+        %tmp.7 = getv function %tmp.6 :setEnabledSensors;
+        %tmp.8 = newa 1;
+        symbol [ Sensor %tmp.9 36 38 44 ];
+        %tmp.9 = getm $.Toybox.Sensor;
+        symbol [ SENSOR_HEARTRATE %tmp.10 36 45 61 ];
+        %tmp.10 = getv %tmp.9 :SENSOR_HEARTRATE;
+        %tmp.11 = dup %tmp.8;
+        %tmp.12 = aputv %tmp.11 0 %tmp.10;
+        invoke %tmp.6 %tmp.7(%tmp.12);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 38 12 ]
+        symbol [ ActivityRecording %tmp.13 38 23 40 ];
+        %tmp.13 = getm $.Toybox.ActivityRecording;
+        symbol [ createSession %tmp.14 38 41 54 ];
+        %tmp.14 = getv function %tmp.13 :createSession;
+        %tmp.15 = newd 3;
+        %tmp.17 = const :name;
+        symbol [ name %tmp.17 39 17 21 const ];
+        %tmp.18 = "Padel";
+        %tmp.19 = dup %tmp.15;
+        %tmp.20 = aputv %tmp.19 %tmp.17 %tmp.18;
+        %tmp.22 = const :sport;
+        symbol [ sport %tmp.22 40 17 22 const ];
+        symbol [ Activity %tmp.23 40 26 34 ];
+        %tmp.23 = getm $.Toybox.Activity;
+        symbol [ SPORT_RACKET %tmp.24 40 35 47 ];
+        %tmp.24 = getv %tmp.23 :SPORT_RACKET;
+        %tmp.25 = dup %tmp.20;
+        %tmp.26 = aputv %tmp.25 %tmp.22 %tmp.24;
+        %tmp.28 = const :subSport;
+        symbol [ subSport %tmp.28 41 17 25 const ];
+        symbol [ Activity %tmp.29 41 29 37 ];
+        %tmp.29 = getm $.Toybox.Activity;
+        symbol [ SUB_SPORT_PADEL %tmp.30 41 38 53 ];
+        %tmp.30 = getv %tmp.29 :SUB_SPORT_PADEL;
+        %tmp.31 = dup %tmp.26;
+        %tmp.32 = aputv %tmp.31 %tmp.28 %tmp.30;
+        %tmp.33 = invoke %tmp.13 %tmp.14(%tmp.32);
+        symbol [ _session ? 38 12 20 ];
+        putv self :_session %tmp.33;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 43 12 ]
+        %tmp.34 = lgetv %engine;
+        symbol [ engine %tmp.34 43 22 28 ];
+        symbol [ _engine ? 43 12 19 ];
+        putv self :_engine %tmp.34;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 44 12 ]
+        %tmp.35 = 0;
+        symbol [ _recordedSetCount ? 44 12 29 ];
+        putv self :_recordedSetCount %tmp.35;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 45 12 ]
+        %tmp.36 = self;
+        symbol [ createFields %tmp.37 45 12 24 ];
+        %tmp.37 = getv function %tmp.36 :createFields;
+        invoke %tmp.36 %tmp.37();
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 46 12 ]
+        %tmp.38 = self;
+        symbol [ updateSummary %tmp.39 46 12 25 ];
+        %tmp.39 = getv function %tmp.38 :updateSummary;
+        %tmp.40 = lgetv %engine;
+        symbol [ engine %tmp.40 46 26 32 ];
+        invoke %tmp.38 %tmp.39(%tmp.40);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 47 12 ]
+        symbol [ _session %tmp.42 47 19 27 ];
+        %tmp.42 = getv ? :_session;
+        symbol [ start %tmp.43 47 28 33 ];
+        %tmp.43 = getv function %tmp.42 :start;
+        %tmp.44 = invoke %tmp.42 %tmp.43();
+        jsr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_finally;
+        ret %tmp.44;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_12_48_8_stop:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_endTry:
+        jsr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_finally;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_catch:
+        %tmp.45 = exception;
+        push %tmp.45;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 48 10 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_catch" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_48_10_51_8_end" ]
+        %error.1 = local;
+        symbol [ error %error.1 48 17 22 ];
+        %tmp.46 = dup %tmp.45;
+        lputv %error.1 %tmp.46;
+        symbol [ error %error.1 48 17 22 ];
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_48_24_51_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 49 12 ]
+        %tmp.47 = self;
+        symbol [ reset %tmp.48 49 12 17 ];
+        %tmp.48 = getv function %tmp.47 :reset;
+        invoke %tmp.47 %tmp.48();
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 50 12 ]
+        pop;
+        %tmp.49 = false;
+        jsr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_finally;
+        ret %tmp.49;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_48_24_51_8_stop:
+        jsr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_finally;
+        pop;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_48_10_51_8_end:
+        try @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_catch @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_48_10_51_8_end @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_48_10_51_8_end @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_finally;
+        jsr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_finally;
+        throw %tmp.45;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_finally:
+        jsrret;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_35_8_51_8_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_30_27_52_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 54; @symbol_functiondef = [createFields,54,13,25]; ]
+    function createFields() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_54_28_76_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 55 8 ]
+        symbol [ _session %tmp.2 55 27 35 ];
+        %tmp.2 = getv ? :_session;
+        symbol [ createField %tmp.3 55 36 47 ];
+        %tmp.3 = getv function %tmp.2 :createField;
+        %tmp.4 = "point_event";
+        symbol [ FIELD_POINT_EVENT %tmp.6 55 63 80 ];
+        %tmp.6 = getv ? :FIELD_POINT_EVENT;
+        symbol [ FitContributor %tmp.7 56 12 26 ];
+        %tmp.7 = getm $.Toybox.FitContributor;
+        symbol [ DATA_TYPE_UINT8 %tmp.8 56 27 42 ];
+        %tmp.8 = getv %tmp.7 :DATA_TYPE_UINT8;
+        %tmp.9 = newd 2;
+        %tmp.11 = const :mesgType;
+        symbol [ mesgType %tmp.11 57 14 22 const ];
+        symbol [ FitContributor %tmp.12 57 26 40 ];
+        %tmp.12 = getm $.Toybox.FitContributor;
+        symbol [ MESG_TYPE_RECORD %tmp.13 57 41 57 ];
+        %tmp.13 = getv %tmp.12 :MESG_TYPE_RECORD;
+        %tmp.14 = dup %tmp.9;
+        %tmp.15 = aputv %tmp.14 %tmp.11 %tmp.13;
+        %tmp.17 = const :units;
+        symbol [ units %tmp.17 57 60 65 const ];
+        %tmp.18 = "code";
+        %tmp.19 = dup %tmp.15;
+        %tmp.20 = aputv %tmp.19 %tmp.17 %tmp.18;
+        %tmp.21 = invoke %tmp.2 %tmp.3(%tmp.4, %tmp.6, %tmp.8, %tmp.20);
+        symbol [ _pointEventField ? 55 8 24 ];
+        putv self :_pointEventField %tmp.21;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 58 8 ]
+        symbol [ _session %tmp.23 58 27 35 ];
+        %tmp.23 = getv ? :_session;
+        symbol [ createField %tmp.24 58 36 47 ];
+        %tmp.24 = getv function %tmp.23 :createField;
+        %tmp.25 = "my_set_games";
+        symbol [ FIELD_MY_SET_SCORE %tmp.27 58 64 82 ];
+        %tmp.27 = getv ? :FIELD_MY_SET_SCORE;
+        symbol [ FitContributor %tmp.28 59 12 26 ];
+        %tmp.28 = getm $.Toybox.FitContributor;
+        symbol [ DATA_TYPE_UINT8 %tmp.29 59 27 42 ];
+        %tmp.29 = getv %tmp.28 :DATA_TYPE_UINT8;
+        %tmp.30 = newd 2;
+        %tmp.32 = const :mesgType;
+        symbol [ mesgType %tmp.32 60 14 22 const ];
+        symbol [ FitContributor %tmp.33 60 26 40 ];
+        %tmp.33 = getm $.Toybox.FitContributor;
+        symbol [ MESG_TYPE_LAP %tmp.34 60 41 54 ];
+        %tmp.34 = getv %tmp.33 :MESG_TYPE_LAP;
+        %tmp.35 = dup %tmp.30;
+        %tmp.36 = aputv %tmp.35 %tmp.32 %tmp.34;
+        %tmp.38 = const :units;
+        symbol [ units %tmp.38 60 57 62 const ];
+        %tmp.39 = "games";
+        %tmp.40 = dup %tmp.36;
+        %tmp.41 = aputv %tmp.40 %tmp.38 %tmp.39;
+        %tmp.42 = invoke %tmp.23 %tmp.24(%tmp.25, %tmp.27, %tmp.29, %tmp.41);
+        symbol [ _mySetScoreField ? 58 8 24 ];
+        putv self :_mySetScoreField %tmp.42;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 61 8 ]
+        symbol [ _session %tmp.44 61 33 41 ];
+        %tmp.44 = getv ? :_session;
+        symbol [ createField %tmp.45 61 42 53 ];
+        %tmp.45 = getv function %tmp.44 :createField;
+        %tmp.46 = "opponent_set_games";
+        symbol [ FIELD_OPPONENT_SET_SCORE %tmp.48 61 76 100 ];
+        %tmp.48 = getv ? :FIELD_OPPONENT_SET_SCORE;
+        symbol [ FitContributor %tmp.49 62 12 26 ];
+        %tmp.49 = getm $.Toybox.FitContributor;
+        symbol [ DATA_TYPE_UINT8 %tmp.50 62 27 42 ];
+        %tmp.50 = getv %tmp.49 :DATA_TYPE_UINT8;
+        %tmp.51 = newd 2;
+        %tmp.53 = const :mesgType;
+        symbol [ mesgType %tmp.53 63 14 22 const ];
+        symbol [ FitContributor %tmp.54 63 26 40 ];
+        %tmp.54 = getm $.Toybox.FitContributor;
+        symbol [ MESG_TYPE_LAP %tmp.55 63 41 54 ];
+        %tmp.55 = getv %tmp.54 :MESG_TYPE_LAP;
+        %tmp.56 = dup %tmp.51;
+        %tmp.57 = aputv %tmp.56 %tmp.53 %tmp.55;
+        %tmp.59 = const :units;
+        symbol [ units %tmp.59 63 57 62 const ];
+        %tmp.60 = "games";
+        %tmp.61 = dup %tmp.57;
+        %tmp.62 = aputv %tmp.61 %tmp.59 %tmp.60;
+        %tmp.63 = invoke %tmp.44 %tmp.45(%tmp.46, %tmp.48, %tmp.50, %tmp.62);
+        symbol [ _opponentSetScoreField ? 61 8 30 ];
+        putv self :_opponentSetScoreField %tmp.63;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 64 8 ]
+        symbol [ _session %tmp.65 64 23 31 ];
+        %tmp.65 = getv ? :_session;
+        symbol [ createField %tmp.66 64 32 43 ];
+        %tmp.66 = getv function %tmp.65 :createField;
+        %tmp.67 = "my_sets";
+        symbol [ FIELD_MY_SETS %tmp.69 64 55 68 ];
+        %tmp.69 = getv ? :FIELD_MY_SETS;
+        symbol [ FitContributor %tmp.70 65 12 26 ];
+        %tmp.70 = getm $.Toybox.FitContributor;
+        symbol [ DATA_TYPE_UINT8 %tmp.71 65 27 42 ];
+        %tmp.71 = getv %tmp.70 :DATA_TYPE_UINT8;
+        %tmp.72 = newd 2;
+        %tmp.74 = const :mesgType;
+        symbol [ mesgType %tmp.74 66 14 22 const ];
+        symbol [ FitContributor %tmp.75 66 26 40 ];
+        %tmp.75 = getm $.Toybox.FitContributor;
+        symbol [ MESG_TYPE_SESSION %tmp.76 66 41 58 ];
+        %tmp.76 = getv %tmp.75 :MESG_TYPE_SESSION;
+        %tmp.77 = dup %tmp.72;
+        %tmp.78 = aputv %tmp.77 %tmp.74 %tmp.76;
+        %tmp.80 = const :units;
+        symbol [ units %tmp.80 66 61 66 const ];
+        %tmp.81 = "sets";
+        %tmp.82 = dup %tmp.78;
+        %tmp.83 = aputv %tmp.82 %tmp.80 %tmp.81;
+        %tmp.84 = invoke %tmp.65 %tmp.66(%tmp.67, %tmp.69, %tmp.71, %tmp.83);
+        symbol [ _mySetsField ? 64 8 20 ];
+        putv self :_mySetsField %tmp.84;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 67 8 ]
+        symbol [ _session %tmp.86 67 29 37 ];
+        %tmp.86 = getv ? :_session;
+        symbol [ createField %tmp.87 67 38 49 ];
+        %tmp.87 = getv function %tmp.86 :createField;
+        %tmp.88 = "opponent_sets";
+        symbol [ FIELD_OPPONENT_SETS %tmp.90 67 67 86 ];
+        %tmp.90 = getv ? :FIELD_OPPONENT_SETS;
+        symbol [ FitContributor %tmp.91 68 12 26 ];
+        %tmp.91 = getm $.Toybox.FitContributor;
+        symbol [ DATA_TYPE_UINT8 %tmp.92 68 27 42 ];
+        %tmp.92 = getv %tmp.91 :DATA_TYPE_UINT8;
+        %tmp.93 = newd 2;
+        %tmp.95 = const :mesgType;
+        symbol [ mesgType %tmp.95 69 14 22 const ];
+        symbol [ FitContributor %tmp.96 69 26 40 ];
+        %tmp.96 = getm $.Toybox.FitContributor;
+        symbol [ MESG_TYPE_SESSION %tmp.97 69 41 58 ];
+        %tmp.97 = getv %tmp.96 :MESG_TYPE_SESSION;
+        %tmp.98 = dup %tmp.93;
+        %tmp.99 = aputv %tmp.98 %tmp.95 %tmp.97;
+        %tmp.101 = const :units;
+        symbol [ units %tmp.101 69 61 66 const ];
+        %tmp.102 = "sets";
+        %tmp.103 = dup %tmp.99;
+        %tmp.104 = aputv %tmp.103 %tmp.101 %tmp.102;
+        %tmp.105 = invoke %tmp.86 %tmp.87(%tmp.88, %tmp.90, %tmp.92, %tmp.104);
+        symbol [ _opponentSetsField ? 67 8 26 ];
+        putv self :_opponentSetsField %tmp.105;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 70 8 ]
+        symbol [ _session %tmp.107 70 23 31 ];
+        %tmp.107 = getv ? :_session;
+        symbol [ createField %tmp.108 70 32 43 ];
+        %tmp.108 = getv function %tmp.107 :createField;
+        %tmp.109 = "winner";
+        symbol [ FIELD_WINNER %tmp.111 70 54 66 ];
+        %tmp.111 = getv ? :FIELD_WINNER;
+        symbol [ FitContributor %tmp.112 71 12 26 ];
+        %tmp.112 = getm $.Toybox.FitContributor;
+        symbol [ DATA_TYPE_STRING %tmp.113 71 27 43 ];
+        %tmp.113 = getv %tmp.112 :DATA_TYPE_STRING;
+        %tmp.114 = newd 3;
+        %tmp.116 = const :count;
+        symbol [ count %tmp.116 72 14 19 const ];
+        %tmp.117 = 16;
+        %tmp.118 = dup %tmp.114;
+        %tmp.119 = aputv %tmp.118 %tmp.116 %tmp.117;
+        %tmp.121 = const :mesgType;
+        symbol [ mesgType %tmp.121 72 28 36 const ];
+        symbol [ FitContributor %tmp.122 72 40 54 ];
+        %tmp.122 = getm $.Toybox.FitContributor;
+        symbol [ MESG_TYPE_SESSION %tmp.123 72 55 72 ];
+        %tmp.123 = getv %tmp.122 :MESG_TYPE_SESSION;
+        %tmp.124 = dup %tmp.119;
+        %tmp.125 = aputv %tmp.124 %tmp.121 %tmp.123;
+        %tmp.127 = const :units;
+        symbol [ units %tmp.127 72 75 80 const ];
+        %tmp.128 = "";
+        %tmp.129 = dup %tmp.125;
+        %tmp.130 = aputv %tmp.129 %tmp.127 %tmp.128;
+        %tmp.131 = invoke %tmp.107 %tmp.108(%tmp.109, %tmp.111, %tmp.113, %tmp.130);
+        symbol [ _winnerField ? 70 8 20 ];
+        putv self :_winnerField %tmp.131;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 73 8 ]
+        symbol [ _session %tmp.133 73 26 34 ];
+        %tmp.133 = getv ? :_session;
+        symbol [ createField %tmp.134 73 35 46 ];
+        %tmp.134 = getv function %tmp.133 :createField;
+        %tmp.135 = "set_scores";
+        symbol [ FIELD_SET_SCORES %tmp.137 73 61 77 ];
+        %tmp.137 = getv ? :FIELD_SET_SCORES;
+        symbol [ FitContributor %tmp.138 74 12 26 ];
+        %tmp.138 = getm $.Toybox.FitContributor;
+        symbol [ DATA_TYPE_STRING %tmp.139 74 27 43 ];
+        %tmp.139 = getv %tmp.138 :DATA_TYPE_STRING;
+        %tmp.140 = newd 3;
+        %tmp.142 = const :count;
+        symbol [ count %tmp.142 75 14 19 const ];
+        %tmp.143 = 64;
+        %tmp.144 = dup %tmp.140;
+        %tmp.145 = aputv %tmp.144 %tmp.142 %tmp.143;
+        %tmp.147 = const :mesgType;
+        symbol [ mesgType %tmp.147 75 28 36 const ];
+        symbol [ FitContributor %tmp.148 75 40 54 ];
+        %tmp.148 = getm $.Toybox.FitContributor;
+        symbol [ MESG_TYPE_SESSION %tmp.149 75 55 72 ];
+        %tmp.149 = getv %tmp.148 :MESG_TYPE_SESSION;
+        %tmp.150 = dup %tmp.145;
+        %tmp.151 = aputv %tmp.150 %tmp.147 %tmp.149;
+        %tmp.153 = const :units;
+        symbol [ units %tmp.153 75 75 80 const ];
+        %tmp.154 = "";
+        %tmp.155 = dup %tmp.151;
+        %tmp.156 = aputv %tmp.155 %tmp.153 %tmp.154;
+        %tmp.157 = invoke %tmp.133 %tmp.134(%tmp.135, %tmp.137, %tmp.139, %tmp.156);
+        symbol [ _setScoresField ? 73 8 23 ];
+        putv self :_setScoresField %tmp.157;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_54_28_76_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 78; @symbol_functiondef = [recordPoint,78,13,24]; @symbol_param<0> = [team,78,25,29]; @symbol_param<1> = [engine,78,31,37]; @symbol_param<2> = [completedSetsBeforePoint,78,39,63]; ]
+    function recordPoint(team, engine, completedSetsBeforePoint) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_78_65_89_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 79 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_79_8_81_8_if_stmt:
+        symbol [ _session %tmp.2 79 12 20 ];
+        %tmp.2 = getv ? :_session;
+        %tmp.3 = null;
+        %tmp.4 = eq %tmp.2 %tmp.3;
+        bf %tmp.4 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_79_8_81_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_79_8_81_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_79_30_81_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 80 12 ]
+        ret ?;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_79_30_81_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_79_8_81_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_79_8_81_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 82 8 ]
+        %tmp.5 = self;
+        symbol [ flushPendingSets %tmp.6 82 8 24 ];
+        %tmp.6 = getv function %tmp.5 :flushPendingSets;
+        %tmp.7 = lgetv %engine;
+        symbol [ engine %tmp.7 82 25 31 ];
+        %tmp.8 = lgetv %completedSetsBeforePoint;
+        symbol [ completedSetsBeforePoint %tmp.8 82 33 57 ];
+        invoke %tmp.5 %tmp.6(%tmp.7, %tmp.8);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 83 8 ]
+        symbol [ _pointEventField %tmp.10 83 8 24 ];
+        %tmp.10 = getv ? :_pointEventField;
+        symbol [ setData %tmp.11 83 25 32 ];
+        %tmp.11 = getv function %tmp.10 :setData;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_83_33_83_62_begin:
+        %tmp.12 = lgetv %team;
+        symbol [ team %tmp.12 83 33 37 ];
+        %tmp.13 = 0;
+        %tmp.14 = eq %tmp.12 %tmp.13;
+        bf %tmp.14 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_83_33_83_62_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_83_33_83_62_true:
+        symbol [ EVENT_MY_POINT %tmp.16 83 45 59 ];
+        %tmp.16 = getv ? :EVENT_MY_POINT;
+        push %tmp.16;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_83_33_83_62_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_83_33_83_62_else_false:
+        symbol [ EVENT_OPPONENT_POINT %tmp.18 83 62 82 ];
+        %tmp.18 = getv ? :EVENT_OPPONENT_POINT;
+        push %tmp.18;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_83_33_83_62_end:
+        %tmp.19 = phi [%tmp.14 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_83_33_83_62_begin] [%tmp.16 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_83_33_83_62_true] [%tmp.18 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_83_33_83_62_else_false] [%tmp.19 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_83_33_83_62_end];
+        invoke %tmp.10 %tmp.11(%tmp.19);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 84 8 ]
+        %tmp.20 = self;
+        symbol [ updateSummary %tmp.21 84 8 21 ];
+        %tmp.21 = getv function %tmp.20 :updateSummary;
+        %tmp.22 = lgetv %engine;
+        symbol [ engine %tmp.22 84 22 28 ];
+        invoke %tmp.20 %tmp.21(%tmp.22);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 86 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_86_8_88_8_if_stmt:
+        %tmp.23 = lgetv %engine;
+        symbol [ engine %tmp.23 86 12 18 ];
+        symbol [ getMatchWinner %tmp.24 86 19 33 ];
+        %tmp.24 = getv function %tmp.23 :getMatchWinner;
+        %tmp.25 = invoke %tmp.23 %tmp.24();
+        %tmp.26 = null;
+        %tmp.27 = ne %tmp.25 %tmp.26;
+        bf %tmp.27 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_86_8_88_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_86_8_88_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_86_45_88_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 87 12 ]
+        %tmp.28 = self;
+        symbol [ pause %tmp.29 87 12 17 ];
+        %tmp.29 = getv function %tmp.28 :pause;
+        invoke %tmp.28 %tmp.29();
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_86_45_88_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_86_8_88_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_86_8_88_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_78_65_89_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 91; @symbol_functiondef = [recordUndo,91,13,23]; @symbol_param<0> = [engine,91,24,30]; ]
+    function recordUndo(engine) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_91_32_96_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 92 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_92_8_95_8_if_stmt:
+        symbol [ _session %tmp.2 92 12 20 ];
+        %tmp.2 = getv ? :_session;
+        %tmp.3 = null;
+        %tmp.4 = ne %tmp.2 %tmp.3;
+        bf %tmp.4 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_92_8_95_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_92_8_95_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_92_30_95_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 93 12 ]
+        symbol [ _pointEventField %tmp.6 93 12 28 ];
+        %tmp.6 = getv ? :_pointEventField;
+        symbol [ setData %tmp.7 93 29 36 ];
+        %tmp.7 = getv function %tmp.6 :setData;
+        symbol [ EVENT_UNDO %tmp.9 93 37 47 ];
+        %tmp.9 = getv ? :EVENT_UNDO;
+        invoke %tmp.6 %tmp.7(%tmp.9);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 94 12 ]
+        %tmp.10 = self;
+        symbol [ updateSummary %tmp.11 94 12 25 ];
+        %tmp.11 = getv function %tmp.10 :updateSummary;
+        %tmp.12 = lgetv %engine;
+        symbol [ engine %tmp.12 94 26 32 ];
+        invoke %tmp.10 %tmp.11(%tmp.12);
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_92_30_95_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_92_8_95_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_92_8_95_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_91_32_96_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 98; @symbol_functiondef = [flushPendingSets,98,13,29]; @symbol_param<0> = [engine,98,30,36]; @symbol_param<1> = [completedCount,98,38,52]; ]
+    function flushPendingSets(engine, completedCount) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_98_54_106_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 99 8 ]
+        while @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_99_8_105_8_while_test @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_99_8_105_8_while_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_99_8_105_8_while_test:
+        symbol [ _recordedSetCount %tmp.2 99 15 32 ];
+        %tmp.2 = getv ? :_recordedSetCount;
+        %tmp.3 = lgetv %completedCount;
+        symbol [ completedCount %tmp.3 99 35 49 ];
+        %tmp.4 = lt %tmp.2 %tmp.3;
+        bf %tmp.4 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_99_8_105_8_while_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_99_8_105_8_while_begin:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_99_51_105_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 100 12 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_99_51_105_8_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_99_51_105_8_stop" ]
+        %completedSet.1 = local;
+        symbol [ completedSet %completedSet.1 100 16 28 ];
+        %tmp.5 = lgetv %engine;
+        symbol [ engine %tmp.5 100 31 37 ];
+        symbol [ getCompletedSets %tmp.6 100 38 54 ];
+        %tmp.6 = getv function %tmp.5 :getCompletedSets;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        symbol [ _recordedSetCount %tmp.9 100 57 74 ];
+        %tmp.9 = getv ? :_recordedSetCount;
+        %tmp.10 = agetv %tmp.7 %tmp.9;
+        lputv %completedSet.1 %tmp.10;
+        symbol [ completedSet %completedSet.1 100 16 28 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 101 12 ]
+        symbol [ _mySetScoreField %tmp.12 101 12 28 ];
+        %tmp.12 = getv ? :_mySetScoreField;
+        symbol [ setData %tmp.13 101 29 36 ];
+        %tmp.13 = getv function %tmp.12 :setData;
+        %tmp.14 = lgetv %completedSet.1;
+        symbol [ completedSet %tmp.14 101 37 49 ];
+        %tmp.15 = 0;
+        %tmp.16 = agetv %tmp.14 %tmp.15;
+        invoke %tmp.12 %tmp.13(%tmp.16);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 102 12 ]
+        symbol [ _opponentSetScoreField %tmp.18 102 12 34 ];
+        %tmp.18 = getv ? :_opponentSetScoreField;
+        symbol [ setData %tmp.19 102 35 42 ];
+        %tmp.19 = getv function %tmp.18 :setData;
+        %tmp.20 = lgetv %completedSet.1;
+        symbol [ completedSet %tmp.20 102 43 55 ];
+        %tmp.21 = 1;
+        %tmp.22 = agetv %tmp.20 %tmp.21;
+        invoke %tmp.18 %tmp.19(%tmp.22);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 103 12 ]
+        symbol [ _session %tmp.24 103 12 20 ];
+        %tmp.24 = getv ? :_session;
+        symbol [ addLap %tmp.25 103 21 27 ];
+        %tmp.25 = getv function %tmp.24 :addLap;
+        invoke %tmp.24 %tmp.25();
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 104 12 ]
+        symbol [ _recordedSetCount %tmp.26 104 12 29 ];
+        %tmp.26 = getv self :_recordedSetCount;
+        %tmp.27 = 1;
+        %tmp.28 = add %tmp.26 %tmp.27;
+        symbol [ _recordedSetCount ? 104 12 29 ];
+        putv self :_recordedSetCount dup %tmp.28;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_99_51_105_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_99_8_105_8_while_test;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_99_8_105_8_while_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_98_54_106_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 108; @symbol_functiondef = [updateSummary,108,13,26]; @symbol_param<0> = [engine,108,27,33]; ]
+    function updateSummary(engine) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_108_35_114_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 109 8 ]
+        symbol [ _mySetsField %tmp.2 109 8 20 ];
+        %tmp.2 = getv ? :_mySetsField;
+        symbol [ setData %tmp.3 109 21 28 ];
+        %tmp.3 = getv function %tmp.2 :setData;
+        %tmp.4 = lgetv %engine;
+        symbol [ engine %tmp.4 109 29 35 ];
+        symbol [ getSets %tmp.5 109 36 43 ];
+        %tmp.5 = getv function %tmp.4 :getSets;
+        %tmp.6 = invoke %tmp.4 %tmp.5();
+        %tmp.7 = 0;
+        %tmp.8 = agetv %tmp.6 %tmp.7;
+        invoke %tmp.2 %tmp.3(%tmp.8);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 110 8 ]
+        symbol [ _opponentSetsField %tmp.10 110 8 26 ];
+        %tmp.10 = getv ? :_opponentSetsField;
+        symbol [ setData %tmp.11 110 27 34 ];
+        %tmp.11 = getv function %tmp.10 :setData;
+        %tmp.12 = lgetv %engine;
+        symbol [ engine %tmp.12 110 35 41 ];
+        symbol [ getSets %tmp.13 110 42 49 ];
+        %tmp.13 = getv function %tmp.12 :getSets;
+        %tmp.14 = invoke %tmp.12 %tmp.13();
+        %tmp.15 = 1;
+        %tmp.16 = agetv %tmp.14 %tmp.15;
+        invoke %tmp.10 %tmp.11(%tmp.16);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 111 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_108_35_114_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_108_35_114_4_stop" ]
+        %winner.1 = local;
+        symbol [ winner %winner.1 111 12 18 ];
+        %tmp.17 = lgetv %engine;
+        symbol [ engine %tmp.17 111 21 27 ];
+        symbol [ getMatchWinner %tmp.18 111 28 42 ];
+        %tmp.18 = getv function %tmp.17 :getMatchWinner;
+        %tmp.19 = invoke %tmp.17 %tmp.18();
+        lputv %winner.1 %tmp.19;
+        symbol [ winner %winner.1 111 12 18 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 112 8 ]
+        symbol [ _winnerField %tmp.21 112 8 20 ];
+        %tmp.21 = getv ? :_winnerField;
+        symbol [ setData %tmp.22 112 21 28 ];
+        %tmp.22 = getv function %tmp.21 :setData;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_29_112_89_begin:
+        %tmp.23 = lgetv %winner.1;
+        symbol [ winner %tmp.23 112 29 35 ];
+        %tmp.24 = null;
+        %tmp.25 = eq %tmp.23 %tmp.24;
+        bf %tmp.25 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_29_112_89_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_29_112_89_true:
+        %tmp.26 = "-";
+        push %tmp.26;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_29_112_89_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_29_112_89_else_false:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_53_112_79_begin:
+        %tmp.27 = lgetv %winner.1;
+        symbol [ winner %tmp.27 112 53 59 ];
+        %tmp.28 = as %tmp.27 { (!Null) };
+        %tmp.29 = 0;
+        %tmp.30 = eq %tmp.28 %tmp.29;
+        bf %tmp.30 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_53_112_79_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_53_112_79_true:
+        %tmp.31 = "My team";
+        push %tmp.31;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_53_112_79_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_53_112_79_else_false:
+        %tmp.32 = "Opponent";
+        push %tmp.32;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_53_112_79_end:
+        %tmp.33 = phi [%tmp.30 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_53_112_79_begin] [%tmp.31 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_53_112_79_true] [%tmp.32 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_53_112_79_else_false] [%tmp.33 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_53_112_79_end];
+        push %tmp.33;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_29_112_89_end:
+        %tmp.34 = phi [%tmp.25 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_29_112_89_begin] [%tmp.26 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_29_112_89_true] [%tmp.33 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_29_112_89_else_false] [%tmp.34 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_112_29_112_89_end];
+        invoke %tmp.21 %tmp.22(%tmp.34);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 113 8 ]
+        symbol [ _setScoresField %tmp.36 113 8 23 ];
+        %tmp.36 = getv ? :_setScoresField;
+        symbol [ setData %tmp.37 113 24 31 ];
+        %tmp.37 = getv function %tmp.36 :setData;
+        %tmp.38 = self;
+        symbol [ buildSetScores %tmp.39 113 32 46 ];
+        %tmp.39 = getv function %tmp.38 :buildSetScores;
+        %tmp.40 = lgetv %engine;
+        symbol [ engine %tmp.40 113 47 53 ];
+        %tmp.41 = invoke %tmp.38 %tmp.39(%tmp.40);
+        invoke %tmp.36 %tmp.37(%tmp.41);
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_108_35_114_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 116; @symbol_functiondef = [buildSetScores,116,13,27]; @symbol_param<0> = [engine,116,28,34]; ]
+    function buildSetScores(engine) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_116_36_129_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 117 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_116_36_129_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_116_36_129_4_stop" ]
+        %label.1 = local;
+        symbol [ label %label.1 117 12 17 ];
+        %tmp.1 = "";
+        lputv %label.1 %tmp.1;
+        symbol [ label %label.1 117 12 17 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 118 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_116_36_129_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_116_36_129_4_stop" ]
+        %completedSets.2 = local;
+        symbol [ completedSets %completedSets.2 118 12 25 ];
+        %tmp.2 = lgetv %engine;
+        symbol [ engine %tmp.2 118 28 34 ];
+        symbol [ getCompletedSets %tmp.3 118 35 51 ];
+        %tmp.3 = getv function %tmp.2 :getCompletedSets;
+        %tmp.4 = invoke %tmp.2 %tmp.3();
+        lputv %completedSets.2 %tmp.4;
+        symbol [ completedSets %completedSets.2 118 12 25 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 119 8 ]
+        for @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_8_127_8_for_test @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_8_127_8_for_incr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_8_127_8_for_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_8_127_8_for_init:
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_8_127_8_for_begin" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_8_127_8_for_end" ]
+        %index.3 = local;
+        symbol [ index %index.3 119 17 22 ];
+        %tmp.5 = 0;
+        lputv %index.3 %tmp.5;
+        symbol [ index %index.3 119 17 22 ];
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_8_127_8_for_test:
+        %tmp.6 = lgetv %index.3;
+        symbol [ index %tmp.6 119 28 33 ];
+        %tmp.7 = lgetv %completedSets.2;
+        symbol [ completedSets %tmp.7 119 36 49 ];
+        symbol [ size %tmp.8 119 50 54 ];
+        %tmp.8 = getv function %tmp.7 :size;
+        %tmp.9 = invoke %tmp.7 %tmp.8();
+        %tmp.10 = lt %tmp.6 %tmp.9;
+        bf %tmp.10 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_8_127_8_for_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_8_127_8_for_begin:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_70_127_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 120 12 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_120_12_122_12_if_stmt:
+        %tmp.11 = lgetv %index.3;
+        symbol [ index %tmp.11 120 16 21 ];
+        %tmp.12 = 0;
+        %tmp.13 = gt %tmp.11 %tmp.12;
+        bf %tmp.13 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_120_12_122_12_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_120_12_122_12_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_120_27_122_12_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 121 16 ]
+        %tmp.14 = lgetv %label.1;
+        symbol [ label %tmp.14 121 16 21 ];
+        %tmp.15 = ", ";
+        %tmp.16 = add %tmp.14 %tmp.15;
+        lputv %label.1 %tmp.16;
+        symbol [ label %label.1 121 16 21 ];
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_120_27_122_12_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_120_12_122_12_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_120_12_122_12_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 123 12 ]
+        %tmp.17 = lgetv %label.1;
+        symbol [ label %tmp.17 123 12 17 ];
+        %tmp.18 = lgetv %completedSets.2;
+        symbol [ completedSets %tmp.18 123 21 34 ];
+        %tmp.19 = lgetv %index.3;
+        symbol [ index %tmp.19 123 35 40 ];
+        %tmp.20 = agetv %tmp.18 %tmp.19;
+        %tmp.21 = 0;
+        %tmp.22 = agetv %tmp.20 %tmp.21;
+        %tmp.23 = "-";
+        %tmp.24 = add %tmp.22 %tmp.23;
+        %tmp.25 = lgetv %completedSets.2;
+        symbol [ completedSets %tmp.25 123 53 66 ];
+        %tmp.26 = lgetv %index.3;
+        symbol [ index %tmp.26 123 67 72 ];
+        %tmp.27 = agetv %tmp.25 %tmp.26;
+        %tmp.28 = 1;
+        %tmp.29 = agetv %tmp.27 %tmp.28;
+        %tmp.30 = add %tmp.24 %tmp.29;
+        %tmp.31 = add %tmp.17 %tmp.30;
+        lputv %label.1 %tmp.31;
+        symbol [ label %label.1 123 12 17 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 124 12 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_124_12_126_12_if_stmt:
+        %tmp.32 = lgetv %completedSets.2;
+        symbol [ completedSets %tmp.32 124 16 29 ];
+        %tmp.33 = lgetv %index.3;
+        symbol [ index %tmp.33 124 30 35 ];
+        %tmp.34 = agetv %tmp.32 %tmp.33;
+        %tmp.35 = 2;
+        %tmp.36 = agetv %tmp.34 %tmp.35;
+        bf %tmp.36 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_124_12_126_12_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_124_12_126_12_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_124_41_126_12_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 125 16 ]
+        %tmp.37 = lgetv %label.1;
+        symbol [ label %tmp.37 125 16 21 ];
+        %tmp.38 = " MTB";
+        %tmp.39 = add %tmp.37 %tmp.38;
+        lputv %label.1 %tmp.39;
+        symbol [ label %label.1 125 16 21 ];
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_124_41_126_12_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_124_12_126_12_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_124_12_126_12_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_70_127_8_stop:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_8_127_8_for_incr:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 119 ]
+        %tmp.40 = lgetv %index.3;
+        symbol [ index %tmp.40 119 58 63 ];
+        %tmp.41 = 1;
+        %tmp.42 = add %tmp.40 %tmp.41;
+        lputv %index.3 %tmp.42;
+        symbol [ index %index.3 119 58 63 ];
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_8_127_8_for_test;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_119_8_127_8_for_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 128 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_128_15_128_45_begin:
+        %tmp.43 = lgetv %label.1;
+        symbol [ label %tmp.43 128 15 20 ];
+        symbol [ length %tmp.44 128 21 27 ];
+        %tmp.44 = getv function %tmp.43 :length;
+        %tmp.45 = invoke %tmp.43 %tmp.44();
+        %tmp.46 = 0;
+        %tmp.47 = eq %tmp.45 %tmp.46;
+        bf %tmp.47 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_128_15_128_45_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_128_15_128_45_true:
+        %tmp.48 = "0-0";
+        push %tmp.48;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_128_15_128_45_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_128_15_128_45_else_false:
+        %tmp.49 = lgetv %label.1;
+        symbol [ label %tmp.49 128 45 50 ];
+        push %tmp.49;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_128_15_128_45_end:
+        %tmp.50 = phi [%tmp.47 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_128_15_128_45_begin] [%tmp.48 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_128_15_128_45_true] [%tmp.49 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_128_15_128_45_else_false] [%tmp.50 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_128_15_128_45_end];
+        ret %tmp.50;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_116_36_129_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 131; @symbol_functiondef = [pause,131,13,18]; ]
+    function pause() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_131_21_135_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 132 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_8_134_8_if_stmt:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_12_132_53_begin:
+        symbol [ _session %tmp.2 132 12 20 ];
+        %tmp.2 = getv ? :_session;
+        %tmp.3 = null;
+        %tmp.4 = ne %tmp.2 %tmp.3;
+        bf %tmp.4 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_8_134_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_32_132_53_true:
+        symbol [ _session %tmp.6 132 32 40 ];
+        %tmp.6 = getv ? :_session;
+        %tmp.7 = as %tmp.6 { (!Null) };
+        symbol [ isRecording %tmp.8 132 41 52 ];
+        %tmp.8 = getv function %tmp.7 :isRecording;
+        %tmp.9 = invoke %tmp.7 %tmp.8();
+        push %tmp.9;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_32_132_53_end:
+        %tmp.10 = phi [%tmp.4 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_12_132_53_begin] [%tmp.9 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_32_132_53_true] [%tmp.10 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_32_132_53_end];
+        bf %tmp.10 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_8_134_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_8_134_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_56_134_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 133 12 ]
+        symbol [ _session %tmp.12 133 12 20 ];
+        %tmp.12 = getv ? :_session;
+        symbol [ stop %tmp.13 133 21 25 ];
+        %tmp.13 = getv function %tmp.12 :stop;
+        invoke %tmp.12 %tmp.13();
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_56_134_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_8_134_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_132_8_134_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_131_21_135_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 137; @symbol_functiondef = [resume,137,13,19]; ]
+    function resume() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_137_22_141_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 138 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_8_140_8_if_stmt:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_12_138_54_begin:
+        symbol [ _session %tmp.2 138 12 20 ];
+        %tmp.2 = getv ? :_session;
+        %tmp.3 = null;
+        %tmp.4 = ne %tmp.2 %tmp.3;
+        bf %tmp.4 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_8_140_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_32_138_54_true:
+        symbol [ _session %tmp.6 138 33 41 ];
+        %tmp.6 = getv ? :_session;
+        %tmp.7 = as %tmp.6 { (!Null) };
+        symbol [ isRecording %tmp.8 138 42 53 ];
+        %tmp.8 = getv function %tmp.7 :isRecording;
+        %tmp.9 = invoke %tmp.7 %tmp.8();
+        %tmp.10 = not %tmp.9;
+        push %tmp.10;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_32_138_54_end:
+        %tmp.11 = phi [%tmp.4 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_12_138_54_begin] [%tmp.10 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_32_138_54_true] [%tmp.11 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_32_138_54_end];
+        bf %tmp.11 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_8_140_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_8_140_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_57_140_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 139 12 ]
+        symbol [ _session %tmp.13 139 12 20 ];
+        %tmp.13 = getv ? :_session;
+        symbol [ start %tmp.14 139 21 26 ];
+        %tmp.14 = getv function %tmp.13 :start;
+        invoke %tmp.13 %tmp.14();
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_57_140_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_8_140_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_138_8_140_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_137_22_141_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 143; @symbol_functiondef = [finish,143,13,19]; @symbol_param<0> = [engine,143,20,26]; @symbol_param<1> = [shouldSave,143,28,38]; ]
+    function finish(engine, shouldSave) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_143_40_162_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 144 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_144_8_146_8_if_stmt:
+        symbol [ _session %tmp.2 144 12 20 ];
+        %tmp.2 = getv ? :_session;
+        %tmp.3 = null;
+        %tmp.4 = eq %tmp.2 %tmp.3;
+        bf %tmp.4 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_144_8_146_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_144_8_146_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_144_30_146_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 145 12 ]
+        %tmp.5 = false;
+        ret %tmp.5;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_144_30_146_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_144_8_146_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_144_8_146_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 148 8 ]
+        try @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_beginTry @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_endTry @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_catch @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_finally;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_beginTry:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_12_158_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 149 12 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_149_12_151_12_if_stmt:
+        symbol [ _session %tmp.7 149 17 25 ];
+        %tmp.7 = getv ? :_session;
+        symbol [ isRecording %tmp.8 149 26 37 ];
+        %tmp.8 = getv function %tmp.7 :isRecording;
+        %tmp.9 = invoke %tmp.7 %tmp.8();
+        %tmp.10 = not %tmp.9;
+        bf %tmp.10 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_149_12_151_12_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_149_12_151_12_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_149_41_151_12_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 150 16 ]
+        symbol [ _session %tmp.12 150 16 24 ];
+        %tmp.12 = getv ? :_session;
+        symbol [ start %tmp.13 150 25 30 ];
+        %tmp.13 = getv function %tmp.12 :start;
+        invoke %tmp.12 %tmp.13();
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_149_41_151_12_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_149_12_151_12_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_149_12_151_12_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 152 12 ]
+        %tmp.14 = self;
+        symbol [ flushPendingSets %tmp.15 152 12 28 ];
+        %tmp.15 = getv function %tmp.14 :flushPendingSets;
+        %tmp.16 = lgetv %engine;
+        symbol [ engine %tmp.16 152 29 35 ];
+        %tmp.17 = lgetv %engine;
+        symbol [ engine %tmp.17 152 37 43 ];
+        symbol [ getCompletedSets %tmp.18 152 44 60 ];
+        %tmp.18 = getv function %tmp.17 :getCompletedSets;
+        %tmp.19 = invoke %tmp.17 %tmp.18();
+        symbol [ size %tmp.20 152 63 67 ];
+        %tmp.20 = getv function %tmp.19 :size;
+        %tmp.21 = invoke %tmp.19 %tmp.20();
+        invoke %tmp.14 %tmp.15(%tmp.16, %tmp.21);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 153 12 ]
+        %tmp.22 = self;
+        symbol [ updateSummary %tmp.23 153 12 25 ];
+        %tmp.23 = getv function %tmp.22 :updateSummary;
+        %tmp.24 = lgetv %engine;
+        symbol [ engine %tmp.24 153 26 32 ];
+        invoke %tmp.22 %tmp.23(%tmp.24);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 154 12 ]
+        %tmp.25 = self;
+        symbol [ pause %tmp.26 154 12 17 ];
+        %tmp.26 = getv function %tmp.25 :pause;
+        invoke %tmp.25 %tmp.26();
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 155 12 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_12_158_8_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_12_158_8_stop" ]
+        %result.1 = local;
+        symbol [ result %result.1 155 16 22 ];
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_155_25_155_73_begin:
+        %tmp.27 = lgetv %shouldSave;
+        symbol [ shouldSave %tmp.27 155 25 35 ];
+        bf %tmp.27 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_155_25_155_73_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_155_25_155_73_true:
+        symbol [ _session %tmp.29 155 38 46 ];
+        %tmp.29 = getv ? :_session;
+        symbol [ save %tmp.30 155 47 51 ];
+        %tmp.30 = getv function %tmp.29 :save;
+        %tmp.31 = invoke %tmp.29 %tmp.30();
+        push %tmp.31;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_155_25_155_73_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_155_25_155_73_else_false:
+        symbol [ _session %tmp.33 155 56 64 ];
+        %tmp.33 = getv ? :_session;
+        symbol [ discard %tmp.34 155 65 72 ];
+        %tmp.34 = getv function %tmp.33 :discard;
+        %tmp.35 = invoke %tmp.33 %tmp.34();
+        push %tmp.35;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_155_25_155_73_end:
+        %tmp.36 = phi [%tmp.27 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_155_25_155_73_begin] [%tmp.31 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_155_25_155_73_true] [%tmp.35 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_155_25_155_73_else_false] [%tmp.36 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_155_25_155_73_end];
+        lputv %result.1 %tmp.36;
+        symbol [ result %result.1 155 16 22 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 156 12 ]
+        %tmp.37 = self;
+        symbol [ reset %tmp.38 156 12 17 ];
+        %tmp.38 = getv function %tmp.37 :reset;
+        invoke %tmp.37 %tmp.38();
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 157 12 ]
+        %tmp.39 = lgetv %result.1;
+        symbol [ result %tmp.39 157 19 25 ];
+        jsr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_finally;
+        ret %tmp.39;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_12_158_8_stop:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_endTry:
+        jsr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_finally;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_catch:
+        %tmp.40 = exception;
+        push %tmp.40;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 158 10 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_catch" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_158_10_161_8_end" ]
+        %error.2 = local;
+        symbol [ error %error.2 158 17 22 ];
+        %tmp.41 = dup %tmp.40;
+        lputv %error.2 %tmp.41;
+        symbol [ error %error.2 158 17 22 ];
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_158_24_161_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 159 12 ]
+        %tmp.42 = self;
+        symbol [ reset %tmp.43 159 12 17 ];
+        %tmp.43 = getv function %tmp.42 :reset;
+        invoke %tmp.42 %tmp.43();
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 160 12 ]
+        pop;
+        %tmp.44 = false;
+        jsr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_finally;
+        ret %tmp.44;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_158_24_161_8_stop:
+        jsr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_finally;
+        pop;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_158_10_161_8_end:
+        try @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_catch @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_158_10_161_8_end @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_158_10_161_8_end @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_finally;
+        jsr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_finally;
+        throw %tmp.40;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_finally:
+        jsrret;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_148_8_161_8_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_143_40_162_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 164; @symbol_functiondef = [handleAppStop,164,13,26]; ]
+    function handleAppStop() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_164_29_179_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 165 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_165_8_167_8_if_stmt:
+        symbol [ _session %tmp.2 165 12 20 ];
+        %tmp.2 = getv ? :_session;
+        %tmp.3 = null;
+        %tmp.4 = eq %tmp.2 %tmp.3;
+        bf %tmp.4 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_165_8_167_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_165_8_167_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_165_30_167_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 166 12 ]
+        ret ?;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_165_30_167_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_165_8_167_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_165_8_167_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 168 8 ]
+        try @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_beginTry @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_endTry @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_catch @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_finally;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_beginTry:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_12_176_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 169 12 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_169_12_171_12_if_stmt:
+        symbol [ _session %tmp.6 169 17 25 ];
+        %tmp.6 = getv ? :_session;
+        symbol [ isRecording %tmp.7 169 26 37 ];
+        %tmp.7 = getv function %tmp.6 :isRecording;
+        %tmp.8 = invoke %tmp.6 %tmp.7();
+        %tmp.9 = not %tmp.8;
+        bf %tmp.9 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_169_12_171_12_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_169_12_171_12_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_169_41_171_12_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 170 16 ]
+        symbol [ _session %tmp.11 170 16 24 ];
+        %tmp.11 = getv ? :_session;
+        symbol [ start %tmp.12 170 25 30 ];
+        %tmp.12 = getv function %tmp.11 :start;
+        invoke %tmp.11 %tmp.12();
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_169_41_171_12_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_169_12_171_12_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_169_12_171_12_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 172 12 ]
+        %tmp.13 = self;
+        symbol [ flushPendingSets %tmp.14 172 12 28 ];
+        %tmp.14 = getv function %tmp.13 :flushPendingSets;
+        symbol [ _engine %tmp.16 172 29 36 ];
+        %tmp.16 = getv ? :_engine;
+        symbol [ _engine %tmp.18 172 38 45 ];
+        %tmp.18 = getv ? :_engine;
+        symbol [ getCompletedSets %tmp.19 172 46 62 ];
+        %tmp.19 = getv function %tmp.18 :getCompletedSets;
+        %tmp.20 = invoke %tmp.18 %tmp.19();
+        symbol [ size %tmp.21 172 65 69 ];
+        %tmp.21 = getv function %tmp.20 :size;
+        %tmp.22 = invoke %tmp.20 %tmp.21();
+        invoke %tmp.13 %tmp.14(%tmp.16, %tmp.22);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 173 12 ]
+        %tmp.23 = self;
+        symbol [ updateSummary %tmp.24 173 12 25 ];
+        %tmp.24 = getv function %tmp.23 :updateSummary;
+        symbol [ _engine %tmp.26 173 26 33 ];
+        %tmp.26 = getv ? :_engine;
+        invoke %tmp.23 %tmp.24(%tmp.26);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 174 12 ]
+        %tmp.27 = self;
+        symbol [ pause %tmp.28 174 12 17 ];
+        %tmp.28 = getv function %tmp.27 :pause;
+        invoke %tmp.27 %tmp.28();
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 175 12 ]
+        symbol [ _session %tmp.30 175 12 20 ];
+        %tmp.30 = getv ? :_session;
+        symbol [ save %tmp.31 175 21 25 ];
+        %tmp.31 = getv function %tmp.30 :save;
+        invoke %tmp.30 %tmp.31();
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_12_176_8_stop:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_endTry:
+        jsr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_finally;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_catch:
+        %tmp.32 = exception;
+        push %tmp.32;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 176 10 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_catch" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_176_10_177_8_end" ]
+        %error.1 = local;
+        symbol [ error %error.1 176 17 22 ];
+        %tmp.33 = dup %tmp.32;
+        lputv %error.1 %tmp.33;
+        symbol [ error %error.1 176 17 22 ];
+        jsr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_finally;
+        pop;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_176_10_177_8_end:
+        try @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_catch @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_176_10_177_8_end @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_176_10_177_8_end @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_finally;
+        jsr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_finally;
+        throw %tmp.32;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_finally:
+        jsrret;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_168_8_177_8_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 178 8 ]
+        %tmp.34 = self;
+        symbol [ reset %tmp.35 178 8 13 ];
+        %tmp.35 = getv function %tmp.34 :reset;
+        invoke %tmp.34 %tmp.35();
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_164_29_179_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 181; @symbol_functiondef = [reset,181,13,18]; ]
+    function reset() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_181_21_193_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 182 8 ]
+        %tmp.1 = null;
+        symbol [ _session ? 182 8 16 ];
+        putv self :_session %tmp.1;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 183 8 ]
+        %tmp.2 = null;
+        symbol [ _engine ? 183 8 15 ];
+        putv self :_engine %tmp.2;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 184 8 ]
+        %tmp.3 = null;
+        symbol [ _pointEventField ? 184 8 24 ];
+        putv self :_pointEventField %tmp.3;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 185 8 ]
+        %tmp.4 = null;
+        symbol [ _mySetScoreField ? 185 8 24 ];
+        putv self :_mySetScoreField %tmp.4;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 186 8 ]
+        %tmp.5 = null;
+        symbol [ _opponentSetScoreField ? 186 8 30 ];
+        putv self :_opponentSetScoreField %tmp.5;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 187 8 ]
+        %tmp.6 = null;
+        symbol [ _mySetsField ? 187 8 20 ];
+        putv self :_mySetsField %tmp.6;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 188 8 ]
+        %tmp.7 = null;
+        symbol [ _opponentSetsField ? 188 8 26 ];
+        putv self :_opponentSetsField %tmp.7;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 189 8 ]
+        %tmp.8 = null;
+        symbol [ _winnerField ? 189 8 20 ];
+        putv self :_winnerField %tmp.8;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 190 8 ]
+        %tmp.9 = null;
+        symbol [ _setScoresField ? 190 8 23 ];
+        putv self :_setScoresField %tmp.9;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 191 8 ]
+        %tmp.10 = 0;
+        symbol [ _recordedSetCount ? 191 8 25 ];
+        putv self :_recordedSetCount %tmp.10;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc" 192 8 ]
+        symbol [ Sensor %tmp.11 192 8 14 ];
+        %tmp.11 = getm $.Toybox.Sensor;
+        symbol [ setEnabledSensors %tmp.12 192 15 32 ];
+        %tmp.12 = getv function %tmp.11 :setEnabledSensors;
+        %tmp.13 = newa 0;
+        invoke %tmp.11 %tmp.12(%tmp.13);
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PadelActivityRecorder_mc_181_21_193_4_stop:
+    }
+}
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PadelActivityRecorder.mc"; @line = 1; ]
+<init> {
+}

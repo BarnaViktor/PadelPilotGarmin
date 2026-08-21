@@ -36,7 +36,7 @@ class RecoveryView extends WatchUi.View {
             "CONTINUE");
         PadelTheme.drawCard(dc, 108, 344, 200, 42, false, PadelTheme.RED);
         dc.setColor(PadelTheme.RED, Graphics.COLOR_BLACK);
-        dc.drawText(centerX, 354, Graphics.FONT_XTINY, "DISCARD",
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(centerX, 365, Graphics.FONT_XTINY, "DISCARD",
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 }

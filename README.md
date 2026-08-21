@@ -5,7 +5,10 @@ végigvezeti és rögzíti egy padelmérkőzés eredményét.
 
 ## Jelenlegi állapot
 
-Az első fejlesztési checkpoint elkészült:
+Verzió: **1.1.0**, helyi Forerunner 265 készülékteszteléshez. Ez még nem
+Connect IQ Store-kiadás.
+
+Az első helyi tesztkiadás elkészült:
 
 - készülékfüggetlen pontozási motor;
 - Forerunner 265 célkészülék (`fr265`);
@@ -26,12 +29,17 @@ Az első fejlesztési checkpoint elkészült:
 - legfeljebb 20 lezárt meccset mutató helyi előzmény;
 - sérült aktív mentések és előzményrekordok biztonságos kiszűrése;
 - Garmin FIT-aktivitás `racket/padel` besorolással;
-- pulzus-, kalória- és aktivitásidő-rögzítés;
+- GPS-nyomvonal, megtett távolság, valamint aktuális, átlagos és maximális
+  sebesség rögzítése;
+- aktuális, átlagos és maximális pulzus, kalória, aktivitásidő és az órán
+  elérhető kadenciaadatok rögzítése;
+- meccsvégi aktivitás-összegzés távolság-, sebesség-, pulzus- és
+  kalóriaadatokkal;
 - pontesemények, szetteredmények és győztes egyedi FIT-mezőkben;
 - Monkey C egységtesztek a C1 pontozási és szervarend szabályokra.
 
-A hőtérkép, az Americano, a Mexicano, a FIT-aktivitás és a szerveres
-szinkron nem része ennek a checkpointnak.
+A hőtérkép, az Americano, a Mexicano és a saját szerveres szinkron nem része
+ennek a checkpointnak.
 
 ## Projektstruktúra
 

@@ -17,6 +17,16 @@ class MatchHistoryInputDelegate extends WatchUi.BehaviorDelegate {
         } else if (key == WatchUi.KEY_ESC) {
             WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
             return true;
+        } else if (key == WatchUi.KEY_ENTER) {
+            var record = _view.getSelectedRecord();
+            if (record == null) {
+                return false;
+            }
+            var detailView = new MatchHistoryDetailView(record);
+            WatchUi.pushView(detailView,
+                new MatchHistoryDetailInputDelegate(detailView),
+                WatchUi.SLIDE_IMMEDIATE);
+            return true;
         } else {
             return false;
         }

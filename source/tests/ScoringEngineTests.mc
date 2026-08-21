@@ -614,7 +614,7 @@ function completedMatchCanBeSavedLocally(logger) {
     ));
 
     winSet(engine, 0);
-    MatchHistoryStore.save(engine, 123);
+    MatchHistoryStore.save(engine, 123, [123]);
 
     var storedHistory = Storage.getValue(MatchHistoryStore.HISTORY_KEY);
     Test.assert(storedHistory instanceof Lang.Array);
@@ -624,6 +624,11 @@ function completedMatchCanBeSavedLocally(logger) {
 
     var history = storedHistory as Lang.Array<Storage.ValueType>;
     Test.assertEqual(1, history.size());
+    var record = history[0] as Lang.Array<Storage.ValueType>;
+    Test.assertEqual(6, record.size());
+    var setEndTimes = record[5] as Lang.Array<Storage.ValueType>;
+    Test.assertEqual(1, setEndTimes.size());
+    Test.assertEqual(123, setEndTimes[0]);
     Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
     return true;
 }
@@ -638,7 +643,7 @@ function activeMatchRoundTripRestoresScoreServeAndTime(logger) {
     engine.setServerTeam(1);
     engine.setServeSide(0);
 
-    ActiveMatchStore.save(engine, 87);
+    ActiveMatchStore.save(engine, 87, []);
     var loaded = ActiveMatchStore.load();
     Test.assert(loaded != null);
     if (loaded == null) {
@@ -647,6 +652,7 @@ function activeMatchRoundTripRestoresScoreServeAndTime(logger) {
 
     var restored = loaded[0];
     Test.assertEqual(87, loaded[1]);
+    Test.assertEqual(0, loaded[2].size());
     Test.assertEqual(engine.getPoints()[0], restored.getPoints()[0]);
     Test.assertEqual(engine.getPoints()[1], restored.getPoints()[1]);
     Test.assertEqual(1, restored.getServerTeam());
@@ -664,7 +670,7 @@ function activeMatchRoundTripDoesNotRestoreSideChangeBlock(logger) {
     }
     Test.assert(!engine.isSideChangePending());
 
-    ActiveMatchStore.save(engine, 42);
+    ActiveMatchStore.save(engine, 42, []);
     var loaded = ActiveMatchStore.load();
     Test.assert(loaded != null);
     if (loaded == null) {
@@ -693,7 +699,7 @@ function activeMatchRoundTripKeepsNoAdPlayContinuous(logger) {
         engine.awardPoint(0);
         engine.awardPoint(1);
     }
-    ActiveMatchStore.save(engine, 43);
+    ActiveMatchStore.save(engine, 43, []);
     var loaded = ActiveMatchStore.load();
     Test.assert(loaded != null);
     if (loaded == null) {
@@ -725,7 +731,7 @@ function restoredNoAdDeuceDoesNotRequireReceiverChoice(logger) {
     }
     Test.assert(!engine.isReceiverSideSelectionPending());
 
-    ActiveMatchStore.save(engine, 44);
+    ActiveMatchStore.save(engine, 44, []);
     var loaded = ActiveMatchStore.load();
     Test.assert(loaded != null);
     if (loaded == null) {
@@ -763,6 +769,20 @@ function fitSetScoreLabelContainsEveryCompletedSet(logger) {
     winSet(engine, 0);
 
     Test.assertEqual("6-0", PadelActivityRecorder.buildSetScores(engine));
+    return true;
+}
+
+(:test)
+function activityMetricLabelsUseConnectUnits(logger) {
+    Test.assertEqual("--", PadelActivityRecorder.formatDistance(null));
+    Test.assertEqual("250 m", PadelActivityRecorder.formatDistance(250.8));
+    Test.assertEqual("1.25 km", PadelActivityRecorder.formatDistance(1250.0));
+    Test.assertEqual("--", PadelActivityRecorder.formatSpeed(null));
+    Test.assertEqual("18.0 km/h", PadelActivityRecorder.formatSpeed(5.0));
+    Test.assertEqual("--", PadelActivityRecorder.formatHeartRate(null));
+    Test.assertEqual("145 bpm", PadelActivityRecorder.formatHeartRate(145));
+    Test.assertEqual("--", PadelActivityRecorder.formatCalories(null));
+    Test.assertEqual("420 kcal", PadelActivityRecorder.formatCalories(420));
     return true;
 }
 

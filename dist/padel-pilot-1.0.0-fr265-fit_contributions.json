@@ -1,0 +1,108 @@
+{
+  "datafields" : [ {
+    "id" : 0,
+    "chart-visible" : false,
+    "activity-visible" : false,
+    "lap-visible" : false,
+    "chart-title-key" : null,
+    "label-key" : "FitPointEvent",
+    "unit-label-key" : "FitPointEventUnit",
+    "sort-order" : 0,
+    "precision" : null,
+    "fill-color" : null
+  }, {
+    "id" : 1,
+    "chart-visible" : false,
+    "activity-visible" : false,
+    "lap-visible" : true,
+    "chart-title-key" : null,
+    "label-key" : "FitMySetScore",
+    "unit-label-key" : "FitGamesUnit",
+    "sort-order" : 1,
+    "precision" : null,
+    "fill-color" : null
+  }, {
+    "id" : 2,
+    "chart-visible" : false,
+    "activity-visible" : false,
+    "lap-visible" : true,
+    "chart-title-key" : null,
+    "label-key" : "FitOpponentSetScore",
+    "unit-label-key" : "FitGamesUnit",
+    "sort-order" : 2,
+    "precision" : null,
+    "fill-color" : null
+  }, {
+    "id" : 3,
+    "chart-visible" : false,
+    "activity-visible" : true,
+    "lap-visible" : false,
+    "chart-title-key" : null,
+    "label-key" : "FitMySets",
+    "unit-label-key" : "FitSetsUnit",
+    "sort-order" : 3,
+    "precision" : null,
+    "fill-color" : null
+  }, {
+    "id" : 4,
+    "chart-visible" : false,
+    "activity-visible" : true,
+    "lap-visible" : false,
+    "chart-title-key" : null,
+    "label-key" : "FitOpponentSets",
+    "unit-label-key" : "FitSetsUnit",
+    "sort-order" : 4,
+    "precision" : null,
+    "fill-color" : null
+  }, {
+    "id" : 5,
+    "chart-visible" : false,
+    "activity-visible" : true,
+    "lap-visible" : false,
+    "chart-title-key" : null,
+    "label-key" : "FitWinner",
+    "unit-label-key" : "FitNoUnit",
+    "sort-order" : 5,
+    "precision" : null,
+    "fill-color" : null
+  }, {
+    "id" : 6,
+    "chart-visible" : false,
+    "activity-visible" : true,
+    "lap-visible" : false,
+    "chart-title-key" : null,
+    "label-key" : "FitSetScores",
+    "unit-label-key" : "FitNoUnit",
+    "sort-order" : 6,
+    "precision" : null,
+    "fill-color" : null
+  } ],
+  "strings" : {
+    "hu-HU" : {
+      "FitPointEvent" : "Pontesemény",
+      "FitPointEventUnit" : "kód",
+      "FitMySetScore" : "Saját game",
+      "FitGamesUnit" : "game",
+      "FitOpponentSetScore" : "Ellenfél game",
+      "FitMySets" : "Saját szett",
+      "FitSetsUnit" : "szett",
+      "FitOpponentSets" : "Ellenfél szett",
+      "FitWinner" : "Győztes",
+      "FitNoUnit" : "eredmény",
+      "FitSetScores" : "Szetteredmények"
+    },
+    "default" : {
+      "FitPointEvent" : "Point event",
+      "FitPointEventUnit" : "code",
+      "FitMySetScore" : "My games",
+      "FitGamesUnit" : "games",
+      "FitOpponentSetScore" : "Opponent games",
+      "FitMySets" : "My sets",
+      "FitSetsUnit" : "sets",
+      "FitOpponentSets" : "Opponent sets",
+      "FitWinner" : "Winner",
+      "FitNoUnit" : "score",
+      "FitSetScores" : "Set scores"
+    }
+  }
+}

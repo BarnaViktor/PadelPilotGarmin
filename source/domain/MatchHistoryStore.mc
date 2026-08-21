@@ -5,7 +5,7 @@ module MatchHistoryStore {
     const HISTORY_KEY = "matchHistory";
     const MAX_HISTORY_SIZE = 20;
 
-    function save(engine, durationSeconds) {
+    function save(engine, durationSeconds, setEndTimes) {
         var history = load();
 
         var completedSets = [] as Lang.Array<Storage.ValueType>;
@@ -18,12 +18,18 @@ module MatchHistoryStore {
             ] as Lang.Array<Storage.ValueType>);
         }
 
+        var storedSetEndTimes = [] as Lang.Array<Storage.ValueType>;
+        for (var timeIndex = 0; timeIndex < setEndTimes.size(); timeIndex += 1) {
+            storedSetEndTimes.add(setEndTimes[timeIndex].toNumber());
+        }
+
         history.add([
             engine.getSets()[0].toNumber(),
             engine.getSets()[1].toNumber(),
             engine.getMatchWinner().toNumber(),
             durationSeconds.toNumber(),
-            completedSets
+            completedSets,
+            storedSetEndTimes
         ] as Lang.Array<Storage.ValueType>);
 
         if (history.size() > MAX_HISTORY_SIZE) {
@@ -56,7 +62,8 @@ module MatchHistoryStore {
     }
 
     function isValidRecord(record) {
-        if (!(record instanceof Lang.Array) || record.size() != 5) {
+        if (!(record instanceof Lang.Array)
+                || (record.size() != 5 && record.size() != 6)) {
             return false;
         }
         for (var index = 0; index < 4; index += 1) {
@@ -78,6 +85,21 @@ module MatchHistoryStore {
                     || !(completedSet[2] instanceof Lang.Boolean)
                     || completedSet[0] < 0 || completedSet[1] < 0) {
                 return false;
+            }
+        }
+        if (record.size() == 6) {
+            if (!(record[5] instanceof Lang.Array)
+                    || record[5].size() != record[4].size()) {
+                return false;
+            }
+            var previousEnd = 0;
+            for (var timeIndex = 0; timeIndex < record[5].size(); timeIndex += 1) {
+                if (!(record[5][timeIndex] instanceof Lang.Number)
+                        || record[5][timeIndex] < previousEnd
+                        || record[5][timeIndex] > record[3]) {
+                    return false;
+                }
+                previousEnd = record[5][timeIndex];
             }
         }
         return true;

@@ -1,6 +1,6 @@
 # Padel Pilot Privacy Notice
 
-Last updated: 2026-08-20
+Last updated: 2026-08-21
 
 Padel Pilot does not send personal data to the developer or to a developer-run
 server. The application has no network communication permission and contains
@@ -9,6 +9,8 @@ no advertising, analytics or account system.
 The application uses Garmin sensor and activity-recording APIs to create a
 padel activity. Depending on the watch and the user’s settings, the activity
 may include heart rate, calories, duration, point events and match results.
+When an activity is started, the application also enables positioning so the
+saved activity may include location, GPS track, distance and speed data.
 Active-match state and a history of up to 20 completed matches are stored
 locally on the watch.
 

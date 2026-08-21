@@ -34,6 +34,7 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
         } else if (key == WatchUi.KEY_ESC) {
             if (_engine.undoLastPoint()) {
                 _pointInputGuard.reset();
+                _view.syncSetEndTimes();
                 PadelActivityRecorder.recordUndo(_engine);
                 vibrate(25);
             }
@@ -51,10 +52,16 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
 
     function handlePausedKey(key) {
         if (_view.isPauseStopConfirm()) {
-            if (key == WatchUi.KEY_ENTER) {
-                PadelActivityRecorder.finish(_engine, false);
-                exitMatch();
-            } else if (key == WatchUi.KEY_DOWN || key == WatchUi.KEY_ESC) {
+            if (key == WatchUi.KEY_DOWN || key == WatchUi.KEY_UP) {
+                _view.moveDecisionSelection(1);
+            } else if (key == WatchUi.KEY_ENTER) {
+                if (_view.isDecisionYes()) {
+                    PadelActivityRecorder.finish(_engine, false);
+                    exitMatch();
+                } else {
+                    _view.setPauseStopConfirm(false);
+                }
+            } else if (key == WatchUi.KEY_ESC) {
                 _view.setPauseStopConfirm(false);
             } else {
                 return false;
@@ -100,19 +107,26 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
 
     function handleSummaryKey(key) {
         if (_view.isFinishMenu()) {
-            if (key == WatchUi.KEY_ENTER) {
-                PadelActivityRecorder.finish(_engine, true);
-                MatchHistoryStore.save(_engine, _view.getDurationSeconds());
-                exitMatch();
-            } else if (key == WatchUi.KEY_DOWN) {
-                PadelActivityRecorder.finish(_engine, false);
-                exitMatch();
+            if (key == WatchUi.KEY_DOWN || key == WatchUi.KEY_UP) {
+                _view.moveDecisionSelection(1);
+            } else if (key == WatchUi.KEY_ENTER) {
+                if (_view.isDecisionYes()) {
+                    PadelActivityRecorder.finish(_engine, true);
+                    MatchHistoryStore.save(_engine, _view.getDurationSeconds(),
+                        _view.getSetEndTimes());
+                    exitMatch();
+                } else {
+                    PadelActivityRecorder.finish(_engine, false);
+                    exitMatch();
+                }
             } else if (key == WatchUi.KEY_ESC) {
                 _view.setFinishMenu(false);
                 WatchUi.requestUpdate();
             } else {
                 return false;
             }
+            WatchUi.requestUpdate();
+            ActiveMatchSession.persist();
             return true;
         }
 
@@ -167,6 +181,7 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
         if (!_engine.awardPoint(team)) {
             return;
         }
+        _view.syncSetEndTimes();
         PadelActivityRecorder.recordPoint(team, _engine, completedSetsBeforePoint);
 
         if (oldWinner == null && _engine.getMatchWinner() != null) {
@@ -187,11 +202,8 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
 
     function exitMatch() {
         ActiveMatchSession.clear();
-        if (_returnToFreshSetup) {
-            var homeView = new HomeView();
-            WatchUi.switchToView(homeView, new HomeInputDelegate(homeView), WatchUi.SLIDE_IMMEDIATE);
-        } else {
-            WatchUi.popView(WatchUi.SLIDE_IMMEDIATE);
-        }
+        var homeView = new HomeView();
+        WatchUi.switchToView(homeView, new HomeInputDelegate(homeView),
+            WatchUi.SLIDE_IMMEDIATE);
     }
 }

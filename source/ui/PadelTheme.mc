@@ -25,11 +25,11 @@ module PadelTheme {
 
         dc.setPenWidth(3);
         dc.setColor(CYAN, BLACK);
-        dc.drawLine(centerX - 82, 78, centerX - 8, 78);
+        dc.drawLine(centerX - 82, 84, centerX - 8, 84);
         dc.setColor(WHITE, BLACK);
-        dc.drawLine(centerX - 2, 72, centerX - 2, 84);
+        dc.drawLine(centerX, 78, centerX, 90);
         dc.setColor(RED, BLACK);
-        dc.drawLine(centerX + 8, 78, centerX + 82, 78);
+        dc.drawLine(centerX + 8, 84, centerX + 82, 84);
         dc.setPenWidth(1);
     }
 
@@ -44,22 +44,35 @@ module PadelTheme {
 
     function drawSplitCard(dc, x, y, width, height, selected, label, value) {
         drawCard(dc, x, y, width, height, selected, selected ? CYAN : LINE);
-        var dividerX = x + (width * 57 / 100);
+        var dividerX = x + (width * 60 / 100);
+        var centerY = y + height / 2;
         dc.setColor(LINE, BLACK);
         dc.drawLine(dividerX, y + 10, dividerX, y + height - 10);
         dc.setColor(selected ? WHITE : MUTED, BLACK);
-        dc.drawText(x + 20, y + 12, Graphics.FONT_XTINY, label,
-            Graphics.TEXT_JUSTIFY_LEFT);
+        dc.drawText(x + 20, centerY, Graphics.FONT_XTINY, label,
+            Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.setColor(selected ? LIME : WHITE, BLACK);
-        dc.drawText(x + width - 18, y + 12, Graphics.FONT_XTINY, value,
-            Graphics.TEXT_JUSTIFY_RIGHT);
+        dc.drawText(x + width - 18, centerY, Graphics.FONT_XTINY, value,
+            Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     function drawActionButton(dc, x, y, width, height, selected, label) {
         drawCard(dc, x, y, width, height, selected, selected ? LIME : LINE);
         dc.setColor(selected ? LIME : MUTED, BLACK);
-        dc.drawText(x + width / 2, y + 17, Graphics.FONT_XTINY, label,
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(x + width / 2, y + height / 2, Graphics.FONT_XTINY, label,
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+    }
+
+    function drawTennisBall(dc, x, y, radius) {
+        dc.setColor(LIME, BLACK);
+        dc.fillCircle(x, y, radius);
+        dc.setColor(BLACK, LIME);
+        dc.setPenWidth(2);
+        dc.drawArc(x - radius, y, radius, Graphics.ARC_COUNTER_CLOCKWISE,
+            300, 60);
+        dc.drawArc(x + radius, y, radius, Graphics.ARC_COUNTER_CLOCKWISE,
+            120, 240);
+        dc.setPenWidth(1);
     }
 
     function drawPageDots(dc, active, count, y) {

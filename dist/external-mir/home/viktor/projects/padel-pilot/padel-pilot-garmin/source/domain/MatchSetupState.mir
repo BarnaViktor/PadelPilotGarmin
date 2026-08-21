@@ -1,0 +1,1266 @@
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 1; @symbol_classdef = [MatchSetupState,1,6,21]; ]
+class MatchSetupState {
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 1; ]
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 1; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 2; @position = 8; @symbol_vardef = [bestOfSets,2,8,18]; ]
+    var bestOfSets;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 3; @position = 8; @symbol_vardef = [scoringMode,3,8,19]; ]
+    var scoringMode;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 4; @position = 8; @symbol_vardef = [startingServerTeam,4,8,26]; ]
+    var startingServerTeam;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 5; @position = 8; @symbol_vardef = [decidingSetMode,5,8,23]; ]
+    var decidingSetMode;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 6; @position = 8; @symbol_vardef = [regularTieBreakTarget,6,8,29]; ]
+    var regularTieBreakTarget;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 7; @position = 8; @symbol_vardef = [decidingTieBreakTarget,7,8,30]; ]
+    var decidingTieBreakTarget;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 8; @position = 8; @symbol_vardef = [requireTwoPointTieBreakMargin,8,8,37]; ]
+    var requireTwoPointTieBreakMargin;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 9; @position = 8; @symbol_vardef = [selectedField,9,8,21]; ]
+    var selectedField;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 10; @position = 8; @symbol_vardef = [editing,10,8,15]; ]
+    var editing;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 11; @position = 8; @symbol_vardef = [_originalValue,11,8,22]; ]
+    var _originalValue;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 13; @symbol_functiondef = [initialize,13,13,23]; ]
+    function initialize() as Void {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_13_26_24_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 14 8 ]
+        %tmp.1 = 3;
+        symbol [ bestOfSets ? 14 8 18 ];
+        putv self :bestOfSets %tmp.1;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 15 8 ]
+        symbol [ ScoringMode %tmp.3 15 22 33 ];
+        %tmp.3 = getv ? :ScoringMode;
+        symbol [ ADVANTAGE %tmp.4 15 34 43 ];
+        %tmp.4 = getv %tmp.3 :ADVANTAGE;
+        symbol [ scoringMode ? 15 8 19 ];
+        putv self :scoringMode %tmp.4;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 16 8 ]
+        %tmp.5 = 0;
+        symbol [ startingServerTeam ? 16 8 26 ];
+        putv self :startingServerTeam %tmp.5;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 17 8 ]
+        symbol [ DecidingSetMode %tmp.7 17 26 41 ];
+        %tmp.7 = getv ? :DecidingSetMode;
+        symbol [ MATCH_TIEBREAK %tmp.8 17 42 56 ];
+        %tmp.8 = getv %tmp.7 :MATCH_TIEBREAK;
+        symbol [ decidingSetMode ? 17 8 23 ];
+        putv self :decidingSetMode %tmp.8;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 18 8 ]
+        %tmp.9 = 7;
+        symbol [ regularTieBreakTarget ? 18 8 29 ];
+        putv self :regularTieBreakTarget %tmp.9;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 19 8 ]
+        %tmp.10 = 10;
+        symbol [ decidingTieBreakTarget ? 19 8 30 ];
+        putv self :decidingTieBreakTarget %tmp.10;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 20 8 ]
+        %tmp.11 = true;
+        symbol [ requireTwoPointTieBreakMargin ? 20 8 37 ];
+        putv self :requireTwoPointTieBreakMargin %tmp.11;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 21 8 ]
+        %tmp.12 = 0;
+        symbol [ selectedField ? 21 8 21 ];
+        putv self :selectedField %tmp.12;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 22 8 ]
+        %tmp.13 = false;
+        symbol [ editing ? 22 8 15 ];
+        putv self :editing %tmp.13;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 23 8 ]
+        %tmp.14 = null;
+        symbol [ _originalValue ? 23 8 22 ];
+        putv self :_originalValue %tmp.14;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_13_26_24_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 26; @symbol_functiondef = [fieldCount,26,13,23]; ]
+    function fieldCount() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_26_26_28_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 27 8 ]
+        %tmp.1 = 7;
+        ret %tmp.1;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_26_26_28_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 30; @symbol_functiondef = [itemCount,30,13,22]; ]
+    function itemCount() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_30_25_32_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 31 8 ]
+        %tmp.1 = self;
+        symbol [ fieldCount %tmp.2 31 15 25 ];
+        %tmp.2 = getv function %tmp.1 :fieldCount;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        %tmp.4 = 1;
+        %tmp.5 = add %tmp.3 %tmp.4;
+        ret %tmp.5;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_30_25_32_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 34; @symbol_functiondef = [moveSelection,34,13,26]; @symbol_param<0> = [delta,34,27,32]; ]
+    function moveSelection(delta) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_34_34_36_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 35 8 ]
+        symbol [ selectedField %tmp.2 35 25 38 ];
+        %tmp.2 = getv ? :selectedField;
+        %tmp.3 = lgetv %delta;
+        symbol [ delta %tmp.3 35 41 46 ];
+        %tmp.4 = add %tmp.2 %tmp.3;
+        %tmp.5 = self;
+        symbol [ itemCount %tmp.6 35 49 58 ];
+        %tmp.6 = getv function %tmp.5 :itemCount;
+        %tmp.7 = invoke %tmp.5 %tmp.6();
+        %tmp.8 = add %tmp.4 %tmp.7;
+        %tmp.9 = self;
+        symbol [ itemCount %tmp.10 35 64 73 ];
+        %tmp.10 = getv function %tmp.9 :itemCount;
+        %tmp.11 = invoke %tmp.9 %tmp.10();
+        %tmp.12 = mod %tmp.8 %tmp.11;
+        symbol [ selectedField ? 35 8 21 ];
+        putv self :selectedField %tmp.12;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_34_34_36_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 38; @symbol_functiondef = [isStartGameSelected,38,13,32]; ]
+    function isStartGameSelected() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_38_35_40_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 39 8 ]
+        symbol [ selectedField %tmp.2 39 15 28 ];
+        %tmp.2 = getv ? :selectedField;
+        %tmp.3 = self;
+        symbol [ fieldCount %tmp.4 39 32 42 ];
+        %tmp.4 = getv function %tmp.3 :fieldCount;
+        %tmp.5 = invoke %tmp.3 %tmp.4();
+        %tmp.6 = eq %tmp.2 %tmp.5;
+        ret %tmp.6;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_38_35_40_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 42; @symbol_functiondef = [isHistorySelected,42,13,30]; ]
+    function isHistorySelected() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_42_33_44_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 43 8 ]
+        %tmp.1 = false;
+        ret %tmp.1;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_42_33_44_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 46; @symbol_functiondef = [beginEditing,46,13,25]; ]
+    function beginEditing() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_46_28_54_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 47 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_8_49_8_if_stmt:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_12_47_55_begin:
+        %tmp.1 = self;
+        symbol [ isStartGameSelected %tmp.2 47 12 31 ];
+        %tmp.2 = getv function %tmp.1 :isStartGameSelected;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        bt %tmp.3 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_8_49_8_if_true;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_37_47_55_false:
+        %tmp.4 = self;
+        symbol [ isHistorySelected %tmp.5 47 37 54 ];
+        %tmp.5 = getv function %tmp.4 :isHistorySelected;
+        %tmp.6 = invoke %tmp.4 %tmp.5();
+        push %tmp.6;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_37_47_55_end:
+        %tmp.7 = phi [%tmp.3 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_12_47_55_begin] [%tmp.6 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_37_47_55_false] [%tmp.7 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_37_47_55_end];
+        bf %tmp.7 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_8_49_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_8_49_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_58_49_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 48 12 ]
+        %tmp.8 = false;
+        ret %tmp.8;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_58_49_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_8_49_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_47_8_49_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 51 8 ]
+        %tmp.9 = self;
+        symbol [ valueFor %tmp.10 51 25 33 ];
+        %tmp.10 = getv function %tmp.9 :valueFor;
+        symbol [ selectedField %tmp.12 51 34 47 ];
+        %tmp.12 = getv ? :selectedField;
+        %tmp.13 = invoke %tmp.9 %tmp.10(%tmp.12);
+        symbol [ _originalValue ? 51 8 22 ];
+        putv self :_originalValue %tmp.13;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 52 8 ]
+        %tmp.14 = true;
+        symbol [ editing ? 52 8 15 ];
+        putv self :editing %tmp.14;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 53 8 ]
+        %tmp.15 = true;
+        ret %tmp.15;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_46_28_54_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 56; @symbol_functiondef = [saveEditing,56,13,24]; ]
+    function saveEditing() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_56_27_59_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 57 8 ]
+        %tmp.1 = false;
+        symbol [ editing ? 57 8 15 ];
+        putv self :editing %tmp.1;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 58 8 ]
+        %tmp.2 = null;
+        symbol [ _originalValue ? 58 8 22 ];
+        putv self :_originalValue %tmp.2;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_56_27_59_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 61; @symbol_functiondef = [cancelEditing,61,13,26]; ]
+    function cancelEditing() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_61_29_69_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 62 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_62_8_64_8_if_stmt:
+        symbol [ editing %tmp.2 62 13 20 ];
+        %tmp.2 = getv ? :editing;
+        %tmp.3 = not %tmp.2;
+        bf %tmp.3 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_62_8_64_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_62_8_64_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_62_22_64_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 63 12 ]
+        ret ?;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_62_22_64_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_62_8_64_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_62_8_64_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 66 8 ]
+        %tmp.4 = self;
+        symbol [ setValueFor %tmp.5 66 8 19 ];
+        %tmp.5 = getv function %tmp.4 :setValueFor;
+        symbol [ selectedField %tmp.7 66 20 33 ];
+        %tmp.7 = getv ? :selectedField;
+        symbol [ _originalValue %tmp.9 66 35 49 ];
+        %tmp.9 = getv ? :_originalValue;
+        invoke %tmp.4 %tmp.5(%tmp.7, %tmp.9);
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 67 8 ]
+        %tmp.10 = false;
+        symbol [ editing ? 67 8 15 ];
+        putv self :editing %tmp.10;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 68 8 ]
+        %tmp.11 = null;
+        symbol [ _originalValue ? 68 8 22 ];
+        putv self :_originalValue %tmp.11;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_61_29_69_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 71; @symbol_functiondef = [changeSelected,71,13,27]; @symbol_param<0> = [delta,71,28,33]; ]
+    function changeSelected(delta) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_71_35_92_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 72 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_72_8_91_8_if_stmt:
+        symbol [ selectedField %tmp.2 72 12 25 ];
+        %tmp.2 = getv ? :selectedField;
+        %tmp.3 = 0;
+        %tmp.4 = eq %tmp.2 %tmp.3;
+        bf %tmp.4 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_72_8_91_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_72_8_91_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_72_32_75_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 73 12 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_72_32_75_8_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_72_32_75_8_stop" ]
+        %values.1 = local;
+        symbol [ values %values.1 73 16 22 ];
+        %tmp.5 = newa 3;
+        %tmp.6 = 1;
+        %tmp.7 = dup %tmp.5;
+        %tmp.8 = aputv %tmp.7 0 %tmp.6;
+        %tmp.9 = 3;
+        %tmp.10 = dup %tmp.8;
+        %tmp.11 = aputv %tmp.10 1 %tmp.9;
+        %tmp.12 = 5;
+        %tmp.13 = dup %tmp.11;
+        %tmp.14 = aputv %tmp.13 2 %tmp.12;
+        lputv %values.1 %tmp.14;
+        symbol [ values %values.1 73 16 22 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 74 12 ]
+        %tmp.15 = self;
+        symbol [ cycleValue %tmp.16 74 25 35 ];
+        %tmp.16 = getv function %tmp.15 :cycleValue;
+        %tmp.17 = lgetv %values.1;
+        symbol [ values %tmp.17 74 36 42 ];
+        symbol [ bestOfSets %tmp.19 74 44 54 ];
+        %tmp.19 = getv ? :bestOfSets;
+        %tmp.20 = lgetv %delta;
+        symbol [ delta %tmp.20 74 56 61 ];
+        %tmp.21 = invoke %tmp.15 %tmp.16(%tmp.17, %tmp.19, %tmp.20);
+        symbol [ bestOfSets ? 74 12 22 ];
+        putv self :bestOfSets %tmp.21;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_72_32_75_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_72_8_91_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_72_8_91_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 75 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_75_15_91_8_if_stmt:
+        symbol [ selectedField %tmp.23 75 19 32 ];
+        %tmp.23 = getv ? :selectedField;
+        %tmp.24 = 1;
+        %tmp.25 = eq %tmp.23 %tmp.24;
+        bf %tmp.25 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_75_15_91_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_75_15_91_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_75_39_79_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 76 12 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_76_26_78_30_begin:
+        symbol [ scoringMode %tmp.27 76 26 37 ];
+        %tmp.27 = getv ? :scoringMode;
+        symbol [ ScoringMode %tmp.29 76 41 52 ];
+        %tmp.29 = getv ? :ScoringMode;
+        symbol [ ADVANTAGE %tmp.30 76 53 62 ];
+        %tmp.30 = getv %tmp.29 :ADVANTAGE;
+        %tmp.31 = eq %tmp.27 %tmp.30;
+        bf %tmp.31 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_76_26_78_30_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_76_26_78_30_true:
+        symbol [ ScoringMode %tmp.33 77 18 29 ];
+        %tmp.33 = getv ? :ScoringMode;
+        symbol [ NO_AD %tmp.34 77 30 35 ];
+        %tmp.34 = getv %tmp.33 :NO_AD;
+        push %tmp.34;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_76_26_78_30_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_76_26_78_30_else_false:
+        symbol [ ScoringMode %tmp.36 78 18 29 ];
+        %tmp.36 = getv ? :ScoringMode;
+        symbol [ ADVANTAGE %tmp.37 78 30 39 ];
+        %tmp.37 = getv %tmp.36 :ADVANTAGE;
+        push %tmp.37;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_76_26_78_30_end:
+        %tmp.38 = phi [%tmp.31 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_76_26_78_30_begin] [%tmp.34 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_76_26_78_30_true] [%tmp.37 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_76_26_78_30_else_false] [%tmp.38 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_76_26_78_30_end];
+        symbol [ scoringMode ? 76 12 23 ];
+        putv self :scoringMode %tmp.38;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_75_39_79_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_75_15_91_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_75_15_91_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 79 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_79_15_91_8_if_stmt:
+        symbol [ selectedField %tmp.40 79 19 32 ];
+        %tmp.40 = getv ? :selectedField;
+        %tmp.41 = 2;
+        %tmp.42 = eq %tmp.40 %tmp.41;
+        bf %tmp.42 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_79_15_91_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_79_15_91_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_79_39_81_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 80 12 ]
+        %tmp.43 = 1;
+        symbol [ startingServerTeam %tmp.45 80 37 55 ];
+        %tmp.45 = getv ? :startingServerTeam;
+        %tmp.46 = sub %tmp.43 %tmp.45;
+        symbol [ startingServerTeam ? 80 12 30 ];
+        putv self :startingServerTeam %tmp.46;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_79_39_81_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_79_15_91_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_79_15_91_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 81 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_81_15_91_8_if_stmt:
+        symbol [ selectedField %tmp.48 81 19 32 ];
+        %tmp.48 = getv ? :selectedField;
+        %tmp.49 = 3;
+        %tmp.50 = eq %tmp.48 %tmp.49;
+        bf %tmp.50 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_81_15_91_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_81_15_91_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_81_39_85_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 82 12 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_82_30_84_34_begin:
+        symbol [ decidingSetMode %tmp.52 82 30 45 ];
+        %tmp.52 = getv ? :decidingSetMode;
+        symbol [ DecidingSetMode %tmp.54 82 49 64 ];
+        %tmp.54 = getv ? :DecidingSetMode;
+        symbol [ FULL_SET %tmp.55 82 65 73 ];
+        %tmp.55 = getv %tmp.54 :FULL_SET;
+        %tmp.56 = eq %tmp.52 %tmp.55;
+        bf %tmp.56 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_82_30_84_34_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_82_30_84_34_true:
+        symbol [ DecidingSetMode %tmp.58 83 18 33 ];
+        %tmp.58 = getv ? :DecidingSetMode;
+        symbol [ MATCH_TIEBREAK %tmp.59 83 34 48 ];
+        %tmp.59 = getv %tmp.58 :MATCH_TIEBREAK;
+        push %tmp.59;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_82_30_84_34_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_82_30_84_34_else_false:
+        symbol [ DecidingSetMode %tmp.61 84 18 33 ];
+        %tmp.61 = getv ? :DecidingSetMode;
+        symbol [ FULL_SET %tmp.62 84 34 42 ];
+        %tmp.62 = getv %tmp.61 :FULL_SET;
+        push %tmp.62;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_82_30_84_34_end:
+        %tmp.63 = phi [%tmp.56 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_82_30_84_34_begin] [%tmp.59 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_82_30_84_34_true] [%tmp.62 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_82_30_84_34_else_false] [%tmp.63 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_82_30_84_34_end];
+        symbol [ decidingSetMode ? 82 12 27 ];
+        putv self :decidingSetMode %tmp.63;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_81_39_85_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_81_15_91_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_81_15_91_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 85 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_85_15_91_8_if_stmt:
+        symbol [ selectedField %tmp.65 85 19 32 ];
+        %tmp.65 = getv ? :selectedField;
+        %tmp.66 = 4;
+        %tmp.67 = eq %tmp.65 %tmp.66;
+        bf %tmp.67 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_85_15_91_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_85_15_91_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_85_39_87_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 86 12 ]
+        %tmp.68 = self;
+        symbol [ clamp %tmp.69 86 36 41 ];
+        %tmp.69 = getv function %tmp.68 :clamp;
+        symbol [ regularTieBreakTarget %tmp.71 86 42 63 ];
+        %tmp.71 = getv ? :regularTieBreakTarget;
+        %tmp.72 = lgetv %delta;
+        symbol [ delta %tmp.72 86 66 71 ];
+        %tmp.73 = add %tmp.71 %tmp.72;
+        %tmp.74 = 5;
+        %tmp.75 = 21;
+        %tmp.76 = invoke %tmp.68 %tmp.69(%tmp.73, %tmp.74, %tmp.75);
+        symbol [ regularTieBreakTarget ? 86 12 33 ];
+        putv self :regularTieBreakTarget %tmp.76;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_85_39_87_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_85_15_91_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_85_15_91_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 87 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_87_15_91_8_if_stmt:
+        symbol [ selectedField %tmp.78 87 19 32 ];
+        %tmp.78 = getv ? :selectedField;
+        %tmp.79 = 5;
+        %tmp.80 = eq %tmp.78 %tmp.79;
+        bf %tmp.80 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_87_15_91_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_87_15_91_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_87_39_89_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 88 12 ]
+        %tmp.81 = self;
+        symbol [ clamp %tmp.82 88 37 42 ];
+        %tmp.82 = getv function %tmp.81 :clamp;
+        symbol [ decidingTieBreakTarget %tmp.84 88 43 65 ];
+        %tmp.84 = getv ? :decidingTieBreakTarget;
+        %tmp.85 = lgetv %delta;
+        symbol [ delta %tmp.85 88 68 73 ];
+        %tmp.86 = add %tmp.84 %tmp.85;
+        %tmp.87 = 7;
+        %tmp.88 = 21;
+        %tmp.89 = invoke %tmp.81 %tmp.82(%tmp.86, %tmp.87, %tmp.88);
+        symbol [ decidingTieBreakTarget ? 88 12 34 ];
+        putv self :decidingTieBreakTarget %tmp.89;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_87_39_89_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_87_15_91_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_87_15_91_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 89 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_89_15_91_8_if_stmt:
+        symbol [ selectedField %tmp.91 89 19 32 ];
+        %tmp.91 = getv ? :selectedField;
+        %tmp.92 = 6;
+        %tmp.93 = eq %tmp.91 %tmp.92;
+        bf %tmp.93 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_89_15_91_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_89_15_91_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_89_39_91_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 90 12 ]
+        symbol [ requireTwoPointTieBreakMargin %tmp.95 90 45 74 ];
+        %tmp.95 = getv ? :requireTwoPointTieBreakMargin;
+        %tmp.96 = not %tmp.95;
+        symbol [ requireTwoPointTieBreakMargin ? 90 12 41 ];
+        putv self :requireTwoPointTieBreakMargin %tmp.96;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_89_39_91_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_89_15_91_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_89_15_91_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_87_15_91_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_85_15_91_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_81_15_91_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_79_15_91_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_75_15_91_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_72_8_91_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_71_35_92_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 94; @symbol_functiondef = [toConfig,94,13,21]; ]
+    function toConfig() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_94_24_104_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 95 8 ]
+        symbol [ MatchConfig %tmp.4 95 19 30 ];
+        %tmp.4 = getv ? :MatchConfig;
+        symbol [ bestOfSets %tmp.6 96 12 22 ];
+        %tmp.6 = getv ? :bestOfSets;
+        symbol [ scoringMode %tmp.8 97 12 23 ];
+        %tmp.8 = getv ? :scoringMode;
+        symbol [ decidingSetMode %tmp.10 98 12 27 ];
+        %tmp.10 = getv ? :decidingSetMode;
+        symbol [ startingServerTeam %tmp.12 99 12 30 ];
+        %tmp.12 = getv ? :startingServerTeam;
+        symbol [ regularTieBreakTarget %tmp.14 100 12 33 ];
+        %tmp.14 = getv ? :regularTieBreakTarget;
+        symbol [ decidingTieBreakTarget %tmp.16 101 12 34 ];
+        %tmp.16 = getv ? :decidingTieBreakTarget;
+        symbol [ requireTwoPointTieBreakMargin %tmp.18 102 12 41 ];
+        %tmp.18 = getv ? :requireTwoPointTieBreakMargin;
+        %tmp.1 = newc %tmp.4 (%tmp.6, %tmp.8, %tmp.10, %tmp.12, %tmp.14, %tmp.16, %tmp.18);
+        ret %tmp.1;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_94_24_104_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 106; @symbol_functiondef = [labelFor,106,13,21]; @symbol_param<0> = [index,106,22,27]; ]
+    function labelFor(index) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_106_29_126_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 107 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_107_8_119_8_if_stmt:
+        %tmp.1 = lgetv %index;
+        symbol [ index %tmp.1 107 12 17 ];
+        %tmp.2 = 0;
+        %tmp.3 = eq %tmp.1 %tmp.2;
+        bf %tmp.3 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_107_8_119_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_107_8_119_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_107_24_109_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 108 12 ]
+        %tmp.4 = "Best of ";
+        symbol [ bestOfSets %tmp.6 108 32 42 ];
+        %tmp.6 = getv ? :bestOfSets;
+        %tmp.7 = add %tmp.4 %tmp.6;
+        ret %tmp.7;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_107_24_109_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_107_8_119_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_107_8_119_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 109 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_109_15_119_8_if_stmt:
+        %tmp.8 = lgetv %index;
+        symbol [ index %tmp.8 109 19 24 ];
+        %tmp.9 = 1;
+        %tmp.10 = eq %tmp.8 %tmp.9;
+        bf %tmp.10 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_109_15_119_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_109_15_119_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_109_31_111_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 110 12 ]
+        %tmp.11 = "Scoring: ";
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_110_34_110_81_begin:
+        symbol [ scoringMode %tmp.13 110 34 45 ];
+        %tmp.13 = getv ? :scoringMode;
+        symbol [ ScoringMode %tmp.15 110 49 60 ];
+        %tmp.15 = getv ? :ScoringMode;
+        symbol [ ADVANTAGE %tmp.16 110 61 70 ];
+        %tmp.16 = getv %tmp.15 :ADVANTAGE;
+        %tmp.17 = eq %tmp.13 %tmp.16;
+        bf %tmp.17 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_110_34_110_81_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_110_34_110_81_true:
+        %tmp.18 = "Adv";
+        push %tmp.18;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_110_34_110_81_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_110_34_110_81_else_false:
+        %tmp.19 = "No-ad";
+        push %tmp.19;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_110_34_110_81_end:
+        %tmp.20 = phi [%tmp.17 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_110_34_110_81_begin] [%tmp.18 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_110_34_110_81_true] [%tmp.19 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_110_34_110_81_else_false] [%tmp.20 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_110_34_110_81_end];
+        %tmp.21 = add %tmp.11 %tmp.20;
+        ret %tmp.21;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_109_31_111_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_109_15_119_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_109_15_119_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 111 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_111_15_119_8_if_stmt:
+        %tmp.22 = lgetv %index;
+        symbol [ index %tmp.22 111 19 24 ];
+        %tmp.23 = 2;
+        %tmp.24 = eq %tmp.22 %tmp.23;
+        bf %tmp.24 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_111_15_119_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_111_15_119_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_111_31_113_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 112 12 ]
+        %tmp.25 = "First serve: ";
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_112_38_112_71_begin:
+        symbol [ startingServerTeam %tmp.27 112 38 56 ];
+        %tmp.27 = getv ? :startingServerTeam;
+        %tmp.28 = 0;
+        %tmp.29 = eq %tmp.27 %tmp.28;
+        bf %tmp.29 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_112_38_112_71_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_112_38_112_71_true:
+        %tmp.30 = "Me";
+        push %tmp.30;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_112_38_112_71_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_112_38_112_71_else_false:
+        %tmp.31 = "Opponent";
+        push %tmp.31;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_112_38_112_71_end:
+        %tmp.32 = phi [%tmp.29 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_112_38_112_71_begin] [%tmp.30 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_112_38_112_71_true] [%tmp.31 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_112_38_112_71_else_false] [%tmp.32 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_112_38_112_71_end];
+        %tmp.33 = add %tmp.25 %tmp.32;
+        ret %tmp.33;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_111_31_113_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_111_15_119_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_111_15_119_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 113 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_113_15_119_8_if_stmt:
+        %tmp.34 = lgetv %index;
+        symbol [ index %tmp.34 113 19 24 ];
+        %tmp.35 = 3;
+        %tmp.36 = eq %tmp.34 %tmp.35;
+        bf %tmp.36 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_113_15_119_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_113_15_119_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_113_31_115_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 114 12 ]
+        %tmp.37 = "Decider: ";
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_114_34_114_89_begin:
+        symbol [ decidingSetMode %tmp.39 114 34 49 ];
+        %tmp.39 = getv ? :decidingSetMode;
+        symbol [ DecidingSetMode %tmp.41 114 53 68 ];
+        %tmp.41 = getv ? :DecidingSetMode;
+        symbol [ FULL_SET %tmp.42 114 69 77 ];
+        %tmp.42 = getv %tmp.41 :FULL_SET;
+        %tmp.43 = eq %tmp.39 %tmp.42;
+        bf %tmp.43 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_114_34_114_89_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_114_34_114_89_true:
+        %tmp.44 = "Full";
+        push %tmp.44;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_114_34_114_89_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_114_34_114_89_else_false:
+        %tmp.45 = "MTB";
+        push %tmp.45;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_114_34_114_89_end:
+        %tmp.46 = phi [%tmp.43 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_114_34_114_89_begin] [%tmp.44 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_114_34_114_89_true] [%tmp.45 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_114_34_114_89_else_false] [%tmp.46 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_114_34_114_89_end];
+        %tmp.47 = add %tmp.37 %tmp.46;
+        ret %tmp.47;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_113_31_115_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_113_15_119_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_113_15_119_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 115 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_115_15_119_8_if_stmt:
+        %tmp.48 = lgetv %index;
+        symbol [ index %tmp.48 115 19 24 ];
+        %tmp.49 = 4;
+        %tmp.50 = eq %tmp.48 %tmp.49;
+        bf %tmp.50 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_115_15_119_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_115_15_119_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_115_31_117_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 116 12 ]
+        %tmp.51 = "Tie-break to ";
+        symbol [ regularTieBreakTarget %tmp.53 116 37 58 ];
+        %tmp.53 = getv ? :regularTieBreakTarget;
+        %tmp.54 = add %tmp.51 %tmp.53;
+        ret %tmp.54;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_115_31_117_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_115_15_119_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_115_15_119_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 117 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_117_15_119_8_if_stmt:
+        %tmp.55 = lgetv %index;
+        symbol [ index %tmp.55 117 19 24 ];
+        %tmp.56 = 5;
+        %tmp.57 = eq %tmp.55 %tmp.56;
+        bf %tmp.57 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_117_15_119_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_117_15_119_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_117_31_119_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 118 12 ]
+        %tmp.58 = "Match TB to ";
+        symbol [ decidingTieBreakTarget %tmp.60 118 36 58 ];
+        %tmp.60 = getv ? :decidingTieBreakTarget;
+        %tmp.61 = add %tmp.58 %tmp.60;
+        ret %tmp.61;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_117_31_119_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_117_15_119_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_117_15_119_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_115_15_119_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_113_15_119_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_111_15_119_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_109_15_119_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_107_8_119_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 121 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_121_8_123_8_if_stmt:
+        %tmp.62 = lgetv %index;
+        symbol [ index %tmp.62 121 12 17 ];
+        %tmp.63 = 6;
+        %tmp.64 = eq %tmp.62 %tmp.63;
+        bf %tmp.64 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_121_8_123_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_121_8_123_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_121_24_123_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 122 12 ]
+        %tmp.65 = "Win by 2: ";
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_122_35_122_74_begin:
+        symbol [ requireTwoPointTieBreakMargin %tmp.67 122 35 64 ];
+        %tmp.67 = getv ? :requireTwoPointTieBreakMargin;
+        bf %tmp.67 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_122_35_122_74_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_122_35_122_74_true:
+        %tmp.68 = "On";
+        push %tmp.68;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_122_35_122_74_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_122_35_122_74_else_false:
+        %tmp.69 = "Off";
+        push %tmp.69;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_122_35_122_74_end:
+        %tmp.70 = phi [%tmp.67 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_122_35_122_74_begin] [%tmp.68 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_122_35_122_74_true] [%tmp.69 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_122_35_122_74_else_false] [%tmp.70 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_122_35_122_74_end];
+        %tmp.71 = add %tmp.65 %tmp.70;
+        ret %tmp.71;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_121_24_123_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_121_8_123_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_121_8_123_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 125 8 ]
+        %tmp.72 = "START GAME";
+        ret %tmp.72;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_106_29_126_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 128; @symbol_functiondef = [titleFor,128,13,21]; @symbol_param<0> = [index,128,22,27]; ]
+    function titleFor(index) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_128_29_139_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 129 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_128_29_139_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_128_29_139_4_stop" ]
+        %titles.1 = local;
+        symbol [ titles %titles.1 129 12 18 ];
+        %tmp.1 = newa 7;
+        %tmp.2 = "MATCH LENGTH";
+        %tmp.3 = dup %tmp.1;
+        %tmp.4 = aputv %tmp.3 0 %tmp.2;
+        %tmp.5 = "SCORING";
+        %tmp.6 = dup %tmp.4;
+        %tmp.7 = aputv %tmp.6 1 %tmp.5;
+        %tmp.8 = "FIRST SERVE";
+        %tmp.9 = dup %tmp.7;
+        %tmp.10 = aputv %tmp.9 2 %tmp.8;
+        %tmp.11 = "DECIDING SET";
+        %tmp.12 = dup %tmp.10;
+        %tmp.13 = aputv %tmp.12 3 %tmp.11;
+        %tmp.14 = "TIE-BREAK TARGET";
+        %tmp.15 = dup %tmp.13;
+        %tmp.16 = aputv %tmp.15 4 %tmp.14;
+        %tmp.17 = "MATCH TB TARGET";
+        %tmp.18 = dup %tmp.16;
+        %tmp.19 = aputv %tmp.18 5 %tmp.17;
+        %tmp.20 = "TIE-BREAK MARGIN";
+        %tmp.21 = dup %tmp.19;
+        %tmp.22 = aputv %tmp.21 6 %tmp.20;
+        lputv %titles.1 %tmp.22;
+        symbol [ titles %titles.1 129 12 18 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 138 8 ]
+        %tmp.23 = lgetv %titles.1;
+        symbol [ titles %tmp.23 138 15 21 ];
+        %tmp.24 = lgetv %index;
+        symbol [ index %tmp.24 138 22 27 ];
+        %tmp.25 = agetv %tmp.23 %tmp.24;
+        ret %tmp.25;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_128_29_139_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 141; @symbol_functiondef = [valueLabelFor,141,13,26]; @symbol_param<0> = [index,141,27,32]; ]
+    function valueLabelFor(index) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_141_34_157_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 142 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_142_8_154_8_if_stmt:
+        %tmp.1 = lgetv %index;
+        symbol [ index %tmp.1 142 12 17 ];
+        %tmp.2 = 0;
+        %tmp.3 = eq %tmp.1 %tmp.2;
+        bf %tmp.3 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_142_8_154_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_142_8_154_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_142_24_144_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 143 12 ]
+        %tmp.4 = "Best of ";
+        symbol [ bestOfSets %tmp.6 143 32 42 ];
+        %tmp.6 = getv ? :bestOfSets;
+        %tmp.7 = add %tmp.4 %tmp.6;
+        ret %tmp.7;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_142_24_144_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_142_8_154_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_142_8_154_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 144 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_144_15_154_8_if_stmt:
+        %tmp.8 = lgetv %index;
+        symbol [ index %tmp.8 144 19 24 ];
+        %tmp.9 = 1;
+        %tmp.10 = eq %tmp.8 %tmp.9;
+        bf %tmp.10 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_144_15_154_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_144_15_154_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_144_31_146_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 145 12 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_145_19_145_72_begin:
+        symbol [ scoringMode %tmp.12 145 19 30 ];
+        %tmp.12 = getv ? :scoringMode;
+        symbol [ ScoringMode %tmp.14 145 34 45 ];
+        %tmp.14 = getv ? :ScoringMode;
+        symbol [ ADVANTAGE %tmp.15 145 46 55 ];
+        %tmp.15 = getv %tmp.14 :ADVANTAGE;
+        %tmp.16 = eq %tmp.12 %tmp.15;
+        bf %tmp.16 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_145_19_145_72_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_145_19_145_72_true:
+        %tmp.17 = "Advantage";
+        push %tmp.17;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_145_19_145_72_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_145_19_145_72_else_false:
+        %tmp.18 = "No-ad";
+        push %tmp.18;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_145_19_145_72_end:
+        %tmp.19 = phi [%tmp.16 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_145_19_145_72_begin] [%tmp.17 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_145_19_145_72_true] [%tmp.18 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_145_19_145_72_else_false] [%tmp.19 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_145_19_145_72_end];
+        ret %tmp.19;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_144_31_146_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_144_15_154_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_144_15_154_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 146 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_146_15_154_8_if_stmt:
+        %tmp.20 = lgetv %index;
+        symbol [ index %tmp.20 146 19 24 ];
+        %tmp.21 = 2;
+        %tmp.22 = eq %tmp.20 %tmp.21;
+        bf %tmp.22 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_146_15_154_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_146_15_154_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_146_31_148_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 147 12 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_147_19_147_57_begin:
+        symbol [ startingServerTeam %tmp.24 147 19 37 ];
+        %tmp.24 = getv ? :startingServerTeam;
+        %tmp.25 = 0;
+        %tmp.26 = eq %tmp.24 %tmp.25;
+        bf %tmp.26 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_147_19_147_57_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_147_19_147_57_true:
+        %tmp.27 = "My team";
+        push %tmp.27;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_147_19_147_57_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_147_19_147_57_else_false:
+        %tmp.28 = "Opponent";
+        push %tmp.28;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_147_19_147_57_end:
+        %tmp.29 = phi [%tmp.26 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_147_19_147_57_begin] [%tmp.27 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_147_19_147_57_true] [%tmp.28 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_147_19_147_57_else_false] [%tmp.29 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_147_19_147_57_end];
+        ret %tmp.29;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_146_31_148_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_146_15_154_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_146_15_154_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 148 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_148_15_154_8_if_stmt:
+        %tmp.30 = lgetv %index;
+        symbol [ index %tmp.30 148 19 24 ];
+        %tmp.31 = 3;
+        %tmp.32 = eq %tmp.30 %tmp.31;
+        bf %tmp.32 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_148_15_154_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_148_15_154_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_148_31_150_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 149 12 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_149_19_149_78_begin:
+        symbol [ decidingSetMode %tmp.34 149 19 34 ];
+        %tmp.34 = getv ? :decidingSetMode;
+        symbol [ DecidingSetMode %tmp.36 149 38 53 ];
+        %tmp.36 = getv ? :DecidingSetMode;
+        symbol [ FULL_SET %tmp.37 149 54 62 ];
+        %tmp.37 = getv %tmp.36 :FULL_SET;
+        %tmp.38 = eq %tmp.34 %tmp.37;
+        bf %tmp.38 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_149_19_149_78_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_149_19_149_78_true:
+        %tmp.39 = "Full set";
+        push %tmp.39;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_149_19_149_78_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_149_19_149_78_else_false:
+        %tmp.40 = "Match tie-break";
+        push %tmp.40;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_149_19_149_78_end:
+        %tmp.41 = phi [%tmp.38 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_149_19_149_78_begin] [%tmp.39 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_149_19_149_78_true] [%tmp.40 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_149_19_149_78_else_false] [%tmp.41 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_149_19_149_78_end];
+        ret %tmp.41;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_148_31_150_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_148_15_154_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_148_15_154_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 150 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_150_15_154_8_if_stmt:
+        %tmp.42 = lgetv %index;
+        symbol [ index %tmp.42 150 19 24 ];
+        %tmp.43 = 4;
+        %tmp.44 = eq %tmp.42 %tmp.43;
+        bf %tmp.44 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_150_15_154_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_150_15_154_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_150_31_152_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 151 12 ]
+        symbol [ regularTieBreakTarget %tmp.46 151 19 40 ];
+        %tmp.46 = getv ? :regularTieBreakTarget;
+        symbol [ toString %tmp.47 151 41 49 ];
+        %tmp.47 = getv function %tmp.46 :toString;
+        %tmp.48 = invoke %tmp.46 %tmp.47();
+        ret %tmp.48;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_150_31_152_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_150_15_154_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_150_15_154_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 152 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_152_15_154_8_if_stmt:
+        %tmp.49 = lgetv %index;
+        symbol [ index %tmp.49 152 19 24 ];
+        %tmp.50 = 5;
+        %tmp.51 = eq %tmp.49 %tmp.50;
+        bf %tmp.51 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_152_15_154_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_152_15_154_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_152_31_154_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 153 12 ]
+        symbol [ decidingTieBreakTarget %tmp.53 153 19 41 ];
+        %tmp.53 = getv ? :decidingTieBreakTarget;
+        symbol [ toString %tmp.54 153 42 50 ];
+        %tmp.54 = getv function %tmp.53 :toString;
+        %tmp.55 = invoke %tmp.53 %tmp.54();
+        ret %tmp.55;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_152_31_154_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_152_15_154_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_152_15_154_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_150_15_154_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_148_15_154_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_146_15_154_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_144_15_154_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_142_8_154_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 156 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_156_15_156_54_begin:
+        symbol [ requireTwoPointTieBreakMargin %tmp.57 156 15 44 ];
+        %tmp.57 = getv ? :requireTwoPointTieBreakMargin;
+        bf %tmp.57 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_156_15_156_54_else_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_156_15_156_54_true:
+        %tmp.58 = "On";
+        push %tmp.58;
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_156_15_156_54_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_156_15_156_54_else_false:
+        %tmp.59 = "Off";
+        push %tmp.59;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_156_15_156_54_end:
+        %tmp.60 = phi [%tmp.57 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_156_15_156_54_begin] [%tmp.58 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_156_15_156_54_true] [%tmp.59 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_156_15_156_54_else_false] [%tmp.60 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_156_15_156_54_end];
+        ret %tmp.60;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_141_34_157_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 159; @symbol_functiondef = [valueFor,159,13,21]; @symbol_param<0> = [index,159,22,27]; ]
+    function valueFor(index) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_159_29_175_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 160 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_160_8_172_8_if_stmt:
+        %tmp.1 = lgetv %index;
+        symbol [ index %tmp.1 160 12 17 ];
+        %tmp.2 = 0;
+        %tmp.3 = eq %tmp.1 %tmp.2;
+        bf %tmp.3 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_160_8_172_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_160_8_172_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_160_24_162_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 161 12 ]
+        symbol [ bestOfSets %tmp.5 161 19 29 ];
+        %tmp.5 = getv ? :bestOfSets;
+        ret %tmp.5;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_160_24_162_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_160_8_172_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_160_8_172_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 162 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_162_15_172_8_if_stmt:
+        %tmp.6 = lgetv %index;
+        symbol [ index %tmp.6 162 19 24 ];
+        %tmp.7 = 1;
+        %tmp.8 = eq %tmp.6 %tmp.7;
+        bf %tmp.8 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_162_15_172_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_162_15_172_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_162_31_164_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 163 12 ]
+        symbol [ scoringMode %tmp.10 163 19 30 ];
+        %tmp.10 = getv ? :scoringMode;
+        ret %tmp.10;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_162_31_164_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_162_15_172_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_162_15_172_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 164 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_164_15_172_8_if_stmt:
+        %tmp.11 = lgetv %index;
+        symbol [ index %tmp.11 164 19 24 ];
+        %tmp.12 = 2;
+        %tmp.13 = eq %tmp.11 %tmp.12;
+        bf %tmp.13 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_164_15_172_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_164_15_172_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_164_31_166_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 165 12 ]
+        symbol [ startingServerTeam %tmp.15 165 19 37 ];
+        %tmp.15 = getv ? :startingServerTeam;
+        ret %tmp.15;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_164_31_166_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_164_15_172_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_164_15_172_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 166 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_166_15_172_8_if_stmt:
+        %tmp.16 = lgetv %index;
+        symbol [ index %tmp.16 166 19 24 ];
+        %tmp.17 = 3;
+        %tmp.18 = eq %tmp.16 %tmp.17;
+        bf %tmp.18 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_166_15_172_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_166_15_172_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_166_31_168_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 167 12 ]
+        symbol [ decidingSetMode %tmp.20 167 19 34 ];
+        %tmp.20 = getv ? :decidingSetMode;
+        ret %tmp.20;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_166_31_168_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_166_15_172_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_166_15_172_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 168 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_168_15_172_8_if_stmt:
+        %tmp.21 = lgetv %index;
+        symbol [ index %tmp.21 168 19 24 ];
+        %tmp.22 = 4;
+        %tmp.23 = eq %tmp.21 %tmp.22;
+        bf %tmp.23 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_168_15_172_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_168_15_172_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_168_31_170_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 169 12 ]
+        symbol [ regularTieBreakTarget %tmp.25 169 19 40 ];
+        %tmp.25 = getv ? :regularTieBreakTarget;
+        ret %tmp.25;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_168_31_170_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_168_15_172_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_168_15_172_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 170 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_170_15_172_8_if_stmt:
+        %tmp.26 = lgetv %index;
+        symbol [ index %tmp.26 170 19 24 ];
+        %tmp.27 = 5;
+        %tmp.28 = eq %tmp.26 %tmp.27;
+        bf %tmp.28 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_170_15_172_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_170_15_172_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_170_31_172_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 171 12 ]
+        symbol [ decidingTieBreakTarget %tmp.30 171 19 41 ];
+        %tmp.30 = getv ? :decidingTieBreakTarget;
+        ret %tmp.30;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_170_31_172_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_170_15_172_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_170_15_172_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_168_15_172_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_166_15_172_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_164_15_172_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_162_15_172_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_160_8_172_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 174 8 ]
+        symbol [ requireTwoPointTieBreakMargin %tmp.32 174 15 44 ];
+        %tmp.32 = getv ? :requireTwoPointTieBreakMargin;
+        ret %tmp.32;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_159_29_175_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 177; @symbol_functiondef = [setValueFor,177,13,24]; @symbol_param<0> = [index,177,25,30]; @symbol_param<1> = [value,177,32,37]; ]
+    function setValueFor(index, value) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_177_39_193_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 178 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_178_8_192_8_if_stmt:
+        %tmp.1 = lgetv %index;
+        symbol [ index %tmp.1 178 12 17 ];
+        %tmp.2 = 0;
+        %tmp.3 = eq %tmp.1 %tmp.2;
+        bf %tmp.3 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_178_8_192_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_178_8_192_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_178_24_180_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 179 12 ]
+        %tmp.4 = lgetv %value;
+        symbol [ value %tmp.4 179 25 30 ];
+        symbol [ bestOfSets ? 179 12 22 ];
+        putv self :bestOfSets %tmp.4;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_178_24_180_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_178_8_192_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_178_8_192_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 180 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_180_15_192_8_if_stmt:
+        %tmp.5 = lgetv %index;
+        symbol [ index %tmp.5 180 19 24 ];
+        %tmp.6 = 1;
+        %tmp.7 = eq %tmp.5 %tmp.6;
+        bf %tmp.7 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_180_15_192_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_180_15_192_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_180_31_182_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 181 12 ]
+        %tmp.8 = lgetv %value;
+        symbol [ value %tmp.8 181 26 31 ];
+        symbol [ scoringMode ? 181 12 23 ];
+        putv self :scoringMode %tmp.8;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_180_31_182_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_180_15_192_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_180_15_192_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 182 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_182_15_192_8_if_stmt:
+        %tmp.9 = lgetv %index;
+        symbol [ index %tmp.9 182 19 24 ];
+        %tmp.10 = 2;
+        %tmp.11 = eq %tmp.9 %tmp.10;
+        bf %tmp.11 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_182_15_192_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_182_15_192_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_182_31_184_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 183 12 ]
+        %tmp.12 = lgetv %value;
+        symbol [ value %tmp.12 183 33 38 ];
+        symbol [ startingServerTeam ? 183 12 30 ];
+        putv self :startingServerTeam %tmp.12;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_182_31_184_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_182_15_192_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_182_15_192_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 184 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_184_15_192_8_if_stmt:
+        %tmp.13 = lgetv %index;
+        symbol [ index %tmp.13 184 19 24 ];
+        %tmp.14 = 3;
+        %tmp.15 = eq %tmp.13 %tmp.14;
+        bf %tmp.15 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_184_15_192_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_184_15_192_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_184_31_186_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 185 12 ]
+        %tmp.16 = lgetv %value;
+        symbol [ value %tmp.16 185 30 35 ];
+        symbol [ decidingSetMode ? 185 12 27 ];
+        putv self :decidingSetMode %tmp.16;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_184_31_186_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_184_15_192_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_184_15_192_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 186 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_186_15_192_8_if_stmt:
+        %tmp.17 = lgetv %index;
+        symbol [ index %tmp.17 186 19 24 ];
+        %tmp.18 = 4;
+        %tmp.19 = eq %tmp.17 %tmp.18;
+        bf %tmp.19 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_186_15_192_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_186_15_192_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_186_31_188_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 187 12 ]
+        %tmp.20 = lgetv %value;
+        symbol [ value %tmp.20 187 36 41 ];
+        symbol [ regularTieBreakTarget ? 187 12 33 ];
+        putv self :regularTieBreakTarget %tmp.20;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_186_31_188_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_186_15_192_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_186_15_192_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 188 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_188_15_192_8_if_stmt:
+        %tmp.21 = lgetv %index;
+        symbol [ index %tmp.21 188 19 24 ];
+        %tmp.22 = 5;
+        %tmp.23 = eq %tmp.21 %tmp.22;
+        bf %tmp.23 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_188_15_192_8_if_false;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_188_15_192_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_188_31_190_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 189 12 ]
+        %tmp.24 = lgetv %value;
+        symbol [ value %tmp.24 189 37 42 ];
+        symbol [ decidingTieBreakTarget ? 189 12 34 ];
+        putv self :decidingTieBreakTarget %tmp.24;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_188_31_190_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_188_15_192_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_188_15_192_8_if_false:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 190 15 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_190_15_192_8_if_stmt:
+        %tmp.25 = lgetv %index;
+        symbol [ index %tmp.25 190 19 24 ];
+        %tmp.26 = 6;
+        %tmp.27 = eq %tmp.25 %tmp.26;
+        bf %tmp.27 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_190_15_192_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_190_15_192_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_190_31_192_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 191 12 ]
+        %tmp.28 = lgetv %value;
+        symbol [ value %tmp.28 191 44 49 ];
+        symbol [ requireTwoPointTieBreakMargin ? 191 12 41 ];
+        putv self :requireTwoPointTieBreakMargin %tmp.28;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_190_31_192_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_190_15_192_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_190_15_192_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_188_15_192_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_186_15_192_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_184_15_192_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_182_15_192_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_180_15_192_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_178_8_192_8_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_177_39_193_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 195; @symbol_functiondef = [cycleValue,195,13,23]; @symbol_param<0> = [values,195,24,30]; @symbol_param<1> = [current,195,32,39]; @symbol_param<2> = [delta,195,41,46]; ]
+    function cycleValue(values, current, delta) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_195_48_204_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 196 8 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_195_48_204_4_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_195_48_204_4_stop" ]
+        %index.1 = local;
+        symbol [ index %index.1 196 12 17 ];
+        %tmp.1 = 0;
+        lputv %index.1 %tmp.1;
+        symbol [ index %index.1 196 12 17 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 197 8 ]
+        for @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_8_201_8_for_test @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_8_201_8_for_incr @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_8_201_8_for_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_8_201_8_for_init:
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_8_201_8_for_begin" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_8_201_8_for_end" ]
+        %i.2 = local;
+        symbol [ i %i.2 197 17 18 ];
+        %tmp.2 = 0;
+        lputv %i.2 %tmp.2;
+        symbol [ i %i.2 197 17 18 ];
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_8_201_8_for_test:
+        %tmp.3 = lgetv %i.2;
+        symbol [ i %tmp.3 197 24 25 ];
+        %tmp.4 = lgetv %values;
+        symbol [ values %tmp.4 197 28 34 ];
+        symbol [ size %tmp.5 197 35 39 ];
+        %tmp.5 = getv function %tmp.4 :size;
+        %tmp.6 = invoke %tmp.4 %tmp.5();
+        %tmp.7 = lt %tmp.3 %tmp.6;
+        bf %tmp.7 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_8_201_8_for_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_8_201_8_for_begin:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_51_201_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 198 12 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_198_12_200_12_if_stmt:
+        %tmp.8 = lgetv %values;
+        symbol [ values %tmp.8 198 16 22 ];
+        %tmp.9 = lgetv %i.2;
+        symbol [ i %tmp.9 198 23 24 ];
+        %tmp.10 = agetv %tmp.8 %tmp.9;
+        %tmp.11 = lgetv %current;
+        symbol [ current %tmp.11 198 29 36 ];
+        %tmp.12 = eq %tmp.10 %tmp.11;
+        bf %tmp.12 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_198_12_200_12_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_198_12_200_12_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_198_38_200_12_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 199 16 ]
+        %tmp.13 = lgetv %i.2;
+        symbol [ i %tmp.13 199 24 25 ];
+        lputv %index.1 %tmp.13;
+        symbol [ index %index.1 199 16 21 ];
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_198_38_200_12_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_198_12_200_12_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_198_12_200_12_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_51_201_8_stop:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_8_201_8_for_incr:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 197 ]
+        %tmp.14 = lgetv %i.2;
+        symbol [ i %tmp.14 197 43 44 ];
+        %tmp.15 = 1;
+        %tmp.16 = add %tmp.14 %tmp.15;
+        lputv %i.2 %tmp.16;
+        symbol [ i %i.2 197 43 44 ];
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_8_201_8_for_test;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_197_8_201_8_for_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 203 8 ]
+        %tmp.17 = lgetv %values;
+        symbol [ values %tmp.17 203 15 21 ];
+        %tmp.18 = lgetv %index.1;
+        symbol [ index %tmp.18 203 23 28 ];
+        %tmp.19 = lgetv %delta;
+        symbol [ delta %tmp.19 203 31 36 ];
+        %tmp.20 = add %tmp.18 %tmp.19;
+        %tmp.21 = lgetv %values;
+        symbol [ values %tmp.21 203 39 45 ];
+        symbol [ size %tmp.22 203 46 50 ];
+        %tmp.22 = getv function %tmp.21 :size;
+        %tmp.23 = invoke %tmp.21 %tmp.22();
+        %tmp.24 = add %tmp.20 %tmp.23;
+        %tmp.25 = lgetv %values;
+        symbol [ values %tmp.25 203 56 62 ];
+        symbol [ size %tmp.26 203 63 67 ];
+        %tmp.26 = getv function %tmp.25 :size;
+        %tmp.27 = invoke %tmp.25 %tmp.26();
+        %tmp.28 = mod %tmp.24 %tmp.27;
+        %tmp.29 = agetv %tmp.17 %tmp.28;
+        ret %tmp.29;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_195_48_204_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 206; @symbol_functiondef = [clamp,206,13,18]; @symbol_param<0> = [value,206,19,24]; @symbol_param<1> = [minValue,206,26,34]; @symbol_param<2> = [maxValue,206,36,44]; ]
+    function clamp(value, minValue, maxValue) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_206_46_214_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 207 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_207_8_209_8_if_stmt:
+        %tmp.1 = lgetv %value;
+        symbol [ value %tmp.1 207 12 17 ];
+        %tmp.2 = lgetv %minValue;
+        symbol [ minValue %tmp.2 207 20 28 ];
+        %tmp.3 = lt %tmp.1 %tmp.2;
+        bf %tmp.3 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_207_8_209_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_207_8_209_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_207_30_209_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 208 12 ]
+        %tmp.4 = lgetv %minValue;
+        symbol [ minValue %tmp.4 208 19 27 ];
+        ret %tmp.4;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_207_30_209_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_207_8_209_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_207_8_209_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 210 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_210_8_212_8_if_stmt:
+        %tmp.5 = lgetv %value;
+        symbol [ value %tmp.5 210 12 17 ];
+        %tmp.6 = lgetv %maxValue;
+        symbol [ maxValue %tmp.6 210 20 28 ];
+        %tmp.7 = gt %tmp.5 %tmp.6;
+        bf %tmp.7 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_210_8_212_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_210_8_212_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_210_30_212_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 211 12 ]
+        %tmp.8 = lgetv %maxValue;
+        symbol [ maxValue %tmp.8 211 19 27 ];
+        ret %tmp.8;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_210_30_212_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_210_8_212_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_210_8_212_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc" 213 8 ]
+        %tmp.9 = lgetv %value;
+        symbol [ value %tmp.9 213 15 20 ];
+        ret %tmp.9;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_MatchSetupState_mc_206_46_214_4_stop:
+    }
+}
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/MatchSetupState.mc"; @line = 1; ]
+<init> {
+}

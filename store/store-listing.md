@@ -25,7 +25,9 @@ Features:
 - uninterrupted scoring across games and no-ad deciding points;
 - pause, resume and local active-match recovery;
 - local history for up to 20 completed matches;
-- padel FIT activity with heart rate, calories and match summary fields;
+- padel FIT activity with GPS, distance, speed, heart rate, calories and match
+  summary fields;
+- on-watch post-match activity summary;
 - button-only match controls to prevent accidental touch input.
 
 The current development target is Garmin Forerunner 265.
@@ -57,7 +59,9 @@ Funkciók:
 - folyamatos pontbevitel game-ek és no-ad döntő pontok között;
 - szünet, folytatás és aktív meccs helyi visszaállítása;
 - legfeljebb 20 lezárt meccs helyi előzménye;
-- padel FIT-aktivitás pulzus-, kalória- és eredménymezőkkel;
+- padel FIT-aktivitás GPS-, távolság-, sebesség-, pulzus-, kalória- és
+  eredménymezőkkel;
+- órán megjelenő meccsvégi aktivitás-összegzés;
 - kizárólag gombos meccsvezérlés a véletlen érintések ellen.
 
 A jelenlegi fejlesztési célkészülék a Garmin Forerunner 265.

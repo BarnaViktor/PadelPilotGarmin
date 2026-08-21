@@ -17,6 +17,13 @@ class MatchHistoryView extends WatchUi.View {
         }
     }
 
+    function getSelectedRecord() {
+        if (_history.size() == 0) {
+            return null;
+        }
+        return _history[_history.size() - 1 - _selected];
+    }
+
     function onUpdate(dc) {
         PadelTheme.clear(dc);
         var centerX = dc.getWidth() / 2;
@@ -50,19 +57,20 @@ class MatchHistoryView extends WatchUi.View {
         var record = _history[_history.size() - 1 - displayIndex];
         var selected = displayIndex == _selected;
         PadelTheme.drawCard(dc, 52, y, 312, 64, selected, PadelTheme.CYAN);
+        var centerY = y + 32;
 
         dc.setColor(PadelTheme.CYAN, Graphics.COLOR_BLACK);
-        dc.drawText(126, y + 20, Graphics.FONT_XTINY, record[0],
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(126, centerY, Graphics.FONT_XTINY, record[0],
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
-        dc.drawText(172, y + 20, Graphics.FONT_XTINY, "–",
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(172, centerY, Graphics.FONT_XTINY, "–",
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.setColor(PadelTheme.RED, Graphics.COLOR_BLACK);
-        dc.drawText(218, y + 20, Graphics.FONT_XTINY, record[1],
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(218, centerY, Graphics.FONT_XTINY, record[1],
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
-        dc.drawText(312, y + 19, Graphics.FONT_XTINY, durationLabel(record[3]),
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(312, centerY, Graphics.FONT_XTINY, durationLabel(record[3]),
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     function durationLabel(totalSeconds) {

@@ -92,9 +92,14 @@ válik olvashatóvá; ez külön eszközviselkedési megfigyelés.
    - a sportbesorolást;
    - az időtartamot;
    - a pulzus- és kalóriaadatokat;
+   - a GPS-nyomvonalat, a távolságot, valamint az átlagos és maximális
+     sebességet;
    - az eredmény és a szettadatok megjelenését, amennyiben a Garmin Connect
      felülete megjeleníti a developer mezőket.
-4. Jegyezd fel a záró akkumulátort. Ez ezen a teszten csak megfigyelés; a C4
+4. A meccsvégi összegzés ACTIVITY oldalán ellenőrizd a távolságot, az átlagos
+   és maximális sebességet, az átlagos és maximális pulzust, valamint a
+   kalóriát.
+5. Jegyezd fel a záró akkumulátort. Ez ezen a teszten csak megfigyelés; a C4
    külön akkumulátormérését nem helyettesíti.
 
 ## Eredménylap
@@ -104,6 +109,11 @@ válik olvashatóvá; ez külön eszközviselkedési megfigyelés.
 - Helyi előzmény helyes: igen / nem
 - FIT-aktivitás létrejött: igen / nem
 - Garmin Connect szinkron sikeres: igen / nem
+- GPS-nyomvonal létrejött: igen / nem
+- Mért távolság: ____________________
+- Átlagos / maximális sebesség: ____________________
+- Órás ACTIVITY összegzés helyes: igen / nem
+- Garmin Connectben látható meccseredmény: igen / nem / USB-s telepítés
 - Pontozási eltérések száma: ______
 - Undo teszt: sikeres / sikertelen / nem történt
 - Szünet–folytatás: sikeres / sikertelen / nem történt

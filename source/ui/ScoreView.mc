@@ -13,8 +13,10 @@ class ScoreView extends WatchUi.View {
     var _pauseStopConfirm;
     var _pauseServerPicker;
     var _serverPickerIndex;
+    var _decisionIndex;
+    var _setEndTimes;
 
-    function initialize(engine, elapsedSeconds) {
+    function initialize(engine, elapsedSeconds, setEndTimes) {
         View.initialize();
         _engine = engine;
         _paused = false;
@@ -26,6 +28,8 @@ class ScoreView extends WatchUi.View {
         _pauseStopConfirm = false;
         _pauseServerPicker = false;
         _serverPickerIndex = 0;
+        _decisionIndex = 0;
+        _setEndTimes = setEndTimes.slice(0, setEndTimes.size());
     }
 
     function onUpdate(dc) {
@@ -56,7 +60,7 @@ class ScoreView extends WatchUi.View {
 
         dc.setColor(PadelTheme.LINE, Graphics.COLOR_BLACK);
         dc.setPenWidth(2);
-        dc.drawLine(centerX, 48, centerX, 256);
+        dc.drawLine(centerX, 82, centerX, 256);
         dc.setPenWidth(1);
         dc.fillCircle(centerX, 183, 5);
 
@@ -80,22 +84,19 @@ class ScoreView extends WatchUi.View {
 
     function drawSetStrip(dc, centerX) {
         var sets = _engine.getCompletedSets();
-        var startX = centerX - ((sets.size() - 1) * 26);
+        var startX = centerX - ((sets.size() - 1) * 34);
         if (sets.size() == 0) {
-            dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
-            dc.drawText(centerX, 45, Graphics.FONT_XTINY, "MATCH IN PROGRESS",
-                Graphics.TEXT_JUSTIFY_CENTER);
             return;
         }
         for (var i = 0; i < sets.size(); i += 1) {
             dc.setColor(PadelTheme.CYAN, Graphics.COLOR_BLACK);
-            dc.drawText(startX + i * 52 - 10, 45, Graphics.FONT_XTINY,
+            dc.drawText(startX + i * 68 - 24, 45, Graphics.FONT_XTINY,
                 sets[i][0], Graphics.TEXT_JUSTIFY_CENTER);
             dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
-            dc.drawText(startX + i * 52, 45, Graphics.FONT_XTINY, "–",
+            dc.drawText(startX + i * 68, 45, Graphics.FONT_XTINY, "–",
                 Graphics.TEXT_JUSTIFY_CENTER);
             dc.setColor(PadelTheme.RED, Graphics.COLOR_BLACK);
-            dc.drawText(startX + i * 52 + 10, 45, Graphics.FONT_XTINY,
+            dc.drawText(startX + i * 68 + 24, 45, Graphics.FONT_XTINY,
                 sets[i][1], Graphics.TEXT_JUSTIFY_CENTER);
         }
     }
@@ -103,29 +104,18 @@ class ScoreView extends WatchUi.View {
     function drawTeamLabel(dc, x, y, team, label) {
         var color = team == 0 ? PadelTheme.CYAN : PadelTheme.RED;
         if (_engine.getServerTeam() == team) {
-            dc.setColor(PadelTheme.LIME, Graphics.COLOR_BLACK);
-            dc.fillCircle(x - 44, y + 10, 10);
-            dc.setColor(Graphics.COLOR_BLACK, PadelTheme.LIME);
-            dc.setPenWidth(2);
-            dc.drawArc(x - 44, y + 10, 7, Graphics.ARC_COUNTER_CLOCKWISE, 30, 210);
-            dc.setPenWidth(1);
+            PadelTheme.drawTennisBall(dc, x - 44, y + 10, 10);
         }
         dc.setColor(color, Graphics.COLOR_BLACK);
-        dc.drawText(x, y + 5, Graphics.FONT_XTINY, label, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(x, y + 10, Graphics.FONT_XTINY, label,
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     function drawServeIndicator(dc, centerX, y) {
         var team = _engine.getServerTeam();
         var side = _engine.getServeSide();
-        var player = _engine.getTeamServerSlots()[team] + 1;
         var left = centerX - 80;
-        var top = y + 28;
-
-        dc.setColor(team == 0 ? PadelTheme.CYAN : PadelTheme.RED,
-            Graphics.COLOR_BLACK);
-        dc.drawText(centerX, y, Graphics.FONT_XTINY,
-            (team == 0 ? "A" : "B") + player,
-            Graphics.TEXT_JUSTIFY_CENTER);
+        var top = y + 12;
 
         dc.setColor(PadelTheme.CYAN, Graphics.COLOR_BLACK);
         dc.setPenWidth(2);
@@ -142,16 +132,14 @@ class ScoreView extends WatchUi.View {
         dc.setPenWidth(1);
 
         var markerX = team == 0 ? centerX - 40 : centerX + 40;
-        var markerY = side == 0 ? top + 13 : top + 39;
-        dc.setColor(PadelTheme.LIME, Graphics.COLOR_BLACK);
-        dc.fillCircle(markerX, markerY, 8);
-        dc.setColor(Graphics.COLOR_BLACK, PadelTheme.LIME);
-        dc.setPenWidth(2);
-        dc.drawArc(markerX, markerY, 6, Graphics.ARC_COUNTER_CLOCKWISE, 25, 205);
-        dc.setPenWidth(1);
+        var markerIsLower = (team == 0 && side == 0)
+            || (team == 1 && side == 1);
+        var markerY = markerIsLower ? top + 39 : top + 13;
+        PadelTheme.drawTennisBall(dc, markerX, markerY, 8);
     }
 
     function completeMatch() {
+        syncSetEndTimes();
         if (_finishedAt == null) {
             _finishedAt = System.getTimer();
         }
@@ -160,18 +148,22 @@ class ScoreView extends WatchUi.View {
     }
 
     function resumeMatchAfterUndo() {
+        syncSetEndTimes();
         _finishedAt = null;
         _summaryPage = 0;
         _finishMenu = false;
     }
 
     function changeSummaryPage(delta) {
-        var pageCount = _engine.getCompletedSets().size() + 1;
+        var pageCount = _engine.getCompletedSets().size() + 2;
         _summaryPage = (_summaryPage + delta + pageCount) % pageCount;
     }
 
     function setFinishMenu(visible) {
         _finishMenu = visible;
+        if (visible) {
+            _decisionIndex = 0;
+        }
     }
 
     function isFinishMenu() {
@@ -181,10 +173,44 @@ class ScoreView extends WatchUi.View {
     function drawSummary(dc, centerX) {
         if (_summaryPage == 0) {
             drawMatchSummary(dc, centerX);
+        } else if (_summaryPage == 1) {
+            drawActivitySummary(dc, centerX);
         } else {
-            drawSetSummary(dc, centerX, _summaryPage - 1);
+            drawSetSummary(dc, centerX, _summaryPage - 2);
         }
         drawPageDots(dc, centerX);
+    }
+
+    function drawActivitySummary(dc, centerX) {
+        var stats = PadelActivityRecorder.getStats();
+        PadelTheme.drawHeader(dc, "ACTIVITY");
+        drawMetricRow(dc, centerX, 92, "DISTANCE",
+            PadelActivityRecorder.formatDistance(stats[:distance]));
+        drawMetricRow(dc, centerX, 142, "AVG SPEED",
+            PadelActivityRecorder.formatSpeed(stats[:averageSpeed]));
+        drawMetricRow(dc, centerX, 192, "MAX SPEED",
+            PadelActivityRecorder.formatSpeed(stats[:maxSpeed]));
+        drawMetricRow(dc, centerX, 242, "AVG / MAX HR",
+            pairedHeartRateLabel(stats[:averageHeartRate], stats[:maxHeartRate]));
+        drawMetricRow(dc, centerX, 292, "CALORIES",
+            PadelActivityRecorder.formatCalories(stats[:calories]));
+    }
+
+    function drawMetricRow(dc, centerX, y, label, value) {
+        dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
+        dc.drawText(82, y, Graphics.FONT_XTINY, label,
+            Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.setColor(PadelTheme.WHITE, Graphics.COLOR_BLACK);
+        dc.drawText(334, y, Graphics.FONT_XTINY, value,
+            Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.setColor(PadelTheme.LINE, Graphics.COLOR_BLACK);
+        dc.drawLine(82, y + 24, 334, y + 24);
+    }
+
+    function pairedHeartRateLabel(averageHeartRate, maxHeartRate) {
+        var average = averageHeartRate == null ? "--" : averageHeartRate.toString();
+        var maximum = maxHeartRate == null ? "--" : maxHeartRate.toString();
+        return average + " / " + maximum + " bpm";
     }
 
     function drawMatchSummary(dc, centerX) {
@@ -200,7 +226,7 @@ class ScoreView extends WatchUi.View {
         dc.drawLine(82, 210, 334, 210);
         dc.setColor(PadelTheme.WHITE, Graphics.COLOR_BLACK);
         dc.drawText(centerX, 237, Graphics.FONT_XTINY, durationLabel(),
-            Graphics.TEXT_JUSTIFY_CENTER);
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         PadelTheme.drawActionButton(dc, 106, 294, 204, 50, true, "SAVE");
     }
 
@@ -217,6 +243,10 @@ class ScoreView extends WatchUi.View {
         );
 
         drawSummaryScore(dc, centerX, completedSet[1], completedSet[0]);
+        dc.setColor(PadelTheme.WHITE, Graphics.COLOR_BLACK);
+        dc.drawText(centerX, 237, Graphics.FONT_XTINY,
+            setDurationLabel(setIndex),
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     function drawSummaryScore(dc, centerX, opponentScore, myScore) {
@@ -240,7 +270,7 @@ class ScoreView extends WatchUi.View {
     }
 
     function drawPageDots(dc, centerX) {
-        var pageCount = _engine.getCompletedSets().size() + 1;
+        var pageCount = _engine.getCompletedSets().size() + 2;
         var firstX = centerX - ((pageCount - 1) * 10);
         for (var page = 0; page < pageCount; page += 1) {
             dc.setColor(page == _summaryPage ? Graphics.COLOR_WHITE : Graphics.COLOR_DK_GRAY,
@@ -256,6 +286,14 @@ class ScoreView extends WatchUi.View {
     function durationLabel() {
         var endTime = _finishedAt == null ? System.getTimer() : _finishedAt;
         var totalSeconds = ((endTime - _startedAt) / 1000).toNumber();
+        return formatDuration(totalSeconds);
+    }
+
+    function setDurationLabel(setIndex) {
+        return formatDuration(getSetDurationSeconds(setIndex));
+    }
+
+    function formatDuration(totalSeconds) {
         var hours = (totalSeconds / 3600).toNumber();
         var minutes = ((totalSeconds % 3600) / 60).toNumber();
         var seconds = totalSeconds % 60;
@@ -269,6 +307,28 @@ class ScoreView extends WatchUi.View {
     function getDurationSeconds() {
         var endTime = _finishedAt == null ? System.getTimer() : _finishedAt;
         return ((endTime - _startedAt) / 1000).toNumber();
+    }
+
+    function syncSetEndTimes() {
+        var completedCount = _engine.getCompletedSets().size();
+        if (_setEndTimes.size() > completedCount) {
+            _setEndTimes = _setEndTimes.slice(0, completedCount);
+        }
+        while (_setEndTimes.size() < completedCount) {
+            _setEndTimes.add(getDurationSeconds());
+        }
+    }
+
+    function getSetEndTimes() {
+        return _setEndTimes.slice(0, _setEndTimes.size());
+    }
+
+    function getSetDurationSeconds(setIndex) {
+        if (setIndex < 0 || setIndex >= _setEndTimes.size()) {
+            return 0;
+        }
+        var previousEnd = setIndex == 0 ? 0 : _setEndTimes[setIndex - 1];
+        return _setEndTimes[setIndex] - previousEnd;
     }
 
     function padTwo(value) {
@@ -298,6 +358,9 @@ class ScoreView extends WatchUi.View {
 
     function setPauseStopConfirm(visible) {
         _pauseStopConfirm = visible;
+        if (visible) {
+            _decisionIndex = 0;
+        }
     }
 
     function isPauseStopConfirm() {
@@ -333,6 +396,14 @@ class ScoreView extends WatchUi.View {
         return 1;
     }
 
+    function moveDecisionSelection(delta) {
+        _decisionIndex = (_decisionIndex + delta + 2) % 2;
+    }
+
+    function isDecisionYes() {
+        return _decisionIndex == 0;
+    }
+
     function serverPickerIndex(team, side) {
         if (team == 1) {
             return side == 0 ? 0 : 1;
@@ -342,7 +413,7 @@ class ScoreView extends WatchUi.View {
 
     function drawPause(dc, centerX) {
         if (_pauseStopConfirm) {
-            drawDecision(dc, centerX, "END MATCH?", null);
+            drawDecision(dc, centerX, "END MATCH?", PadelTheme.RED);
             return;
         }
         if (_pauseServerPicker) {
@@ -356,7 +427,7 @@ class ScoreView extends WatchUi.View {
     }
 
     function drawFinishMenu(dc, centerX) {
-        drawDecision(dc, centerX, "SAVE MATCH?", null);
+        drawDecision(dc, centerX, "SAVE MATCH?", PadelTheme.LIME);
     }
 
     function drawPauseMenuRow(dc, centerX, y, index, label) {
@@ -365,8 +436,8 @@ class ScoreView extends WatchUi.View {
         PadelTheme.drawCard(dc, 63, y, 290, 65, selected, selectedColor);
         dc.setColor(selected ? selectedColor : PadelTheme.MUTED,
             Graphics.COLOR_BLACK);
-        dc.drawText(centerX, y + 24, Graphics.FONT_XTINY, label,
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(centerX, y + 65 / 2, Graphics.FONT_XTINY, label,
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     function drawServerPicker(dc, centerX) {
@@ -390,37 +461,24 @@ class ScoreView extends WatchUi.View {
         dc.drawCircle(selectorX, selectorY, 54);
         dc.setPenWidth(1);
 
-        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
-        dc.fillRoundedRectangle(centerX - 112, centerY - 31, 224, 62, 14);
-        dc.setColor(PadelTheme.WHITE, Graphics.COLOR_BLACK);
-        dc.drawText(centerX, centerY - 23, Graphics.FONT_XTINY,
-            (getSelectedServerTeam() == 0 ? "A" : "B")
-                + (_engine.getTeamServerSlots()[getSelectedServerTeam()] + 1),
-            Graphics.TEXT_JUSTIFY_CENTER);
     }
 
-    function drawDecision(dc, centerX, question, explanation) {
-        PadelTheme.drawCard(dc, 56, 108, 304, 200, true, PadelTheme.LINE);
-        dc.setColor(PadelTheme.RED, Graphics.COLOR_BLACK);
-        dc.setPenWidth(4);
-        dc.drawArc(centerX, 147, 20, Graphics.ARC_COUNTER_CLOCKWISE, 300, 90);
-        dc.setPenWidth(1);
+    function drawDecision(dc, centerX, question, yesAccent) {
+        PadelTheme.drawHeader(dc, question);
+        drawDecisionButton(dc, 42, 174, 156, 68, "YES",
+            _decisionIndex == 0, yesAccent);
+        drawDecisionButton(dc, 218, 174, 156, 68, "NO",
+            _decisionIndex == 1, PadelTheme.CYAN);
+    }
 
-        dc.setColor(PadelTheme.WHITE, Graphics.COLOR_BLACK);
-        dc.drawText(centerX, 188, Graphics.FONT_XTINY, question, Graphics.TEXT_JUSTIFY_CENTER);
-        if (explanation != null) {
-            dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
-            dc.drawText(centerX, 216, Graphics.FONT_XTINY, explanation, Graphics.TEXT_JUSTIFY_CENTER);
-        }
-        dc.setColor(PadelTheme.LINE, Graphics.COLOR_BLACK);
-        dc.drawLine(76, 255, 340, 255);
-        dc.drawLine(centerX, 255, centerX, 300);
-        dc.setColor(PadelTheme.LIME, Graphics.COLOR_BLACK);
-        dc.drawText(132, 268, Graphics.FONT_XTINY, "YES",
-            Graphics.TEXT_JUSTIFY_CENTER);
-        dc.setColor(PadelTheme.WHITE, Graphics.COLOR_BLACK);
-        dc.drawText(284, 268, Graphics.FONT_XTINY, "NO",
-            Graphics.TEXT_JUSTIFY_CENTER);
+    function drawDecisionButton(dc, x, y, width, height, label, selected,
+            accent) {
+        PadelTheme.drawCard(dc, x, y, width, height, selected, accent);
+        dc.setColor(selected ? accent : PadelTheme.MUTED,
+            Graphics.COLOR_BLACK);
+        dc.drawText(x + width / 2, y + height / 2, Graphics.FONT_XTINY,
+            label, Graphics.TEXT_JUSTIFY_CENTER
+                | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
 }

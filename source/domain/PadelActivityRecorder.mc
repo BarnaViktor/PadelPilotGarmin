@@ -1,7 +1,18 @@
 using Toybox.Activity as Activity;
 using Toybox.ActivityRecording as ActivityRecording;
 using Toybox.FitContributor as FitContributor;
+using Toybox.Position as Position;
 using Toybox.Sensor as Sensor;
+
+class PadelPositioningListener {
+    function initialize() {
+    }
+
+    function onPosition(info as Position.Info) as Void {
+        // ActivityRecording consumes the enabled location stream and writes the
+        // native FIT position, distance and speed fields.
+    }
+}
 
 module PadelActivityRecorder {
     const FIELD_POINT_EVENT = 0;
@@ -26,6 +37,8 @@ module PadelActivityRecorder {
     var _winnerField = null;
     var _setScoresField = null;
     var _recordedSetCount = 0;
+    var _positioningEnabled = false;
+    var _positionListener = null;
 
     function start(engine) {
         if (_session != null) {
@@ -34,6 +47,7 @@ module PadelActivityRecorder {
 
         try {
             Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);
+            enablePositioning();
 
             _session = ActivityRecording.createSession({
                 :name => "Padel",
@@ -128,6 +142,83 @@ module PadelActivityRecorder {
         return label.length() == 0 ? "0-0" : label;
     }
 
+    function enablePositioning() {
+        if (_positioningEnabled) {
+            return;
+        }
+        try {
+            _positionListener = new PadelPositioningListener();
+            Position.enableLocationEvents(Position.LOCATION_CONTINUOUS,
+                _positionListener.method(:onPosition));
+            _positioningEnabled = true;
+        } catch (error) {
+            _positioningEnabled = false;
+            _positionListener = null;
+        }
+    }
+
+    function getStats() {
+        var stats = {
+            :distance => null,
+            :currentSpeed => null,
+            :averageSpeed => null,
+            :maxSpeed => null,
+            :currentHeartRate => null,
+            :averageHeartRate => null,
+            :maxHeartRate => null,
+            :calories => null,
+            :currentCadence => null,
+            :averageCadence => null,
+            :maxCadence => null
+        };
+
+        if (_session == null) {
+            return stats;
+        }
+
+        try {
+            var info = Activity.getActivityInfo();
+            stats[:distance] = info.elapsedDistance;
+            stats[:currentSpeed] = info.currentSpeed;
+            stats[:averageSpeed] = info.averageSpeed;
+            stats[:maxSpeed] = info.maxSpeed;
+            stats[:currentHeartRate] = info.currentHeartRate;
+            stats[:averageHeartRate] = info.averageHeartRate;
+            stats[:maxHeartRate] = info.maxHeartRate;
+            stats[:calories] = info.calories;
+            stats[:currentCadence] = info.currentCadence;
+            stats[:averageCadence] = info.averageCadence;
+            stats[:maxCadence] = info.maxCadence;
+        } catch (error) {
+        }
+        return stats;
+    }
+
+    function formatDistance(meters) {
+        if (meters == null) {
+            return "--";
+        }
+        if (meters >= 1000) {
+            return (meters / 1000.0).format("%.2f") + " km";
+        }
+        return meters.toNumber() + " m";
+    }
+
+    function formatSpeed(metersPerSecond) {
+        if (metersPerSecond == null) {
+            return "--";
+        }
+        return (metersPerSecond * 3.6).format("%.1f") + " km/h";
+    }
+
+    function formatHeartRate(beatsPerMinute) {
+        return beatsPerMinute == null ? "--" : beatsPerMinute + " bpm";
+    }
+
+    function formatCalories(calories) {
+        return calories == null ? "--" : calories + " kcal";
+    }
+
     function pause() {
         if (_session != null && _session.isRecording()) {
             _session.stop();
@@ -189,6 +280,12 @@ module PadelActivityRecorder {
         _winnerField = null;
         _setScoresField = null;
         _recordedSetCount = 0;
+        try {
+            Position.enableLocationEvents(Position.LOCATION_DISABLE, null);
+        } catch (error) {
+        }
+        _positioningEnabled = false;
+        _positionListener = null;
         Sensor.setEnabledSensors([]);
     }
 }

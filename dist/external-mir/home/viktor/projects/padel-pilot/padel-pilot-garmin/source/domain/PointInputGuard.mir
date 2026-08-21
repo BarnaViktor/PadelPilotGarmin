@@ -1,0 +1,105 @@
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc"; @line = 1; @symbol_classdef = [PointInputGuard,1,6,21]; ]
+class PointInputGuard {
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc"; @line = 1; ]
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc"; @line = 1; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc"; @line = 2; @position = 8; @symbol_vardef = [_minimumIntervalMs,2,8,26]; ]
+    var _minimumIntervalMs;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc"; @line = 3; @position = 8; @symbol_vardef = [_lastAcceptedAt,3,8,23]; ]
+    var _lastAcceptedAt;
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc"; @line = 5; @symbol_functiondef = [initialize,5,13,23]; @symbol_param<0> = [minimumIntervalMs,5,24,41]; ]
+    function initialize(minimumIntervalMs) as Void {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_5_43_8_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc" 6 8 ]
+        %tmp.1 = lgetv %minimumIntervalMs;
+        symbol [ minimumIntervalMs %tmp.1 6 29 46 ];
+        symbol [ _minimumIntervalMs ? 6 8 26 ];
+        putv self :_minimumIntervalMs %tmp.1;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc" 7 8 ]
+        %tmp.2 = null;
+        symbol [ _lastAcceptedAt ? 7 8 23 ];
+        putv self :_lastAcceptedAt %tmp.2;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_5_43_8_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc"; @line = 10; @symbol_functiondef = [accept,10,13,19]; @symbol_param<0> = [now,10,20,23]; ]
+    function accept(now) {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_10_25_20_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc" 11 8 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_8_16_8_if_stmt:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_12_11_46_begin:
+        symbol [ _lastAcceptedAt %tmp.2 11 12 27 ];
+        %tmp.2 = getv ? :_lastAcceptedAt;
+        %tmp.3 = null;
+        %tmp.4 = ne %tmp.2 %tmp.3;
+        bf %tmp.4 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_8_16_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_39_11_46_true:
+        %tmp.5 = lgetv %now;
+        symbol [ now %tmp.5 11 39 42 ];
+        symbol [ _lastAcceptedAt %tmp.7 11 46 61 ];
+        %tmp.7 = getv ? :_lastAcceptedAt;
+        %tmp.8 = as %tmp.7 { (!Null) };
+        %tmp.9 = gte %tmp.5 %tmp.8;
+        push %tmp.9;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_39_11_46_end:
+        %tmp.10 = phi [%tmp.4 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_12_11_46_begin] [%tmp.9 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_39_11_46_true] [%tmp.10 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_39_11_46_end];
+        bf %tmp.10 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_8_16_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_8_16_8_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_63_16_8_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc" 12 12 ]
+        [ "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_63_16_8_start" "_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_63_16_8_stop" ]
+        %elapsed.1 = local;
+        symbol [ elapsed %elapsed.1 12 16 23 ];
+        %tmp.11 = lgetv %now;
+        symbol [ now %tmp.11 12 26 29 ];
+        symbol [ _lastAcceptedAt %tmp.13 12 32 47 ];
+        %tmp.13 = getv ? :_lastAcceptedAt;
+        %tmp.14 = as %tmp.13 { (!Null) };
+        %tmp.15 = sub %tmp.11 %tmp.14;
+        lputv %elapsed.1 %tmp.15;
+        symbol [ elapsed %elapsed.1 12 16 23 ];
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc" 13 12 ]
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_13_12_15_12_if_stmt:
+        %tmp.16 = lgetv %elapsed.1;
+        symbol [ elapsed %tmp.16 13 16 23 ];
+        symbol [ _minimumIntervalMs %tmp.18 13 26 44 ];
+        %tmp.18 = getv ? :_minimumIntervalMs;
+        %tmp.19 = lt %tmp.16 %tmp.18;
+        bf %tmp.19 @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_13_12_15_12_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_13_12_15_12_if_true:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_13_46_15_12_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc" 14 16 ]
+        %tmp.20 = false;
+        ret %tmp.20;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_13_46_15_12_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_13_12_15_12_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_13_12_15_12_if_end:
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_63_16_8_stop:
+        goto @_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_8_16_8_if_end;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_11_8_16_8_if_end:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc" 18 8 ]
+        %tmp.21 = lgetv %now;
+        symbol [ now %tmp.21 18 26 29 ];
+        symbol [ _lastAcceptedAt ? 18 8 23 ];
+        putv self :_lastAcceptedAt %tmp.21;
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc" 19 8 ]
+        %tmp.22 = true;
+        ret %tmp.22;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_10_25_20_4_stop:
+    }
+    [ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc"; @line = 22; @symbol_functiondef = [reset,22,13,18]; ]
+    function reset() {
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_22_21_24_4_start:
+[ "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc" 23 8 ]
+        %tmp.1 = null;
+        symbol [ _lastAcceptedAt ? 23 8 23 ];
+        putv self :_lastAcceptedAt %tmp.1;
+_home_viktor_projects_padel_pilot_padel_pilot_garmin_source_domain_PointInputGuard_mc_22_21_24_4_stop:
+    }
+}
+[ @file = "/home/viktor/projects/padel-pilot/padel-pilot-garmin/source/domain/PointInputGuard.mc"; @line = 1; ]
+<init> {
+}
