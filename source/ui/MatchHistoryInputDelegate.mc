@@ -24,7 +24,7 @@ class MatchHistoryInputDelegate extends WatchUi.BehaviorDelegate {
             }
             var detailView = new MatchHistoryDetailView(record);
             WatchUi.pushView(detailView,
-                new MatchHistoryDetailInputDelegate(detailView),
+                new MatchHistoryDetailInputDelegate(detailView, _view),
                 WatchUi.SLIDE_IMMEDIATE);
             return true;
         } else {

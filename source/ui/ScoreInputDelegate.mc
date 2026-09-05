@@ -7,6 +7,7 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
     var _engine;
     var _returnToFreshSetup;
     var _pointInputGuard;
+    var _activitySaved;
 
     function initialize(view, engine, returnToFreshSetup) {
         BehaviorDelegate.initialize();
@@ -14,6 +15,7 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
         _engine = engine;
         _returnToFreshSetup = returnToFreshSetup;
         _pointInputGuard = new PointInputGuard(500);
+        _activitySaved = false;
     }
 
     function onKey(event) {
@@ -51,18 +53,21 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function handlePausedKey(key) {
-        if (_view.isPauseStopConfirm()) {
+        if (_view.isPauseDecision()) {
             if (key == WatchUi.KEY_DOWN || key == WatchUi.KEY_UP) {
                 _view.moveDecisionSelection(1);
             } else if (key == WatchUi.KEY_ENTER) {
                 if (_view.isDecisionYes()) {
-                    PadelActivityRecorder.finish(_engine, false);
-                    exitMatch();
+                    if (_view.isSavePauseDecision()) {
+                        saveStoppedMatch();
+                    } else {
+                        discardMatch();
+                    }
                 } else {
-                    _view.setPauseStopConfirm(false);
+                    _view.clearPauseDecision();
                 }
             } else if (key == WatchUi.KEY_ESC) {
-                _view.setPauseStopConfirm(false);
+                _view.clearPauseDecision();
             } else {
                 return false;
             }
@@ -89,8 +94,10 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
             } else if (key == WatchUi.KEY_ENTER) {
                 if (_view.getPauseSelection() == 0) {
                     _view.setPauseServerPicker(true);
+                } else if (_view.getPauseSelection() == 1) {
+                    _view.showSavePauseDecision();
                 } else {
-                    _view.setPauseStopConfirm(true);
+                    _view.showDiscardPauseDecision();
                 }
             } else if (key == WatchUi.KEY_ESC) {
                 _view.setPaused(false);
@@ -111,13 +118,9 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
                 _view.moveDecisionSelection(1);
             } else if (key == WatchUi.KEY_ENTER) {
                 if (_view.isDecisionYes()) {
-                    PadelActivityRecorder.finish(_engine, true);
-                    MatchHistoryStore.save(_engine, _view.getDurationSeconds(),
-                        _view.getSetEndTimes());
-                    exitMatch();
+                    saveCompletedMatch();
                 } else {
-                    PadelActivityRecorder.finish(_engine, false);
-                    exitMatch();
+                    discardMatch();
                 }
             } else if (key == WatchUi.KEY_ESC) {
                 _view.setFinishMenu(false);
@@ -176,13 +179,11 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
         var oldGames = _engine.getGames().slice(0, 2);
         var oldSets = _engine.getSets().slice(0, 2);
         var oldWinner = _engine.getMatchWinner();
-        var completedSetsBeforePoint = _engine.getCompletedSets().size();
-
         if (!_engine.awardPoint(team)) {
             return;
         }
         _view.syncSetEndTimes();
-        PadelActivityRecorder.recordPoint(team, _engine, completedSetsBeforePoint);
+        PadelActivityRecorder.recordPoint(team, _engine);
 
         if (oldWinner == null && _engine.getMatchWinner() != null) {
             _view.completeMatch();
@@ -198,6 +199,65 @@ class ScoreInputDelegate extends WatchUi.BehaviorDelegate {
 
     function vibrate(duration) {
         Attention.vibrate([new Attention.VibeProfile(50, duration)]);
+    }
+
+    function saveCompletedMatch() {
+        if (!saveActivity(false)) {
+            return;
+        }
+        var historySaved = false;
+        try {
+            historySaved = MatchHistoryStore.saveCompleted(_engine,
+                _view.getDurationSeconds(), _view.getSetEndTimes());
+        } catch (error) {
+        }
+        if (!historySaved) {
+            showSaveError("HISTORY SAVE FAILED");
+            return;
+        }
+        exitMatch();
+    }
+
+    function saveStoppedMatch() {
+        _view.syncSetEndTimes();
+        if (!saveActivity(true)) {
+            return;
+        }
+        var historySaved = false;
+        try {
+            historySaved = MatchHistoryStore.saveStopped(_engine,
+                _view.getDurationSeconds(), _view.getSetEndTimes());
+        } catch (error) {
+        }
+        if (!historySaved) {
+            showSaveError("HISTORY SAVE FAILED");
+            return;
+        }
+        exitMatch();
+    }
+
+    function saveActivity(stopped) {
+        if (_activitySaved) {
+            return true;
+        }
+        if (!PadelActivityRecorder.finish(_engine, true, stopped)) {
+            showSaveError("ACTIVITY SAVE FAILED");
+            return false;
+        }
+        _activitySaved = true;
+        return true;
+    }
+
+    function showSaveError(message) {
+        try {
+            WatchUi.showToast(message + " - TRY AGAIN", null);
+        } catch (error) {
+        }
+    }
+
+    function discardMatch() {
+        PadelActivityRecorder.finish(_engine, false, false);
+        exitMatch();
     }
 
     function exitMatch() {

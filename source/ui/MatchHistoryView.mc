@@ -7,8 +7,21 @@ class MatchHistoryView extends WatchUi.View {
 
     function initialize() {
         View.initialize();
-        _history = MatchHistoryStore.load();
         _selected = 0;
+        reload();
+    }
+
+    function onShow() {
+        reload();
+    }
+
+    function reload() {
+        _history = MatchHistoryStore.load();
+        if (_history.size() == 0) {
+            _selected = 0;
+        } else if (_selected >= _history.size()) {
+            _selected = _history.size() - 1;
+        }
     }
 
     function moveSelection(delta) {
@@ -22,6 +35,18 @@ class MatchHistoryView extends WatchUi.View {
             return null;
         }
         return _history[_history.size() - 1 - _selected];
+    }
+
+    function deleteSelected() {
+        if (_history.size() == 0) {
+            return false;
+        }
+        var storageIndex = _history.size() - 1 - _selected;
+        if (!MatchHistoryStore.deleteAt(storageIndex)) {
+            return false;
+        }
+        reload();
+        return true;
     }
 
     function onUpdate(dc) {
@@ -58,16 +83,23 @@ class MatchHistoryView extends WatchUi.View {
         var selected = displayIndex == _selected;
         PadelTheme.drawCard(dc, 52, y, 312, 64, selected, PadelTheme.CYAN);
         var centerY = y + 32;
+        var stopped = MatchHistoryStore.isStopped(record);
+        var scoreY = stopped ? centerY - 11 : centerY;
 
         dc.setColor(PadelTheme.CYAN, Graphics.COLOR_BLACK);
-        dc.drawText(126, centerY, Graphics.FONT_XTINY, record[0],
+        dc.drawText(126, scoreY, Graphics.FONT_XTINY, record[0],
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
-        dc.drawText(172, centerY, Graphics.FONT_XTINY, "–",
+        dc.drawText(172, scoreY, Graphics.FONT_XTINY, "–",
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.setColor(PadelTheme.RED, Graphics.COLOR_BLACK);
-        dc.drawText(218, centerY, Graphics.FONT_XTINY, record[1],
+        dc.drawText(218, scoreY, Graphics.FONT_XTINY, record[1],
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        if (stopped) {
+            dc.setColor(PadelTheme.LIME, Graphics.COLOR_BLACK);
+            dc.drawText(172, centerY + 17, Graphics.FONT_XTINY, "STOPPED",
+                Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        }
         dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
         dc.drawText(312, centerY, Graphics.FONT_XTINY, durationLabel(record[3]),
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);

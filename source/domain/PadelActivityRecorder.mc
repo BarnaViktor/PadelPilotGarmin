@@ -55,9 +55,12 @@ module PadelActivityRecorder {
                 :subSport => Activity.SUB_SPORT_PADEL
             });
             _engine = engine;
-            _recordedSetCount = 0;
+            // A recovered match starts a new FIT segment. Sets already present
+            // in the restored engine were written by the previous segment and
+            // must not be announced again on the next point.
+            _recordedSetCount = engine.getCompletedSets().size();
             createFields();
-            updateSummary(engine);
+            updateSummary(engine, null);
             return _session.start();
         } catch (error) {
             reset();
@@ -89,13 +92,13 @@ module PadelActivityRecorder {
             {:count => 64, :mesgType => FitContributor.MESG_TYPE_SESSION, :units => ""});
     }
 
-    function recordPoint(team, engine, completedSetsBeforePoint) {
+    function recordPoint(team, engine) {
         if (_session == null) {
             return;
         }
-        flushPendingSets(engine, completedSetsBeforePoint);
         _pointEventField.setData(team == 0 ? EVENT_MY_POINT : EVENT_OPPONENT_POINT);
-        updateSummary(engine);
+        updateSummary(engine, null);
+        flushPendingSets(engine, engine.getCompletedSets().size());
 
         if (engine.getMatchWinner() != null) {
             pause();
@@ -105,7 +108,14 @@ module PadelActivityRecorder {
     function recordUndo(engine) {
         if (_session != null) {
             _pointEventField.setData(EVENT_UNDO);
-            updateSummary(engine);
+            updateSummary(engine, null);
+            // addLap() cannot be removed from an ActivityRecording session,
+            // but the set-ending feedback must fire again if the user undoes
+            // the winning point and then wins that set again.
+            var completedCount = engine.getCompletedSets().size();
+            if (completedCount < _recordedSetCount) {
+                _recordedSetCount = completedCount;
+            }
         }
     }
 
@@ -119,12 +129,20 @@ module PadelActivityRecorder {
         }
     }
 
-    function updateSummary(engine) {
+    function getRecordedSetCount() {
+        return _recordedSetCount;
+    }
+
+    function updateSummary(engine, endState) {
         _mySetsField.setData(engine.getSets()[0]);
         _opponentSetsField.setData(engine.getSets()[1]);
         var winner = engine.getMatchWinner();
-        _winnerField.setData(winner == null ? "-" : (winner == 0 ? "My team" : "Opponent"));
-        _setScoresField.setData(buildSetScores(engine));
+        _winnerField.setData(winner == null
+            ? (endState == null ? "-" : endState)
+            : (winner == 0 ? "My team" : "Opponent"));
+        _setScoresField.setData(winner == null && endState != null
+            ? buildIncompleteSetScores(engine, endState)
+            : buildSetScores(engine));
     }
 
     function buildSetScores(engine) {
@@ -142,6 +160,27 @@ module PadelActivityRecorder {
         return label.length() == 0 ? "0-0" : label;
     }
 
+    function buildIncompleteSetScores(engine, endState) {
+        var label = engine.getCompletedSets().size() == 0
+            ? "" : buildSetScores(engine);
+        if (label.length() > 0) {
+            label += ", ";
+        }
+
+        if (engine.isDecidingMatchTieBreak()) {
+            label += "MTB " + engine.getPoints()[0] + "-"
+                + engine.getPoints()[1];
+        } else if (engine.isTieBreak()) {
+            label += engine.getGames()[0] + "-" + engine.getGames()[1]
+                + " TB " + engine.getPoints()[0] + "-"
+                + engine.getPoints()[1];
+        } else {
+            label += engine.getGames()[0] + "-" + engine.getGames()[1]
+                + " " + engine.pointLabel(0) + "-" + engine.pointLabel(1);
+        }
+        return label + (endState == "Interrupted" ? " INT" : " STOP");
+    }
+
     function enablePositioning() {
         if (_positioningEnabled) {
             return;
@@ -157,68 +196,6 @@ module PadelActivityRecorder {
         }
     }
 
-    function getStats() {
-        var stats = {
-            :distance => null,
-            :currentSpeed => null,
-            :averageSpeed => null,
-            :maxSpeed => null,
-            :currentHeartRate => null,
-            :averageHeartRate => null,
-            :maxHeartRate => null,
-            :calories => null,
-            :currentCadence => null,
-            :averageCadence => null,
-            :maxCadence => null
-        };
-
-        if (_session == null) {
-            return stats;
-        }
-
-        try {
-            var info = Activity.getActivityInfo();
-            stats[:distance] = info.elapsedDistance;
-            stats[:currentSpeed] = info.currentSpeed;
-            stats[:averageSpeed] = info.averageSpeed;
-            stats[:maxSpeed] = info.maxSpeed;
-            stats[:currentHeartRate] = info.currentHeartRate;
-            stats[:averageHeartRate] = info.averageHeartRate;
-            stats[:maxHeartRate] = info.maxHeartRate;
-            stats[:calories] = info.calories;
-            stats[:currentCadence] = info.currentCadence;
-            stats[:averageCadence] = info.averageCadence;
-            stats[:maxCadence] = info.maxCadence;
-        } catch (error) {
-        }
-        return stats;
-    }
-
-    function formatDistance(meters) {
-        if (meters == null) {
-            return "--";
-        }
-        if (meters >= 1000) {
-            return (meters / 1000.0).format("%.2f") + " km";
-        }
-        return meters.toNumber() + " m";
-    }
-
-    function formatSpeed(metersPerSecond) {
-        if (metersPerSecond == null) {
-            return "--";
-        }
-        return (metersPerSecond * 3.6).format("%.1f") + " km/h";
-    }
-
-    function formatHeartRate(beatsPerMinute) {
-        return beatsPerMinute == null ? "--" : beatsPerMinute + " bpm";
-    }
-
-    function formatCalories(calories) {
-        return calories == null ? "--" : calories + " kcal";
-    }
-
     function pause() {
         if (_session != null && _session.isRecording()) {
             _session.stop();
@@ -231,7 +208,7 @@ module PadelActivityRecorder {
         }
     }
 
-    function finish(engine, shouldSave) {
+    function finish(engine, shouldSave, stopped) {
         if (_session == null) {
             return false;
         }
@@ -241,13 +218,20 @@ module PadelActivityRecorder {
                 _session.start();
             }
             flushPendingSets(engine, engine.getCompletedSets().size());
-            updateSummary(engine);
+            updateSummary(engine, stopped ? "Stopped" : null);
             pause();
             var result = shouldSave ? _session.save() : _session.discard();
-            reset();
+            // A failed save stays retryable and the active match snapshot is
+            // deliberately kept by the caller. Discard is explicit, so its
+            // in-memory recorder state is always released.
+            if (result || !shouldSave) {
+                reset();
+            }
             return result;
         } catch (error) {
-            reset();
+            if (!shouldSave) {
+                reset();
+            }
             return false;
         }
     }
@@ -261,7 +245,7 @@ module PadelActivityRecorder {
                 _session.start();
             }
             flushPendingSets(_engine, _engine.getCompletedSets().size());
-            updateSummary(_engine);
+            updateSummary(_engine, "Interrupted");
             pause();
             _session.save();
         } catch (error) {

@@ -31,9 +31,12 @@ majd őrizze meg a végeredményt és a később definiált alapstatisztikákat.
 - pont a 2. csapatnak;
 - utolsó pont visszavonása;
 - aktuális pont-, game- és szettállás;
+- pontos idő a meccsképernyő tetején;
 - szerváló csapat és oldal;
 - game-, szett- és mérkőzésvégi rezgés;
-- szüneteltetés, folytatás és feladás;
+- szüneteltetés és folytatás;
+- félbehagyott meccs eredményének és aktivitásának mentése, vagy a meccs
+  mentés nélküli eldobása;
 - hibás vagy véletlen bevitel elleni megerősítések.
 
 ### Elsőként tárolandó adatok
@@ -44,7 +47,8 @@ majd őrizze meg a végeredményt és a később definiált alapstatisztikákat.
 - szettenkénti idő;
 - összes pont és game;
 - pontok időpontja;
-- labdamenet becsült időtartama a két pontbevitel között.
+- labdamenet becsült időtartama a két pontbevitel között;
+- lezárt és félbehagyott meccsek helyi előzménye, egyenkénti törléssel.
 
 ## Nem része az első kiadásnak
 
@@ -58,8 +62,7 @@ majd őrizze meg a végeredményt és a később definiált alapstatisztikákat.
 
 ## Nyitott termékdöntések
 
-1. A Forerunner 265 mellett a 265S és más 416 x 416 AMOLED órák is támogatottak
-   legyenek-e az MVP-ben?
+1. Eldöntve: az első Store-kiadás kizárólag a Forerunner 265 modellt támogatja.
 2. Az 1 szettes meccsnél értelmezhető legyen-e külön döntőszett-mód?
 3. Eldöntve: no-ad 40–40-nél nincs külön fogadóoldal-választás; a
    következő pont megszakítás nélkül lezárja a game-et.

@@ -625,11 +625,112 @@ function completedMatchCanBeSavedLocally(logger) {
     var history = storedHistory as Lang.Array<Storage.ValueType>;
     Test.assertEqual(1, history.size());
     var record = history[0] as Lang.Array<Storage.ValueType>;
-    Test.assertEqual(6, record.size());
+    Test.assertEqual(9, record.size());
     var setEndTimes = record[5] as Lang.Array<Storage.ValueType>;
     Test.assertEqual(1, setEndTimes.size());
     Test.assertEqual(123, setEndTimes[0]);
+    Test.assertEqual(MatchHistoryStore.RECORD_VERSION, record[6]);
+    Test.assertEqual(MatchHistoryStore.STATUS_COMPLETE, record[7]);
     Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
+    return true;
+}
+
+(:test)
+function stoppedMatchKeepsCurrentGameAndPointScore(logger) {
+    Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
+    var engine = createAdvantageMatch();
+    winGame(engine, 0);
+    engine.awardPoint(0);
+    engine.awardPoint(1);
+    engine.awardPoint(0);
+
+    Test.assert(MatchHistoryStore.saveStopped(engine, 87, []));
+    var history = MatchHistoryStore.load();
+    Test.assertEqual(1, history.size());
+    var record = history[0];
+    Test.assert(MatchHistoryStore.isStopped(record));
+    Test.assertEqual(-1, record[2]);
+    Test.assertEqual(MatchHistoryStore.STATUS_STOPPED, record[7]);
+
+    var currentState = MatchHistoryStore.getCurrentState(record);
+    Test.assertEqual(1, currentState[0]);
+    Test.assertEqual(0, currentState[1]);
+    Test.assertEqual(2, currentState[2]);
+    Test.assertEqual(1, currentState[3]);
+    Test.assert(!currentState[4]);
+    Test.assert(!currentState[5]);
+    Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
+    return true;
+}
+
+(:test)
+function stoppedMatchKeepsTieBreakState(logger) {
+    Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
+    var engine = createAdvantageMatch();
+    for (var game = 0; game < 6; game += 1) {
+        winGame(engine, 0);
+        winGame(engine, 1);
+    }
+    engine.awardPoint(0);
+    engine.awardPoint(1);
+    engine.awardPoint(0);
+
+    Test.assert(MatchHistoryStore.saveStopped(engine, 160, []));
+    var record = MatchHistoryStore.load()[0];
+    var currentState = MatchHistoryStore.getCurrentState(record);
+    Test.assertEqual(6, currentState[0]);
+    Test.assertEqual(6, currentState[1]);
+    Test.assertEqual(2, currentState[2]);
+    Test.assertEqual(1, currentState[3]);
+    Test.assert(currentState[4]);
+    Test.assert(!currentState[5]);
+    Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
+    return true;
+}
+
+(:test)
+function legacyHistoryRecordsRemainReadable(logger) {
+    Storage.setValue(MatchHistoryStore.HISTORY_KEY, [[
+        1, 0, 0, 123, [[6, 4, false]], [123]
+    ]]);
+
+    var history = MatchHistoryStore.load();
+    Test.assertEqual(1, history.size());
+    Test.assert(!MatchHistoryStore.isStopped(history[0]));
+    Test.assertEqual(6, history[0].size());
+    Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
+    return true;
+}
+
+(:test)
+function historyDeletionUsesStorageIndexAndPreservesOrder(logger) {
+    Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
+    var engine = createAdvantageMatch();
+    Test.assert(MatchHistoryStore.saveStopped(engine, 10, []));
+    Test.assert(MatchHistoryStore.saveStopped(engine, 20, []));
+    Test.assert(MatchHistoryStore.saveStopped(engine, 30, []));
+
+    Test.assert(MatchHistoryStore.deleteAt(1));
+    var history = MatchHistoryStore.load();
+    Test.assertEqual(2, history.size());
+    Test.assertEqual(10, history[0][3]);
+    Test.assertEqual(30, history[1][3]);
+    Test.assert(!MatchHistoryStore.deleteAt(-1));
+    Test.assert(!MatchHistoryStore.deleteAt(2));
+    Test.assertEqual(2, MatchHistoryStore.load().size());
+    Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
+    return true;
+}
+
+(:test)
+function deletingOnlyHistoryRecordClearsStorage(logger) {
+    Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
+    var engine = createAdvantageMatch();
+    Test.assert(MatchHistoryStore.saveStopped(engine, 10, []));
+
+    Test.assert(MatchHistoryStore.deleteAt(0));
+    Test.assertEqual(0, MatchHistoryStore.load().size());
+    Test.assert(Storage.getValue(MatchHistoryStore.HISTORY_KEY) == null);
     return true;
 }
 
@@ -773,16 +874,91 @@ function fitSetScoreLabelContainsEveryCompletedSet(logger) {
 }
 
 (:test)
-function activityMetricLabelsUseConnectUnits(logger) {
-    Test.assertEqual("--", PadelActivityRecorder.formatDistance(null));
-    Test.assertEqual("250 m", PadelActivityRecorder.formatDistance(250.8));
-    Test.assertEqual("1.25 km", PadelActivityRecorder.formatDistance(1250.0));
-    Test.assertEqual("--", PadelActivityRecorder.formatSpeed(null));
-    Test.assertEqual("18.0 km/h", PadelActivityRecorder.formatSpeed(5.0));
-    Test.assertEqual("--", PadelActivityRecorder.formatHeartRate(null));
-    Test.assertEqual("145 bpm", PadelActivityRecorder.formatHeartRate(145));
-    Test.assertEqual("--", PadelActivityRecorder.formatCalories(null));
-    Test.assertEqual("420 kcal", PadelActivityRecorder.formatCalories(420));
+function fitStoppedScoreContainsCurrentGameAndPoints(logger) {
+    var engine = createAdvantageMatch();
+    winGame(engine, 0);
+    engine.awardPoint(0);
+    engine.awardPoint(1);
+    engine.awardPoint(0);
+
+    Test.assertEqual("1-0 30-15 STOP",
+        PadelActivityRecorder.buildIncompleteSetScores(engine, "Stopped"));
+    return true;
+}
+
+(:test)
+function fitStoppedScoreIdentifiesTieBreak(logger) {
+    var engine = createAdvantageMatch();
+    for (var game = 0; game < 6; game += 1) {
+        winGame(engine, 0);
+        winGame(engine, 1);
+    }
+    engine.awardPoint(0);
+    engine.awardPoint(1);
+    engine.awardPoint(0);
+
+    Test.assertEqual("6-6 TB 2-1 STOP",
+        PadelActivityRecorder.buildIncompleteSetScores(engine, "Stopped"));
+    return true;
+}
+
+(:test)
+function fitLapIsFlushedOnSetWinningPoint(logger) {
+    var engine = createAdvantageMatch();
+    Test.assert(PadelActivityRecorder.start(engine));
+
+    for (var game = 0; game < 6; game += 1) {
+        for (var point = 0; point < 4; point += 1) {
+            engine.awardPoint(0);
+            PadelActivityRecorder.recordPoint(0, engine);
+        }
+    }
+
+    Test.assertEqual(1, engine.getCompletedSets().size());
+    Test.assertEqual(1, PadelActivityRecorder.getRecordedSetCount());
+    engine.awardPoint(1);
+    PadelActivityRecorder.recordPoint(1, engine);
+    Test.assertEqual(1, PadelActivityRecorder.getRecordedSetCount());
+    Test.assert(PadelActivityRecorder.finish(engine, false, false));
+    return true;
+}
+
+(:test)
+function fitSetFeedbackCanFireAgainAfterWinningPointUndo(logger) {
+    var engine = createAdvantageMatch();
+    Test.assert(PadelActivityRecorder.start(engine));
+
+    for (var game = 0; game < 6; game += 1) {
+        for (var point = 0; point < 4; point += 1) {
+            engine.awardPoint(0);
+            PadelActivityRecorder.recordPoint(0, engine);
+        }
+    }
+    Test.assertEqual(1, PadelActivityRecorder.getRecordedSetCount());
+
+    Test.assert(engine.undoLastPoint());
+    PadelActivityRecorder.recordUndo(engine);
+    Test.assertEqual(0, PadelActivityRecorder.getRecordedSetCount());
+
+    engine.awardPoint(0);
+    PadelActivityRecorder.recordPoint(0, engine);
+    Test.assertEqual(1, PadelActivityRecorder.getRecordedSetCount());
+    Test.assert(PadelActivityRecorder.finish(engine, false, false));
+    return true;
+}
+
+(:test)
+function recoveredFitSegmentDoesNotRepeatCompletedSetOnNextPoint(logger) {
+    var engine = createAdvantageMatch();
+    winSet(engine, 0);
+    Test.assertEqual(1, engine.getCompletedSets().size());
+
+    Test.assert(PadelActivityRecorder.start(engine));
+    Test.assertEqual(1, PadelActivityRecorder.getRecordedSetCount());
+    engine.awardPoint(1);
+    PadelActivityRecorder.recordPoint(1, engine);
+    Test.assertEqual(1, PadelActivityRecorder.getRecordedSetCount());
+    Test.assert(PadelActivityRecorder.finish(engine, false, false));
     return true;
 }
 
@@ -791,9 +967,8 @@ function fitSessionStartsRecordsAndDiscards(logger) {
     var engine = createAdvantageMatch();
 
     Test.assert(PadelActivityRecorder.start(engine));
-    var completedSetsBeforePoint = engine.getCompletedSets().size();
     engine.awardPoint(0);
-    PadelActivityRecorder.recordPoint(0, engine, completedSetsBeforePoint);
-    Test.assert(PadelActivityRecorder.finish(engine, false));
+    PadelActivityRecorder.recordPoint(0, engine);
+    Test.assert(PadelActivityRecorder.finish(engine, false, false));
     return true;
 }

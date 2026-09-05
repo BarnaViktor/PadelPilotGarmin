@@ -14,7 +14,8 @@ Forerunner 265 órán úgy, hogy:
 - a szükséges korrekciók az undo vagy a szünetmenü segítségével adatvesztés
   nélkül elvégezhetők;
 - az alkalmazás nem fagy le, nem lép ki és a meccs végéig nem veszít állapotot;
-- a lezárt meccs bekerül a helyi előzménybe;
+- a lezárt és a félbehagyva mentett meccs bekerül a helyi előzménybe, és az
+  előzményrekord megerősítés után törölhető;
 - a mentett Garmin-aktivitás megjelenik az órán és szinkronizálás után a
   Garmin Connectben.
 
@@ -58,7 +59,10 @@ vagy hiányzó FIT-aktivitás blokkoló hiba.
    - no-ad 40–40 után nem jelenik meg külön oldalválasztó;
    - két gyors egymás utáni azonos pontgombnyomásra csak egy pont kerül be;
    - az aktív eredményképernyő megérintése nem módosítja az állapotot;
-   - a szünetmenü szervaválasztója kizárólag gombokkal végigkezelhető.
+   - a szünetmenü szervaválasztója kizárólag gombokkal végigkezelhető;
+   - a kijelző tetején mutatott pontos idő egyezik az óra rendszeridejével;
+   - a szettvégi visszajelzés közvetlenül a szettet lezáró pont után érkezik,
+     nem a következő szett első pontjánál.
 5. Ha kialakul, külön ellenőrizd a deuce/advantage és a tie-break működését.
    Ezeket nem kell mesterségesen előidézni a valódi meccs rovására.
 6. Eltérésnél ne próbáld emlékezetből rekonstruálni az eseményt: állítsd meg a
@@ -96,11 +100,24 @@ válik olvashatóvá; ez külön eszközviselkedési megfigyelés.
      sebességet;
    - az eredmény és a szettadatok megjelenését, amennyiben a Garmin Connect
      felülete megjeleníti a developer mezőket.
-4. A meccsvégi összegzés ACTIVITY oldalán ellenőrizd a távolságot, az átlagos
-   és maximális sebességet, az átlagos és maximális pulzust, valamint a
-   kalóriát.
+4. Ellenőrizd, hogy a meccsvégi órás összegzés csak az eredményt, az
+   időtartamot és a szettenkénti bontást mutatja, külön teljesítményoldal
+   nélkül.
 5. Jegyezd fel a záró akkumulátort. Ez ezen a teszten csak megfigyelés; a C4
    külön akkumulátormérését nem helyettesíti.
+
+## Félbehagyott meccs és előzménytörlés
+
+1. Indíts új tesztmeccset, és vigyél be legalább két pontot úgy, hogy a game
+   még ne legyen befejezve.
+2. Nyisd meg a szünetmenüt, válaszd a SAVE & END műveletet, majd erősítsd meg.
+3. Az előzményben ellenőrizd a félbehagyott jelölést, az aktuális game- és
+   pontállást, valamint az időtartamot.
+4. Ellenőrizd, hogy a félbehagyott meccsből is létrejött mentett
+   FIT-aktivitás.
+5. Az előzmény részletein indítsd el a törlést. Először válaszd a NO opciót és
+   ellenőrizd, hogy a rekord megmarad, majd ismételd meg YES választással és
+   ellenőrizd, hogy csak a kiválasztott rekord tűnt el.
 
 ## Eredménylap
 
@@ -112,7 +129,7 @@ válik olvashatóvá; ez külön eszközviselkedési megfigyelés.
 - GPS-nyomvonal létrejött: igen / nem
 - Mért távolság: ____________________
 - Átlagos / maximális sebesség: ____________________
-- Órás ACTIVITY összegzés helyes: igen / nem
+- Meccsvégi összegzés teljesítményoldal nélkül: igen / nem
 - Garmin Connectben látható meccseredmény: igen / nem / USB-s telepítés
 - Pontozási eltérések száma: ______
 - Undo teszt: sikeres / sikertelen / nem történt
@@ -122,6 +139,11 @@ válik olvashatóvá; ez külön eszközviselkedési megfigyelés.
 - Gyors duplagombnyomás védelme: sikeres / sikertelen / nem történt
 - Véletlen érintés védelme: sikeres / sikertelen / nem történt
 - Gombos szervaválasztás: sikeres / sikertelen / nem történt
+- Pontos idő kijelzése: sikeres / sikertelen
+- Azonnali szettvégi visszajelzés: sikeres / sikertelen / nem alakult ki
+- Félbehagyott meccs mentése: sikeres / sikertelen
+- Félbehagyott FIT-aktivitás mentése: sikeres / sikertelen
+- Előzménytörlés és NO védelem: sikeres / sikertelen
 - Olvashatóság napfényben: sikeres / sikertelen / nem történt
 - Olvashatóság árnyékban: sikeres / sikertelen / nem történt
 - Olvashatóság sötétben: sikeres / sikertelen / nem történt

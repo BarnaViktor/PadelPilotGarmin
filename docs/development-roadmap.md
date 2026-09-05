@@ -30,7 +30,8 @@ két gombbal végigjátszható.
 C1 kiegészítésként elkészült a kétlépcsős beállítási felület, a saját/ellenfél
 szemléletű pontbevitel, valamint a szünet/folytatás, opcionális kézi
 szerválócsapat- és szervaoldal-váltás, valamint a megerősített
-meccsleállítás. A pontbevitel game és no-ad 40–40 után is folyamatos.
+mentés/befejezés és eldobás. A pontbevitel game és no-ad 40–40 után is
+folyamatos, a meccsképernyő tetején pedig látható a pontos idő.
 
 ## C2 – Helyi mentés és visszaállítás
 
@@ -38,7 +39,8 @@ meccsleállítás. A pontbevitel game és no-ad 40–40 után is folyamatos.
 
 - meccsállapot tartós mentése;
 - alkalmazás bezárása utáni folytatás;
-- lezárt meccsek rövid előzménye;
+- lezárt és félbehagyva mentett meccsek rövid előzménye;
+- előzményrekordok egyenkénti, megerősített törlése;
 - hibás vagy félbemaradt mentés kezelése.
 
 A mentési formátum verziózott. Az aktív meccs pont-, game-, szett-, tie-break-,
@@ -46,6 +48,10 @@ szerva- és időállapota minden változás után frissül, valamint az alkalmaz
 leállásakor is mentődik. Újraindításkor a meccs folytatható vagy elvethető;
 a folytatás biztonsági okból szüneteltetett állapotban indul. A hibás aktív
 mentés törlődik, a hibás előzményrekordok pedig kimaradnak a listából.
+Szünetből a meccs az aktuális game-, pont- vagy tie-break állással együtt
+félbehagyottként menthető, vagy mentés nélkül eldobható. A SAVE & END a helyi
+rekordot és a FIT-aktivitást is menti; sikertelen FIT-mentésnél az aktív
+meccsállapot megmarad, és a művelet újrapróbálható.
 
 ## C3 – Garmin aktivitás és alapstatisztika
 
@@ -64,7 +70,9 @@ A FIT session `racket/padel` sportbesorolással indul. A Garmin natív
 aktivitásmotorja rögzíti az időt, az engedélyezett pulzusszenzor adatait és az
 ezekből számolt kalóriát. Developer mezőként bekerülnek a pontesemények, a
 szettenkénti game-eredmények, a szettarány, a győztes és az összesített
-szetteredmény. A pause megállítja, a folytatás újraindítja a FIT időzítőt.
+szetteredmény. A pause megállítja, a folytatás újraindítja a FIT időzítőt. A
+teljesítménymetrikákat az alkalmazás nem ismétli meg a meccsvégi képernyőn;
+azok a mentett FIT-aktivitásban maradnak a Garmin Connect számára.
 
 Technikai korlát: a Garmin ActivityRecording session objektuma folyamatok
 között nem állítható vissza. Ha az alkalmazás aktív meccs közben teljesen
@@ -74,9 +82,9 @@ folyamatosan helyreáll.
 
 ## C4 – Valós órás MVP
 
-Állapot: az `1.1.0` helyi tesztverzió elkészült; valós Forerunner 265
-készülékteszt következik. A Connect IQ Store-csomag és Store-beállítások nem
-részei ennek a helyi kiadásnak.
+Állapot: az `1.1.0` Store release candidate, a Store-csomag, az ikonok és a
+beküldési metaadatok elkészültek. A nyilvános review előtt a valós Forerunner
+265 készülékteszt és a Garmin Connect-megjelenítés ellenőrzése következik.
 
 - valós meccsek tesztelése;
 - véletlen gombnyomások és izzadt kéz kezelése;
@@ -87,9 +95,10 @@ részei ennek a helyi kiadásnak.
 
 ## C5 – Kibővített aktivitásmérés és eredményszinkron
 
-Állapot: implementálva, 42 egységteszttel és Forerunner 265 szimulátorban
-ellenőrizve, majd valós órára telepítve. A FIT-fájl tartalmának és a Garmin
-Connect-megjelenítésnek a valós meccses ellenőrzése még hátravan.
+Állapot: implementálva, 51 egységteszttel és Forerunner 265 szimulátorban
+ellenőrizve. A jelenlegi módosítások valós órás telepítése, valamint a
+FIT-fájl tartalmának és a Garmin Connect-megjelenítésnek a valós meccses
+ellenőrzése még hátravan.
 
 ### Több aktivitásadat rögzítése
 
@@ -100,8 +109,8 @@ Connect-megjelenítésnek a valós meccses ellenőrzése még hátravan.
   aktivitás- és szenzoradatok felmérése;
 - az aktuális, átlagos és maximális pulzus, kalória, aktivitásidő és az órán
   elérhető kadenciaadatok natív rögzítése;
-- meccsvégi aktivitásoldal a távolság, átlagos és maximális sebesség,
-  átlagos és maximális pulzus, valamint kalória megjelenítésére;
+- termékdöntés: a meccsvégi órás összegzés nem mutat külön teljesítményoldalt;
+  a távolság-, sebesség-, pulzus- és kalóriaadatok a FIT-aktivitásba kerülnek;
 - a mérések pontosságának összehasonlítása a Garmin natív padelaktivitásával,
   különösen beltéri pályán, ahol a GPS-alapú távolság és sebesség pontatlan
   lehet;

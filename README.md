@@ -5,8 +5,9 @@ végigvezeti és rögzíti egy padelmérkőzés eredményét.
 
 ## Jelenlegi állapot
 
-Verzió: **1.1.0**, helyi Forerunner 265 készülékteszteléshez. Ez még nem
-Connect IQ Store-kiadás.
+Verzió: **1.1.0**, Forerunner 265 Store-kiadásra előkészítve. A nyilvános
+beküldés előtt a teljes valós órás meccsteszt és a Garmin Connect-megjelenítés
+ellenőrzése még szükséges.
 
 Az első helyi tesztkiadás elkészült:
 
@@ -21,22 +22,23 @@ Az első helyi tesztkiadás elkészült:
 - kétpontos különbség;
 - kezdő adogató csapat;
 - szerváló csapat és csapaton belüli szerváló sorszám követése;
+- pontos idő kijelzése játék közben;
 - utolsó pont visszavonása;
 - legfeljebb 20 pontnyi, memóriában korlátozott undo-előzmény;
 - pont-, game-, szett- és meccsvégi rezgéses visszajelzés;
 - aktív meccs automatikus helyi mentése és alkalmazás-újraindítás utáni
   folytatása;
-- legfeljebb 20 lezárt meccset mutató helyi előzmény;
+- legfeljebb 20 lezárt vagy félbehagyva mentett meccset mutató, egyenként
+  törölhető helyi előzmény;
 - sérült aktív mentések és előzményrekordok biztonságos kiszűrése;
 - Garmin FIT-aktivitás `racket/padel` besorolással;
 - GPS-nyomvonal, megtett távolság, valamint aktuális, átlagos és maximális
   sebesség rögzítése;
-- aktuális, átlagos és maximális pulzus, kalória, aktivitásidő és az órán
-  elérhető kadenciaadatok rögzítése;
-- meccsvégi aktivitás-összegzés távolság-, sebesség-, pulzus- és
-  kalóriaadatokkal;
+- aktuális, átlagos és maximális pulzus, Garmin által számított kalória és
+  aktivitásidő rögzítése, amikor ezek az adatok elérhetők;
 - pontesemények, szetteredmények és győztes egyedi FIT-mezőkben;
-- Monkey C egységtesztek a C1 pontozási és szervarend szabályokra.
+- 51 Monkey C egységteszt a pontozásra, mentésre, előzményre és
+  aktivitásrögzítésre.
 
 A hőtérkép, az Americano, a Mexicano és a saját szerveres szinkron nem része
 ennek a checkpointnak.
@@ -78,7 +80,9 @@ Beállítás:
 - a beállításon belül UP/DOWN: érték módosítása;
 - a beállításon belül START: mentés, BACK: módosítás elvetése;
 - START GAME menüponton START: meccs indítása.
-- MATCH HISTORY menüponton START: a legutóbbi lezárt meccsek megnyitása.
+- MATCH HISTORY menüponton START: a legutóbbi lezárt vagy félbehagyva mentett
+  meccsek megnyitása;
+- az előzmény részletein START: az adott rekord törlése megerősítés után.
 
 Alkalmazás-újraindítás után:
 
@@ -103,22 +107,26 @@ elvetés pedig a FIT-rögzítést is eldobja.
 
 Szünet közben:
 
-- UP/DOWN: választás a szerváló oldal módosítása és a meccs leállítása között;
+- UP/DOWN: választás a szerváló oldal módosítása, a félbehagyott meccs mentése
+  és a meccs mentés nélküli eldobása között;
 - START a szerváló oldal módosításán: négy pályanegyedes választó megnyitása;
 - UP/DOWN választ pályanegyedet, START menti a szerváló csapatot és a
   jobb/bal oldalt, majd a játék azonnal folytatódik;
-- START a meccs leállításán: megerősítő kérdés megnyitása;
-- a megerősítésnél START és a zöld pipa leállítja, DOWN és a piros X
-  visszalép a szünetmenübe;
+- START a SAVE & END vagy DISCARD MATCH soron: külön megerősítő kérdés
+  megnyitása;
+- SAVE & END megőrzi az aktuális game-, pont- vagy tie-break állást az
+  előzményben és menti a FIT-aktivitást; DISCARD MATCH mindkettőt eldobja;
 - BACK: folytatás.
 
 ## Meccskijelző
 
 - a cián A és piros B oldal nagy számokkal mutatja a pontállást;
-- felül a lezárt szettek, alul az aktuális set/game állás látható;
+- legfelül a pontos idő, alatta a lezárt szettek, majd az aktuális set/game
+  állás látható;
 - a lime labdajelölés mutatja a szerváló csapatot;
-- a meccs végén lapozható összegzés mutatja a végeredményt, az időtartamot és
-  a szettenkénti bontást.
+- a meccs végén lapozható összegzés csak a végeredményt, az időtartamot és a
+  szettenkénti bontást mutatja; a teljesítményadatok a mentett FIT-aktivitásban
+  maradnak a Garmin Connect számára;
 - az összegzésen START nyitja meg a mentési kérdést; a kijelzőszéli zöld pipa
   a START gombnál menti helyben, a piros X a DOWN gombnál elveti a meccset,
   majd mindkét művelet visszatér a beállításokhoz.

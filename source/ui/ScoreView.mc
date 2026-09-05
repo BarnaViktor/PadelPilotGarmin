@@ -1,35 +1,85 @@
 using Toybox.Graphics as Graphics;
 using Toybox.System as System;
+using Toybox.Timer as Timer;
 using Toybox.WatchUi as WatchUi;
 
 class ScoreView extends WatchUi.View {
+    const PAUSE_ACTION_NONE = 0;
+    const PAUSE_ACTION_SAVE = 1;
+    const PAUSE_ACTION_DISCARD = 2;
+
     var _engine;
     var _paused;
+    var _pausedAt;
     var _startedAt;
     var _finishedAt;
     var _summaryPage;
     var _finishMenu;
     var _pauseMenuIndex;
-    var _pauseStopConfirm;
+    var _pauseDecisionAction;
     var _pauseServerPicker;
     var _serverPickerIndex;
     var _decisionIndex;
     var _setEndTimes;
+    var _clockTimer;
+    var _lastClockMinute;
+    var _visible;
+    var _clockTimerRunning;
 
     function initialize(engine, elapsedSeconds, setEndTimes) {
         View.initialize();
         _engine = engine;
         _paused = false;
+        _pausedAt = null;
         _startedAt = System.getTimer() - (elapsedSeconds * 1000);
         _finishedAt = null;
         _summaryPage = 0;
         _finishMenu = false;
         _pauseMenuIndex = 0;
-        _pauseStopConfirm = false;
+        _pauseDecisionAction = PAUSE_ACTION_NONE;
         _pauseServerPicker = false;
         _serverPickerIndex = 0;
         _decisionIndex = 0;
         _setEndTimes = setEndTimes.slice(0, setEndTimes.size());
+        _clockTimer = new Timer.Timer();
+        _lastClockMinute = -1;
+        _visible = false;
+        _clockTimerRunning = false;
+    }
+
+    function onShow() {
+        _visible = true;
+        syncClockTimer();
+    }
+
+    function onHide() {
+        _visible = false;
+        syncClockTimer();
+    }
+
+    function syncClockTimer() {
+        var shouldRun = _visible && !_paused
+            && _engine.getMatchWinner() == null;
+        if (shouldRun && !_clockTimerRunning) {
+            _clockTimer.start(method(:onClockTimer), 1000, true);
+            _clockTimerRunning = true;
+        } else if (!shouldRun && _clockTimerRunning) {
+            _clockTimer.stop();
+            _clockTimerRunning = false;
+        }
+    }
+
+    function onClockTimer() {
+        if (_paused || _engine.getMatchWinner() != null) {
+            return;
+        }
+
+        var clock = System.getClockTime();
+        var minute = clock.hour * 60 + clock.min;
+        if (minute != _lastClockMinute) {
+            _lastClockMinute = minute;
+            WatchUi.requestUpdate();
+        }
     }
 
     function onUpdate(dc) {
@@ -56,6 +106,7 @@ class ScoreView extends WatchUi.View {
     }
 
     function drawScoreTable(dc, centerX) {
+        drawClock(dc, centerX);
         drawSetStrip(dc, centerX);
 
         dc.setColor(PadelTheme.LINE, Graphics.COLOR_BLACK);
@@ -80,6 +131,15 @@ class ScoreView extends WatchUi.View {
             + "  •  " + _engine.getGames()[0] + "–" + _engine.getGames()[1] + " GAMES",
             Graphics.TEXT_JUSTIFY_CENTER);
         drawServeIndicator(dc, centerX, 308);
+    }
+
+    function drawClock(dc, centerX) {
+        var clock = System.getClockTime();
+        _lastClockMinute = clock.hour * 60 + clock.min;
+        dc.setColor(PadelTheme.WHITE, Graphics.COLOR_BLACK);
+        dc.drawText(centerX, 8, Graphics.FONT_XTINY,
+            padTwo(clock.hour) + ":" + padTwo(clock.min),
+            Graphics.TEXT_JUSTIFY_CENTER);
     }
 
     function drawSetStrip(dc, centerX) {
@@ -145,6 +205,7 @@ class ScoreView extends WatchUi.View {
         }
         _summaryPage = 0;
         _finishMenu = false;
+        syncClockTimer();
     }
 
     function resumeMatchAfterUndo() {
@@ -152,10 +213,11 @@ class ScoreView extends WatchUi.View {
         _finishedAt = null;
         _summaryPage = 0;
         _finishMenu = false;
+        syncClockTimer();
     }
 
     function changeSummaryPage(delta) {
-        var pageCount = _engine.getCompletedSets().size() + 2;
+        var pageCount = _engine.getCompletedSets().size() + 1;
         _summaryPage = (_summaryPage + delta + pageCount) % pageCount;
     }
 
@@ -173,44 +235,10 @@ class ScoreView extends WatchUi.View {
     function drawSummary(dc, centerX) {
         if (_summaryPage == 0) {
             drawMatchSummary(dc, centerX);
-        } else if (_summaryPage == 1) {
-            drawActivitySummary(dc, centerX);
         } else {
-            drawSetSummary(dc, centerX, _summaryPage - 2);
+            drawSetSummary(dc, centerX, _summaryPage - 1);
         }
         drawPageDots(dc, centerX);
-    }
-
-    function drawActivitySummary(dc, centerX) {
-        var stats = PadelActivityRecorder.getStats();
-        PadelTheme.drawHeader(dc, "ACTIVITY");
-        drawMetricRow(dc, centerX, 92, "DISTANCE",
-            PadelActivityRecorder.formatDistance(stats[:distance]));
-        drawMetricRow(dc, centerX, 142, "AVG SPEED",
-            PadelActivityRecorder.formatSpeed(stats[:averageSpeed]));
-        drawMetricRow(dc, centerX, 192, "MAX SPEED",
-            PadelActivityRecorder.formatSpeed(stats[:maxSpeed]));
-        drawMetricRow(dc, centerX, 242, "AVG / MAX HR",
-            pairedHeartRateLabel(stats[:averageHeartRate], stats[:maxHeartRate]));
-        drawMetricRow(dc, centerX, 292, "CALORIES",
-            PadelActivityRecorder.formatCalories(stats[:calories]));
-    }
-
-    function drawMetricRow(dc, centerX, y, label, value) {
-        dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
-        dc.drawText(82, y, Graphics.FONT_XTINY, label,
-            Graphics.TEXT_JUSTIFY_LEFT | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.setColor(PadelTheme.WHITE, Graphics.COLOR_BLACK);
-        dc.drawText(334, y, Graphics.FONT_XTINY, value,
-            Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER);
-        dc.setColor(PadelTheme.LINE, Graphics.COLOR_BLACK);
-        dc.drawLine(82, y + 24, 334, y + 24);
-    }
-
-    function pairedHeartRateLabel(averageHeartRate, maxHeartRate) {
-        var average = averageHeartRate == null ? "--" : averageHeartRate.toString();
-        var maximum = maxHeartRate == null ? "--" : maxHeartRate.toString();
-        return average + " / " + maximum + " bpm";
     }
 
     function drawMatchSummary(dc, centerX) {
@@ -270,7 +298,7 @@ class ScoreView extends WatchUi.View {
     }
 
     function drawPageDots(dc, centerX) {
-        var pageCount = _engine.getCompletedSets().size() + 2;
+        var pageCount = _engine.getCompletedSets().size() + 1;
         var firstX = centerX - ((pageCount - 1) * 10);
         for (var page = 0; page < pageCount; page += 1) {
             dc.setColor(page == _summaryPage ? Graphics.COLOR_WHITE : Graphics.COLOR_DK_GRAY,
@@ -284,7 +312,7 @@ class ScoreView extends WatchUi.View {
     }
 
     function durationLabel() {
-        var endTime = _finishedAt == null ? System.getTimer() : _finishedAt;
+        var endTime = currentEndTime();
         var totalSeconds = ((endTime - _startedAt) / 1000).toNumber();
         return formatDuration(totalSeconds);
     }
@@ -305,8 +333,15 @@ class ScoreView extends WatchUi.View {
     }
 
     function getDurationSeconds() {
-        var endTime = _finishedAt == null ? System.getTimer() : _finishedAt;
+        var endTime = currentEndTime();
         return ((endTime - _startedAt) / 1000).toNumber();
+    }
+
+    function currentEndTime() {
+        if (_finishedAt != null) {
+            return _finishedAt;
+        }
+        return _pausedAt == null ? System.getTimer() : _pausedAt;
     }
 
     function syncSetEndTimes() {
@@ -336,12 +371,22 @@ class ScoreView extends WatchUi.View {
     }
 
     function setPaused(paused) {
-        _paused = paused;
         if (paused) {
+            if (!_paused) {
+                _pausedAt = System.getTimer();
+            }
+            _paused = true;
             _pauseMenuIndex = 0;
-            _pauseStopConfirm = false;
+            _pauseDecisionAction = PAUSE_ACTION_NONE;
             _pauseServerPicker = false;
+        } else {
+            if (_paused && _pausedAt != null) {
+                _startedAt += System.getTimer() - _pausedAt;
+            }
+            _pausedAt = null;
+            _paused = false;
         }
+        syncClockTimer();
     }
 
     function isPaused() {
@@ -349,22 +394,36 @@ class ScoreView extends WatchUi.View {
     }
 
     function movePauseSelection(delta) {
-        _pauseMenuIndex = (_pauseMenuIndex + delta + 2) % 2;
+        _pauseMenuIndex = (_pauseMenuIndex + delta + 3) % 3;
     }
 
     function getPauseSelection() {
         return _pauseMenuIndex;
     }
 
-    function setPauseStopConfirm(visible) {
-        _pauseStopConfirm = visible;
-        if (visible) {
-            _decisionIndex = 0;
-        }
+    function setPauseDecision(action) {
+        _pauseDecisionAction = action;
+        _decisionIndex = action == PAUSE_ACTION_DISCARD ? 1 : 0;
     }
 
-    function isPauseStopConfirm() {
-        return _pauseStopConfirm;
+    function showSavePauseDecision() {
+        setPauseDecision(PAUSE_ACTION_SAVE);
+    }
+
+    function showDiscardPauseDecision() {
+        setPauseDecision(PAUSE_ACTION_DISCARD);
+    }
+
+    function clearPauseDecision() {
+        setPauseDecision(PAUSE_ACTION_NONE);
+    }
+
+    function isPauseDecision() {
+        return _pauseDecisionAction != PAUSE_ACTION_NONE;
+    }
+
+    function isSavePauseDecision() {
+        return _pauseDecisionAction == PAUSE_ACTION_SAVE;
     }
 
     function setPauseServerPicker(visible) {
@@ -412,8 +471,10 @@ class ScoreView extends WatchUi.View {
     }
 
     function drawPause(dc, centerX) {
-        if (_pauseStopConfirm) {
-            drawDecision(dc, centerX, "END MATCH?", PadelTheme.RED);
+        if (isPauseDecision()) {
+            drawDecision(dc, centerX,
+                isSavePauseDecision() ? "SAVE & END?" : "DISCARD MATCH?",
+                isSavePauseDecision() ? PadelTheme.LIME : PadelTheme.RED);
             return;
         }
         if (_pauseServerPicker) {
@@ -422,8 +483,9 @@ class ScoreView extends WatchUi.View {
         }
 
         PadelTheme.drawHeader(dc, "PAUSED");
-        drawPauseMenuRow(dc, centerX, 128, 0, "CHANGE SERVER");
-        drawPauseMenuRow(dc, centerX, 214, 1, "END MATCH");
+        drawPauseMenuRow(dc, centerX, 108, 0, "CHANGE SERVER");
+        drawPauseMenuRow(dc, centerX, 180, 1, "SAVE & END");
+        drawPauseMenuRow(dc, centerX, 252, 2, "DISCARD MATCH");
     }
 
     function drawFinishMenu(dc, centerX) {
@@ -432,11 +494,12 @@ class ScoreView extends WatchUi.View {
 
     function drawPauseMenuRow(dc, centerX, y, index, label) {
         var selected = _pauseMenuIndex == index;
-        var selectedColor = index == 1 ? PadelTheme.RED : PadelTheme.CYAN;
-        PadelTheme.drawCard(dc, 63, y, 290, 65, selected, selectedColor);
+        var selectedColor = index == 0 ? PadelTheme.CYAN
+            : (index == 1 ? PadelTheme.LIME : PadelTheme.RED);
+        PadelTheme.drawCard(dc, 63, y, 290, 56, selected, selectedColor);
         dc.setColor(selected ? selectedColor : PadelTheme.MUTED,
             Graphics.COLOR_BLACK);
-        dc.drawText(centerX, y + 65 / 2, Graphics.FONT_XTINY, label,
+        dc.drawText(centerX, y + 28, Graphics.FONT_XTINY, label,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 

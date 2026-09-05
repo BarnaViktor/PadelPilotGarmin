@@ -12,7 +12,7 @@
         <fitField id="4" displayInChart="false" displayInActivitySummary="true" sortOrder="4"
             dataLabel="@Strings.FitOpponentSets" unitLabel="@Strings.FitSetsUnit"/>
         <fitField id="5" displayInChart="false" displayInActivitySummary="true" sortOrder="5"
-            dataLabel="@Strings.FitWinner" unitLabel="@Strings.FitNoUnit"/>
+            dataLabel="@Strings.FitWinner" unitLabel="@Strings.FitWinnerUnit"/>
         <fitField id="6" displayInChart="false" displayInActivitySummary="true" sortOrder="6"
             dataLabel="@Strings.FitSetScores" unitLabel="@Strings.FitNoUnit"/>
     </fitContributions>
