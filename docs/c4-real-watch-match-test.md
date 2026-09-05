@@ -1,6 +1,28 @@
 # C4.1 – Valós órás meccsteszt
 
-Állapot: végrehajtásra előkészítve, valós Forerunner 265 teszt szükséges.
+Állapot: egy 2026-09-05 előtti verzió valós Forerunner 265 használatát és
+tesztelését a felhasználó megerősítette. Az `1.1.0` release candidate mai
+változásainak célzott órás regressziója és a Beta/Connect ellenőrzése még
+szükséges.
+
+## Korábbi valós készülékes alap
+
+A korábbi verzió használata valós FR265 kompatibilitási alapnak számít. Mivel
+nem áll rendelkezésre hozzá kitöltött eredménylap, pontos buildazonosító és a
+mai módosítások még nem szerepeltek benne, önmagában nem zárja le az `1.1.0`
+kiadási kapuját.
+
+Az új kiadás előtt nem szükséges minden régi funkciót az elejétől újratesztelni.
+A kötelező célzott regresszió:
+
+1. a Connect IQ-ból telepített `1.1.0` Beta elindul az FR265-ön;
+2. játék közben helyes a pontos idő, és a szettvégi jelzés közvetlenül a
+   szettet lezáró pont után érkezik;
+3. a meccsvégi összegzés nem tartalmaz külön teljesítményoldalt;
+4. egy nem nulla állású félbehagyott meccs a FIT-aktivitással együtt menthető;
+5. a mentett előzményrekord a NO védelem ellenőrzése után törölhető;
+6. a teljes és félbehagyott aktivitás szinkronizálódik, a meccseredmény-mezők
+   pedig megjelennek a Garmin Connectben.
 
 ## Cél és elfogadási feltételek
 

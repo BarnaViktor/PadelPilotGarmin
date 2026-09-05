@@ -16,7 +16,8 @@ public production submission is sent for review.
   `dist/padel-pilot-1.1.0-beta.iq`.
 - [x] Hungarian and English languages declared.
 - [x] FIT, FitContributor, Positioning and Sensor permissions declared.
-- [ ] Full real-watch match test passes.
+- [x] A pre-2026-09-05 version was used and tested on a real Forerunner 265.
+- [ ] Current `1.1.0` Beta passes the targeted real-watch regression.
 - [ ] FIT file and Garmin Connect display verified.
 - [ ] Store/Beta-installed build tested after the final export.
 - [ ] Signing key backed up securely for future Store updates.
@@ -69,7 +70,8 @@ Connect data, desktop chrome or simulator controls in the uploaded images.
 ## Submission sequence
 
 1. Upload `dist/padel-pilot-1.1.0-beta.iq` as a private Beta App.
-2. Install the beta through Connect IQ and complete a real-watch match test.
+2. Install the beta through Connect IQ and complete the targeted real-watch
+   regression for the changes introduced after the previously tested build.
 3. Save and sync completed and stopped matches; verify native metrics and the
    custom result fields in Garmin Connect mobile and web.
 4. Re-export with the production manifest, upload the production listing and

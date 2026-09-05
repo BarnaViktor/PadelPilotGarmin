@@ -83,8 +83,10 @@ folyamatosan helyreáll.
 ## C4 – Valós órás MVP
 
 Állapot: az `1.1.0` Store release candidate, a Store-csomag, az ikonok és a
-beküldési metaadatok elkészültek. A nyilvános review előtt a valós Forerunner
-265 készülékteszt és a Garmin Connect-megjelenítés ellenőrzése következik.
+beküldési metaadatok elkészültek. Egy korábbi verzió valós Forerunner 265
+használatát és tesztelését a felhasználó megerősítette. A nyilvános review
+előtt a mai változások célzott órás regressziója és a Garmin
+Connect-megjelenítés ellenőrzése következik.
 
 - valós meccsek tesztelése;
 - véletlen gombnyomások és izzadt kéz kezelése;
