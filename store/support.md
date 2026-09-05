@@ -11,5 +11,5 @@ version, scoring configuration and the steps that led to the issue. Do not
 attach FIT files publicly if they contain health or location data. Send such
 files by email only after agreeing on a safe troubleshooting method.
 
-Padel Pilot is a free-of-charge app and does not provide an emergency or continuously
-monitored support service.
+Padel Pilot is a free-of-charge app and does not provide an emergency or
+continuously monitored support service.

@@ -10,6 +10,10 @@ public production submission is sent for review.
 - [x] Release-candidate `.iq` exported and archive-verified as
   `dist/padel-pilot-1.1.0.iq`.
 - [x] Manifest contains only the intended MVP device (`fr265`).
+- [x] Private Beta manifest uses the separate application ID
+  `998e196669f54d34a1519db8ecaa0bbe`.
+- [x] Private Beta `.iq` exported and archive-verified as
+  `dist/padel-pilot-1.1.0-beta.iq`.
 - [x] Hungarian and English languages declared.
 - [x] FIT, FitContributor, Positioning and Sensor permissions declared.
 - [ ] Full real-watch match test passes.
@@ -24,6 +28,16 @@ SDK_DIR=/path/to/connectiq-sdk
 APP_VERSION="$(tr -d '[:space:]' < VERSION)"
 "$SDK_DIR/bin/monkeyc" -e -f monkey.jungle \
   -o "dist/padel-pilot-${APP_VERSION}.iq" \
+  -y /path/to/developer_key -r -O 3 -w
+```
+
+Private Beta export command:
+
+```bash
+SDK_DIR=/path/to/connectiq-sdk
+APP_VERSION="$(tr -d '[:space:]' < VERSION)"
+"$SDK_DIR/bin/monkeyc" -e -f beta.jungle \
+  -o "dist/padel-pilot-${APP_VERSION}-beta.iq" \
   -y /path/to/developer_key -r -O 3 -w
 ```
 
@@ -54,12 +68,12 @@ Connect data, desktop chrome or simulator controls in the uploaded images.
 
 ## Submission sequence
 
-1. Export and upload a private Beta App with an alternate application UUID.
+1. Upload `dist/padel-pilot-1.1.0-beta.iq` as a private Beta App.
 2. Install the beta through Connect IQ and complete a real-watch match test.
 3. Save and sync completed and stopped matches; verify native metrics and the
    custom result fields in Garmin Connect mobile and web.
-4. Re-export with the production UUID, upload the production listing and send
-   it for public review only after the two open verification gates pass.
+4. Re-export with the production manifest, upload the production listing and
+   send it for public review only after the two open verification gates pass.
 
 ## Review notes
 
