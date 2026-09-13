@@ -12,6 +12,16 @@ module PadelTheme {
     const PANEL = Graphics.COLOR_BLACK;
     const BLACK = Graphics.COLOR_BLACK;
 
+    // The Enduro family has a 280px round display. Keep layout coordinates
+    // in the existing 416px design space, drawing directly to the native DC
+    // so the 128 KiB Enduro does not need an intermediate bitmap.
+    function canvas(dc) {
+        if (dc.getWidth() == 280 && dc.getHeight() == 280) {
+            return new PadelScaledCanvas(dc);
+        }
+        return dc;
+    }
+
     function clear(dc) {
         dc.setColor(WHITE, BLACK);
         dc.clear();
@@ -86,5 +96,67 @@ module PadelTheme {
                 dc.drawCircle(firstX + i * 20, y, 5);
             }
         }
+    }
+}
+
+class PadelScaledCanvas {
+    var _dc;
+
+    function initialize(dc) {
+        _dc = dc;
+    }
+
+    function getWidth() { return 416; }
+    function getHeight() { return 416; }
+
+    function pixel(value) {
+        return (value * 280.0 / 416.0).toNumber();
+    }
+
+    function setColor(foreground, background) {
+        _dc.setColor(foreground, background);
+    }
+
+    function clear() { _dc.clear(); }
+
+    function setPenWidth(width) {
+        var scaled = pixel(width);
+        _dc.setPenWidth(scaled < 1 ? 1 : scaled);
+    }
+
+    function drawLine(x1, y1, x2, y2) {
+        _dc.drawLine(pixel(x1), pixel(y1), pixel(x2), pixel(y2));
+    }
+
+    function drawText(x, y, font, text, justification) {
+        // System fonts are supplied at the device's native size.
+        _dc.drawText(pixel(x), pixel(y), font, text, justification);
+    }
+
+    function drawCircle(x, y, radius) {
+        _dc.drawCircle(pixel(x), pixel(y), pixel(radius));
+    }
+
+    function fillCircle(x, y, radius) {
+        _dc.fillCircle(pixel(x), pixel(y), pixel(radius));
+    }
+
+    function drawArc(x, y, radius, direction, start, end) {
+        _dc.drawArc(pixel(x), pixel(y), pixel(radius), direction, start, end);
+    }
+
+    function fillRectangle(x, y, width, height) {
+        _dc.fillRectangle(pixel(x), pixel(y), pixel(x + width) - pixel(x),
+            pixel(y + height) - pixel(y));
+    }
+
+    function drawRoundedRectangle(x, y, width, height, radius) {
+        _dc.drawRoundedRectangle(pixel(x), pixel(y),
+            pixel(x + width) - pixel(x), pixel(y + height) - pixel(y), pixel(radius));
+    }
+
+    function fillRoundedRectangle(x, y, width, height, radius) {
+        _dc.fillRoundedRectangle(pixel(x), pixel(y),
+            pixel(x + width) - pixel(x), pixel(y + height) - pixel(y), pixel(radius));
     }
 }

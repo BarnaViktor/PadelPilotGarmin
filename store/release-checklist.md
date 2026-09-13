@@ -1,8 +1,9 @@
 # Connect IQ Store release checklist — 1.1.0
 
-The Store release candidate is being prepared for Garmin Forerunner 265. The
-remaining unchecked real-device and Garmin Connect gates must pass before the
-public production submission is sent for review.
+The user confirmed that production version `1.1.0` is in active use. This
+checklist retains the package preparation history and outstanding evidence
+for future updates. Store publication status and the installation channel
+have not been recorded here; production use alone does not establish them.
 
 ## Binary
 
@@ -17,7 +18,8 @@ public production submission is sent for review.
 - [x] Hungarian and English languages declared.
 - [x] FIT, FitContributor, Positioning and Sensor permissions declared.
 - [x] A pre-2026-09-05 version was used and tested on a real Forerunner 265.
-- [ ] Current `1.1.0` Beta passes the targeted real-watch regression.
+- [x] Production `1.1.0` is in active use, confirmed by the user.
+- [ ] Targeted regression results recorded for the production `1.1.0` in use.
 - [ ] FIT file and Garmin Connect display verified.
 - [ ] Store/Beta-installed build tested after the final export.
 - [ ] Signing key backed up securely for future Store updates.
@@ -25,22 +27,21 @@ public production submission is sent for review.
 Release export command:
 
 ```bash
-SDK_DIR=/path/to/connectiq-sdk
-APP_VERSION="$(tr -d '[:space:]' < VERSION)"
-"$SDK_DIR/bin/monkeyc" -e -f monkey.jungle \
-  -o "dist/padel-pilot-${APP_VERSION}.iq" \
-  -y /path/to/developer_key -r -O 3 -w
+python3 scripts/dev.py release
 ```
 
 Private Beta export command:
 
 ```bash
-SDK_DIR=/path/to/connectiq-sdk
-APP_VERSION="$(tr -d '[:space:]' < VERSION)"
-"$SDK_DIR/bin/monkeyc" -e -f beta.jungle \
-  -o "dist/padel-pilot-${APP_VERSION}-beta.iq" \
-  -y /path/to/developer_key -r -O 3 -w
+python3 scripts/dev.py beta
 ```
+
+These commands now create separate directories under `build/`, print the
+artifact path, verify the IQ archive with 7z, and save `build-info.json`
+alongside it. The `dist/` paths above identify the earlier exports. Use the
+newly printed path for a new submission and retain its SHA-256 build record
+with the real-watch test results. SDK/key overrides and test commands are
+documented in [README.md](../README.md#fordítás-és-automatikus-ellenőrzés).
 
 ## Store metadata
 
@@ -67,9 +68,14 @@ APP_VERSION="$(tr -d '[:space:]' < VERSION)"
 Use screenshots from the final release build. Do not include personal Garmin
 Connect data, desktop chrome or simulator controls in the uploaded images.
 
-## Submission sequence
+## Submission sequence for future updates
 
-1. Upload `dist/padel-pilot-1.1.0-beta.iq` as a private Beta App.
+Use the installed production `1.1.0` for current usage feedback and Connect
+checks. The private Beta sequence below is available for testing future
+changes; it is not a prerequisite for collecting production feedback.
+
+1. Run `python3 scripts/dev.py beta` and upload its printed `.iq` path as a
+   private Beta App.
 2. Install the beta through Connect IQ and complete the targeted real-watch
    regression for the changes introduced after the previously tested build.
 3. Save and sync completed and stopped matches; verify native metrics and the

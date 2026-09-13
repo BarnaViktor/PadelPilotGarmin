@@ -1,6 +1,9 @@
 # Forerunner 265 célkészülék
 
-Állapot: C1 célkészülék.
+Állapot: az éles `1.1.0` támogatott célkészüléke. A C1-re hivatkozó alábbi
+szakaszok történeti feljegyzések; a jelenlegi működést és gombkiosztást a
+[README](../README.md), a bővítés állapotát a
+[készüléklista](supported-devices.md) írja le.
 
 ## Ellenőrzött eszközadatok
 
@@ -17,9 +20,9 @@
   alapján.
 - Connect IQ appkorlátok: a Garmin az alkalmazások számát és tárhelyét
   eszközönként korlátozza, a Connect IQ Store szabályozza. Ez külön kezelendő
-  az óra általános 8 GB-os tárhelyétől. A pontos Forerunner 265 futásidejű
-  app-memóriakeretet ebben a fejlesztői környezetben nem sikerült helyi SDK-ból
-  kiolvasni, mert a Connect IQ SDK nincs telepítve.
+  az óra általános 8 GB-os tárhelyétől. A telepített SDK 9.2.0
+  `Devices/fr265/compiler.json` profilja szerint a watch-app memóriakeret
+  786 432 bájt (768 KiB).
 
 Források:
 

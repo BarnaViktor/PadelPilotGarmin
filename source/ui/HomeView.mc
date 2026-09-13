@@ -18,6 +18,7 @@ class HomeView extends WatchUi.View {
     }
 
     function onUpdate(dc) {
+        dc = PadelTheme.canvas(dc);
         PadelTheme.clear(dc);
         var centerX = dc.getWidth() / 2;
 

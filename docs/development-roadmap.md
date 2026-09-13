@@ -82,11 +82,13 @@ folyamatosan helyreáll.
 
 ## C4 – Valós órás MVP
 
-Állapot: az `1.1.0` Store release candidate, a Store-csomag, az ikonok és a
-beküldési metaadatok elkészültek. Egy korábbi verzió valós Forerunner 265
-használatát és tesztelését a felhasználó megerősítette. A nyilvános review
-előtt a mai változások célzott órás regressziója és a Garmin
-Connect-megjelenítés ellenőrzése következik.
+Állapot: a felhasználó megerősítette, hogy az éles `1.1.0` van használatban.
+A saját használatra szánt MVP-t megfelelőnek találja: működési hibát vagy
+zavaró viselkedést nem tapasztalt, jelenleg nincs bejelentett javítási igény.
+A Store-csomag, az ikonok és a beküldési metaadatok elkészültek.
+A Garmin Connect-megjelenítés és a memória-/akkumulátormérés részletes
+eredménye még nincs dokumentálva. Külön béta telepítése nem előfeltétele
+az éles kiadás tapasztalatai feldolgozásának.
 
 - valós meccsek tesztelése;
 - véletlen gombnyomások és izzadt kéz kezelése;
@@ -95,12 +97,19 @@ Connect-megjelenítés ellenőrzése következik.
 - támogatott készüléklista;
 - Connect IQ Store előkészítés.
 
+A fordítás és ellenőrzés a `scripts/dev.py` paranccsal automatizálva:
+FR265 PRG, szimulátoros egységtesztek, béta- és produkciós IQ-export,
+archívumellenőrzés és SHA-256 azonosítót tartalmazó build-jegyzőkönyv.
+Ez a következő javítások ellenőrzését segíti; a részletes valós készülékes
+mérési eredmények még nincsenek dokumentálva.
+Használat: [README.md](../README.md#fordítás-és-automatikus-ellenőrzés).
+
 ## C5 – Kibővített aktivitásmérés és eredményszinkron
 
 Állapot: implementálva, 51 egységteszttel és Forerunner 265 szimulátorban
-ellenőrizve. A jelenlegi módosítások valós órás telepítése, valamint a
-FIT-fájl tartalmának és a Garmin Connect-megjelenítésnek a valós meccses
-ellenőrzése még hátravan.
+ellenőrizve. Az éles `1.1.0` használatát a felhasználó megerősítette.
+A FIT-fájl tartalmának és a Garmin Connect-megjelenítésnek a valós meccses
+ellenőrzési eredménye még nincs dokumentálva.
 
 ### Több aktivitásadat rögzítése
 
@@ -143,13 +152,35 @@ egy támogatott szinkronizált felületen egyértelműen megjelenik. A nem
 támogatható vagy nem kellően pontos mérések dokumentált döntéssel kerülnek ki
 a fejlesztési körből.
 
-## Későbbi ágak
+## Következő fejlesztések – jóváhagyott prioritás
 
-- Americano lebonyolítás;
-- Mexicano lebonyolítás;
-- saját Laravel API;
-- Vue statisztikai webalkalmazás;
-- részletes többmeccses elemzések.
+Az éles `1.1.0` a felhasználó saját használatára megfelelő. A bővítések
+felhasználó által meghatározott sorrendje:
+
+1. **További Garmin órák támogatása, az Enduro családdal együtt.**
+   Felhasználói kiegészítés: az Enduro, Enduro 2 és Enduro 3 is támogatási cél.
+   Első lépés a meglévő 416 × 416-as,
+   fizikai gombokkal vezérelt felülethez közeli készülékek fordítási és
+   szimulátoros ellenőrzése. Ezután képernyőnkénti UI-/gombkezelési és valós
+   órás ellenőrzés következik. Az Enduro családhoz 280 × 280-as MIP-felület
+   szükséges. Az első Enduro régebbi API-ja és kisebb memóriakerete külön
+   kompatibilitási munkát igényel; az Enduro 2 SDK-azonosítója `fenix7x`,
+   az Enduro 3-é `enduro3`.
+2. **Meccstörténet és statisztikák.** A meglévő helyi előzmények bővítése,
+   többmeccses összesítések; a pontos mutatók a munka kezdetén választandók ki.
+3. **Americano / Mexicano játékmód.** Lebonyolítás és kapcsolódó pontozás;
+   a részletes szabályok a fejlesztési egység elején rögzítendők.
+4. **Instinct 2 támogatása, külön grafikai adaptációval.** 176 × 176-as
+   monokróm MIP-elrendezés, színektől független jelölések, kisebb grafikák
+   és szövegek, API 3.4-kompatibilitás és 96 KiB-os memóriakeret vizsgálata.
+   A felhasználó kérésére az Americano/Mexicano után, a saját webes felület
+   előtt következik. Állapota: felírva, megvalósítás előtt; részletes
+   [feladatlista](supported-devices.md#instinct-2--külön-grafikai-adaptációs-feladat).
+5. **Saját szinkron és webes felület.** Saját Laravel API és Vue
+   statisztikai webalkalmazás a korábbi elképzelések szerint.
+
+Aktív fejlesztési egység: **készüléktámogatás bővítése**.
+A készülékenkénti állapot: [supported-devices.md](supported-devices.md).
 
 ## Codex munkamenet egy checkpointon belül
 

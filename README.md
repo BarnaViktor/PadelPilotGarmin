@@ -5,9 +5,12 @@ végigvezeti és rögzíti egy padelmérkőzés eredményét.
 
 ## Jelenlegi állapot
 
-Verzió: **1.1.0**, Forerunner 265 Store-kiadásra előkészítve. A nyilvános
-beküldés előtt a teljes valós órás meccsteszt és a Garmin Connect-megjelenítés
-ellenőrzése még szükséges.
+Verzió: **1.1.0**, éles használatban a felhasználó megerősítése alapján.
+A felhasználó saját használatára teljesen megfelelőnek találja: működési
+hibát vagy zavaró viselkedést nem tapasztalt. Jelenleg nincs bejelentett
+működési hiba vagy használhatósági javítási igény.
+A Garmin Connect-megjelenítés és az erőforrásmérések részletes eredménye
+még nincs dokumentálva.
 
 Az első helyi tesztkiadás elkészült:
 
@@ -70,6 +73,52 @@ A repository jelenlegi célkészüléke a Forerunner 265 (`fr265`). A Garmin
 kompatibilitási táblája szerint a Forerunner 265 Connect IQ API level 5.2
 eszköz, 416 x 416 pixeles kerek AMOLED kijelzővel. Részletek:
 [docs/forerunner-265-target.md](docs/forerunner-265-target.md).
+
+## Fordítás és automatikus ellenőrzés
+
+A `scripts/dev.py` Python 3-mal fut, külön Python-csomag nem szükséges.
+Linuxon automatikusan beolvassa a Garmin SDK Manager aktív SDK-ját, és
+alapértelmezetten a helyi `docs/developer_key` aláírókulcsot használja.
+Más elérési út a `CIQ_SDK_DIR` és `CIQ_DEVELOPER_KEY` környezeti változóval,
+illetve a `--sdk` és `--key` argumentummal adható meg.
+
+```bash
+python3 scripts/dev.py build     # optimalizált FR265 PRG órás teszthez
+python3 scripts/dev.py test      # fordítás és egységtesztek
+python3 scripts/dev.py beta      # privát béta IQ-csomag és archívumellenőrzés
+python3 scripts/dev.py release   # produkciós IQ-csomag és archívumellenőrzés
+```
+
+Készülékbővítés vizsgálatához a `build` és `test` parancsnál megadható
+a Garmin készülékazonosító:
+
+```bash
+python3 scripts/dev.py build --device epix2
+python3 scripts/dev.py test --device epix2
+python3 scripts/dev.py test --device enduro --min-api 3.4.0
+```
+
+A kiadási manifestben még nem szereplő készülékekhez a parancs külön
+tesztmanifestet és a béta alkalmazásazonosítójával kísérleti PRG-t készít.
+Ezeknél a `build-info.json` `experimental` mezője `true`.
+A `--min-api` csak ilyen kísérleti buildhez használható; a tényleges
+API-minimumot a jegyzőkönyv `min_api_level` mezője rögzíti.
+A `beta` és `release` továbbra is a saját kiadási manifestjükben felsorolt
+készülékekre exportál; ezeknél a `--device` nem használható.
+A készülékenkénti előrehaladás: [támogatott készülékek](docs/supported-devices.md).
+
+A `test` előtt nyisd meg a Connect IQ szimulátort. A tesztek annak helyi
+tesztadatait módosítják. A `beta` és `release` ellenőrzéshez `7z` vagy `7zz`
+szükséges. Ezek a parancsok helyi csomagokat készítenek; a Store-beküldés a
+[kiadási ellenőrzőlista](store/release-checklist.md) szerinti külön lépés.
+
+Minden futás külön `build/` almappába kerül, a korábbi kiadásokat megőrzi.
+A parancs kiírja az elkészült fájl elérési útját. A mellette lévő
+`build-info.json` tartalmazza a verziót, alkalmazásazonosítót, Git-revíziót,
+a nem commitolt módosítások jelzését, SDK-verziót, fájlméretet, SHA-256
+azonosítót és az adott futás ellenőrzéseit. A fordítás és tesztelés naplója
+ugyanitt található. Sikertelen ellenőrzésnél nincs sikeres build-jegyzőkönyv.
+Az órás eredménylaphoz őrizd meg a tesztelt csomagot és a `build-info.json`-t.
 
 ## Gombkiosztás
 
@@ -137,11 +186,13 @@ az első kerül feldolgozásra.
 
 ## Következő checkpoint
 
-Valós órás MVP:
+A saját használatra bevált `1.1.0` után a jóváhagyott bővítési sorrend:
 
-- valós meccsek tesztelése;
-- FIT-fájl és Garmin Connect megjelenítés ellenőrzése;
-- olvashatóság, memória és akkumulátor mérése;
-- Connect IQ Store előkészítése.
+1. további Garmin órák támogatása, az Enduro / Enduro 2 / Enduro 3
+   modellekkel együtt – aktív fejlesztési egység;
+2. meccstörténet és statisztikák;
+3. Americano / Mexicano játékmód;
+4. Instinct 2 támogatása, külön monokróm grafikai adaptációval;
+5. saját szinkron és webes felület.
 
 Részletek: [docs/development-roadmap.md](docs/development-roadmap.md)

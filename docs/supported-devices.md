@@ -1,6 +1,6 @@
 # Támogatott készülékek
 
-## Jelenlegi fejlesztési cél
+## Éles támogatás és aktív bővítés
 
 A jelenlegi fejlesztési, szimulátoros és első Store-kiadási célkészülék:
 
@@ -8,31 +8,146 @@ A jelenlegi fejlesztési, szimulátoros és első Store-kiadási célkészülék
 
 Ennek oka, hogy a felületet 416 × 416 pixeles, kerek AMOLED-kijelzőre és az
 ötgombos UP/DOWN/START/BACK vezérlésre terveztük. Az `1.1.0` Store-kiadás
-kizárólag a Forerunner 265 modellt támogatja, és a valós órás elfogadási
-tesztet is ezen végezzük. További készülék csak a megjelenítési és működési
-kompatibilitás külön ellenőrzése után kerülhet a manifestbe.
+kizárólag a Forerunner 265 modellt támogatja; a felhasználó az éles kiadást
+saját használatra megfelelőnek találja, működési hibát nem tapasztalt.
+A következő, első prioritású bővítés további Garmin órák támogatása.
+További készülék a megjelenítési és működési kompatibilitás külön
+ellenőrzése után kerülhet a kiadási manifestbe.
 
-## Fordítási jelöltek
+## Első kör – fordítás és szimulátoros tesztek
 
 A Connect IQ SDK 9.2.0 helyi készülékprofiljai alapján az alábbi modellek
 azonos 416 × 416-as kerek AMOLED-felületet, 768 KiB watch-app memóriakeretet és
-a szükséges fizikai gombokat kínálják. Ideiglenes tesztmanifesttel mindegyikre
-sikeresen lefordult az alkalmazás.
+a szükséges fizikai gombokat kínálják. A 2026-09-13-i ellenőrzésen mindegyikre
+sikeresen lefordult az optimalizált PRG és a tesztbuild, és készülékenként
+mind az 51 egységteszt sikeres volt (összesen 357, az FR265 kontrollal).
+Kódbázis: `1.1.0`, `9df380b` Git-alap, a munkafában bővített fejlesztői
+parancsokkal; az alkalmazás Monkey C forrása ebben a körben nem változott.
 
 | Készülékazonosító | SDK-név | API-szint | Érintés | Állapot |
 |---|---|---:|---:|---|
-| `fr265` | Forerunner 265 | 5.2 | igen | 1.1.0 támogatott |
-| `d2mach1` | D2 Mach 1 | 5.2 | igen | fordítható jelölt |
-| `epix2` | epix Gen 2 / quatix 7 Sapphire | 5.2 | igen | fordítható jelölt |
-| `epix2pro47mm` | epix Pro Gen 2 47mm / quatix 7 Pro | 5.2 | igen | fordítható jelölt |
-| `fenix843mm` | fēnix 8 43mm | 6.0 | igen | fordítható jelölt |
-| `fenixe` | fēnix E | 6.0 | igen | fordítható jelölt |
-| `instinct3amoled50mm` | Instinct 3 AMOLED 50mm | 6.0 | nem | fordítható jelölt |
+| `fr265` | Forerunner 265 | 5.2 | igen | 1.1.0 éles; 51/51 kontrollteszt |
+| `d2mach1` | D2 Mach 1 | 5.2 | igen | PRG + 51/51 teszt; UI és órás próba nyitott |
+| `epix2` | epix Gen 2 / quatix 7 Sapphire | 5.2 | igen | PRG + 51/51 teszt; UI és órás próba nyitott |
+| `epix2pro47mm` | epix Pro Gen 2 47mm / quatix 7 Pro | 5.2 | igen | PRG + 51/51 teszt; UI és órás próba nyitott |
+| `fenix843mm` | fēnix 8 43mm | 6.0 | igen | PRG + 51/51 teszt; UI és órás próba nyitott |
+| `fenixe` | fēnix E | 6.0 | igen | PRG + 51/51 teszt; UI és órás próba nyitott |
+| `instinct3amoled50mm` | Instinct 3 AMOLED 50mm | 6.0 | nem | PRG + 51/51 teszt; UI és órás próba nyitott |
+
+A fordító a meglévő dinamikus konténerhozzáférésekhez típusellenőrzési
+figyelmeztetéseket adott; fordítási hiba és sikertelen teszt nem volt.
+A fordítási naplók és a pontos binárisazonosítók a futások `build/`
+almappáiban találhatók.
 
 A D2 Air X10, Venu 2 és Venu 2 Plus felbontása megfelelő, de nincs meg a
 jelenlegi gombvezérléshez szükséges teljes fizikai gombkészlet, ezért nem
 jelöltek. A Forerunner 265S 360 × 360-as felbontása külön reszponzív UI-munkát
 igényel.
+
+A felbontásokat és API-szinteket a
+[Garmin kompatibilitási listájával](https://developer.garmin.com/connect-iq/compatible-devices/)
+is összevetettük. A gombkészlet és memóriakeret ellenőrzésének forrása a
+telepített SDK `Devices/<id>/simulator.json` és `compiler.json` profilja.
+
+## Enduro család – kifejezett támogatási cél
+
+A felhasználó kérésére az Enduro család is az első prioritású
+készülékbővítés része. Mindhárom generáció 280 × 280-as, 64 színű MIP
+kijelzőt és a szükséges fizikai gombokat használja. Az API-/kijelzőadatokat
+a [Garmin készüléklistája](https://developer.garmin.com/connect-iq/compatible-devices/),
+a memóriakereteket a helyi SDK-profilok alapján rögzítettük.
+
+| Modell | SDK-azonosító | API-szint | Watch-app memória | Teendő |
+|---|---|---:|---:|---|
+| Enduro | `enduro` | 3.4 | 128 KiB | Kísérleti API 3.4 build + 51/51 teszt; memória és MIP-felület nyitott |
+| Enduro 2 | `fenix7x` | 5.2 | 768 KiB | PRG + 51/51 teszt; MIP-felület és órás próba nyitott |
+| Enduro 3 | `enduro3` | 6.0 | 768 KiB | PRG + 51/51 teszt; MIP-felület és órás próba nyitott |
+
+Az Enduro 2 a Garmin SDK-ban a fēnix 7X-szel közös készülékprofilhoz
+tartozik; külön `enduro2` termékazonosítót nem használunk.
+
+Az eredeti Enduro fordítása a jelenlegi `minApiLevel="4.1.6"` mellett
+API-eltéréssel leáll. A külön tesztmanifest `3.4.0` API-minimumával viszont
+az optimalizált alkalmazás lefordult, és az 51 teszt is sikeres volt.
+Ez a 2026-09-13-i, SDK 9.2.0-val végzett kísérleti ellenőrzés eredménye;
+a kiadási manifestelemek API-minimuma továbbra is `4.1.6`.
+A régi generáció támogatásához a teljes UI API-kompatibilitását és a
+128 KiB-os futásidejű memóriakeretet is ellenőrizni kell.
+A kisebb PRG-fájlméret önmagában nem bizonyítja,
+hogy az alkalmazás futás közben belefér ebbe a memóriába.
+
+A felület adaptációja minden Enduro generációhoz szükséges: a rögzített
+416-as koordináták, szövegméretek és bitmap-erőforrások ellenőrzése,
+MIP-kontraszt, valamint a beállítások, pontozás, szünet, visszaállítás,
+összegzés és előzmény teljes bejárása. Ez a következő UI-adaptációs kör
+kifejezett célja. A modellek a felvételi feltételek teljesülése után
+kerülnek a kiadási manifestbe.
+
+## Instinct 2 – külön grafikai adaptációs feladat
+
+Állapot: **felírva, megvalósítás és készülékes ellenőrzés előtt**.
+A felhasználó kifejezett támogatási célként kérte az Instinct 2-t, a
+kijelzőtípusból adódó grafikai eltérések külön kezelésével. A felhasználó
+által megadott sorrendben ez a **4. prioritás**: az Americano/Mexicano után,
+a saját szinkron és webes felület előtt következik. Az első készülékbővítési
+kör az AMOLED-jelölteket és az Enduro családot viszi tovább.
+
+Az `instinct2` profil 176 × 176 pixeles, kétszínű MIP-kijelzőt használ,
+`semi-octagon` geometriával és API 3.4 támogatással a
+[Garmin készüléklistája](https://developer.garmin.com/connect-iq/compatible-devices/)
+szerint. A helyi SDK-profil alapján a watch-app memóriakeret 96 KiB,
+érintés nincs, az UP/DOWN/START/BACK fizikai gombok rendelkezésre állnak.
+
+Teendők:
+
+- [ ] Önálló monokróm elrendezés kialakítása a 176 × 176-as hasznos
+  kijelzőterületre, a geometria és a takart területek ellenőrzésével.
+- [ ] A csapatok, szerváló, kijelölés és megerősítés egyértelmű jelölése
+  szöveggel, formával vagy inverz megjelenítéssel; a jelenlegi cián/piros/lime
+  színek jelentésének átültetése kétszínű kijelzésre.
+- [ ] Betűméretek, sortörések, menüsorok és lapozás újratervezése; a
+  pontállás játék közbeni gyors leolvashatóságának megőrzése.
+- [ ] Monokróm ikonok, trófeák és megerősítő grafikák előkészítése;
+  bitmap-erőforrások méretének és kontrasztjának ellenőrzése.
+- [ ] API 3.4-re készülő kísérleti build, a tesztcsomag futtatása és a
+  96 KiB-os memóriahatár mérése hosszú meccs és feltöltött undo mellett.
+- [ ] Minden képernyő és gombművelet bejárása szimulátorban, majd valós órán;
+  FIT-mentés, szinkron, olvashatóság és akkumulátor ellenőrzése.
+
+Tervezési döntés: a pontozási és mentési logika közös marad, a megjelenítés
+készülékprofilhoz igazodik. A 416-as AMOLED-felület egyszerű lekicsinyítése
+nem tekinthető kész Instinct 2-adaptációnak. Fordítási vagy teszteredményt
+ehhez a modellhez még nem rögzítettünk; éles támogatás a felvételi feltételek
+teljesítése után jelölhető.
+
+## Ellenőrzés megismétlése
+
+Nyitott Connect IQ szimulátor mellett:
+
+```bash
+python3 scripts/dev.py build --device epix2
+python3 scripts/dev.py test --device epix2
+python3 scripts/dev.py build --device fenix7x  # Enduro 2
+python3 scripts/dev.py test --device enduro3
+python3 scripts/dev.py build --device enduro --min-api 3.4.0
+python3 scripts/dev.py test --device enduro --min-api 3.4.0
+```
+
+A `--device` a táblázat bármely készülékazonosítójával használható.
+A kiadási manifestben még nem szereplő modell külön tesztmanifestet kap,
+a meglévő béta alkalmazásazonosítójával. A PRG, a naplók és az SHA-256
+azonosítót tartalmazó `build-info.json` a kiírt `build/` almappába kerülnek.
+Az ilyen futás `experimental: true` jelölésű. A szimulátoros tesztek a
+pontozási, mentési és aktivitásrögzítési kódot ellenőrzik; a képernyők
+vizuális és gombos bejárása külön ellenőrzés.
+
+A `--min-api` kizárólag a kiadási manifestben még nem szereplő készülék
+kísérleti buildjénél vagy tesztjénél használható. Az alkalmazott minimum
+a `build-info.json` `min_api_level` mezőjébe kerül.
+
+Az eltérő felbontású órák a következő UI-adaptációs körbe kerülnek.
+A jelenlegi nézetekben sok rögzített koordináta van, ezért például a
+360 × 360-as Forerunner 265S támogatásához önmagában a fordítás nem elég.
 
 ## Új készülék felvételi kapuja
 

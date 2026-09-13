@@ -14,6 +14,7 @@ class RecoveryView extends WatchUi.View {
     }
 
     function onUpdate(dc) {
+        dc = PadelTheme.canvas(dc);
         PadelTheme.clear(dc);
         var centerX = dc.getWidth() / 2;
         PadelTheme.drawHeader(dc, "SAVED MATCH");

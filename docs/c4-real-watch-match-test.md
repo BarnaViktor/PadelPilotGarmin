@@ -1,21 +1,21 @@
 # C4.1 – Valós órás meccsteszt
 
-Állapot: egy 2026-09-05 előtti verzió valós Forerunner 265 használatát és
-tesztelését a felhasználó megerősítette. Az `1.1.0` release candidate mai
-változásainak célzott órás regressziója és a Beta/Connect ellenőrzése még
-szükséges.
+Állapot: a felhasználó megerősítette, hogy az éles `1.1.0` van használatban.
+Saját használatra teljesen megfelelőnek találja; működési hibát vagy zavaró
+viselkedést nem tapasztalt. Jelenleg nincs bejelentett javítási igény.
+Az alábbi részletes ellenőrzésekhez kitöltött eredménylap még nem áll
+rendelkezésre.
 
-## Korábbi valós készülékes alap
+## Valós készülékes alap
 
-A korábbi verzió használata valós FR265 kompatibilitási alapnak számít. Mivel
-nem áll rendelkezésre hozzá kitöltött eredménylap, pontos buildazonosító és a
-mai módosítások még nem szerepeltek benne, önmagában nem zárja le az `1.1.0`
-kiadási kapuját.
+A korábbi verzió tesztelése mellett az éles `1.1.0` problémamentes saját
+használata is megerősített. Ez a saját használati igény elfogadását rögzíti;
+az egyes tesztesetek és műszeres mérések eredményét külön kell dokumentálni.
 
 Az új kiadás előtt nem szükséges minden régi funkciót az elejétől újratesztelni.
 A kötelező célzott regresszió:
 
-1. a Connect IQ-ból telepített `1.1.0` Beta elindul az FR265-ön;
+1. az éles `1.1.0` elindul az FR265-ön (használata megerősítve);
 2. játék közben helyes a pontos idő, és a szettvégi jelzés közvetlenül a
    szettet lezáró pont után érkezik;
 3. a meccsvégi összegzés nem tartalmaz külön teljesítményoldalt;
@@ -47,7 +47,10 @@ vagy hiányzó FIT-aktivitás blokkoló hiba.
 ## Tesztkörnyezet
 
 - Eszköz: Garmin Forerunner 265, nem 265S
-- Alkalmazás: a teszt napján készített `bin/padel-pilot.prg`
+- Alkalmazás: a használatban lévő éles `1.1.0`; új tesztbuild esetén
+  a `build-info.json` és a tesztelt fájl megőrzendő
+- Telepítési mód: USB / Connect IQ Store / Connect IQ Beta
+- Build SHA-256: ____________________
 - Szabály: 3 szett, advantage, normál döntő szett, 7 pontos tie-break
 - Kezdő adogató: a pályán ténylegesen kezdő csapat
 - Független referencia: egy játékostárs vagy papír/jegyzet, legalább
@@ -58,11 +61,18 @@ vagy hiányzó FIT-aktivitás blokkoló hiba.
 
 ## Telepítés előtti ellenőrzés
 
-1. Fordítsd le a projektet `fr265` célra, és csak sikeres buildet telepíts.
-2. Csatlakoztasd az órát USB-n, majd másold a PRG-t az óra
-   `GARMIN/Apps` könyvtárába.
-3. Válaszd le szabályosan az órát, indítsd el az alkalmazást, és ellenőrizd,
-   hogy a beállítóképernyő megjelenik.
+Az éles `1.1.0` tapasztalatainak rögzítéséhez a meglévő telepítést használd.
+Az alábbi telepítési lépések új tesztbuild esetére szólnak.
+
+1. Nyitott szimulátorral futtasd a `python3 scripts/dev.py test` parancsot,
+   majd készíts csomagot a `build` vagy `beta` paranccsal.
+2. Új privát béta tesztelésekor az IQ-csomagot töltsd fel privát bétaként,
+   és a Connect IQ-ból telepítsd. Helyi gombkezelési teszthez az USB-n
+   csatlakoztatott óra `GARMIN/Apps` könyvtárába is másolható a PRG.
+   A Garmin Connect developer-mezőinek ellenőrzéséhez a dokumentált
+   eljárás Store- vagy bétatelepítést használ.
+3. USB-s telepítésnél válaszd le szabályosan az órát. Indítsd el az
+   alkalmazást, és ellenőrizd, hogy a beállítóképernyő megjelenik.
 4. Ellenőrizd, hogy nincs korábbi aktív meccs; ha van, dokumentáld, majd vesd
    el, hogy a teszt tiszta állapotból induljon.
 5. Szinkronizáld az órát, és jegyezd fel az induló akkumulátort.
