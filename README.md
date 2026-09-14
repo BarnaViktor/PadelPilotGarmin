@@ -40,8 +40,8 @@ Az első helyi tesztkiadás elkészült:
 - aktuális, átlagos és maximális pulzus, Garmin által számított kalória és
   aktivitásidő rögzítése, amikor ezek az adatok elérhetők;
 - pontesemények, szetteredmények és győztes egyedi FIT-mezőkben;
-- 51 Monkey C egységteszt a pontozásra, mentésre, előzményre és
-  aktivitásrögzítésre.
+- 55 Monkey C teszt a pontozásra, mentésre, előzményre,
+  aktivitásrögzítésre és a 280/416 pixeles elrendezések rajzolási határaira.
 
 A hőtérkép, az Americano, a Mexicano és a saját szerveres szinkron nem része
 ennek a checkpointnak.
@@ -196,3 +196,5 @@ A saját használatra bevált `1.1.0` után a jóváhagyott bővítési sorrend:
 5. saját szinkron és webes felület.
 
 Részletek: [docs/development-roadmap.md](docs/development-roadmap.md)
+
+Új fejlesztői munkamenethez: [átadási jegyzet](docs/development-handoff.md).

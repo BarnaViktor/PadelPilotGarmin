@@ -182,6 +182,14 @@ felhasználó által meghatározott sorrendje:
 Aktív fejlesztési egység: **készüléktámogatás bővítése**.
 A készülékenkénti állapot: [supported-devices.md](supported-devices.md).
 
+2026-09-14-i folytatási állapot: elkészült a közös nézetek 280 pixeles
+rajzolási adaptere, amely köztes teljes képernyős bitmap nélkül működik.
+Az Enduro beállítóképernyőjén hiányzó Unicode mínuszjelet ASCII mínuszra
+cseréltük. Négy új elrendezési teszttel a csomag 55 tesztesre bővült;
+az Enduro, Enduro 2 (`fenix7x`), Enduro 3 és FR265 profilján 55/55 sikeres.
+A teljes natív vizuális/gombos bejárás és a valós órás mérés még nyitott.
+Az új chat konkrét belépési pontja: [fejlesztési átadás](development-handoff.md).
+
 ## Codex munkamenet egy checkpointon belül
 
 1. kiválasztunk egy szűk, ellenőrizhető célt;

@@ -73,7 +73,7 @@ class SetupView extends WatchUi.View {
         PadelTheme.drawCard(dc, 48, 139, 320, 92, true, PadelTheme.CYAN);
         var centerY = 185;
         dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
-        dc.drawText(84, centerY, Graphics.FONT_TINY, "−",
+        dc.drawText(84, centerY, Graphics.FONT_TINY, "-",
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.drawText(332, centerY, Graphics.FONT_TINY, "+",
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);

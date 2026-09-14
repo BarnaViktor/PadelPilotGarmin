@@ -26,7 +26,7 @@ parancsokkal; az alkalmazás Monkey C forrása ebben a körben nem változott.
 
 | Készülékazonosító | SDK-név | API-szint | Érintés | Állapot |
 |---|---|---:|---:|---|
-| `fr265` | Forerunner 265 | 5.2 | igen | 1.1.0 éles; 51/51 kontrollteszt |
+| `fr265` | Forerunner 265 | 5.2 | igen | 1.1.0 éles; 2026-09-14: 55/55 kontrollteszt |
 | `d2mach1` | D2 Mach 1 | 5.2 | igen | PRG + 51/51 teszt; UI és órás próba nyitott |
 | `epix2` | epix Gen 2 / quatix 7 Sapphire | 5.2 | igen | PRG + 51/51 teszt; UI és órás próba nyitott |
 | `epix2pro47mm` | epix Pro Gen 2 47mm / quatix 7 Pro | 5.2 | igen | PRG + 51/51 teszt; UI és órás próba nyitott |
@@ -59,9 +59,9 @@ a memóriakereteket a helyi SDK-profilok alapján rögzítettük.
 
 | Modell | SDK-azonosító | API-szint | Watch-app memória | Teendő |
 |---|---|---:|---:|---|
-| Enduro | `enduro` | 3.4 | 128 KiB | Kísérleti API 3.4 build + 51/51 teszt; memória és MIP-felület nyitott |
-| Enduro 2 | `fenix7x` | 5.2 | 768 KiB | PRG + 51/51 teszt; MIP-felület és órás próba nyitott |
-| Enduro 3 | `enduro3` | 6.0 | 768 KiB | PRG + 51/51 teszt; MIP-felület és órás próba nyitott |
+| Enduro | `enduro` | 3.4 | 128 KiB | 280-as adapter + 55/55 teszt; vizuális/memória-/órás ellenőrzés nyitott |
+| Enduro 2 | `fenix7x` | 5.2 | 768 KiB | 280-as adapter + 55/55 teszt; vizuális és órás próba nyitott |
+| Enduro 3 | `enduro3` | 6.0 | 768 KiB | 280-as adapter + 55/55 teszt; vizuális és órás próba nyitott |
 
 Az Enduro 2 a Garmin SDK-ban a fēnix 7X-szel közös készülékprofilhoz
 tartozik; külön `enduro2` termékazonosítót nem használunk.
@@ -82,6 +82,34 @@ MIP-kontraszt, valamint a beállítások, pontozás, szünet, visszaállítás,
 összegzés és előzmény teljes bejárása. Ez a következő UI-adaptációs kör
 kifejezett célja. A modellek a felvételi feltételek teljesülése után
 kerülnek a kiadási manifestbe.
+
+### 2026-09-14 – Enduro-adapter és elrendezési tesztek
+
+A `PadelTheme.canvas()` a 280 × 280-as kijelzőn a `PadelScaledCanvas`
+adaptert adja a hat közös nézetnek. A koordinátákat és alakzatokat a
+416-as tervből a natív kijelzőre képezi le; köztes bitmapet nem foglal.
+A natív rendszerbetűket használja. A 416-as AMOLED-kijelző közvetlenül a
+korábbi rajzolási kontextussal működik. Az Instinct 2-höz ez az adapter
+nem aktiválódik, annak külön feladata a 4. prioritásban marad.
+
+Az Enduro főmenüje és több beállítási nézete natívan megjelent a
+szimulátorban. A számérték-szerkesztő Unicode mínuszjele hiányzó karaktert
+adott; ezt ASCII `-` jelre cseréltük. A kezdeti képernyőn a szimulátor
+48,1 / 123,8 kB memóriahasználatot jelzett; ez nem hosszú meccses mérés.
+
+A `DisplayLayoutTests.mc` négy új tesztje a főmenü, beállítások,
+pontozás, szünet, szervaválasztás, megerősítések, visszaállítás,
+összegzés és előzmény vizsgált állapotaiban ellenőrzi a rajzolási
+koordinátákat 280-as, illetve 416-os kijelzőhatárok mellett.
+Mindhárom Enduro-profilon és FR265-ön 55/55 teszt sikeres.
+A teszt rajzolási helyettesítőt használ: nem méri a natív szöveg
+kiterjedését, kontrasztját, a kör alakú maszkot vagy az átfedéseket.
+
+A teljes gombos bejárást nem tekintjük késznek: a Linux/Xwayland
+szimulátoros kattintássorozat nem megbízhatóan a várt állapotokba jutott.
+A `build/ui-review-2026-09-14/enduro/` képfájlok nevei emiatt önmagukban
+nem bizonyítják az adott teszteset sikerét. Az átadási jegyzetben a
+kézi ellenőrzés a következő feladat.
 
 ## Instinct 2 – külön grafikai adaptációs feladat
 
