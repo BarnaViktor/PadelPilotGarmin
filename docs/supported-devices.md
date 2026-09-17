@@ -59,9 +59,9 @@ a memóriakereteket a helyi SDK-profilok alapján rögzítettük.
 
 | Modell | SDK-azonosító | API-szint | Watch-app memória | Teendő |
 |---|---|---:|---:|---|
-| Enduro | `enduro` | 3.4 | 128 KiB | 280-as adapter + 55/55 teszt; vizuális/memória-/órás ellenőrzés nyitott |
-| Enduro 2 | `fenix7x` | 5.2 | 768 KiB | 280-as adapter + 55/55 teszt; vizuális és órás próba nyitott |
-| Enduro 3 | `enduro3` | 6.0 | 768 KiB | 280-as adapter + 55/55 teszt; vizuális és órás próba nyitott |
+| Enduro | `enduro` | 3.4 | 128 KiB | adapter + 55/55 teszt + teljes UI/gomb + 200+ pontos memóriapróba; valós órás próba nyitott |
+| Enduro 2 | `fenix7x` | 5.2 | 768 KiB | adapter + 55/55 teszt + natív font/szín/gomb próba; valós órás próba nyitott |
+| Enduro 3 | `enduro3` | 6.0 | 768 KiB | adapter + 55/55 teszt + natív font/szín/gomb próba; valós órás próba nyitott |
 
 Az Enduro 2 a Garmin SDK-ban a fēnix 7X-szel közös készülékprofilhoz
 tartozik; külön `enduro2` termékazonosítót nem használunk.
@@ -76,12 +76,9 @@ A régi generáció támogatásához a teljes UI API-kompatibilitását és a
 A kisebb PRG-fájlméret önmagában nem bizonyítja,
 hogy az alkalmazás futás közben belefér ebbe a memóriába.
 
-A felület adaptációja minden Enduro generációhoz szükséges: a rögzített
-416-as koordináták, szövegméretek és bitmap-erőforrások ellenőrzése,
-MIP-kontraszt, valamint a beállítások, pontozás, szünet, visszaállítás,
-összegzés és előzmény teljes bejárása. Ez a következő UI-adaptációs kör
-kifejezett célja. A modellek a felvételi feltételek teljesülése után
-kerülnek a kiadási manifestbe.
+A felület adaptációja és szimulátoros ellenőrzése mindhárom Enduro
+generáción elkészült. A modellek csak a valós órás meccs-, FIT-/Connect-,
+olvashatósági és akkumulátorpróba után kerülhetnek a kiadási manifestbe.
 
 ### 2026-09-14 – Enduro-adapter és elrendezési tesztek
 
@@ -105,11 +102,35 @@ Mindhárom Enduro-profilon és FR265-ön 55/55 teszt sikeres.
 A teszt rajzolási helyettesítőt használ: nem méri a natív szöveg
 kiterjedését, kontrasztját, a kör alakú maszkot vagy az átfedéseket.
 
-A teljes gombos bejárást nem tekintjük késznek: a Linux/Xwayland
-szimulátoros kattintássorozat nem megbízhatóan a várt állapotokba jutott.
-A `build/ui-review-2026-09-14/enduro/` képfájlok nevei emiatt önmagukban
-nem bizonyítják az adott teszteset sikerét. Az átadási jegyzetben a
-kézi ellenőrzés a következő feladat.
+A 2026-09-14-i első kattintássorozat nem volt megbízható; az akkori
+`build/ui-review-2026-09-14/enduro/` fájlnevek ezért továbbra sem
+tesztbizonyítékok.
+
+### 2026-09-17 – natív Enduro UI- és memóriapróba
+
+A Wayland-kompozitor natív bemenetével az eredeti Endurón végigjártuk a
+beállítások, pontozás, undo, szünet, szervaválasztás, megerősítések,
+befejezett meccs, összegzés, mentés, előzmény, törlés és újraindítás utáni
+visszaállítás állapotait. A javított ASCII mínusz és a hosszú feliratok
+olvashatók, a körmaszk nem vágja őket, az MIP-színek elkülönülnek.
+
+Az Enduro 2 és Enduro 3 natív skinjén a főmenü, beállítás, számérték-
+szerkesztő, hosszú választó, élő pontozás, szünet és megerősítés mintája
+szintén rendben volt. Élő meccsnél 42,1 / 763,6 kB, illetve
+42,2 / 763,6 kB memóriahasználatot mutattak.
+
+Az első Endurón 220 pontbeviteli esemény terhelte a mérkőzés- és undo-
+állapotot. A 200-as sorozatból egy eseményt a bemenetvédelem kihagyott,
+ezért a plusz 20 esemény biztosította a 200+ rögzített pontot. A kijelzett
+memória 52,0 / 123,8 kB-ról 61,1 / 123,8 kB-ra nőtt; tíz undo után
+56,6 / 123,8 kB volt. A megállított hosszú meccs mentése, előzményének
+megjelenítése és törlése sikerült. A befejezett meccs összegzőjén látott
+maximum 61,3 / 123,8 kB. Összeomlás vagy állapotromlás nem történt.
+
+A képernyőképek és contact sheetek a gitignored
+`build/ui-review-2026-09-17/` könyvtárban vannak. A pontos útvonalakat és
+a következő belépési pontot a [fejlesztési átadás](development-handoff.md)
+rögzíti. Ezek szimulátoros eredmények; a valós órás kapu nyitott marad.
 
 ## Instinct 2 – külön grafikai adaptációs feladat
 

@@ -182,13 +182,17 @@ felhasználó által meghatározott sorrendje:
 Aktív fejlesztési egység: **készüléktámogatás bővítése**.
 A készülékenkénti állapot: [supported-devices.md](supported-devices.md).
 
-2026-09-14-i folytatási állapot: elkészült a közös nézetek 280 pixeles
-rajzolási adaptere, amely köztes teljes képernyős bitmap nélkül működik.
-Az Enduro beállítóképernyőjén hiányzó Unicode mínuszjelet ASCII mínuszra
-cseréltük. Négy új elrendezési teszttel a csomag 55 tesztesre bővült;
-az Enduro, Enduro 2 (`fenix7x`), Enduro 3 és FR265 profilján 55/55 sikeres.
-A teljes natív vizuális/gombos bejárás és a valós órás mérés még nyitott.
-Az új chat konkrét belépési pontja: [fejlesztési átadás](development-handoff.md).
+2026-09-17-i folytatási állapot: a közös nézetek 280 pixeles rajzolási
+adaptere, az ASCII mínusz javítása és az 55 tesztes csomag után elkészült az
+Enduro család natív szimulátoros vizuális/gombos ellenőrzése. Az első Enduro
+128 KiB-os keretében a 200+ pontos, feltöltött undo-előzményű terhelés,
+a hosszú meccs mentése és a megállított előzmény megjelenítése is stabil volt;
+a kijelzett maximum 61,3 / 123,8 kB. Az Enduro 2 és Enduro 3 natív font- és
+MIP-színmintái szintén rendben vannak. Következő szimulátoros lépés a még
+nyitott 416 × 416-as AMOLED-jelöltek teljes bejárása és az 55-ös tesztcsomag
+futtatása; az Enduro család valós órás FIT-/Connect-/akkumulátorpróbája külön
+nyitott kapu. Az új chat konkrét belépési pontja:
+[fejlesztési átadás](development-handoff.md).
 
 ## Codex munkamenet egy checkpointon belül
 
