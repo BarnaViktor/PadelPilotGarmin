@@ -735,6 +735,40 @@ function deletingOnlyHistoryRecordClearsStorage(logger) {
 }
 
 (:test)
+function historyStatisticsSummarizeCompletedStoppedAndLegacyRecords(logger) {
+    var history = [
+        [2, 1, 0, 300, [[6, 4, false], [3, 6, false], [10, 8, true]],
+            [100, 220, 300], 2, 0, [0, 0, 0, 0, false, false]],
+        [0, 1, 1, 120, [[4, 6, false]]],
+        [1, 0, -1, 180, [[6, 4, false]], [150], 2, 1,
+            [2, 1, 3, 2, false, false]]
+    ];
+
+    var summary = MatchHistoryStatistics.summarize(history);
+    Test.assertEqual(3, summary[MatchHistoryStatistics.TOTAL_MATCHES]);
+    Test.assertEqual(2, summary[MatchHistoryStatistics.COMPLETED_MATCHES]);
+    Test.assertEqual(1, summary[MatchHistoryStatistics.STOPPED_MATCHES]);
+    Test.assertEqual(1, summary[MatchHistoryStatistics.MATCH_WINS]);
+    Test.assertEqual(1, summary[MatchHistoryStatistics.MATCH_LOSSES]);
+    Test.assertEqual(600, summary[MatchHistoryStatistics.TOTAL_SECONDS]);
+    Test.assertEqual(3, summary[MatchHistoryStatistics.SETS_WON]);
+    Test.assertEqual(2, summary[MatchHistoryStatistics.SETS_LOST]);
+    Test.assertEqual(50, MatchHistoryStatistics.percentage(1, 2));
+    Test.assertEqual(60, MatchHistoryStatistics.percentage(3, 5));
+    Test.assertEqual(200, MatchHistoryStatistics.averageDuration(summary));
+    return true;
+}
+
+(:test)
+function emptyHistoryStatisticsAvoidDivisionByZero(logger) {
+    var summary = MatchHistoryStatistics.summarize([]);
+    Test.assertEqual(0, summary[MatchHistoryStatistics.TOTAL_MATCHES]);
+    Test.assertEqual(0, MatchHistoryStatistics.percentage(0, 0));
+    Test.assertEqual(0, MatchHistoryStatistics.averageDuration(summary));
+    return true;
+}
+
+(:test)
 function activeMatchRoundTripRestoresScoreServeAndTime(logger) {
     ActiveMatchStore.clear();
     var engine = createAdvantageMatch();

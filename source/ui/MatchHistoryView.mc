@@ -37,6 +37,10 @@ class MatchHistoryView extends WatchUi.View {
         return _history[_history.size() - 1 - _selected];
     }
 
+    function getHistory() {
+        return _history;
+    }
+
     function deleteSelected() {
         if (_history.size() == 0) {
             return false;
@@ -59,6 +63,7 @@ class MatchHistoryView extends WatchUi.View {
             dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
             dc.drawText(centerX, 196, Graphics.FONT_XTINY, "NO MATCHES YET",
                 Graphics.TEXT_JUSTIFY_CENTER);
+            drawStatsHint(dc, centerX);
             return;
         }
 
@@ -76,7 +81,14 @@ class MatchHistoryView extends WatchUi.View {
         for (var row = 0; row < 3 && first + row < _history.size(); row += 1) {
             drawRecord(dc, first + row, 103 + row * 78);
         }
-        PadelTheme.drawPageDots(dc, _selected, _history.size(), 376);
+        drawStatsHint(dc, centerX);
+        PadelTheme.drawPageDots(dc, _selected, _history.size(), 388);
+    }
+
+    function drawStatsHint(dc, centerX) {
+        dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
+        dc.drawText(centerX, 350, Graphics.FONT_XTINY, "HOLD UP: STATS",
+            Graphics.TEXT_JUSTIFY_CENTER);
     }
 
     function drawRecord(dc, displayIndex, y) {

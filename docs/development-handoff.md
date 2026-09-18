@@ -1,13 +1,17 @@
-# Fejlesztési átadás – 2026-09-17
+# Fejlesztési átadás – 2026-09-18
 
 ## Innen folytasd
 
-Aktív munka: **további Garmin órák támogatása**. Az Enduro / Enduro 2 /
-Enduro 3 szimulátoros UI- és gombos ellenőrzése elkészült, beleértve az első
-Enduro 128 KiB-os memóriakeretének hosszú meccses próbáját is. A következő
-szimulátoros lépés a még nyitott 416 × 416-as AMOLED-jelöltek teljes vizuális
-és gombos bejárása. Valós Enduro órán végzett meccs-, FIT-, Connect- és
-akkumulátorpróba továbbra sincs dokumentálva.
+Aktív munka: **meccstörténet és statisztikák bővítése**. Mivel nincs
+csatlakoztatott tesztóra, a készüléktámogatás release-kapuja változatlanul
+nyitott maradt, és elindult a jóváhagyott második prioritás. Az első
+checkpoint háromlapos, a helyi előzményből számolt összesítést ad az
+előzménylista MENU / hosszan nyomott UP műveletéhez.
+
+Az első checkpoint mutatói: összes/befejezett/félbehagyott meccs,
+győzelem–vereség és arány, szettgyőzelem–szettvereség és arány, valamint
+teljes/átlagos játékidő. Új perzisztens formátum nincs; a számítás a meglévő
+legfeljebb 20 rekordból történik, a régi rekordokkal együtt.
 
 Új munkamenet elején olvasd el ezt a fájlt és a
 [készüléklistát](supported-devices.md), majd ellenőrizd a `git status` és
@@ -36,13 +40,14 @@ indult el. A többi funkcióbővítés részletes specifikációja későbbi fel
 
 ## Repository-állapot és meglévő implementáció
 
-A 2026-09-17-i ellenőrzés indulásakor a munkafa tiszta volt, a HEAD és az
-`origin` egyaránt:
+A 2026-09-18-i AMOLED-ellenőrzés indulásakor a munkafa tiszta volt, a HEAD és
+az `origin` egyaránt:
 
-`2458cdf32bc6fd9309eb4970dc08ceae358e895f` – „eszköz támogatások és fixek hozzá”.
+`003b039` – „eszköztámogatás bővítése”.
 
-Ebben a munkamenetben termékkód és teszt nem változott, commit nem készült.
-Csak a dokumentáció módosult; a képek és a helyi segédek a gitignored
+A készülékellenőrzési szakaszban termékkód és teszt nem változott. A mostani
+statisztikai checkpoint már termékkódot és két új tesztet is hozzáad; commit
+még nem készült. A korábbi képek és helyi segédek a gitignored
 `build/ui-review-2026-09-17/` könyvtárban vannak.
 
 Meglévő implementáció:
@@ -54,8 +59,14 @@ Meglévő implementáció:
   a natív DC-t kapják vissza, a betűméret natív rendszerbetű marad.
 - `source/ui/SetupView.mc`: a számérték-szerkesztő ASCII `-` jelet használ,
   mert a natív Enduro fontból hiányzott a korábbi Unicode mínusz.
-- `source/tests/DisplayLayoutTests.mc`: négy elrendezési teszt; a teljes
-  csomag **55 tesztes**. A segédek `:debug` jelölésűek.
+- `source/domain/MatchHistoryStatistics.mc`: a helyi rekordokból számolt
+  meccs-, szett- és időösszesítés, külön perzisztens állapot nélkül.
+- `source/ui/MatchHistoryStatsView.mc`: háromlapos összesítő; az
+  előzménylistáról MENU / hosszan nyomott UP nyitja meg.
+- `source/tests/DisplayLayoutTests.mc`: négy elrendezési teszt; az előzményteszt
+  már a három statisztikalapot is bejárja. A segédek `:debug` jelölésűek.
+- A teljes csomag **57 tesztes**; az új két teszt a vegyes rekordok
+  összesítését és az üres előzményt ellenőrzi.
 - `scripts/dev.py`: normál build, egységteszt, béta- és produkciós export,
   `--device`, kísérleti készülékekhez `--min-api`, naplók és SHA-256
   build-jegyzőkönyv. A kiadási manifestek továbbra is csak FR265-re szólnak.
@@ -75,9 +86,23 @@ Ezek a 2026-09-14-i eredmények. A 2026-09-17-i munkamenetben nem futottak
 újra, mert termékkód nem változott. A fordító korábban ismert, dinamikus
 konténerhozzáféréshez kapcsolódó típusellenőrzési figyelmeztetéseket adott.
 
-A további AMOLED-jelölteken 2026-09-13-án 51/51 teszt futott le. Az új 55-ös
-csomag és a teljes UI-/gombos bejárás rajtuk még nyitott. Részletek:
-[készüléklista](supported-devices.md).
+A hat további AMOLED-jelöltön 2026-09-18-án készülékenként 55/55 teszt
+futott le, normál optimalizált PRG is készült, és lezárult a natív
+UI-/gombos bejárás. Részletek: [készüléklista](supported-devices.md).
+
+## 2026-09-18-i statisztikai checkpoint
+
+Az FR265 és az első generációs Enduro profilon **57/57 teszt** sikeres.
+Mindkettőhöz elkészült az optimalizált normál build is. Az Enduro futás
+`3.4.0` API-minimumú kísérleti manifestet használt; a régi 128 KiB-os
+profilon a tesztalkalmazás is végigfutott. A fordító csak a korábbról ismert,
+dinamikus konténertípusokra vonatkozó figyelmeztetéseket adta.
+
+Ellenőrzött új esetek: üres lista; új, régi és félbehagyott rekordok vegyes
+összesítése; győzelmi és szettarány; átlagidő; valamint a három új lap
+rajzolási határa 416 × 416 és 280 × 280 képponton. A natív font, körmaszk és
+a MENU / hosszan nyomott UP gomb valós órás ellenőrzése teszteszköz hiányában
+nyitott.
 
 ## 2026-09-17-i natív szimulátoros eredmények
 
@@ -152,22 +177,56 @@ Egy korábban befejezett 6–0 6–0 mérkőzés összegzőjén a kijelzett maxi
 **61,3 / 123,8 kB** volt. A mérés szimulátoros, nem helyettesít valós órás
 memória- vagy akkumulátortesztet.
 
+## 2026-09-18-i AMOLED szimulátoros eredmények
+
+Az `epix2`, `d2mach1`, `epix2pro47mm`, `fenix843mm`, `fenixe` és
+`instinct3amoled50mm` profilokon készülékenként **55/55 teszt** és normál
+optimalizált build sikerült.
+
+Mindegyiken natív skinnel és fizikai gombpontokkal ellenőriztük a főmenüt,
+az összes beállítási sort és szerkesztőt, a hosszú `MATCH TIE-BREAK`
+feliratot, a számérték-szerkesztő ASCII mínuszát, mindkét csapat pontgombját,
+az undo, szünet, szervaválasztás, SAVE & END és DISCARD MATCH ágakat. Az
+érintés nélküli `instinct3amoled50mm` teljes mintája kizárólag a skin fizikai
+gombjaival is működött. Natív font-, körmaszk- vagy kontraszthibát, levágást
+és összeomlást nem láttunk.
+
+Az `epix2` mély bejárása ezen felül tartalmazta:
+
+- egy 6–0-s teljes meccs összegzését, szettlapját, összegzésről undo-t,
+  újrabefejezést és mentést;
+- előzménylistát, meccs- és szettrészletet, NO/YES törlési ágakat és üres
+  előzményt;
+- aktív 15–0-s meccs újraindítás utáni helyreállítását, szüneteltetett
+  folytatását és külön újraindítás utáni eldobását.
+
+Kiemelt contact sheetek:
+
+- `build/ui-review-2026-09-17/amoled/epix2-setup-a-contact.png`
+- `build/ui-review-2026-09-17/amoled/epix2-live-pause-contact.png`
+- `build/ui-review-2026-09-17/amoled/epix2-summary-contact.png`
+- `build/ui-review-2026-09-17/amoled/epix2-history-contact.png`
+- `build/ui-review-2026-09-17/amoled/epix2-recovery-evidence.png`
+- `build/ui-review-2026-09-17/amoled/d2mach1-actions-contact.png`
+- `build/ui-review-2026-09-17/amoled/epix2pro47mm-contact.png`
+- `build/ui-review-2026-09-17/amoled/fenix843mm-contact.png`
+- `build/ui-review-2026-09-17/amoled/fenixe-contact.png`
+- `build/ui-review-2026-09-17/amoled/instinct3amoled50mm-contact.png`
+
+Az `epix2` köztes `61`, `65`–`67` és `70` képei betöltési/időzítési próbák;
+a helyreállítás bizonyítékaként a `62`–`64`, `68` és `69` képeket használd.
+
 ## Következő konkrét munkalépések
 
-1. Folytasd a készüléktámogatási prioritást a még nyitott AMOLED-profilok
-   teljes natív UI-/gombos bejárásával. Elsőként az `epix2` profilt vedd elő,
-   ahol korábban csak a főmenü és a beállítás eleje jelent meg; utána
-   `d2mach1`, `epix2pro47mm`, `fenix843mm`, `fenixe`,
-   `instinct3amoled50mm`.
-2. Az AMOLED-jelölteken futtasd le az 55-ös tesztcsomagot is, mert rajtuk
-   eddig csak a korábbi 51/51 eredmény van dokumentálva.
-3. Ha rendelkezésre állnak a készülékek, végezz Enduro / Enduro 2 / Enduro 3
-   valós órás teljes meccs-, FIT-, Garmin Connect-, olvashatósági és
-   akkumulátorpróbát. A szimulátoros eredmény önmagában nem nyitja meg a
-   kiadási manifestet.
-4. Csak a modell felvételi kapujának teljesítése után bővítsd a release
-   manifestet. Ezután következhet a jóváhagyott sorrend második pontja,
-   a meccstörténet és statisztikák bővítése.
+1. A statisztikai lapokat járd be natív FR265 és Enduro szimulátorskin alatt:
+   üres és vegyes előzmény, MENU / hosszan nyomott UP megnyitás, UP/DOWN
+   lapozás és BACK. Valós órán ismételd meg, amikor lesz teszteszköz.
+2. A következő történeti checkpoint előtt döntsd el, szükséges-e a 20
+   rekordos helyi korlát bővítése, illetve mely új, mentendő mérőszám indokol
+   rekordformátum-migrációt. A jelenlegi összesítésekhez migráció nem kell.
+3. Ha rendelkezésre állnak a készülékek, folytasd a teljes valós órás
+   meccs-, FIT-, Garmin Connect-, olvashatósági és akkumulátorpróbát. Csak az
+   adott modell kapujának teljesítése után bővítsd a release manifestet.
 
 ## Parancsok és helyi bizonyítékok
 
@@ -207,6 +266,15 @@ A bejárt PRG-k:
   `de8cd11b5bc914eff17f945ea2c1cc0a88035bc184dace5ad4bfb265c333c4e2`;
 - `build/build-1.1.0-enduro3-2k2yc79p/padel-pilot-1.1.0-enduro3.prg`
   — 39 980 bájt, ugyanazzal a SHA-256 azonosítóval.
+
+AMOLED PRG-k: az `epix2`, `d2mach1`, `epix2pro47mm`, `fenix843mm` és
+`fenixe` buildje 45 740 bájtos, SHA-256:
+`fb595f6236f05beada8597edfe984bf52f86f80500ef7c5626641943004937a6`.
+Az `instinct3amoled50mm` buildje 45 260 bájtos, SHA-256:
+`0e5dd1b3472500e828edd6021df44efdf34b84a0f805a19f8a6c0d24ab9920cd`.
+Az egyedi build- és tesztjegyzőkönyvek a megfelelő, 2026-09-18-án létrejött
+`build/build-1.1.0-<device>-*` és `build/test-1.1.0-<device>-*`
+könyvtárakban vannak.
 
 Az `1.1.0` verziószám változatlan; új Store-kiadás ebben a munkamenetben
 nem történt.

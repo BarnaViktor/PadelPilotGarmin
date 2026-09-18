@@ -179,20 +179,44 @@ felhasználó által meghatározott sorrendje:
 5. **Saját szinkron és webes felület.** Saját Laravel API és Vue
    statisztikai webalkalmazás a korábbi elképzelések szerint.
 
-Aktív fejlesztési egység: **készüléktámogatás bővítése**.
-A készülékenkénti állapot: [supported-devices.md](supported-devices.md).
+Aktív fejlesztési egység: **meccstörténet és statisztikák bővítése**.
+A készüléktámogatás valós órás kapuja továbbra is nyitott; a
+készülékenkénti állapot: [supported-devices.md](supported-devices.md).
 
-2026-09-17-i folytatási állapot: a közös nézetek 280 pixeles rajzolási
-adaptere, az ASCII mínusz javítása és az 55 tesztes csomag után elkészült az
-Enduro család natív szimulátoros vizuális/gombos ellenőrzése. Az első Enduro
+2026-09-18-i folytatási állapot: az Enduro család és a hat 416 × 416-as
+AMOLED-jelölt natív szimulátoros vizuális/gombos ellenőrzése elkészült; az
+AMOLED-jelölteken készülékenként 55/55 teszt is sikeres. Az első Enduro
 128 KiB-os keretében a 200+ pontos, feltöltött undo-előzményű terhelés,
-a hosszú meccs mentése és a megállított előzmény megjelenítése is stabil volt;
-a kijelzett maximum 61,3 / 123,8 kB. Az Enduro 2 és Enduro 3 natív font- és
-MIP-színmintái szintén rendben vannak. Következő szimulátoros lépés a még
-nyitott 416 × 416-as AMOLED-jelöltek teljes bejárása és az 55-ös tesztcsomag
-futtatása; az Enduro család valós órás FIT-/Connect-/akkumulátorpróbája külön
-nyitott kapu. Az új chat konkrét belépési pontja:
+a hosszú meccs mentése és a megállított előzmény megjelenítése stabil volt;
+a kijelzett maximum 61,3 / 123,8 kB. A következő kapu a felvenni kívánt
+modellek valós órás teljes meccs-, FIT-/Connect-, olvashatósági és
+akkumulátorpróbája. Tesztóra hiányában a felhasználó úgy döntött, hogy ez a
+kapu nyitva marad, és közben elindul a meccstörténet és statisztikák
+bővítése. Az új chat konkrét belépési pontja:
 [fejlesztési átadás](development-handoff.md).
+
+### Meccstörténet és statisztikák – 1. checkpoint
+
+A 2026-09-18-án indított első, eszköz nélkül is ellenőrizhető bővítés a
+meglévő, legfeljebb 20 helyi előzménybejegyzésből számol. Nem vezet be új
+tárolási formátumot, ezért a korábbi rekordok olvashatósága megmarad, és
+előzménytörlés után az összesítés automatikusan frissül.
+
+Az első mutatók:
+
+- összes, befejezett és félbehagyott meccs;
+- győzelem–vereség és győzelmi arány a befejezett meccsekből;
+- megnyert–elvesztett befejezett szettek és szettgyőzelmi arány;
+- teljes és átlagos játékidő az összes mentett bejegyzésből.
+
+Az előzménylistán a MENU / hosszan nyomott UP gomb nyitja meg a háromlapos
+statisztikai nézetet; UP/DOWN lapoz, BACK visszalép. Üres előzménynél a
+darabszámok nullák, a nem értelmezhető arányok `--` jelölést kapnak.
+
+Elfogadási állapot: FR265 és első generációs Enduro profilon 57/57 teszt
+sikeres, benne a vegyes új/régi/félbehagyott rekordok számítása, a nullával
+osztás elkerülése és a 416 × 416 / 280 × 280 elrendezési határvizsgálat.
+Valós órás vizuális és gombos ellenőrzés eszköz hiányában nyitott.
 
 ## Codex munkamenet egy checkpointon belül
 

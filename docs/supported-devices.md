@@ -18,26 +18,41 @@ ellenőrzése után kerülhet a kiadási manifestbe.
 
 A Connect IQ SDK 9.2.0 helyi készülékprofiljai alapján az alábbi modellek
 azonos 416 × 416-as kerek AMOLED-felületet, 768 KiB watch-app memóriakeretet és
-a szükséges fizikai gombokat kínálják. A 2026-09-13-i ellenőrzésen mindegyikre
-sikeresen lefordult az optimalizált PRG és a tesztbuild, és készülékenként
-mind az 51 egységteszt sikeres volt (összesen 357, az FR265 kontrollal).
-Kódbázis: `1.1.0`, `9df380b` Git-alap, a munkafában bővített fejlesztői
-parancsokkal; az alkalmazás Monkey C forrása ebben a körben nem változott.
+a szükséges fizikai gombokat kínálják. A 2026-09-18-i ellenőrzésen mindegyikre
+sikeresen lefordult az optimalizált PRG és a tesztbuild, készülékenként 55/55
+egységteszt sikeres volt, és lezárult a natív UI-/gombos szimulátoros kör.
+Kódbázis: `1.1.0`, `003b039` Git-alap; az alkalmazás Monkey C forrása ebben a
+körben nem változott.
 
 | Készülékazonosító | SDK-név | API-szint | Érintés | Állapot |
 |---|---|---:|---:|---|
 | `fr265` | Forerunner 265 | 5.2 | igen | 1.1.0 éles; 2026-09-14: 55/55 kontrollteszt |
-| `d2mach1` | D2 Mach 1 | 5.2 | igen | PRG + 51/51 teszt; UI és órás próba nyitott |
-| `epix2` | epix Gen 2 / quatix 7 Sapphire | 5.2 | igen | PRG + 51/51 teszt; UI és órás próba nyitott |
-| `epix2pro47mm` | epix Pro Gen 2 47mm / quatix 7 Pro | 5.2 | igen | PRG + 51/51 teszt; UI és órás próba nyitott |
-| `fenix843mm` | fēnix 8 43mm | 6.0 | igen | PRG + 51/51 teszt; UI és órás próba nyitott |
-| `fenixe` | fēnix E | 6.0 | igen | PRG + 51/51 teszt; UI és órás próba nyitott |
-| `instinct3amoled50mm` | Instinct 3 AMOLED 50mm | 6.0 | nem | PRG + 51/51 teszt; UI és órás próba nyitott |
+| `d2mach1` | D2 Mach 1 | 5.2 | igen | PRG + 55/55 + natív UI/gomb kész; órás próba nyitott |
+| `epix2` | epix Gen 2 / quatix 7 Sapphire | 5.2 | igen | PRG + 55/55 + teljes mély UI/gomb kész; órás próba nyitott |
+| `epix2pro47mm` | epix Pro Gen 2 47mm / quatix 7 Pro | 5.2 | igen | PRG + 55/55 + natív UI/gomb kész; órás próba nyitott |
+| `fenix843mm` | fēnix 8 43mm | 6.0 | igen | PRG + 55/55 + natív UI/gomb kész; órás próba nyitott |
+| `fenixe` | fēnix E | 6.0 | igen | PRG + 55/55 + natív UI/gomb kész; órás próba nyitott |
+| `instinct3amoled50mm` | Instinct 3 AMOLED 50mm | 6.0 | nem | PRG + 55/55 + natív UI/gomb kész; órás próba nyitott |
 
 A fordító a meglévő dinamikus konténerhozzáférésekhez típusellenőrzési
 figyelmeztetéseket adott; fordítási hiba és sikertelen teszt nem volt.
 A fordítási naplók és a pontos binárisazonosítók a futások `build/`
 almappáiban találhatók.
+
+### 2026-09-18 – AMOLED natív szimulátoros ellenőrzés
+
+Mind a hat jelöltön a natív fontok, a körmaszk és az AMOLED-kontraszt rendben
+volt. Ellenőrzött képernyőtípusok és gombágak: főmenü; minden beállítási sor
+és szerkesztő; hosszú feliratok; élő pontozás mindkét csapatnak; undo;
+szünet; szervaválasztás; mentési és eldobási megerősítés. Az érintés nélküli
+Instinct 3 AMOLED-en a teljes minta fizikai gombokkal működött.
+
+Az `epix2` profilon külön mély körben egy teljes 6–0-s meccs, összegzés,
+összegzésről undo, mentés, előzménylapok, törlés, valamint aktív meccs
+újraindítás utáni folytatása és eldobása is sikerült. A képernyőképek és
+contact sheetek a gitignored `build/ui-review-2026-09-17/amoled/`
+könyvtárban vannak. Ezek továbbra is szimulátoros eredmények; a valós órás
+FIT-/Connect-, olvashatósági és akkumulátorkapu minden új modellen nyitott.
 
 A D2 Air X10, Venu 2 és Venu 2 Plus felbontása megfelelő, de nincs meg a
 jelenlegi gombvezérléshez szükséges teljes fizikai gombkészlet, ezért nem

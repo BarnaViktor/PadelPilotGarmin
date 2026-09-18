@@ -33,4 +33,11 @@ class MatchHistoryInputDelegate extends WatchUi.BehaviorDelegate {
         WatchUi.requestUpdate();
         return true;
     }
+
+    function onMenu() {
+        var statsView = new MatchHistoryStatsView(_view.getHistory());
+        WatchUi.pushView(statsView, new MatchHistoryStatsInputDelegate(statsView),
+            WatchUi.SLIDE_IMMEDIATE);
+        return true;
+    }
 }

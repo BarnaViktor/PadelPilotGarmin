@@ -118,6 +118,12 @@ function checkHistoryLayouts(size) {
     assertLayoutBounds(history, size);
     history._history = [completed, stopped];
     assertLayoutBounds(history, size);
+    var stats = new MatchHistoryStatsView(history._history);
+    for (var statsPage = 0; statsPage < stats.getPageCount();
+            statsPage += 1) {
+        assertLayoutBounds(stats, size);
+        stats.movePage(1);
+    }
     for (var index = 0; index < 2; index += 1) {
         var detail = new MatchHistoryDetailView(history._history[index]);
         for (var page = 0; page < detail.getPageCount(); page += 1) {
