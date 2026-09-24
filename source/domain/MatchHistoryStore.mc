@@ -4,7 +4,8 @@ using Toybox.Lang as Lang;
 module MatchHistoryStore {
     const HISTORY_KEY = "matchHistory";
     const MAX_HISTORY_SIZE = 20;
-    const RECORD_VERSION = 2;
+    const LEGACY_RECORD_VERSION = 2;
+    const RECORD_VERSION = 3;
     const STATUS_COMPLETE = 0;
     const STATUS_STOPPED = 1;
 
@@ -47,14 +48,14 @@ module MatchHistoryStore {
         }
 
         var winner = engine.getMatchWinner();
-        history.add([
+        var record = [
             engine.getSets()[0].toNumber(),
             engine.getSets()[1].toNumber(),
             winner == null ? -1 : winner.toNumber(),
             durationSeconds.toNumber(),
             completedSets,
             storedSetEndTimes,
-            RECORD_VERSION,
+            LEGACY_RECORD_VERSION,
             status,
             [
                 engine.getGames()[0].toNumber(),
@@ -64,7 +65,16 @@ module MatchHistoryStore {
                 engine.isTieBreak(),
                 engine.isDecidingMatchTieBreak()
             ] as Lang.Array<Storage.ValueType>
-        ] as Lang.Array<Storage.ValueType>);
+        ] as Lang.Array<Storage.ValueType>;
+
+        if (engine.hasCompletePointTotals()) {
+            record[6] = RECORD_VERSION;
+            record.add([
+                engine.getPointTotals()[0].toNumber(),
+                engine.getPointTotals()[1].toNumber()
+            ] as Lang.Array<Storage.ValueType>);
+        }
+        history.add(record);
 
         if (history.size() > MAX_HISTORY_SIZE) {
             history = history.slice(history.size() - MAX_HISTORY_SIZE, history.size());
@@ -119,22 +129,41 @@ module MatchHistoryStore {
     }
 
     function isStopped(record) {
-        return record instanceof Lang.Array && record.size() == 9
-            && record[6] == RECORD_VERSION && record[7] == STATUS_STOPPED;
+        return isVersionedRecord(record)
+            && record[7] == STATUS_STOPPED;
     }
 
     function getCurrentState(record) {
-        if (record instanceof Lang.Array && record.size() == 9
-                && record[6] == RECORD_VERSION) {
+        if (isVersionedRecord(record)) {
             return record[8];
         }
         return [0, 0, 0, 0, false, false];
     }
 
+    function hasPointTotals(record) {
+        return record instanceof Lang.Array && record.size() == 10
+            && record[6] == RECORD_VERSION;
+    }
+
+    function getPointTotals(record) {
+        if (hasPointTotals(record)) {
+            return record[9];
+        }
+        return null;
+    }
+
+    function isVersionedRecord(record) {
+        return record instanceof Lang.Array
+            && ((record.size() == 9
+                    && record[6] == LEGACY_RECORD_VERSION)
+                || (record.size() == 10
+                    && record[6] == RECORD_VERSION));
+    }
+
     function isValidRecord(record) {
         if (!(record instanceof Lang.Array)
                 || (record.size() != 5 && record.size() != 6
-                    && record.size() != 9)) {
+                    && record.size() != 9 && record.size() != 10)) {
             return false;
         }
         for (var index = 0; index < 4; index += 1) {
@@ -147,9 +176,12 @@ module MatchHistoryStore {
             return false;
         }
 
-        if (record.size() == 9) {
+        if (record.size() == 9 || record.size() == 10) {
             if (!(record[6] instanceof Lang.Number)
-                    || record[6] != RECORD_VERSION
+                    || (record.size() == 9
+                        && record[6] != LEGACY_RECORD_VERSION)
+                    || (record.size() == 10
+                        && record[6] != RECORD_VERSION)
                     || !(record[7] instanceof Lang.Number)
                     || (record[7] != STATUS_COMPLETE
                         && record[7] != STATUS_STOPPED)
@@ -157,6 +189,9 @@ module MatchHistoryStore {
                         && (record[2] < 0 || record[2] > 1))
                     || (record[7] == STATUS_STOPPED && record[2] != -1)
                     || !isValidCurrentState(record[8])) {
+                return false;
+            }
+            if (record.size() == 10 && !isValidPointTotals(record[9])) {
                 return false;
             }
         } else if (record[2] < 0 || record[2] > 1) {
@@ -173,7 +208,8 @@ module MatchHistoryStore {
                 return false;
             }
         }
-        if (record.size() == 6 || record.size() == 9) {
+        if (record.size() == 6 || record.size() == 9
+                || record.size() == 10) {
             if (!(record[5] instanceof Lang.Array)
                     || record[5].size() != record[4].size()) {
                 return false;
@@ -203,5 +239,12 @@ module MatchHistoryStore {
         return state[4] instanceof Lang.Boolean
             && state[5] instanceof Lang.Boolean
             && (!state[5] || state[4]);
+    }
+
+    function isValidPointTotals(value) {
+        return value instanceof Lang.Array && value.size() == 2
+            && value[0] instanceof Lang.Number
+            && value[1] instanceof Lang.Number
+            && value[0] >= 0 && value[1] >= 0;
     }
 }

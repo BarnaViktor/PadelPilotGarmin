@@ -3,7 +3,7 @@ using Toybox.Lang as Lang;
 using Toybox.WatchUi as WatchUi;
 
 class MatchHistoryStatsView extends WatchUi.View {
-    const PAGE_COUNT = 3;
+    const PAGE_COUNT = 4;
 
     var _summary as Lang.Array<Lang.Number>;
     var _page;
@@ -30,8 +30,10 @@ class MatchHistoryStatsView extends WatchUi.View {
             drawOverview(dc);
         } else if (_page == 1) {
             drawMatchRecord(dc);
-        } else {
+        } else if (_page == 2) {
             drawSetRecord(dc);
+        } else {
+            drawPointRecord(dc);
         }
         PadelTheme.drawPageDots(dc, _page, PAGE_COUNT, 376);
     }
@@ -71,6 +73,22 @@ class MatchHistoryStatsView extends WatchUi.View {
         }
         drawRate(dc, 238, "SET WIN RATE", setRate);
         drawTimeSummary(dc);
+    }
+
+    function drawPointRecord(dc) {
+        PadelTheme.drawHeader(dc, "POINT RECORD");
+        var won = _summary[MatchHistoryStatistics.POINTS_WON];
+        var lost = _summary[MatchHistoryStatistics.POINTS_LOST];
+        drawRecord(dc, won, lost);
+
+        var pointRate = "--";
+        if (won + lost > 0) {
+            pointRate = MatchHistoryStatistics.percentage(
+                won, won + lost) + "%";
+        }
+        drawRate(dc, 238, "POINT RATE", pointRate);
+        drawRate(dc, 286, "POINT MATCHES",
+            _summary[MatchHistoryStatistics.POINT_DATA_MATCHES]);
     }
 
     function drawMetric(dc, y, label, value, accent) {

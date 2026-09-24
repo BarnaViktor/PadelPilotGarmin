@@ -10,10 +10,14 @@ module MatchHistoryStatistics {
     const TOTAL_SECONDS = 5;
     const SETS_WON = 6;
     const SETS_LOST = 7;
+    const POINT_DATA_MATCHES = 8;
+    const POINTS_WON = 9;
+    const POINTS_LOST = 10;
 
     function summarize(history as Lang.Array<Storage.ValueType>)
             as Lang.Array<Lang.Number> {
-        var summary = [0, 0, 0, 0, 0, 0, 0, 0] as Lang.Array<Lang.Number>;
+        var summary = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            as Lang.Array<Lang.Number>;
 
         for (var index = 0; index < history.size(); index += 1) {
             var record = history[index] as Lang.Array<Storage.ValueType>;
@@ -21,6 +25,13 @@ module MatchHistoryStatistics {
             summary[TOTAL_SECONDS] += record[3];
             summary[SETS_WON] += record[0];
             summary[SETS_LOST] += record[1];
+
+            var pointTotals = MatchHistoryStore.getPointTotals(record);
+            if (pointTotals != null) {
+                summary[POINT_DATA_MATCHES] += 1;
+                summary[POINTS_WON] += pointTotals[0];
+                summary[POINTS_LOST] += pointTotals[1];
+            }
 
             if (MatchHistoryStore.isStopped(record)) {
                 summary[STOPPED_MATCHES] += 1;

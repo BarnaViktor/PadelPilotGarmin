@@ -1,5 +1,6 @@
 class MatchSnapshot {
     var points;
+    var pointTotals;
     var games;
     var sets;
     var tieBreak;
@@ -17,6 +18,7 @@ class MatchSnapshot {
 
     function initialize(engine) {
         points = engine.getPoints().slice(0, 2);
+        pointTotals = engine.getPointTotals().slice(0, 2);
         games = engine.getGames().slice(0, 2);
         sets = engine.getSets().slice(0, 2);
         tieBreak = engine.isTieBreak();

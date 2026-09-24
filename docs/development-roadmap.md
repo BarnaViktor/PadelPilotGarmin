@@ -213,10 +213,68 @@ Az előzménylistán a MENU / hosszan nyomott UP gomb nyitja meg a háromlapos
 statisztikai nézetet; UP/DOWN lapoz, BACK visszalép. Üres előzménynél a
 darabszámok nullák, a nem értelmezhető arányok `--` jelölést kapnak.
 
-Elfogadási állapot: FR265 és első generációs Enduro profilon 57/57 teszt
-sikeres, benne a vegyes új/régi/félbehagyott rekordok számítása, a nullával
-osztás elkerülése és a 416 × 416 / 280 × 280 elrendezési határvizsgálat.
-Valós órás vizuális és gombos ellenőrzés eszköz hiányában nyitott.
+Elfogadási állapot: **lezárva**. FR265 és első generációs Enduro profilon,
+tiszta `9f7e3e4` commitból 57/57 teszt és optimalizált build sikeres. A
+csomag tartalmazza a vegyes új/régi/félbehagyott rekordok számítását, a
+nullával osztás elkerülését és a 416 × 416 / 280 × 280 elrendezési
+határvizsgálatot. Mindkét natív szimulátorskin alatt üres és vegyes
+előzménnyel végigjártuk a megnyitást, a három lapot és a visszalépést. A
+bejárás során talált idő- és arányfelirat-átfedések javítva lettek. Valós
+órás vizuális és gombos ismétlés eszköz hiányában nyitott.
+
+### Meccstörténet és statisztikák – 2. checkpoint
+
+Állapot: **implementálva, az automatikus elfogadási kapu lezárva**. A
+scope-döntés 2026-09-24-én, az új kontextusablak elején megszületett.
+
+A helyi előzmény továbbra is a legutóbbi **20 meccs gördülő pillanatképe**
+marad. Ez kiszámítható tárhely- és memóriahasználatot őriz az első generációs,
+128 KiB-os Endurón, és nem próbálja a későbbi saját szinkron hosszú távú
+archívumszerepét átvenni. A korlát csak valós órás tárhelymérés vagy a saját
+szinkron adatmegőrzési tervének elkészülte után vizsgálandó felül.
+
+A checkpoint új adata a meccs során ténylegesen megnyert pontok páronkénti
+összesítése. Ebből az előzmény statisztikai nézete megnyert–elvesztett
+pontszámot és pontnyerési arányt mutat. Ez a legkisebb hasznos adatkör, amely
+valóban új rekordformátumot igényel: a pontos pontszám a korábbi szett-, game-
+és pillanatnyi pontállásokból nem rekonstruálható. A régi rekordok továbbra is
+olvashatók, de nem kerülnek a pontstatisztika nevezőjébe; a nézet jelzi, hány
+mentett meccshez áll rendelkezésre pontadat.
+
+Elfogadási feltételek:
+
+- minden elfogadott pontbevitel pontosan egy csapat összesítőjét növeli, az
+  undo pedig ezt is hiánytalanul visszaállítja;
+- a pontösszesítő aktív meccs mentése és újraindítás utáni folytatása során
+  megmarad;
+- a lezárt és a félbehagyott új rekordok verziózott formátumban tárolják a
+  két pontösszeget, miközben az 5, 6 és 9 elemű régi rekordok olvashatók
+  maradnak;
+- az összesített nézet külön lapon mutatja a megnyert–elvesztett pontokat, a
+  pontnyerési arányt és a pontadattal rendelkező meccsek számát; nulla
+  pontadatnál az arány `--`;
+- célzott domain-, migrációs és 416 × 416 / 280 × 280 elrendezési tesztek
+  készülnek, majd az összes teszt és az optimalizált build sikeresen lefut
+  FR265 és első generációs Enduro profilon.
+
+Elfogadási eredmény: FR265 és első generációs Enduro profilon **61/61 teszt**
+sikeres, benne a pontszámlálás, undo, új és régi aktív mentés, v1/v2/v3
+előzmény, hibás v3 pontadat, a 20 rekordos gördülő korlát, vegyes összesítés,
+nulla nevező és a négylapos nézet 416 × 416 / 280 × 280-as rajzolási határa.
+Mindkét profilon elkészült az optimalizált normál build; az Enduro változat
+API 3.4.0 minimumon, 54 396 bájtos PRG-vel fordult.
+Üres előzménnyel a natív FR265 és Enduro skinen is működött a megnyitás,
+lapozás és BACK. Az FR265 bejárás megtalálta a hosszú pontmeccs- és
+pontarány-címkék átfedését a jobb oldali értékekkel; a rövidített
+`POINT MATCHES` és `POINT RATE` címkékkel javítva.
+
+Az aktív mentés v3 sémája külön jelzi a pontadat teljességét. Egy korábbi
+verzióból folytatott meccs pontszáma nem rekonstruálható, ezért az ilyen
+meccs később is v2 előzményként, pontadat nélkül mentődik, és nem torzítja a
+pontarányt. Újonnan indított meccsnél a lezárt és félbehagyott v3 rekord is
+teljes pontösszesítést kap. Valós órás vizuális és gombos ismétlés továbbra
+is a készüléktámogatási kapu része; régi és vegyes rekordos natív
+szimulátoros ismétlés még nyitott.
 
 ## Codex munkamenet egy checkpointon belül
 

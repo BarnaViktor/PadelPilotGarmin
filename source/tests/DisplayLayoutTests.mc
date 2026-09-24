@@ -109,8 +109,8 @@ function checkMatchLayouts(size) {
 
 (:debug)
 function checkHistoryLayouts(size) {
-    var completed = [1, 0, 0, 120, [[6, 0, false]], [120], 2, 0,
-        [0, 0, 0, 0, false, false]];
+    var completed = [1, 0, 0, 120, [[6, 0, false]], [120], 3, 0,
+        [0, 0, 0, 0, false, false], [24, 8]];
     var stopped = [0, 0, -1, 30, [], [], 2, 1,
         [2, 1, 3, 2, false, false]];
     var history = new MatchHistoryView();

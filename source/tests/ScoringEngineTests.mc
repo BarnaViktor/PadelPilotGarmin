@@ -405,6 +405,23 @@ function undoRestoresPreviousState(logger) {
 }
 
 (:test)
+function pointTotalsTrackAcceptedInputAndUndo(logger) {
+    var engine = createAdvantageMatch();
+
+    Test.assert(engine.awardPoint(0));
+    Test.assert(engine.awardPoint(1));
+    Test.assert(engine.awardPoint(0));
+    Test.assert(!engine.awardPoint(2));
+    Test.assertEqual(2, engine.getPointTotals()[0]);
+    Test.assertEqual(1, engine.getPointTotals()[1]);
+
+    Test.assert(engine.undoLastPoint());
+    Test.assertEqual(1, engine.getPointTotals()[0]);
+    Test.assertEqual(1, engine.getPointTotals()[1]);
+    return true;
+}
+
+(:test)
 function serverTeamCanBeChangedWhilePaused(logger) {
     var engine = createAdvantageMatch();
 
@@ -625,12 +642,15 @@ function completedMatchCanBeSavedLocally(logger) {
     var history = storedHistory as Lang.Array<Storage.ValueType>;
     Test.assertEqual(1, history.size());
     var record = history[0] as Lang.Array<Storage.ValueType>;
-    Test.assertEqual(9, record.size());
+    Test.assertEqual(10, record.size());
     var setEndTimes = record[5] as Lang.Array<Storage.ValueType>;
     Test.assertEqual(1, setEndTimes.size());
     Test.assertEqual(123, setEndTimes[0]);
     Test.assertEqual(MatchHistoryStore.RECORD_VERSION, record[6]);
     Test.assertEqual(MatchHistoryStore.STATUS_COMPLETE, record[7]);
+    Test.assert(MatchHistoryStore.hasPointTotals(record));
+    Test.assertEqual(24, record[9][0]);
+    Test.assertEqual(0, record[9][1]);
     Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
     return true;
 }
@@ -651,6 +671,8 @@ function stoppedMatchKeepsCurrentGameAndPointScore(logger) {
     Test.assert(MatchHistoryStore.isStopped(record));
     Test.assertEqual(-1, record[2]);
     Test.assertEqual(MatchHistoryStore.STATUS_STOPPED, record[7]);
+    Test.assertEqual(6, MatchHistoryStore.getPointTotals(record)[0]);
+    Test.assertEqual(1, MatchHistoryStore.getPointTotals(record)[1]);
 
     var currentState = MatchHistoryStore.getCurrentState(record);
     Test.assertEqual(1, currentState[0]);
@@ -690,14 +712,19 @@ function stoppedMatchKeepsTieBreakState(logger) {
 
 (:test)
 function legacyHistoryRecordsRemainReadable(logger) {
-    Storage.setValue(MatchHistoryStore.HISTORY_KEY, [[
-        1, 0, 0, 123, [[6, 4, false]], [123]
-    ]]);
+    Storage.setValue(MatchHistoryStore.HISTORY_KEY, [
+        [1, 0, 0, 123, [[6, 4, false]], [123]],
+        [1, 0, 0, 125, [[6, 3, false]], [125], 2, 0,
+            [0, 0, 0, 0, false, false]]
+    ]);
 
     var history = MatchHistoryStore.load();
-    Test.assertEqual(1, history.size());
+    Test.assertEqual(2, history.size());
     Test.assert(!MatchHistoryStore.isStopped(history[0]));
     Test.assertEqual(6, history[0].size());
+    Test.assertEqual(9, history[1].size());
+    Test.assert(!MatchHistoryStore.hasPointTotals(history[0]));
+    Test.assert(!MatchHistoryStore.hasPointTotals(history[1]));
     Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
     return true;
 }
@@ -735,10 +762,30 @@ function deletingOnlyHistoryRecordClearsStorage(logger) {
 }
 
 (:test)
+function historyKeepsLatestTwentyPointRecords(logger) {
+    Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
+    var engine = createAdvantageMatch();
+    engine.awardPoint(0);
+
+    for (var index = 1; index <= 21; index += 1) {
+        Test.assert(MatchHistoryStore.saveStopped(engine, index, []));
+    }
+
+    var history = MatchHistoryStore.load();
+    Test.assertEqual(MatchHistoryStore.MAX_HISTORY_SIZE, history.size());
+    Test.assertEqual(2, history[0][3]);
+    Test.assertEqual(21, history[history.size() - 1][3]);
+    Test.assert(MatchHistoryStore.hasPointTotals(history[0]));
+    Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
+    return true;
+}
+
+(:test)
 function historyStatisticsSummarizeCompletedStoppedAndLegacyRecords(logger) {
     var history = [
         [2, 1, 0, 300, [[6, 4, false], [3, 6, false], [10, 8, true]],
-            [100, 220, 300], 2, 0, [0, 0, 0, 0, false, false]],
+            [100, 220, 300], 3, 0, [0, 0, 0, 0, false, false],
+            [80, 70]],
         [0, 1, 1, 120, [[4, 6, false]]],
         [1, 0, -1, 180, [[6, 4, false]], [150], 2, 1,
             [2, 1, 3, 2, false, false]]
@@ -753,6 +800,9 @@ function historyStatisticsSummarizeCompletedStoppedAndLegacyRecords(logger) {
     Test.assertEqual(600, summary[MatchHistoryStatistics.TOTAL_SECONDS]);
     Test.assertEqual(3, summary[MatchHistoryStatistics.SETS_WON]);
     Test.assertEqual(2, summary[MatchHistoryStatistics.SETS_LOST]);
+    Test.assertEqual(1, summary[MatchHistoryStatistics.POINT_DATA_MATCHES]);
+    Test.assertEqual(80, summary[MatchHistoryStatistics.POINTS_WON]);
+    Test.assertEqual(70, summary[MatchHistoryStatistics.POINTS_LOST]);
     Test.assertEqual(50, MatchHistoryStatistics.percentage(1, 2));
     Test.assertEqual(60, MatchHistoryStatistics.percentage(3, 5));
     Test.assertEqual(200, MatchHistoryStatistics.averageDuration(summary));
@@ -765,6 +815,9 @@ function emptyHistoryStatisticsAvoidDivisionByZero(logger) {
     Test.assertEqual(0, summary[MatchHistoryStatistics.TOTAL_MATCHES]);
     Test.assertEqual(0, MatchHistoryStatistics.percentage(0, 0));
     Test.assertEqual(0, MatchHistoryStatistics.averageDuration(summary));
+    Test.assertEqual(0, summary[MatchHistoryStatistics.POINT_DATA_MATCHES]);
+    Test.assertEqual(0, summary[MatchHistoryStatistics.POINTS_WON]);
+    Test.assertEqual(0, summary[MatchHistoryStatistics.POINTS_LOST]);
     return true;
 }
 
@@ -790,9 +843,55 @@ function activeMatchRoundTripRestoresScoreServeAndTime(logger) {
     Test.assertEqual(0, loaded[2].size());
     Test.assertEqual(engine.getPoints()[0], restored.getPoints()[0]);
     Test.assertEqual(engine.getPoints()[1], restored.getPoints()[1]);
+    Test.assertEqual(2, restored.getPointTotals()[0]);
+    Test.assertEqual(1, restored.getPointTotals()[1]);
+    Test.assert(restored.hasCompletePointTotals());
     Test.assertEqual(1, restored.getServerTeam());
     Test.assertEqual(0, restored.getServeSide());
     ActiveMatchStore.clear();
+    return true;
+}
+
+(:test)
+function legacyActiveMatchNeverClaimsCompletePointTotals(logger) {
+    ActiveMatchStore.clear();
+    Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
+    var engine = createAdvantageMatch();
+    engine.awardPoint(0);
+    var legacyState = engine.exportState().slice(0, 15);
+    Storage.setValue(ActiveMatchStore.ACTIVE_KEY, [
+        2,
+        12,
+        [3, ScoringMode.ADVANTAGE, DecidingSetMode.FULL_SET,
+            0, 7, 10, true],
+        legacyState,
+        []
+    ]);
+
+    var loaded = ActiveMatchStore.load();
+    Test.assert(loaded != null);
+    if (loaded == null) {
+        return false;
+    }
+    var restored = loaded[0];
+    Test.assert(!restored.hasCompletePointTotals());
+    Test.assert(restored.awardPoint(1));
+
+    ActiveMatchStore.save(restored, 15, []);
+    var reloaded = ActiveMatchStore.load();
+    Test.assert(reloaded != null);
+    if (reloaded == null) {
+        return false;
+    }
+    restored = reloaded[0];
+    Test.assert(!restored.hasCompletePointTotals());
+    Test.assert(MatchHistoryStore.saveStopped(restored, 15, []));
+    var record = MatchHistoryStore.load()[0];
+    Test.assertEqual(9, record.size());
+    Test.assert(!MatchHistoryStore.hasPointTotals(record));
+
+    ActiveMatchStore.clear();
+    Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
     return true;
 }
 
@@ -894,6 +993,19 @@ function corruptHistoryRecordsAreFiltered(logger) {
 
     var history = MatchHistoryStore.load();
     Test.assertEqual(0, history.size());
+    Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
+    return true;
+}
+
+(:test)
+function corruptV3PointTotalsAreFiltered(logger) {
+    Storage.setValue(MatchHistoryStore.HISTORY_KEY, [[
+        0, 0, -1, 30, [], [], 3, 1,
+        [0, 0, 1, 0, false, false], [1, -1]
+    ]]);
+
+    Test.assertEqual(0, MatchHistoryStore.load().size());
+    Test.assertEqual(0, MatchHistoryStore.load().size());
     Storage.deleteValue(MatchHistoryStore.HISTORY_KEY);
     return true;
 }

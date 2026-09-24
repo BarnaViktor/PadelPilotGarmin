@@ -5,6 +5,8 @@ class ScoringEngine {
 
     var _config;
     var _points;
+    var _pointTotals;
+    var _pointTotalsComplete;
     var _games;
     var _sets;
     var _isTieBreak;
@@ -24,6 +26,8 @@ class ScoringEngine {
     function initialize(config) {
         _config = config;
         _points = [0, 0];
+        _pointTotals = [0, 0];
+        _pointTotalsComplete = true;
         _games = [0, 0];
         _sets = [0, 0];
         _isTieBreak = false;
@@ -51,6 +55,7 @@ class ScoringEngine {
             _history.remove(_history[0]);
         }
 
+        _pointTotals[team] += 1;
         if (_isTieBreak) {
             awardTieBreakPoint(team);
         } else {
@@ -68,6 +73,7 @@ class ScoringEngine {
         var snapshot = _history[_history.size() - 1];
         _history.remove(snapshot);
         _points = snapshot.points;
+        _pointTotals = snapshot.pointTotals;
         _games = snapshot.games;
         _sets = snapshot.sets;
         _isTieBreak = snapshot.tieBreak;
@@ -237,6 +243,14 @@ class ScoringEngine {
         return _points;
     }
 
+    function getPointTotals() {
+        return _pointTotals;
+    }
+
+    function hasCompletePointTotals() {
+        return _pointTotalsComplete;
+    }
+
     function getConfig() {
         return _config;
     }
@@ -383,13 +397,16 @@ class ScoringEngine {
             _serveSideOffset,
             _sideChangePending,
             _receiverSideSelectionPending,
-            _receiverSide == null ? -1 : _receiverSide
+            _receiverSide == null ? -1 : _receiverSide,
+            _pointTotals.slice(0, 2),
+            _pointTotalsComplete
         ];
     }
 
     function restoreState(state) {
         if (!(state instanceof Lang.Array)
-                || (state.size() != 12 && state.size() != 13 && state.size() != 15)
+                || (state.size() != 12 && state.size() != 13
+                    && state.size() != 15 && state.size() != 17)
                 || !isScorePair(state[0]) || !isScorePair(state[1])
                 || !isScorePair(state[2]) || !isScorePair(state[9])
                 || !(state[3] instanceof Lang.Boolean)
@@ -399,8 +416,10 @@ class ScoringEngine {
                 || !(state[10] instanceof Lang.Array)
                 || !isTeam(state[11])
                 || (state.size() >= 13 && !(state[12] instanceof Lang.Boolean))
-                || (state.size() == 15 && (!(state[13] instanceof Lang.Boolean)
-                    || !isTeamOrNone(state[14])))) {
+                || (state.size() >= 15 && (!(state[13] instanceof Lang.Boolean)
+                    || !isTeamOrNone(state[14])))
+                || (state.size() == 17 && (!isScorePair(state[15])
+                    || !(state[16] instanceof Lang.Boolean)))) {
             return false;
         }
 
@@ -418,6 +437,9 @@ class ScoringEngine {
         }
 
         _points = state[0].slice(0, 2);
+        _pointTotals = state.size() == 17
+            ? state[15].slice(0, 2) : [0, 0];
+        _pointTotalsComplete = state.size() == 17 ? state[16] : false;
         _games = state[1].slice(0, 2);
         _sets = state[2].slice(0, 2);
         _isTieBreak = state[3];

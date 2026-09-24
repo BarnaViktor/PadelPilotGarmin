@@ -3,7 +3,7 @@ using Toybox.Lang as Lang;
 
 module ActiveMatchStore {
     const ACTIVE_KEY = "activeMatch";
-    const SCHEMA_VERSION = 2;
+    const SCHEMA_VERSION = 3;
 
     function save(engine, elapsedSeconds, setEndTimes) {
         var config = engine.getConfig();
@@ -33,8 +33,10 @@ module ActiveMatchStore {
         try {
             if (!(stored instanceof Lang.Array)
                     || (stored[0] == 1 && stored.size() != 4)
-                    || (stored[0] == SCHEMA_VERSION && stored.size() != 5)
-                    || (stored[0] != 1 && stored[0] != SCHEMA_VERSION)
+                    || ((stored[0] == 2 || stored[0] == SCHEMA_VERSION)
+                        && stored.size() != 5)
+                    || (stored[0] != 1 && stored[0] != 2
+                        && stored[0] != SCHEMA_VERSION)
                     || !(stored[1] instanceof Lang.Number) || stored[1] < 0
                     || !isValidConfig(stored[2])) {
                 clear();
@@ -52,7 +54,7 @@ module ActiveMatchStore {
                 return null;
             }
             var setEndTimes = [];
-            if (stored[0] == SCHEMA_VERSION) {
+            if (stored[0] == 2 || stored[0] == SCHEMA_VERSION) {
                 if (!isValidSetEndTimes(stored[4], stored[1],
                         engine.getCompletedSets().size())) {
                     clear();

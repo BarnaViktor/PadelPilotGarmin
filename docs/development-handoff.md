@@ -1,17 +1,27 @@
-# Fejlesztési átadás – 2026-09-18
+# Fejlesztési átadás – 2026-09-24
 
 ## Innen folytasd
 
-Aktív munka: **meccstörténet és statisztikák bővítése**. Mivel nincs
-csatlakoztatott tesztóra, a készüléktámogatás release-kapuja változatlanul
-nyitott maradt, és elindult a jóváhagyott második prioritás. Az első
-checkpoint háromlapos, a helyi előzményből számolt összesítést ad az
-előzménylista MENU / hosszan nyomott UP műveletéhez.
+Az első **meccstörténet és statisztika checkpoint lezárult**, a második
+pontstatisztikai checkpoint pedig implementálva és automatikusan ellenőrizve
+van a jelenlegi munkafában. A készüléktámogatás valós órás release-kapuja
+változatlanul nyitott.
 
 Az első checkpoint mutatói: összes/befejezett/félbehagyott meccs,
 győzelem–vereség és arány, szettgyőzelem–szettvereség és arány, valamint
 teljes/átlagos játékidő. Új perzisztens formátum nincs; a számítás a meglévő
 legfeljebb 20 rekordból történik, a régi rekordokkal együtt.
+
+A második checkpoint megtartja a 20 rekordos gördülő korlátot, és az újonnan
+indított meccsekhez megnyert–elvesztett pontot tárol. A négylapos összesítő
+pontlapja ezek összegét, a pontnyerési arányt és a pontadattal rendelkező
+meccsek számát mutatja. A régi előzmények olvashatók, de pontadat hiányában
+nem kerülnek a pontarány nevezőjébe.
+
+FR265 és Enduro profilon 61/61 teszt, optimalizált build és üres előzményes
+natív pontlap-bejárás sikeres. Az FR265 bejárás során talált címke/érték
+átfedéseket a `POINT MATCHES` és `POINT RATE` rövidítések javították. Régi és
+vegyes rekorddal a natív vizuális ismétlés még nyitott.
 
 Új munkamenet elején olvasd el ezt a fájlt és a
 [készüléklistát](supported-devices.md), majd ellenőrizd a `git status` és
@@ -40,15 +50,15 @@ indult el. A többi funkcióbővítés részletes specifikációja későbbi fel
 
 ## Repository-állapot és meglévő implementáció
 
-A 2026-09-18-i AMOLED-ellenőrzés indulásakor a munkafa tiszta volt, a HEAD és
-az `origin` egyaránt:
+A 2026-09-24-i lezárás indulásakor a munkafa tiszta volt, a HEAD és az
+`origin/master` egyaránt:
 
-`003b039` – „eszköztámogatás bővítése”.
+`9f7e3e4` – „további eszköz specifikus fejlesztések, statisztika bővítés elkezdése”.
 
-A készülékellenőrzési szakaszban termékkód és teszt nem változott. A mostani
-statisztikai checkpoint már termékkódot és két új tesztet is hozzáad; commit
-még nem készült. A korábbi képek és helyi segédek a gitignored
-`build/ui-review-2026-09-17/` könyvtárban vannak.
+A commit tartalmazza a statisztikai domainmodult, a háromlapos nézetet és
+delegáltját, az előzménylistás belépést, a két új számítási tesztet, az
+elrendezési bejárást és az addigi dokumentációt. A korábbi képek és helyi
+segédek a gitignored `build/ui-review-2026-09-17/` könyvtárban vannak.
 
 Meglévő implementáció:
 
@@ -60,13 +70,14 @@ Meglévő implementáció:
 - `source/ui/SetupView.mc`: a számérték-szerkesztő ASCII `-` jelet használ,
   mert a natív Enduro fontból hiányzott a korábbi Unicode mínusz.
 - `source/domain/MatchHistoryStatistics.mc`: a helyi rekordokból számolt
-  meccs-, szett- és időösszesítés, külön perzisztens állapot nélkül.
-- `source/ui/MatchHistoryStatsView.mc`: háromlapos összesítő; az
+  meccs-, szett-, idő- és pontösszesítés, külön összesítő-perzisztencia nélkül.
+- `source/ui/MatchHistoryStatsView.mc`: négylapos összesítő; az
   előzménylistáról MENU / hosszan nyomott UP nyitja meg.
 - `source/tests/DisplayLayoutTests.mc`: négy elrendezési teszt; az előzményteszt
-  már a három statisztikalapot is bejárja. A segédek `:debug` jelölésűek.
-- A teljes csomag **57 tesztes**; az új két teszt a vegyes rekordok
-  összesítését és az üres előzményt ellenőrzi.
+  már a négy statisztikalapot is bejárja. A segédek `:debug` jelölésűek.
+- A teljes csomag **61 tesztes**; a pontszámlálás/undo, a régi aktív mentés
+  hiányos pontadatának kizárása, a 20 rekordos korlát és a hibás v3 pontadat
+  szűrése külön tesztet kapott.
 - `scripts/dev.py`: normál build, egységteszt, béta- és produkciós export,
   `--device`, kísérleti készülékekhez `--min-api`, naplók és SHA-256
   build-jegyzőkönyv. A kiadási manifestek továbbra is csak FR265-re szólnak.
@@ -90,19 +101,25 @@ A hat további AMOLED-jelöltön 2026-09-18-án készülékenként 55/55 teszt
 futott le, normál optimalizált PRG is készült, és lezárult a natív
 UI-/gombos bejárás. Részletek: [készüléklista](supported-devices.md).
 
-## 2026-09-18-i statisztikai checkpoint
+## 2026-09-24-én lezárt statisztikai checkpoint
 
-Az FR265 és az első generációs Enduro profilon **57/57 teszt** sikeres.
-Mindkettőhöz elkészült az optimalizált normál build is. Az Enduro futás
-`3.4.0` API-minimumú kísérleti manifestet használt; a régi 128 KiB-os
-profilon a tesztalkalmazás is végigfutott. A fordító csak a korábbról ismert,
-dinamikus konténertípusokra vonatkozó figyelmeztetéseket adta.
+Az FR265 és az első generációs Enduro profilon tiszta `9f7e3e4` commitból
+**57/57 teszt** sikeres, és mindkettőhöz elkészült az optimalizált normál
+build. Az Enduro futás `3.4.0` API-minimumú kísérleti manifestet használt; a
+régi 128 KiB-os profilon a tesztalkalmazás is végigfutott. A fordító csak a
+korábbról ismert, dinamikus konténertípusokra vonatkozó figyelmeztetéseket
+adta. Az első Enduro-próba a szimulátor készülékváltásakor időtúllépett,
+teszteket nem indított; friss szimulátorból az ismétlés hibátlanul lefutott.
 
 Ellenőrzött új esetek: üres lista; új, régi és félbehagyott rekordok vegyes
 összesítése; győzelmi és szettarány; átlagidő; valamint a három új lap
-rajzolási határa 416 × 416 és 280 × 280 képponton. A natív font, körmaszk és
-a MENU / hosszan nyomott UP gomb valós órás ellenőrzése teszteszköz hiányában
-nyitott.
+rajzolási határa 416 × 416 és 280 × 280 képponton. Natív FR265 és Enduro
+szimulátorskin alatt üres és vegyes előzménnyel működött a MENU / hosszan
+nyomott UP megnyitás, az UP/DOWN lapozás és a BACK. A bejárás két valódi
+elrendezési hibát talált és javított: a 280 pixeles időcímke/érték átfedését,
+valamint az FR265 `SET WIN RATE` / `100%` összeérését. A nulla nevezős
+arányok explicit `--` értéket kapnak. Valós órás ismétlés teszteszköz
+hiányában továbbra is nyitott.
 
 ## 2026-09-17-i natív szimulátoros eredmények
 
@@ -218,12 +235,12 @@ a helyreállítás bizonyítékaként a `62`–`64`, `68` és `69` képeket hasz
 
 ## Következő konkrét munkalépések
 
-1. A statisztikai lapokat járd be natív FR265 és Enduro szimulátorskin alatt:
-   üres és vegyes előzmény, MENU / hosszan nyomott UP megnyitás, UP/DOWN
-   lapozás és BACK. Valós órán ismételd meg, amikor lesz teszteszköz.
-2. A következő történeti checkpoint előtt döntsd el, szükséges-e a 20
-   rekordos helyi korlát bővítése, illetve mely új, mentendő mérőszám indokol
-   rekordformátum-migrációt. A jelenlegi összesítésekhez migráció nem kell.
+1. Járd végig a négylapos statisztikai nézet új pontlapját natív FR265 és
+   Enduro szimulátorskin alatt üres, csak régi és vegyes v2/v3 előzménnyel;
+   ellenőrizd az UP/DOWN lapozást, a `--` arányt és a BACK-et.
+2. A következő funkciócheckpoint előtt zárd le vagy tudatosan hagyd nyitva a
+   pontlap natív vizuális kapuját. A 20 rekordos korlátot és a v1/v2/v3
+   olvashatóságot ne változtasd új mérési indok nélkül.
 3. Ha rendelkezésre állnak a készülékek, folytasd a teljes valós órás
    meccs-, FIT-, Garmin Connect-, olvashatósági és akkumulátorpróbát. Csak az
    adott modell kapujának teljesítése után bővítsd a release manifestet.
@@ -278,3 +295,21 @@ könyvtárakban vannak.
 
 Az `1.1.0` verziószám változatlan; új Store-kiadás ebben a munkamenetben
 nem történt.
+
+A második checkpoint jelenlegi munkafából készült ellenőrzései:
+
+- FR265: `build/test-1.1.0-fr265-srxsolfx` – 61/61;
+  `build/build-1.1.0-fr265-q6du_ayf` – 49 436 bájt, SHA-256
+  `3f4498270aee0c70e69f6dcd8b1f10c58dacb92d191ee48f10f03b2ae406d949`.
+- Enduro: `build/test-1.1.0-enduro-wa6a9g03` – 61/61;
+  `build/build-1.1.0-enduro-tdx2w90n` – 54 396 bájt, SHA-256
+  `e088f5352d0af692e17d51d65b187198cc3e71a1c0b6cd8054d40000e1478972`.
+
+A lezáró, tiszta `9f7e3e4` futások:
+
+- FR265: `build/test-1.1.0-fr265-0ego__3a` – 57/57;
+  `build/build-1.1.0-fr265-8yepxtke` – 48 348 bájt, SHA-256
+  `579713ef6bf9dd8d7161d886258ed755598167474c85d5bce065f85618dae3f0`.
+- Enduro: `build/test-1.1.0-enduro-bo3u0sky` – 57/57;
+  `build/build-1.1.0-enduro-q3ggb7f5` – 52 892 bájt, SHA-256
+  `3bdf9303981e1146278a0a98d7dc3012466b94b164555220f9296c0b70ceb89a`.

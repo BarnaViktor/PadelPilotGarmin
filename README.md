@@ -131,6 +131,9 @@ Beállítás:
 - START GAME menüponton START: meccs indítása.
 - MATCH HISTORY menüponton START: a legutóbbi lezárt vagy félbehagyva mentett
   meccsek megnyitása;
+- az előzménylistán MENU / hosszan nyomott UP: a négylapos összesített
+  meccs-, szett-, idő- és pontstatisztika megnyitása; a pontlap csak az új,
+  teljes pontadattal mentett meccseket számolja;
 - az előzmény részletein START: az adott rekord törlése megerősítés után.
 
 Alkalmazás-újraindítás után:
@@ -189,8 +192,9 @@ az első kerül feldolgozásra.
 A saját használatra bevált `1.1.0` után a jóváhagyott bővítési sorrend:
 
 1. további Garmin órák támogatása, az Enduro / Enduro 2 / Enduro 3
-   modellekkel együtt – aktív fejlesztési egység;
-2. meccstörténet és statisztikák;
+   modellekkel együtt – a szimulátoros kör kész, a valós órás kapu nyitott;
+2. meccstörténet és statisztikák – a meccs/szett/idő összesítő után a
+   pontstatisztikai checkpoint is implementálva és automatikusan ellenőrizve;
 3. Americano / Mexicano játékmód;
 4. Instinct 2 támogatása, külön monokróm grafikai adaptációval;
 5. saját szinkron és webes felület.
