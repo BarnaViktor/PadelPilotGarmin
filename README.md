@@ -201,4 +201,7 @@ A saját használatra bevált `1.1.0` után a jóváhagyott bővítési sorrend:
 
 Részletek: [docs/development-roadmap.md](docs/development-roadmap.md)
 
+Kis kontextusablakban, egyenként indítható következő egységek:
+[docs/next-work-units.md](docs/next-work-units.md).
+
 Új fejlesztői munkamenethez: [átadási jegyzet](docs/development-handoff.md).

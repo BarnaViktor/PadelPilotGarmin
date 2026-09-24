@@ -28,6 +28,12 @@ vegyes rekorddal a natív vizuális ismétlés még nyitott.
 `git log -1` eredményét. A már lezárt Enduro-szimulátoros kört ne kezdd újra,
 hacsak az érintett UI-kód nem változik.
 
+A hátralévő munka kis kontextusú, egyenként indítható egységei:
+[következő munkamenetek](next-work-units.md). A közvetlen következő egység
+`S2-V1`; valós tesztóra rendelkezésre állásakor külön `S2-V2` vagy egyetlen
+`D-<device-id>` egység indítható. Egy munkamenetben ne vonj össze több
+azonosítót.
+
 ## Felhasználói döntések és sorrend
 
 Az **éles 1.1.0 használatban van**. A felhasználó működési hibát vagy zavaró
@@ -235,15 +241,17 @@ a helyreállítás bizonyítékaként a `62`–`64`, `68` és `69` képeket hasz
 
 ## Következő konkrét munkalépések
 
-1. Járd végig a négylapos statisztikai nézet új pontlapját natív FR265 és
-   Enduro szimulátorskin alatt üres, csak régi és vegyes v2/v3 előzménnyel;
-   ellenőrizd az UP/DOWN lapozást, a `--` arányt és a BACK-et.
-2. A következő funkciócheckpoint előtt zárd le vagy tudatosan hagyd nyitva a
-   pontlap natív vizuális kapuját. A 20 rekordos korlátot és a v1/v2/v3
-   olvashatóságot ne változtasd új mérési indok nélkül.
-3. Ha rendelkezésre állnak a készülékek, folytasd a teljes valós órás
-   meccs-, FIT-, Garmin Connect-, olvashatósági és akkumulátorpróbát. Csak az
-   adott modell kapujának teljesítése után bővítsd a release manifestet.
+1. `S2-V1`: járd végig a négylapos statisztikát régi és vegyes v2/v3
+   előzménnyel FR265 és Enduro szimulátorskin alatt.
+2. `S2-V2`: csak elérhető tesztórával ellenőrizd a valós pontösszesítést.
+3. Ezután `AM-1`: rögzítsd az Americano/Mexicano termék- és
+   szabálydöntéseit; ebben az egységben még ne írj termékkódot.
+4. A készülékteszteket modellenként külön `D-<device-id>` egységben végezd;
+   csak sikeres valós órás kapu után bővíts release manifestet.
+
+A részletes inputok, korlátok és elfogadási feltételek a
+[kis kontextusú feladatbontásban](next-work-units.md) vannak; mindig csak egy
+azonosítót indíts.
 
 ## Parancsok és helyi bizonyítékok
 

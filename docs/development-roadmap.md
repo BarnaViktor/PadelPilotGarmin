@@ -278,6 +278,10 @@ szimulátoros ismétlés még nyitott.
 
 ## Codex munkamenet egy checkpointon belül
 
+A további feladatok kis, önálló kontextusablakokra bontott azonosítói,
+bemenetei és elfogadási kapui:
+[következő munkamenetek](next-work-units.md).
+
 1. kiválasztunk egy szűk, ellenőrizhető célt;
 2. rögzítjük az elfogadási feltételeket;
 3. Codex implementálja a kódot és a teszteket;
