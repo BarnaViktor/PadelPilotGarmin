@@ -107,7 +107,20 @@ A `beta` és `release` továbbra is a saját kiadási manifestjükben felsorolt
 készülékekre exportál; ezeknél a `--device` nem használható.
 A készülékenkénti előrehaladás: [támogatott készülékek](docs/supported-devices.md).
 
-A `test` előtt nyisd meg a Connect IQ szimulátort. A tesztek annak helyi
+A `test` előtt indítsd el a Connect IQ szimulátort. Ezen a KDE-s Linux gépen
+a háttérben, külön virtuális kijelzőn és hang nélkül is futtatható:
+
+```bash
+python3 scripts/simulator_bg.py start
+python3 scripts/dev.py test --device enduro --min-api 3.4.0
+python3 scripts/simulator_bg.py status
+python3 scripts/simulator_bg.py stop
+```
+
+A háttérpéldány nem jelenik meg az asztalon, ezért nem veszi el a fókuszt a
+gépeléstől. A hangkapcsolat csak ennél a folyamatnál tiltott; a böngésző
+hangbeállítását nem módosítja. A futási naplók a gitignored
+`build/simulator-bg/` könyvtárban vannak. A tesztek a szimulátor helyi
 tesztadatait módosítják. A `beta` és `release` ellenőrzéshez `7z` vagy `7zz`
 szükséges. Ezek a parancsok helyi csomagokat készítenek; a Store-beküldés a
 [kiadási ellenőrzőlista](store/release-checklist.md) szerinti külön lépés.

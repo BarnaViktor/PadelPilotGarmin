@@ -26,6 +26,9 @@ Commit és push csak a felhasználó kifejezett kérésére történjen.
 
 ### S2-V1 – Vegyes rekordok natív szimulátoros bejárása
 
+**Állapot:** kész (2026-09-25), FR265 és Enduro; eredmények és képek a
+`development-handoff.md` fájlban és a gitignored `build/s2-v1-review/` alatt.
+
 **Cél:** a v1/v2 rekordok és az új v3 pontrekordok együttes megjelenésének
 vizuális ellenőrzése FR265 és Enduro skinen.
 
@@ -52,6 +55,12 @@ miatti vágás 416 × 416 és 280 × 280 képponton.
 **Ne módosítsd:** rekordformátum, 20-as korlát, release manifest.
 
 ### S2-V2 – Valós órás pontstatisztika
+
+**Állapot:** FR265-re béta build felmásolva; az órás indítás és alapműködés
+sikeres. A pontsorozat, újraindítás és törlés mérése még nyitott.
+
+Az ismételhető gombsor és az elvárt értékek:
+[valós órás pontstatisztikai próba](s2-v2-real-watch-point-test.md).
 
 **Feltétel:** rendelkezésre áll FR265 vagy valamelyik cél-Enduro.
 

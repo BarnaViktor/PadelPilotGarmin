@@ -1,11 +1,12 @@
-# Fejlesztési átadás – 2026-09-24
+# Fejlesztési átadás – 2026-09-25
 
 ## Innen folytasd
 
 Az első **meccstörténet és statisztika checkpoint lezárult**, a második
-pontstatisztikai checkpoint pedig implementálva és automatikusan ellenőrizve
-van a jelenlegi munkafában. A készüléktámogatás valós órás release-kapuja
-változatlanul nyitott.
+pontstatisztikai checkpoint implementálva, automatikusan ellenőrizve, és a
+vegyes rekordos natív szimulátoros bejárása (`S2-V1`) is kész. A valós órás
+pontstatisztikai próba (`S2-V2`) és a készüléktámogatás valós órás
+release-kapuja továbbra is nyitott.
 
 Az első checkpoint mutatói: összes/befejezett/félbehagyott meccs,
 győzelem–vereség és arány, szettgyőzelem–szettvereség és arány, valamint
@@ -21,7 +22,7 @@ nem kerülnek a pontarány nevezőjébe.
 FR265 és Enduro profilon 61/61 teszt, optimalizált build és üres előzményes
 natív pontlap-bejárás sikeres. Az FR265 bejárás során talált címke/érték
 átfedéseket a `POINT MATCHES` és `POINT RATE` rövidítések javították. Régi és
-vegyes rekorddal a natív vizuális ismétlés még nyitott.
+vegyes rekorddal a natív vizuális ismétlés 2026-09-25-én lezárult.
 
 Új munkamenet elején olvasd el ezt a fájlt és a
 [készüléklistát](supported-devices.md), majd ellenőrizd a `git status` és
@@ -29,10 +30,60 @@ vegyes rekorddal a natív vizuális ismétlés még nyitott.
 hacsak az érintett UI-kód nem változik.
 
 A hátralévő munka kis kontextusú, egyenként indítható egységei:
-[következő munkamenetek](next-work-units.md). A közvetlen következő egység
-`S2-V1`; valós tesztóra rendelkezésre állásakor külön `S2-V2` vagy egyetlen
-`D-<device-id>` egység indítható. Egy munkamenetben ne vonj össze több
-azonosítót.
+[következő munkamenetek](next-work-units.md). A pontos következő egység
+`S2-V2`, ha FR265 vagy cél-Enduro tesztóra rendelkezésre áll. Egy
+munkamenetben ne vonj össze több azonosítót.
+
+Az `S2-V2` valós órás próbához a
+[részletes mérési lap](s2-v2-real-watch-point-test.md) elkészült: rövid
+félbehagyott meccs undo-val és újraindítással, majd 6–0-s lezárt meccs,
+végül a félbehagyott rekord törlése. 2026-09-25-én a felhasználó FR265 órát
+csatlakoztatott. A külön béta alkalmazásazonosítójú, aktuális 1.1.0 tesztbuild
+elkészült és USB/MTP-n az óra `GARMIN/Apps` mappájába került. A PRG-t
+visszaolvastuk; SHA-256 egyezett. A pontos azonosítók a mérési lapon vannak.
+A felhasználó az órán ellenőrizte az alkalmazás indulását és alapműködését;
+ez sikeres. A pontos `S2-V2` pontsorozatot, újraindítást és törlést még nem
+járta végig, így az elfogadási értékek nyitottak. A következő azonosító
+továbbra is `S2-V2`.
+
+Az FR265 béta alkalmazás kiinduló, meccs nélküli állapotában a felhasználó
+`MATCHES 0`, `POINT MATCHES 0` és pont W–L `0–0` értéket olvasott le.
+Az idő hiányában a részletes órás tesztet ma nem végezte el; a munkamenet
+lezárását, commitot és push-t kérte. Következő munkamenetben az `S2-V2`
+mérési lap **1. Félbehagyott meccs: 3–1 pont** szakaszával folytasd a béta
+alkalmazásban. A 24–0-s lezárt meccs és a törlési próba ezután következik.
+Az `S2-V2` sikerét csak a tényleges kijelzett értékek birtokában rögzítsd.
+
+## 2026-09-25 – S2-V1 lezárva
+
+A kizárólag fejlesztői célú, induláskor betöltött előzmény három rekordból
+állt: egy v1 vereség (120 s), egy v2 félbehagyott meccs (180 s) és egy v3
+győzelem (300 s, 80–70 pont). Az FR265 és az eredeti Enduro natív
+szimulátorskinjén az előzménylistáról hosszan nyomott UP megnyitotta az
+összesítőt. Mind a négy lapot, a DOWN és UP körbelapozást, valamint a BACK
+visszalépést képernyőképpel ellenőriztük.
+
+Mindkét profilon azonos, helyes értékek jelentek meg: 3 meccs, 2 befejezett,
+1 félbehagyott; 1–1 meccs, 50%; 3–2 szett, 60%; 10m teljes és 3m átlagos
+idő; 80–70 pont, 53% és `POINT MATCHES 1`. A pontarány nevezőjébe csak a v3
+rekord került. Szövegátfedést vagy körmaszk miatti levágást a 416 × 416 és
+280 × 280 pixeles natív nézeten nem láttunk. Az Enduro legnagyobb kijelzett
+memóriahasználata ezen a bejáráson 55,1 / 123,8 kB volt.
+
+A képek: `build/s2-v1-review/fr265-all-pages.png`,
+`build/s2-v1-review/enduro-all-pages.png`, valamint a könyvtárban a
+körbelapozás és BACK egyedi képei. A vegyes előzményt csak a két helyi
+ellenőrző PRG-be tett ideiglenes indítási tesztadat állította elő; a forrás
+és a szimulátor beállítása visszaállt, a létrehozott átmeneti appadatok
+törölve. A pontos rekordhármas a
+`ScoringEngineTests.mc` `historyStatisticsSummarizeCompletedStoppedAndLegacyRecords`
+tesztjében van; megismétléskor ezt kizárólag fejlesztői buildben kell a
+`matchHistory` kulcsra betölteni. Termékkód, rekordformátum, 20-as korlát és
+release manifest nem változott. A korábbi 61/61 automatikus tesztet nem
+ismételtük, mert a visszaállított termékkód változatlan.
+
+Az első Enduro-váltáskor a szimulátor beragadt; friss példányból a natív
+bejárás sikerült. A következő azonosító `S2-V2`, valós tesztórával.
 
 ## Felhasználói döntések és sorrend
 
@@ -241,12 +292,10 @@ a helyreállítás bizonyítékaként a `62`–`64`, `68` és `69` képeket hasz
 
 ## Következő konkrét munkalépések
 
-1. `S2-V1`: járd végig a négylapos statisztikát régi és vegyes v2/v3
-   előzménnyel FR265 és Enduro szimulátorskin alatt.
-2. `S2-V2`: csak elérhető tesztórával ellenőrizd a valós pontösszesítést.
-3. Ezután `AM-1`: rögzítsd az Americano/Mexicano termék- és
+1. `S2-V2`: csak elérhető tesztórával ellenőrizd a valós pontösszesítést.
+2. Ezután `AM-1`: rögzítsd az Americano/Mexicano termék- és
    szabálydöntéseit; ebben az egységben még ne írj termékkódot.
-4. A készülékteszteket modellenként külön `D-<device-id>` egységben végezd;
+3. A készülékteszteket modellenként külön `D-<device-id>` egységben végezd;
    csak sikeres valós órás kapu után bővíts release manifestet.
 
 A részletes inputok, korlátok és elfogadási feltételek a
@@ -254,6 +303,18 @@ A részletes inputok, korlátok és elfogadási feltételek a
 azonosítót indíts.
 
 ## Parancsok és helyi bizonyítékok
+
+### Háttérszimulátor a 2026-09-25-i munkamenettől
+
+A helyi KDE gépen az automatizált Connect IQ tesztekhez a
+`scripts/simulator_bg.py` külön virtuális KWin/Xwayland kijelzőn indítja a
+szimulátort. Az ablak nem kerül a munkasztalra, a `PULSE_SERVER` csak a
+szimulátornál elérhetetlen címet kap, így nincs új szimulátoros hangfolyam.
+A `start`, `status`, `stop` parancsok a gitignored `build/simulator-bg/`
+állapotfájlt és naplókat használják. `start` után a `scripts/dev.py test`
+változatlanul használható. Az Enduro profil 61/61 tesztje így sikerült; a
+gazdaasztal aktív ablaka a futás alatt nem változott, a hangfolyamok között
+csak a Chrome szerepelt. Natív képernyőképhez látható szimulátor szükséges.
 
 A helyi SDK-t a Garmin SDK Manager konfigurációja jelöli; a `scripts/dev.py`
 a gitignored `docs/developer_key` fájlt használja. A kulcsot ne olvasd ki és
