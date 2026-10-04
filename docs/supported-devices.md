@@ -1,12 +1,39 @@
 # Támogatott készülékek
 
-Az **1.2.0 stabil kiadás** továbbra is csak a **Forerunner 265** modellt
-hirdeti és exportálja. Az Enduro és a többi profil kísérleti marad.
-Az 1.2.0 csomag és friss ellenőrzések: [kiadási jegyzet](releases/1.2.0.md).
-Az alábbi dátumozott ellenőrzések korábbi checkpointokat dokumentálnak.
+Az **1.2.0 stabil kiadás** a felhasználó kifejezett kiadási döntése alapján
+a korábban szimulátorban tesztelt készülékeket is támogatja és exportálja.
+A produkciós és béta manifest ugyanazt a tíz SDK-profilt tartalmazza;
+az API-minimum 3.4.0 az első Enduro támogatásához.
+
+| SDK-azonosító | Támogatott modell / közös Garmin-profil |
+|---|---|
+| `fr265` | Forerunner 265 |
+| `d2mach1` | D2 Mach 1 |
+| `epix2` | epix (Gen 2), quatix 7 Sapphire |
+| `epix2pro47mm` | epix Pro (Gen 2) 47 mm, quatix 7 Pro |
+| `fenix843mm` | fēnix 8 AMOLED 43 mm |
+| `fenixe` | fēnix E |
+| `instinct3amoled50mm` | Instinct 3 AMOLED 50 mm |
+| `enduro` | Enduro |
+| `fenix7x` | fēnix 7X, tactix 7, quatix 7X Solar, Enduro 2 |
+| `enduro3` | Enduro 3 |
+
+A közös profilok modellváltozataihoz az SDK exportálja a megfelelő
+termékazonosítókat; nincs külön `enduro2` azonosító. A Forerunner 265S,
+az Instinct 2 és a listán nem szereplő méretváltozatok nem részei ennek
+a kiadásnak.
+
+A friss, készülékenkénti 1.2.0 fordítási és regressziós bizonyítékok a
+[kiadási jegyzetben](releases/1.2.0.md) és a kiadási mappa `devices/`
+almappájában találhatók. A valós órás, FIT-/Connect- és akkumulátorpróbák
+állapota külön követendő; a korábbi dokumentumokban előírt valós órás
+felvételi kaput a felhasználó az 1.2.0 ezen bővítésére felülírta.
+
+Az alábbi dátumozott ellenőrzések korábbi checkpointokat és az akkori
+kiadási korlátozásokat dokumentálják.
 
 
-## Éles támogatás és aktív bővítés
+## Korábbi FR265-központú támogatás és bővítési terv
 
 A jelenlegi fejlesztési, szimulátoros és első Store-kiadási célkészülék:
 
@@ -244,8 +271,8 @@ python3 scripts/dev.py build --device epix2
 python3 scripts/dev.py test --device epix2
 python3 scripts/dev.py build --device fenix7x  # Enduro 2
 python3 scripts/dev.py test --device enduro3
-python3 scripts/dev.py build --device enduro --min-api 3.4.0
-python3 scripts/dev.py test --device enduro --min-api 3.4.0
+python3 scripts/dev.py build --device enduro
+python3 scripts/dev.py test --device enduro
 ```
 
 A `--device` a táblázat bármely készülékazonosítójával használható.
@@ -264,7 +291,11 @@ Az eltérő felbontású órák a következő UI-adaptációs körbe kerülnek.
 A jelenlegi nézetekben sok rögzített koordináta van, ezért például a
 360 × 360-as Forerunner 265S támogatásához önmagában a fordítás nem elég.
 
-## Új készülék felvételi kapuja
+## További készülékek felvételi kapuja
+
+Az 1.2.0 fent felsorolt modelljeire a felhasználó szimulátoros bizonyítékra
+alapozott kiadást kért. Az alábbi kapu további, még fel nem vett modellekre
+vonatkozik.
 
 Egy jelölt csak akkor kerülhet a kiadási manifestbe, ha:
 

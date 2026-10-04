@@ -1,0 +1,383 @@
+------------------------------------------------------------------------------
+Executing test matchDetailsDistinguishStatisticsAndMissingPointData...
+PASS
+------------------------------------------------------------------------------
+Executing test enduroSetupLayoutsStayWithinDisplay...
+PASS
+------------------------------------------------------------------------------
+Executing test enduroMatchLayoutsStayWithinDisplay...
+PASS
+------------------------------------------------------------------------------
+Executing test enduroHistoryLayoutsStayWithinDisplay...
+PASS
+------------------------------------------------------------------------------
+Executing test amoledLayoutsStayWithinDisplay...
+PASS
+------------------------------------------------------------------------------
+Executing test setupModesCancelAndKeepHiddenSettings...
+PASS
+------------------------------------------------------------------------------
+Executing test setupPointFieldsCancelAndTargetUsesSingleSteps...
+PASS
+------------------------------------------------------------------------------
+Executing test setupStartsFreshEngineWithEveryPointCombination...
+PASS
+------------------------------------------------------------------------------
+Executing test setupPhysicalButtonsSaveAndCancelAcrossModes...
+PASS
+------------------------------------------------------------------------------
+Executing test setupLabelsShowModesRulesAndFrozenStartSettings...
+PASS
+------------------------------------------------------------------------------
+Executing test pointMatchTotalBoundaryAndRejectedPoints...
+PASS
+------------------------------------------------------------------------------
+Executing test pointMatchDrawUndoAndAlternateWinner...
+PASS
+------------------------------------------------------------------------------
+Executing test pointMatchTeamTargetNeedsNoTwoPointMargin...
+PASS
+------------------------------------------------------------------------------
+Executing test pointMatchSameScoreHasDifferentCompletion...
+PASS
+------------------------------------------------------------------------------
+Executing test pointMatchCustomOddAndEvenTargets...
+PASS
+------------------------------------------------------------------------------
+Executing test pointMatchNewMatchAndSinglePointTarget...
+PASS
+------------------------------------------------------------------------------
+Executing test pointMatchUndoFollowsLastPointAndBranch...
+PASS
+------------------------------------------------------------------------------
+Executing test pointMatchUndoKeepsOnlyLastTwentyPoints...
+PASS
+------------------------------------------------------------------------------
+Executing test pointMatchRejectsInvalidSettings...
+PASS
+------------------------------------------------------------------------------
+Executing test pointMatchInvalidPointPreservesScoreResultAndUndo...
+PASS
+------------------------------------------------------------------------------
+Executing test pointMatchStateIsIndependentAndScoresAreDefensiveCopies...
+PASS
+------------------------------------------------------------------------------
+Executing test pointStateRestoreValidatesBeforeChangingScoreOrUndo...
+PASS
+------------------------------------------------------------------------------
+Executing test pointStateRestoreChecksTeamTargetAndMaximumNumber...
+PASS
+------------------------------------------------------------------------------
+Executing test pointActiveRoundTripRecoversEveryModeRuleAndStartingTeam...
+PASS
+------------------------------------------------------------------------------
+Executing test pointRecoveryPreservesFractionsAndExcludesRestartAndPauseTime...
+PASS
+------------------------------------------------------------------------------
+Executing test pointRecoveryRetainsWinLossDrawAndFrozenResultTime...
+PASS
+------------------------------------------------------------------------------
+Executing test corruptPointSavesClearOnlyActiveStorage...
+PASS
+------------------------------------------------------------------------------
+Executing test classicActiveVersionsRemainReadableBesidePointSchema...
+PASS
+------------------------------------------------------------------------------
+Executing test pointLivePersistenceFollowsPointsUndoPauseStopAndDiscard...
+PASS
+------------------------------------------------------------------------------
+Executing test pointRecoveryLabelsAndLargeScoresFitBothDisplays...
+PASS
+------------------------------------------------------------------------------
+Executing test pointSessionCompletesEveryModeRuleAndStartingTeam...
+PASS
+------------------------------------------------------------------------------
+Executing test pointSessionDebouncesAcrossTeamsAndAllowsCorrection...
+PASS
+------------------------------------------------------------------------------
+Executing test pointSessionPauseAndResultExcludeInactiveTime...
+PASS
+------------------------------------------------------------------------------
+Executing test pointSessionLimitsUndoDuringLongLiveMatch...
+PASS
+------------------------------------------------------------------------------
+Executing test pointLiveButtonsPauseConfirmCancelAndUndoResult...
+PASS
+------------------------------------------------------------------------------
+Executing test pointLiveTimerFollowsVisibilityPauseFinishAndUndo...
+PASS
+------------------------------------------------------------------------------
+Executing test pointLiveLayoutsAndResultsFitBothDisplays...
+PASS
+------------------------------------------------------------------------------
+Executing test pointInputGuardRejectsRapidRepeatedInput...
+PASS
+------------------------------------------------------------------------------
+Executing test pointInputGuardResetAllowsImmediateCorrection...
+PASS
+------------------------------------------------------------------------------
+Executing test pointInputGuardRecoversAfterTimerWrap...
+PASS
+------------------------------------------------------------------------------
+Executing test undoHistoryRemainsBoundedDuringLongMatch...
+PASS
+------------------------------------------------------------------------------
+Executing test advantageReturnsToDeuce...
+PASS
+------------------------------------------------------------------------------
+Executing test noAdDecidingPointCompletesGame...
+PASS
+------------------------------------------------------------------------------
+Executing test setEndsAtSixFour...
+PASS
+------------------------------------------------------------------------------
+Executing test regularTieBreakEndsSet...
+PASS
+------------------------------------------------------------------------------
+Executing test decidingMatchTieBreakStartsAtOneSetAll...
+PASS
+------------------------------------------------------------------------------
+Executing test startingServerIsApplied...
+PASS
+------------------------------------------------------------------------------
+Executing test serverChangesAfterGame...
+PASS
+------------------------------------------------------------------------------
+Executing test serverSlotChangesOnTeamNextServiceGame...
+PASS
+------------------------------------------------------------------------------
+Executing test tieBreakServeOrderUsesOneThenTwoPoints...
+PASS
+------------------------------------------------------------------------------
+Executing test nextSetStartsWithNextServerAfterSixFour...
+PASS
+------------------------------------------------------------------------------
+Executing test decidingMatchTieBreakHonorsTwoPointMargin...
+PASS
+------------------------------------------------------------------------------
+Executing test noAdDecidingPointCanBeWonByEitherTeam...
+PASS
+------------------------------------------------------------------------------
+Executing test noAdDecidingPointDoesNotInterruptPlay...
+PASS
+------------------------------------------------------------------------------
+Executing test undoNoAdDecidingPointRestoresDeuce...
+PASS
+------------------------------------------------------------------------------
+Executing test undoRestoresCompleteStateAfterSet...
+PASS
+------------------------------------------------------------------------------
+Executing test undoRestoresPreviousState...
+PASS
+------------------------------------------------------------------------------
+Executing test pointTotalsTrackAcceptedInputAndUndo...
+PASS
+------------------------------------------------------------------------------
+Executing test serverTeamCanBeChangedWhilePaused...
+PASS
+------------------------------------------------------------------------------
+Executing test manualTieBreakServerChangeKeepsRotation...
+PASS
+------------------------------------------------------------------------------
+Executing test setupEditorSavesAndCancelsValues...
+PASS
+------------------------------------------------------------------------------
+Executing test startGameItemCannotBeEdited...
+PASS
+------------------------------------------------------------------------------
+Executing test serveSideAlternatesEveryPointAndResetsWithGame...
+PASS
+------------------------------------------------------------------------------
+Executing test serveSideCanBeSelectedAndKeepsAlternating...
+PASS
+------------------------------------------------------------------------------
+Executing test pointInputContinuesAfterOddGame...
+PASS
+------------------------------------------------------------------------------
+Executing test sideChangeIsNotRequiredAfterEvenGame...
+PASS
+------------------------------------------------------------------------------
+Executing test tieBreakContinuesAfterEverySixPoints...
+PASS
+------------------------------------------------------------------------------
+Executing test regularTieBreakSetEndDoesNotBlockNextSet...
+PASS
+------------------------------------------------------------------------------
+Executing test undoRestoresStateAfterGame...
+PASS
+------------------------------------------------------------------------------
+Executing test completedSetScoreIsStoredAndUndoRestoresIt...
+PASS
+------------------------------------------------------------------------------
+Executing test completedMatchCanBeSavedLocally...
+PASS
+------------------------------------------------------------------------------
+Executing test stoppedMatchKeepsCurrentGameAndPointScore...
+PASS
+------------------------------------------------------------------------------
+Executing test stoppedMatchKeepsTieBreakState...
+PASS
+------------------------------------------------------------------------------
+Executing test legacyHistoryRecordsRemainReadable...
+PASS
+------------------------------------------------------------------------------
+Executing test historyDeletionUsesStorageIndexAndPreservesOrder...
+PASS
+------------------------------------------------------------------------------
+Executing test deletingOnlyHistoryRecordClearsStorage...
+PASS
+------------------------------------------------------------------------------
+Executing test historyKeepsLatestTwentyPointRecords...
+PASS
+------------------------------------------------------------------------------
+Executing test historyStatisticsSummarizeCompletedStoppedAndLegacyRecords...
+PASS
+------------------------------------------------------------------------------
+Executing test emptyHistoryStatisticsAvoidDivisionByZero...
+PASS
+------------------------------------------------------------------------------
+Executing test activeMatchRoundTripRestoresScoreServeAndTime...
+PASS
+------------------------------------------------------------------------------
+Executing test legacyActiveMatchNeverClaimsCompletePointTotals...
+PASS
+------------------------------------------------------------------------------
+Executing test activeMatchRoundTripDoesNotRestoreSideChangeBlock...
+PASS
+------------------------------------------------------------------------------
+Executing test activeMatchRoundTripKeepsNoAdPlayContinuous...
+PASS
+------------------------------------------------------------------------------
+Executing test restoredNoAdDeuceDoesNotRequireReceiverChoice...
+PASS
+------------------------------------------------------------------------------
+Executing test corruptActiveMatchIsDiscardedSafely...
+PASS
+------------------------------------------------------------------------------
+Executing test corruptHistoryRecordsAreFiltered...
+PASS
+------------------------------------------------------------------------------
+Executing test corruptV3PointTotalsAreFiltered...
+PASS
+------------------------------------------------------------------------------
+Executing test fitSetScoreLabelContainsEveryCompletedSet...
+PASS
+------------------------------------------------------------------------------
+Executing test fitStoppedScoreContainsCurrentGameAndPoints...
+PASS
+------------------------------------------------------------------------------
+Executing test fitStoppedScoreIdentifiesTieBreak...
+PASS
+------------------------------------------------------------------------------
+Executing test fitLapIsFlushedOnSetWinningPoint...
+PASS
+------------------------------------------------------------------------------
+Executing test fitSetFeedbackCanFireAgainAfterWinningPointUndo...
+PASS
+------------------------------------------------------------------------------
+Executing test recoveredFitSegmentDoesNotRepeatCompletedSetOnNextPoint...
+PASS
+------------------------------------------------------------------------------
+Executing test fitSessionStartsRecordsAndDiscards...
+PASS
+
+==============================================================================
+RESULTS
+Test:                                                         Status:
+matchDetailsDistinguishStatisticsAndMissingPointData          PASS
+enduroSetupLayoutsStayWithinDisplay                           PASS
+enduroMatchLayoutsStayWithinDisplay                           PASS
+enduroHistoryLayoutsStayWithinDisplay                         PASS
+amoledLayoutsStayWithinDisplay                                PASS
+setupModesCancelAndKeepHiddenSettings                         PASS
+setupPointFieldsCancelAndTargetUsesSingleSteps                PASS
+setupStartsFreshEngineWithEveryPointCombination               PASS
+setupPhysicalButtonsSaveAndCancelAcrossModes                  PASS
+setupLabelsShowModesRulesAndFrozenStartSettings               PASS
+pointMatchTotalBoundaryAndRejectedPoints                      PASS
+pointMatchDrawUndoAndAlternateWinner                          PASS
+pointMatchTeamTargetNeedsNoTwoPointMargin                     PASS
+pointMatchSameScoreHasDifferentCompletion                     PASS
+pointMatchCustomOddAndEvenTargets                             PASS
+pointMatchNewMatchAndSinglePointTarget                        PASS
+pointMatchUndoFollowsLastPointAndBranch                       PASS
+pointMatchUndoKeepsOnlyLastTwentyPoints                       PASS
+pointMatchRejectsInvalidSettings                              PASS
+pointMatchInvalidPointPreservesScoreResultAndUndo             PASS
+pointMatchStateIsIndependentAndScoresAreDefensiveCopies       PASS
+pointStateRestoreValidatesBeforeChangingScoreOrUndo           PASS
+pointStateRestoreChecksTeamTargetAndMaximumNumber             PASS
+pointActiveRoundTripRecoversEveryModeRuleAndStartingTeam      PASS
+pointRecoveryPreservesFractionsAndExcludesRestartAndPauseTime PASS
+pointRecoveryRetainsWinLossDrawAndFrozenResultTime            PASS
+corruptPointSavesClearOnlyActiveStorage                       PASS
+classicActiveVersionsRemainReadableBesidePointSchema          PASS
+pointLivePersistenceFollowsPointsUndoPauseStopAndDiscard      PASS
+pointRecoveryLabelsAndLargeScoresFitBothDisplays              PASS
+pointSessionCompletesEveryModeRuleAndStartingTeam             PASS
+pointSessionDebouncesAcrossTeamsAndAllowsCorrection           PASS
+pointSessionPauseAndResultExcludeInactiveTime                 PASS
+pointSessionLimitsUndoDuringLongLiveMatch                     PASS
+pointLiveButtonsPauseConfirmCancelAndUndoResult               PASS
+pointLiveTimerFollowsVisibilityPauseFinishAndUndo             PASS
+pointLiveLayoutsAndResultsFitBothDisplays                     PASS
+pointInputGuardRejectsRapidRepeatedInput                      PASS
+pointInputGuardResetAllowsImmediateCorrection                 PASS
+pointInputGuardRecoversAfterTimerWrap                         PASS
+undoHistoryRemainsBoundedDuringLongMatch                      PASS
+advantageReturnsToDeuce                                       PASS
+noAdDecidingPointCompletesGame                                PASS
+setEndsAtSixFour                                              PASS
+regularTieBreakEndsSet                                        PASS
+decidingMatchTieBreakStartsAtOneSetAll                        PASS
+startingServerIsApplied                                       PASS
+serverChangesAfterGame                                        PASS
+serverSlotChangesOnTeamNextServiceGame                        PASS
+tieBreakServeOrderUsesOneThenTwoPoints                        PASS
+nextSetStartsWithNextServerAfterSixFour                       PASS
+decidingMatchTieBreakHonorsTwoPointMargin                     PASS
+noAdDecidingPointCanBeWonByEitherTeam                         PASS
+noAdDecidingPointDoesNotInterruptPlay                         PASS
+undoNoAdDecidingPointRestoresDeuce                            PASS
+undoRestoresCompleteStateAfterSet                             PASS
+undoRestoresPreviousState                                     PASS
+pointTotalsTrackAcceptedInputAndUndo                          PASS
+serverTeamCanBeChangedWhilePaused                             PASS
+manualTieBreakServerChangeKeepsRotation                       PASS
+setupEditorSavesAndCancelsValues                              PASS
+startGameItemCannotBeEdited                                   PASS
+serveSideAlternatesEveryPointAndResetsWithGame                PASS
+serveSideCanBeSelectedAndKeepsAlternating                     PASS
+pointInputContinuesAfterOddGame                               PASS
+sideChangeIsNotRequiredAfterEvenGame                          PASS
+tieBreakContinuesAfterEverySixPoints                          PASS
+regularTieBreakSetEndDoesNotBlockNextSet                      PASS
+undoRestoresStateAfterGame                                    PASS
+completedSetScoreIsStoredAndUndoRestoresIt                    PASS
+completedMatchCanBeSavedLocally                               PASS
+stoppedMatchKeepsCurrentGameAndPointScore                     PASS
+stoppedMatchKeepsTieBreakState                                PASS
+legacyHistoryRecordsRemainReadable                            PASS
+historyDeletionUsesStorageIndexAndPreservesOrder              PASS
+deletingOnlyHistoryRecordClearsStorage                        PASS
+historyKeepsLatestTwentyPointRecords                          PASS
+historyStatisticsSummarizeCompletedStoppedAndLegacyRecords    PASS
+emptyHistoryStatisticsAvoidDivisionByZero                     PASS
+activeMatchRoundTripRestoresScoreServeAndTime                 PASS
+legacyActiveMatchNeverClaimsCompletePointTotals               PASS
+activeMatchRoundTripDoesNotRestoreSideChangeBlock             PASS
+activeMatchRoundTripKeepsNoAdPlayContinuous                   PASS
+restoredNoAdDeuceDoesNotRequireReceiverChoice                 PASS
+corruptActiveMatchIsDiscardedSafely                           PASS
+corruptHistoryRecordsAreFiltered                              PASS
+corruptV3PointTotalsAreFiltered                               PASS
+fitSetScoreLabelContainsEveryCompletedSet                     PASS
+fitStoppedScoreContainsCurrentGameAndPoints                   PASS
+fitStoppedScoreIdentifiesTieBreak                             PASS
+fitLapIsFlushedOnSetWinningPoint                              PASS
+fitSetFeedbackCanFireAgainAfterWinningPointUndo               PASS
+recoveredFitSegmentDoesNotRepeatCompletedSetOnNextPoint       PASS
+fitSessionStartsRecordsAndDiscards                            PASS
+Ran 94 tests
+
+PASSED (passed=94, failed=0, errors=0)

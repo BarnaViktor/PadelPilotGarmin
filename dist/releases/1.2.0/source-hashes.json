@@ -46,7 +46,8 @@
   "resources-hun/strings/strings.xml": "248a689ddd336046470e1bebd1e93eccf2f1a992a37eff14bb150e39ef357274",
   "resources-hun/strings/version.xml": "ed1fa9c3f43456641e4edebd9de07b81aa8e3c58e602cb1bf92810b90d90ed53",
   "VERSION": "1e5b51cde515396a9fa762909cf8ca6584ccc564b325d2eebeea76175fe95c4d",
-  "manifest.xml": "631c34c00fade1a12714555a3bc294de374bacb823a8c57d8bdadb9a9b605ebb",
+  "manifest.xml": "9da5941135981e3f05580afcc7a72335e9be52b70719e7b5b6adcd72487ef9d9",
   "monkey.jungle": "7805cb8a18f7ee87bf1443775f806489d823aeb67973705c4871dd278b22dc0c",
-  "scripts/dev.py": "a59935f003ef0bcfa5c92bc6e152e420095e663474337766c2ea46ccd862c16f"
+  "scripts/dev.py": "a59935f003ef0bcfa5c92bc6e152e420095e663474337766c2ea46ccd862c16f",
+  "manifest-beta.xml": "d6e61766284bf9953c72609d116924dbec72b967b3a9b033678acab8b7df9c90"
 }

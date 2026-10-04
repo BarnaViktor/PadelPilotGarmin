@@ -4,5 +4,7 @@ __pycache__/
 .DS_Store
 *.prg
 *.iq
+!dist/releases/**/*.iq
+!dist/releases/**/*.prg
 *.debug.xml
 docs/developer_key

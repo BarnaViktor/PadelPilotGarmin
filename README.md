@@ -17,10 +17,14 @@ Kiadási fájl és telepítési tudnivalók:
 A csomag helyben elkészült; Store-publikálás és az 1.2.0 valós órás
 FIT/Connect ellenőrzése még nem történt.
 
+A kiadások közös helye a `dist/releases/`, verziónként külön mappával:
+az `1.1.0/` a korábbi éles és béta IQ-csomagot, az `1.2.0/` az új
+kiadási csomagot és a hozzá tartozó dokumentációt tartalmazza.
+
 A kiadás funkciói:
 
 - készülékfüggetlen pontozási motor;
-- Forerunner 265 célkészülék (`fr265`);
+- Forerunner 265, tesztelt AMOLED modellek és Enduro 1/2/3 támogatása;
 - gombvezérelt meccsbeállító képernyő;
 - hagyományos advantage és no-ad / aranypont;
 - 1, 3 vagy 5 szettes mérkőzés;
@@ -77,7 +81,9 @@ Szükséges:
 3. Connect IQ SDK Managerrel telepített aktuális SDK;
 4. Garmin developer key a fordításhoz.
 
-A repository jelenlegi célkészüléke a Forerunner 265 (`fr265`). A Garmin
+A fejlesztés alapértelmezett célkészüléke a Forerunner 265 (`fr265`),
+az 1.2.0 kiadási csomag a [támogatott készülékek](docs/supported-devices.md)
+listájában szereplő további kilenc SDK-profilt is tartalmazza. A Garmin
 kompatibilitási táblája szerint a Forerunner 265 Connect IQ API level 5.2
 eszköz, 416 x 416 pixeles kerek AMOLED kijelzővel. Részletek:
 [docs/forerunner-265-target.md](docs/forerunner-265-target.md).
@@ -103,7 +109,7 @@ a Garmin készülékazonosító:
 ```bash
 python3 scripts/dev.py build --device epix2
 python3 scripts/dev.py test --device epix2
-python3 scripts/dev.py test --device enduro --min-api 3.4.0
+python3 scripts/dev.py test --device enduro
 ```
 
 A kiadási manifestben még nem szereplő készülékekhez a parancs külön
@@ -120,7 +126,7 @@ a háttérben, külön virtuális kijelzőn és hang nélkül is futtatható:
 
 ```bash
 python3 scripts/simulator_bg.py start
-python3 scripts/dev.py test --device enduro --min-api 3.4.0
+python3 scripts/dev.py test --device enduro
 python3 scripts/simulator_bg.py status
 python3 scripts/simulator_bg.py stop
 ```

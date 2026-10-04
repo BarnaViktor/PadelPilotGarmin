@@ -3,11 +3,20 @@
   "channel": "production",
   "production_application_id": "e6b2455dd36646098e6f53e16d77df8f",
   "devices": [
-    "fr265"
+    "fr265",
+    "d2mach1",
+    "epix2",
+    "epix2pro47mm",
+    "fenix843mm",
+    "fenixe",
+    "instinct3amoled50mm",
+    "enduro",
+    "fenix7x",
+    "enduro3"
   ],
   "artifact": "padel-pilot-1.2.0.iq",
-  "source_equivalence": "Scoring, recovery and tests match c8e7b3c; HomeView adds the AppVersion label. Exact build inputs are in source-hashes.json.",
-  "build_git_record": "build-info.json retains the actual snapshot base revision and dirty state at compilation.",
+  "source_equivalence": "Application source and resources are unchanged from the original FR265-only 1.2.0 export. Production and beta manifests add the nine tested device profiles and lower the API minimum to 3.4.0 for Enduro. Exact inputs are in source-hashes.json.",
+  "build_git_record": "build-info.json records the actual snapshot base revision and dirty state at compilation.",
   "screenshots": {
     "version": "1.2.0",
     "count": 12,
@@ -20,10 +29,36 @@
     "remaining": "native production view/domain sources with synthetic match fixtures and a separate capture application ID"
   },
   "checks": {
-    "tests_passed": 94,
+    "tests_passed": 940,
     "tests_failed": 0,
-    "archive_integrity": "passed"
+    "archive_integrity": "passed",
+    "tests_per_profile": 94,
+    "profiles_verified": 10,
+    "export_product_ids_verified": 15,
+    "export_binaries_match_device_builds": true,
+    "native_view_frames_per_profile": 16,
+    "native_view_frames_total": 160
   },
   "store_published": false,
-  "real_watch_validation": "not recorded for 1.2.0"
+  "real_watch_validation": "not recorded for 1.2.0",
+  "min_api_level": "3.4.0",
+  "product_ids": [
+    "006-B3638-00",
+    "006-B3872-00",
+    "006-B3907-00",
+    "006-B3910-00",
+    "006-B3943-00",
+    "006-B3944-00",
+    "006-B4079-00",
+    "006-B4135-00",
+    "006-B4257-00",
+    "006-B4313-00",
+    "006-B4341-00",
+    "006-B4534-00",
+    "006-B4575-00",
+    "006-B4587-00",
+    "006-B4666-00"
+  ],
+  "device_evidence": "device-matrix.json and devices/<sdk-id>/",
+  "rendering_evidence": "verification/render-source.mc and devices/<sdk-id>/ui.log, ui-contact.png"
 }

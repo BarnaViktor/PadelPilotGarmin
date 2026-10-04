@@ -1,0 +1,22 @@
+{
+  "version": "1.2.0",
+  "action": "test",
+  "device": "instinct3amoled50mm",
+  "devices": [
+    "instinct3amoled50mm"
+  ],
+  "experimental": false,
+  "min_api_level": "3.4.0",
+  "application_id": "e6b2455dd36646098e6f53e16d77df8f",
+  "built_at_utc": "2026-10-04T17:08:53.520853+00:00",
+  "git_revision": "d998893a63df8fb7c6066aeddb8d5a2b11d84249",
+  "working_tree_dirty": true,
+  "compiler": "Connect IQ Compiler version: 9.2.0",
+  "artifact": "padel-pilot-1.2.0-tests-instinct3amoled50mm.prg",
+  "size_bytes": 282940,
+  "sha256": "5192966fda5160bbb0908602d943f4bb3119c538f8a9f266728e94a462f5c985",
+  "checks": {
+    "build": "passed",
+    "tests_passed": 94
+  }
+}

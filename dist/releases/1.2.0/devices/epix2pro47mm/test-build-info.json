@@ -1,0 +1,22 @@
+{
+  "version": "1.2.0",
+  "action": "test",
+  "device": "epix2pro47mm",
+  "devices": [
+    "epix2pro47mm"
+  ],
+  "experimental": false,
+  "min_api_level": "3.4.0",
+  "application_id": "e6b2455dd36646098e6f53e16d77df8f",
+  "built_at_utc": "2026-10-04T17:07:55.521026+00:00",
+  "git_revision": "d998893a63df8fb7c6066aeddb8d5a2b11d84249",
+  "working_tree_dirty": true,
+  "compiler": "Connect IQ Compiler version: 9.2.0",
+  "artifact": "padel-pilot-1.2.0-tests-epix2pro47mm.prg",
+  "size_bytes": 283404,
+  "sha256": "4099940e714bf0351d6999935a60682ba6fc17d72b255d70ef87c32e1dc33909",
+  "checks": {
+    "build": "passed",
+    "tests_passed": 94
+  }
+}

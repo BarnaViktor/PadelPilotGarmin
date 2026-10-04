@@ -1,0 +1,117 @@
+[
+  {
+    "device": "fr265",
+    "display_name": "Forerunner® 265",
+    "product_ids": [
+      "006-B4257-00"
+    ],
+    "tests_passed": 94,
+    "tests_failed": 0,
+    "production_prg": "devices/fr265/padel-pilot-1.2.0-fr265.prg",
+    "sha256": "adcf7dcaca8ffebf4e45f078edf5535da458180f617dc9befc5e36d28bea2d7b"
+  },
+  {
+    "device": "d2mach1",
+    "display_name": "D2™ Mach 1",
+    "product_ids": [
+      "006-B4079-00"
+    ],
+    "tests_passed": 94,
+    "tests_failed": 0,
+    "production_prg": "devices/d2mach1/padel-pilot-1.2.0-d2mach1.prg",
+    "sha256": "adcf7dcaca8ffebf4e45f078edf5535da458180f617dc9befc5e36d28bea2d7b"
+  },
+  {
+    "device": "epix2",
+    "display_name": "epix™ (Gen 2) / quatix® 7 Sapphire",
+    "product_ids": [
+      "006-B3943-00",
+      "006-B3944-00"
+    ],
+    "tests_passed": 94,
+    "tests_failed": 0,
+    "production_prg": "devices/epix2/padel-pilot-1.2.0-epix2.prg",
+    "sha256": "adcf7dcaca8ffebf4e45f078edf5535da458180f617dc9befc5e36d28bea2d7b"
+  },
+  {
+    "device": "epix2pro47mm",
+    "display_name": "epix™ Pro (Gen 2) 47mm / quatix® 7 Pro",
+    "product_ids": [
+      "006-B4313-00"
+    ],
+    "tests_passed": 94,
+    "tests_failed": 0,
+    "production_prg": "devices/epix2pro47mm/padel-pilot-1.2.0-epix2pro47mm.prg",
+    "sha256": "adcf7dcaca8ffebf4e45f078edf5535da458180f617dc9befc5e36d28bea2d7b"
+  },
+  {
+    "device": "fenix843mm",
+    "display_name": "fēnix® 8 43mm",
+    "product_ids": [
+      "006-B4534-00"
+    ],
+    "tests_passed": 94,
+    "tests_failed": 0,
+    "production_prg": "devices/fenix843mm/padel-pilot-1.2.0-fenix843mm.prg",
+    "sha256": "adcf7dcaca8ffebf4e45f078edf5535da458180f617dc9befc5e36d28bea2d7b"
+  },
+  {
+    "device": "fenixe",
+    "display_name": "fēnix® E",
+    "product_ids": [
+      "006-B4666-00"
+    ],
+    "tests_passed": 94,
+    "tests_failed": 0,
+    "production_prg": "devices/fenixe/padel-pilot-1.2.0-fenixe.prg",
+    "sha256": "adcf7dcaca8ffebf4e45f078edf5535da458180f617dc9befc5e36d28bea2d7b"
+  },
+  {
+    "device": "instinct3amoled50mm",
+    "display_name": "Instinct® 3 AMOLED 50mm",
+    "product_ids": [
+      "006-B4587-00"
+    ],
+    "tests_passed": 94,
+    "tests_failed": 0,
+    "production_prg": "devices/instinct3amoled50mm/padel-pilot-1.2.0-instinct3amoled50mm.prg",
+    "sha256": "c707ada1cb0a2d7b538351ec7d3f0908d9324053d9ebcd9ab68e54ec89c9cc33"
+  },
+  {
+    "device": "enduro",
+    "display_name": "Enduro™",
+    "product_ids": [
+      "006-B3638-00",
+      "006-B3872-00"
+    ],
+    "tests_passed": 94,
+    "tests_failed": 0,
+    "production_prg": "devices/enduro/padel-pilot-1.2.0-enduro.prg",
+    "sha256": "2600a556d3781468a99d4cccdca4c783b4a37e42515316cb193ffed149ac72b9"
+  },
+  {
+    "device": "fenix7x",
+    "display_name": "fēnix® 7X / tactix® 7 / quatix® 7X Solar / Enduro™ 2",
+    "product_ids": [
+      "006-B3907-00",
+      "006-B3910-00",
+      "006-B4135-00",
+      "006-B4341-00"
+    ],
+    "tests_passed": 94,
+    "tests_failed": 0,
+    "production_prg": "devices/fenix7x/padel-pilot-1.2.0-fenix7x.prg",
+    "sha256": "96467f444131b7d8d86757fa988a877da2c1ed4cf9c725eabbe788c9ca4254e6"
+  },
+  {
+    "device": "enduro3",
+    "display_name": "Enduro™ 3",
+    "product_ids": [
+      "006-B4575-00"
+    ],
+    "tests_passed": 94,
+    "tests_failed": 0,
+    "production_prg": "devices/enduro3/padel-pilot-1.2.0-enduro3.prg",
+    "sha256": "96467f444131b7d8d86757fa988a877da2c1ed4cf9c725eabbe788c9ca4254e6"
+  }
+]

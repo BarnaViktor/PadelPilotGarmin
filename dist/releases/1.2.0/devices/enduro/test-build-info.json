@@ -1,0 +1,22 @@
+{
+  "version": "1.2.0",
+  "action": "test",
+  "device": "enduro",
+  "devices": [
+    "enduro"
+  ],
+  "experimental": false,
+  "min_api_level": "3.4.0",
+  "application_id": "e6b2455dd36646098e6f53e16d77df8f",
+  "built_at_utc": "2026-10-04T17:09:12.306632+00:00",
+  "git_revision": "d998893a63df8fb7c6066aeddb8d5a2b11d84249",
+  "working_tree_dirty": true,
+  "compiler": "Connect IQ Compiler version: 9.2.0",
+  "artifact": "padel-pilot-1.2.0-tests-enduro.prg",
+  "size_bytes": 302460,
+  "sha256": "257c5732e20d7c6848ec190dd7b73faa452d5c72d99d9af1f10f886bbe78d457",
+  "checks": {
+    "build": "passed",
+    "tests_passed": 94
+  }
+}

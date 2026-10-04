@@ -3,18 +3,27 @@
   "action": "release",
   "device": null,
   "devices": [
-    "fr265"
+    "fr265",
+    "d2mach1",
+    "epix2",
+    "epix2pro47mm",
+    "fenix843mm",
+    "fenixe",
+    "instinct3amoled50mm",
+    "enduro",
+    "fenix7x",
+    "enduro3"
   ],
   "experimental": false,
-  "min_api_level": "4.1.6",
+  "min_api_level": "3.4.0",
   "application_id": "e6b2455dd36646098e6f53e16d77df8f",
-  "built_at_utc": "2026-10-04T16:26:30.754942+00:00",
-  "git_revision": "a5fd7ac1563df9fb068ac718a9c0d2334c8c3b88",
+  "built_at_utc": "2026-10-04T17:10:09.086122+00:00",
+  "git_revision": "d998893a63df8fb7c6066aeddb8d5a2b11d84249",
   "working_tree_dirty": true,
   "compiler": "Connect IQ Compiler version: 9.2.0",
   "artifact": "padel-pilot-1.2.0.iq",
-  "size_bytes": 49602,
-  "sha256": "7c9e439828ec047251f58ff1b26347ca2115d3c7f415ec1bdcc6402dfe2afd78",
+  "size_bytes": 696458,
+  "sha256": "8feecc88885d23795c7855c1c4f28cb601bb1b85c373322a3a78d4fc507c5217",
   "checks": {
     "build": "passed",
     "archive_integrity": "passed"

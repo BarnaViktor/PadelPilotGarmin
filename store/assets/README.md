@@ -1,6 +1,7 @@
 # Padel Pilot 1.2.0 assets
 
-Current stable version: 1.2.0. Target display: Forerunner 265, 416×416.
+Current stable version: 1.2.0. Store screenshots use Forerunner 265, 416×416;
+the release also supports the tested 416×416 AMOLED and 280×280 MIP profiles.
 The unchanged icons contain no version or beta text and remain the app brand:
 `padel-pilot-store-icon-500.png` (500×500) and
 `padel-pilot-device-icon-128.png` (128×128).

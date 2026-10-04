@@ -10,9 +10,18 @@
         name="@Strings.AppName"
         entry="PadelApp"
         launcherIcon="@Drawables.LauncherIcon"
-        minApiLevel="4.1.6">
+        minApiLevel="3.4.0">
         <iq:products>
             <iq:product id="fr265"/>
+            <iq:product id="d2mach1"/>
+            <iq:product id="epix2"/>
+            <iq:product id="epix2pro47mm"/>
+            <iq:product id="fenix843mm"/>
+            <iq:product id="fenixe"/>
+            <iq:product id="instinct3amoled50mm"/>
+            <iq:product id="enduro"/>
+            <iq:product id="fenix7x"/>
+            <iq:product id="enduro3"/>
         </iq:products>
         <iq:languages>
             <iq:language>hun</iq:language>

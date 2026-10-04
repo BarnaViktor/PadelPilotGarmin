@@ -1,7 +1,7 @@
 # Connect IQ Store listing — version 1.2.0
 
 Submission metadata for the stable 1.2.0 update. The release is free and
-supports Garmin Forerunner 265 only.
+supports the tested Garmin profiles listed below.
 
 ## English
 
@@ -43,9 +43,14 @@ remains in active storage until you confirm discarding it; undo history
 resets after restarting the app. Older Classic records without point totals
 show “NO POINT DATA” rather than estimated statistics.
 
-Supported device: Garmin Forerunner 265.
+Supported devices: Garmin Forerunner 265; D2 Mach 1; epix (Gen 2) and
+quatix 7 Sapphire; epix Pro (Gen 2) 47 mm and quatix 7 Pro; fēnix 8 AMOLED
+43 mm; fēnix E; Instinct 3 AMOLED 50 mm; Enduro; fēnix 7X, tactix 7,
+quatix 7X Solar and Enduro 2; Enduro 3.
 
-**What’s new – version 1.2.0:** Added Americano/Mexicano scoring for one
+**What’s new – version 1.2.0:** Expanded device support to the tested
+AMOLED models and Enduro 1/2/3, including models sharing their Garmin profiles.
+Added Americano/Mexicano scoring for one
 own match, two target rules, pause/undo, elapsed play time and automatic
 active-match recovery. Added clearly scoped statistics for all saved
 Classic matches and individual match set/point pages. The home screen now
@@ -96,11 +101,16 @@ FIT-rögzítés csak Classic módban érhető el. Pontmódban az eredmény az ak
 mentésben marad a megerősített eldobásig; újraindítás után az undo-napló
 üres. Régi, pontadat nélküli klasszikus rekordoknál NO POINT DATA látható.
 
-Támogatott készülék: Garmin Forerunner 265. Az óra kezelőfelülete jelenleg
-angol nyelvű; a Garmin Connect eredménymezőinek címkéi magyarul és angolul is
-elérhetők.
+Támogatott készülékek: Garmin Forerunner 265; D2 Mach 1; epix (Gen 2) és
+quatix 7 Sapphire; epix Pro (Gen 2) 47 mm és quatix 7 Pro; fēnix 8 AMOLED
+43 mm; fēnix E; Instinct 3 AMOLED 50 mm; Enduro; fēnix 7X, tactix 7,
+quatix 7X Solar és Enduro 2; Enduro 3.
+Az óra kezelőfelülete jelenleg angol nyelvű; a Garmin Connect eredménymezőinek
+címkéi magyarul és angolul is elérhetők.
 
-**Újdonságok – 1.2.0:** Americano/Mexicano saját meccs pontozása kétféle
+**Újdonságok – 1.2.0:** Támogatás a tesztelt AMOLED modellekhez és az
+Enduro 1/2/3 órákhoz, beleértve a közös Garmin-profilok további modelljeit.
+Americano/Mexicano saját meccs pontozása kétféle
 lezárási szabállyal, szünettel, undo-val, játékidővel és automatikus aktív
 helyreállítással. Egyértelműen jelölt összesített klasszikus statisztika,
 meccsenkénti szett- és pontoldalak. Verziószám a főmenüben. Pontmódos lezárt
@@ -111,7 +121,8 @@ előzmény és FIT-rögzítés ebben a verzióban még nincs.
 ## Submission details
 
 - Version: 1.2.0
-- Supported device: Garmin Forerunner 265 (`fr265`)
+- Supported SDK profiles: `fr265`, `d2mach1`, `epix2`, `epix2pro47mm`,
+  `fenix843mm`, `fenixe`, `instinct3amoled50mm`, `enduro`, `fenix7x`, `enduro3`
 - Support contact: barna.viktor97@gmail.com
 - Support URL: https://github.com/BarnaViktor/PadelPilotGarmin/blob/master/store/support.md
 - Privacy policy URL: https://github.com/BarnaViktor/PadelPilotGarmin/blob/master/store/privacy-policy.md
