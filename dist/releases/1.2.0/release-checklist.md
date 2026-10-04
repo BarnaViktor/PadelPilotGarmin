@@ -32,7 +32,7 @@ Beta package is needed by this submission sequence.
 
 ## Upload material
 
-See [release notes](../docs/releases/1.2.0.md) and
+See [release notes](release-notes.md) and
 [asset inventory](assets/README.md). A suggested five-image selection:
 home/version, setup, live Classic score, individual match points, Americano
 score. Additional screenshots document history, aggregate stats, modes,

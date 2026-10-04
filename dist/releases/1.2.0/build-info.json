@@ -1,0 +1,22 @@
+{
+  "version": "1.2.0",
+  "action": "release",
+  "device": null,
+  "devices": [
+    "fr265"
+  ],
+  "experimental": false,
+  "min_api_level": "4.1.6",
+  "application_id": "e6b2455dd36646098e6f53e16d77df8f",
+  "built_at_utc": "2026-10-04T16:26:30.754942+00:00",
+  "git_revision": "a5fd7ac1563df9fb068ac718a9c0d2334c8c3b88",
+  "working_tree_dirty": true,
+  "compiler": "Connect IQ Compiler version: 9.2.0",
+  "artifact": "padel-pilot-1.2.0.iq",
+  "size_bytes": 49602,
+  "sha256": "7c9e439828ec047251f58ff1b26347ca2115d3c7f415ec1bdcc6402dfe2afd78",
+  "checks": {
+    "build": "passed",
+    "archive_integrity": "passed"
+  }
+}

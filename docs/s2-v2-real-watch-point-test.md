@@ -1,5 +1,10 @@
 # S2-V2 – Valós órás pontstatisztikai próba
 
+> Új ellenőrzéshez az **1.2.0 produkciós csomagot** használd:
+> [kiadási jegyzet](releases/1.2.0.md). A lent szereplő 1.1.0 béta és
+> korábbi PRG-k történeti adatok, nem az új kiadás ellenőrzött binárisai.
+
+
 **Állapot:** FR265 béta build telepítve. A felhasználó az órás indítást és az
 alapműködést ellenőrizte; a lent felsorolt pontsorozatot, újraindítást és
 törlést még nem járta végig. Az éles, korábbi

@@ -1,5 +1,11 @@
 # Támogatott készülékek
 
+Az **1.2.0 stabil kiadás** továbbra is csak a **Forerunner 265** modellt
+hirdeti és exportálja. Az Enduro és a többi profil kísérleti marad.
+Az 1.2.0 csomag és friss ellenőrzések: [kiadási jegyzet](releases/1.2.0.md).
+Az alábbi dátumozott ellenőrzések korábbi checkpointokat dokumentálnak.
+
+
 ## Éles támogatás és aktív bővítés
 
 A jelenlegi fejlesztési, szimulátoros és első Store-kiadási célkészülék:

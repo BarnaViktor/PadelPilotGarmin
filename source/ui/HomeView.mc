@@ -27,6 +27,11 @@ class HomeView extends WatchUi.View {
             Graphics.TEXT_JUSTIFY_CENTER);
         drawCourt(dc, centerX, 112);
 
+        dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
+        dc.drawText(centerX, 192, Graphics.FONT_XTINY,
+            "v" + WatchUi.loadResource(Rez.Strings.AppVersion),
+            Graphics.TEXT_JUSTIFY_CENTER);
+
         PadelTheme.drawActionButton(dc, 68, 228, 280, 58, _selected == 0,
             "NEW MATCH");
         PadelTheme.drawActionButton(dc, 88, 306, 240, 49, _selected == 1,

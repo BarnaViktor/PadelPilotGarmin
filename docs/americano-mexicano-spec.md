@@ -1,5 +1,12 @@
 # AM-1 – Americano / Mexicano: egy saját meccs pontozása
 
+> Aktuális kiadás: **1.2.0 stabil**, 2026-10-04. A produkciós csomag,
+> verziózás, Store-szöveg és képek: [kiadási jegyzet](releases/1.2.0.md).
+> Az alábbi korábbi checkpointok dátumozott fejlesztési bizonyítékok;
+> az 1.1.0 fájlnevek és a korábbi béta telepítése történeti adatok.
+> Következő fejlesztés: AM-6 (pontmódos lezárt előzmény), majd AM-7 (FIT).
+
+
 **Állapot:** AM-1 lezárva, 2026-10-04. A felhasználó két választható
 pontszám-alapú lezárást, meccs előtt megadható X pontszámot és kezdő
 csapatot kért. AM-2 domain és AM-3 módválasztás/meccsbeállítás elkészült

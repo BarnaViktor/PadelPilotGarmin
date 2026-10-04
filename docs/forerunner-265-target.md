@@ -1,6 +1,6 @@
 # Forerunner 265 célkészülék
 
-Állapot: az éles `1.1.0` támogatott célkészüléke. A C1-re hivatkozó alábbi
+Állapot: az `1.2.0` stabil kiadás támogatott célkészüléke. A C1-re hivatkozó alábbi
 szakaszok történeti feljegyzések; a jelenlegi működést és gombkiosztást a
 [README](../README.md), a bővítés állapotát a
 [készüléklista](supported-devices.md) írja le.

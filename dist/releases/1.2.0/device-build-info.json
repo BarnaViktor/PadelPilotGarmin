@@ -1,0 +1,21 @@
+{
+  "version": "1.2.0",
+  "action": "build",
+  "device": "fr265",
+  "devices": [
+    "fr265"
+  ],
+  "experimental": false,
+  "min_api_level": "4.1.6",
+  "application_id": "e6b2455dd36646098e6f53e16d77df8f",
+  "built_at_utc": "2026-10-04T16:21:59.674846+00:00",
+  "git_revision": "a5fd7ac1563df9fb068ac718a9c0d2334c8c3b88",
+  "working_tree_dirty": true,
+  "compiler": "Connect IQ Compiler version: 9.2.0",
+  "artifact": "padel-pilot-1.2.0-fr265.prg",
+  "size_bytes": 57452,
+  "sha256": "adcf7dcaca8ffebf4e45f078edf5535da458180f617dc9befc5e36d28bea2d7b",
+  "checks": {
+    "build": "passed"
+  }
+}

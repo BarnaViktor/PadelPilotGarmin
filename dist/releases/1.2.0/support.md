@@ -7,7 +7,7 @@ For help, bug reports or feature requests:
 - Email: barna.viktor97@gmail.com
 
 The current stable package is version **1.2.0**, for Forerunner 265.
-See [release notes](../docs/releases/1.2.0.md) for the mode-specific features.
+See [release notes](release-notes.md) for the mode-specific features.
 The version is displayed on the home screen.
 
 When reporting a problem, include the Padel Pilot version, watch software

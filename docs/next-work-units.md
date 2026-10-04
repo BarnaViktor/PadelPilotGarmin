@@ -1,5 +1,12 @@
 # Következő, kis kontextusú munkamenetek
 
+> Aktuális kiadás: **1.2.0 stabil**, 2026-10-04. A produkciós csomag,
+> verziózás, Store-szöveg és képek: [kiadási jegyzet](releases/1.2.0.md).
+> Az alábbi korábbi checkpointok dátumozott fejlesztési bizonyítékok;
+> az 1.1.0 fájlnevek és a korábbi béta telepítése történeti adatok.
+> Következő fejlesztés: AM-6 (pontmódos lezárt előzmény), majd AM-7 (FIT).
+
+
 Ez a lista a hátralévő munkát egymástól elválasztható fejlesztési egységekre
 bontja. Egy új Codex-munkamenet egyszerre csak **egy azonosítót** kapjon meg,
 például: „Folytasd az `S2-V1` egységgel”. Az egységek sorrendjét csak külön

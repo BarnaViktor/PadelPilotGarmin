@@ -1,0 +1,77 @@
+# Padel Pilot 1.2.0 — stabil kiadás
+
+Dátum: 2026-10-04. Csatorna: produkció. Támogatott óra: Forerunner 265.
+Előző stabil verzió: 1.1.0. A változás új funkciókat ad, ezért 1.2.0.
+
+## Feltölthető fájl
+
+[`dist/releases/1.2.0/padel-pilot-1.2.0.iq`](padel-pilot-1.2.0.iq)
+
+Ez a produkciós `manifest.xml` alapján, a meglévő aláírókulccsal készült.
+Alkalmazásazonosító: `e6b2455dd36646098e6f53e16d77df8f`.
+API-minimum: 4.1.6. A manifest séma `version="3"` mezője nem appverzió.
+Az appverzió forrása a gyökérbeli `VERSION`; a fordítóparancs ebből frissíti
+az angol és magyar `AppVersion` erőforrást. A főmenü `v1.2.0`-t mutat.
+A Store verziómezőjébe **1.2.0** kerüljön.
+
+IQ SHA-256: `7c9e439828ec047251f58ff1b26347ca2115d3c7f415ec1bdcc6402dfe2afd78`.
+
+Ugyanebben a mappában található a produkciós FR265 PRG közvetlen órás
+telepítéshez, a build-jegyzőkönyv, fordítási és archívumnapló, tesztadatok,
+Store-szövegek, képek és fájlonkénti SHA-256 lista. Az aláírókulcs nincs
+benne a kiadási csomagban.
+
+## Változások
+
+- Az előzményösszesítő egyértelműen minden helyben mentett klasszikus
+  meccsre vonatkozik (`ALL SAVED MATCHES`), legfeljebb 20 rekordra.
+- Meccsenkénti szett- és pontstatisztika; régi, hiányos pontadatnál
+  `NO POINT DATA` és `--`, becslés nélkül.
+- CLASSIC / AMERICANO / MEXICANO módválasztás.
+- Americano/Mexicano saját meccs: A+B=X vagy A=X/B=X lezárás,
+  1–999 célpont, kezdő csapat, pontbevitel, undo, szünet, játékidő,
+  WIN/LOSS/DRAW és automatikus aktív helyreállítás.
+- Verziószám a főmenüben; friss magyar/angol Store-szöveg és képek.
+
+A pontmódok egyetlen kétcsapatos saját meccset kezelnek. Versenysorsolás,
+partnerváltás, rangsor, lezárt pontmódos előzmény, SAVE & END és pontmódos
+FIT nincs ebben a kiadásban. Lezárt eredmény az aktív mentésben marad
+megerősített eldobásig. Újraindításkor az undo-napló kiürül; az ezután
+bevitt pontok visszavonhatók. Klasszikus helyi előzmény és FIT megmaradt.
+Az 1.1.0 klasszikus mentéseinek olvasását a regressziós tesztek ellenőrzik.
+
+## Ellenőrzés
+
+- Connect IQ SDK 9.2.0; optimalizált produkciós FR265 PRG és IQ sikeres.
+- FR265: **94/94 teszt**, 0 hiba; napló és `test-build-info.json` mellékelve.
+- IQ archívum: `7z t`, sikeres; 49 602 bájt.
+- Főmenü: a változatlan produkciós PRG natív szimulátorképe, `v1.2.0`.
+- További 11 kép: a kiadással azonos nézet- és domainforrások natív
+  szimulátoros megjelenítése, személyes adat nélküli mintapontszámokkal,
+  külön képkészítő appazonosítóval. A képek 416×416 RGB/sRGB PNG-k,
+  kizárólag az órakijelzővel, szimulátorkezelők nélkül.
+- A korábbi, dinamikus konténerekre vonatkozó SDK-figyelmeztetések
+  megmaradtak; fordítási hiba nincs.
+
+Az 1.2.0 valós órás, FIT/Connect és hosszú meccses ellenőrzése még nincs
+rögzítve; az elkészült csomag helyi produkciós export. Store-publikálás
+külön művelet, nem a fordítás része. Az Enduro profil továbbra is kísérleti.
+
+## Élesítés
+
+1. A meglévő Padel Pilot produkciós Store-bejegyzés frissítéséhez töltsd fel
+   a fenti `.iq` fájlt, és a verziómezőbe írd: **1.2.0**.
+2. Másold a magyar/angol leírást és újdonságokat a mellékelt
+   [Store-leírásból](store-listing.md). Használd a mellékelt
+   ikonokat és az [assetjegyzék](assets/README.md) képeit.
+3. A Store ellenőrzésre beküldés után a telepített 1.2.0-val rögzítsd
+   a valós órás és FIT/Connect tapasztalatokat.
+
+Közvetlen USB-s használathoz a `padel-pilot-1.2.0-fr265.prg` fájlt másold
+az FR265 `GARMIN/APPS` mappájába. Az aktív meccset célszerű frissítés előtt
+lezárni vagy eldobni. Ugyanez az alkalmazásazonosító frissíti az eddigi
+produkciós appot.
+
+Következő fejlesztési egység: AM-6 (pontmódos lezárt előzmény), majd AM-7
+(pontmódos FIT). A kiadási számozás és a csomag elkészítése nem jelenti
+az e funkciókra vonatkozó nyitott fejlesztések lezárását.

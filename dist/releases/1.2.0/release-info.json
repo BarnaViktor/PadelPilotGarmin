@@ -1,0 +1,29 @@
+{
+  "version": "1.2.0",
+  "channel": "production",
+  "production_application_id": "e6b2455dd36646098e6f53e16d77df8f",
+  "devices": [
+    "fr265"
+  ],
+  "artifact": "padel-pilot-1.2.0.iq",
+  "source_equivalence": "Scoring, recovery and tests match c8e7b3c; HomeView adds the AppVersion label. Exact build inputs are in source-hashes.json.",
+  "build_git_record": "build-info.json retains the actual snapshot base revision and dirty state at compilation.",
+  "screenshots": {
+    "version": "1.2.0",
+    "count": 12,
+    "dimensions": [
+      416,
+      416
+    ],
+    "format": "RGB PNG with sRGB chunk",
+    "home": "unchanged production PRG",
+    "remaining": "native production view/domain sources with synthetic match fixtures and a separate capture application ID"
+  },
+  "checks": {
+    "tests_passed": 94,
+    "tests_failed": 0,
+    "archive_integrity": "passed"
+  },
+  "store_published": false,
+  "real_watch_validation": "not recorded for 1.2.0"
+}

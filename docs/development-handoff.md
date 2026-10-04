@@ -1,5 +1,12 @@
 # Fejlesztési átadás – 2026-10-04
 
+> Aktuális kiadás: **1.2.0 stabil**, 2026-10-04. A produkciós csomag,
+> verziózás, Store-szöveg és képek: [kiadási jegyzet](releases/1.2.0.md).
+> Az alábbi korábbi checkpointok dátumozott fejlesztési bizonyítékok;
+> az 1.1.0 fájlnevek és a korábbi béta telepítése történeti adatok.
+> Következő fejlesztés: AM-6 (pontmódos lezárt előzmény), majd AM-7 (FIT).
+
+
 ## Aktuális folytatási pont – AM-6
 
 **AM-5 lezárva, 2026-10-04.** Az Americano/Mexicano saját meccs most

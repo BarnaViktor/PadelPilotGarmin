@@ -1,0 +1,22 @@
+
+7-Zip 25.01 (x64) : Copyright (c) 1999-2025 Igor Pavlov : 2025-08-03
+ 64-bit locale=C.UTF-8 Threads:12 OPEN_MAX:524288
+
+Scanning the drive for archives:
+1 file, 49602 bytes (49 KiB)
+
+Testing archive: /home/viktor/Documents/Codex/2026-10-04-a-marad-k-8-5-r/padel-pilot-garmin/build/release-1.2.0-export-w87pce44/padel-pilot-1.2.0.iq
+--
+Path = /home/viktor/Documents/Codex/2026-10-04-a-marad-k-8-5-r/padel-pilot-garmin/build/release-1.2.0-export-w87pce44/padel-pilot-1.2.0.iq
+Type = 7z
+Physical Size = 49602
+Headers Size = 656
+Method = LZMA2:23
+Solid = -
+Blocks = 7
+
+Everything is Ok
+
+Files: 7
+Size:       788926
+Compressed: 49602

@@ -70,6 +70,12 @@ def main():
     version = (ROOT / "VERSION").read_text().strip()
     if not re.fullmatch(r"\d+\.\d+\.\d+", version):
         raise RuntimeError("VERSION must contain a numeric major.minor.patch version.")
+    # The version displayed on the watch comes from the same source as exports.
+    version_xml = f'<strings>\n    <string id="AppVersion">{version}</string>\n</strings>\n'
+    for resource_root in ("resources", "resources-hun"):
+        version_resource = ROOT / resource_root / "strings/version.xml"
+        if not version_resource.is_file() or version_resource.read_text() != version_xml:
+            version_resource.write_text(version_xml)
     is_export = args.action in ("beta", "release")
     archiver = shutil.which("7zz") or shutil.which("7z")
     if is_export and not archiver:

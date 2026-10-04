@@ -5,16 +5,19 @@ végigvezeti és rögzíti egy padelmérkőzés eredményét.
 
 ## Jelenlegi állapot
 
-Verzió: **1.1.0**, éles használatban a felhasználó megerősítése alapján.
-A felhasználó saját használatára teljesen megfelelőnek találja: működési
-hibát vagy zavaró viselkedést nem tapasztalt. A bétatesztelés során
-felmerült az előzmény-összesítő hatókörének egyértelműsítése és az egyedi
-meccsek statisztikáinak megjelenítése; ezek a helyi fejlesztői változatban
-elkészültek.
-A Garmin Connect-megjelenítés és az erőforrásmérések részletes eredménye
-még nincs dokumentálva.
+Verzió: **1.2.0**, stabil produkciós kiadási csomag (2026-10-04).
+A korábbi, saját használatra bevált éles verzió 1.1.0 volt.
+Az új kiadás az összesített és meccsenkénti statisztikai nézeteket,
+valamint az Americano/Mexicano saját meccs pontozását és aktív
+helyreállítását tartalmazza. A főmenü a VERSION fájlból származó verziót mutatja.
 
-Az első helyi tesztkiadás elkészült:
+Kiadási fájl és telepítési tudnivalók:
+[1.2.0 kiadási jegyzet](docs/releases/1.2.0.md),
+[Store ellenőrzőlista](store/release-checklist.md).
+A csomag helyben elkészült; Store-publikálás és az 1.2.0 valós órás
+FIT/Connect ellenőrzése még nem történt.
+
+A kiadás funkciói:
 
 - készülékfüggetlen pontozási motor;
 - Forerunner 265 célkészülék (`fr265`);
@@ -45,8 +48,10 @@ Az első helyi tesztkiadás elkészült:
 - 94 Monkey C teszt a klasszikus és pontmódos domainre, beállításokra,
   mentésre, előzményre, aktivitásrögzítésre és a 280/416 pixeles elrendezésekre.
 
-Az Americano/Mexicano a helyi fejlesztői változatban már pontozható és
-aktív meccsként helyreállítható; előzménye és FIT-je még hátravan.
+Az Americano/Mexicano az 1.2.0-ban egy saját meccset pontoz és aktív
+meccsként helyreállít. Ebben a módban nincs lezárt helyi előzmény,
+SAVE & END vagy FIT-aktivitás; az eredmény a megerősített eldobásig
+megmarad. Nem kezel versenysorsolást, partnerváltást vagy rangsort.
 A hőtérkép és a saját szerveres szinkron későbbi bővítés.
 
 ## Projektstruktúra
@@ -129,7 +134,9 @@ szükséges. Ezek a parancsok helyi csomagokat készítenek; a Store-beküldés 
 [kiadási ellenőrzőlista](store/release-checklist.md) szerinti külön lépés.
 
 Minden futás külön `build/` almappába kerül, a korábbi kiadásokat megőrzi.
-A parancs kiírja az elkészült fájl elérési útját. A mellette lévő
+A parancs kiírja az elkészült fájl elérési útját. A `VERSION` az egyetlen
+verzióforrás: a parancs az angol és magyar `AppVersion` erőforrást is
+frissíti, így az órán kijelzett verzió és a fájlnév egyezik. A mellette lévő
 `build-info.json` tartalmazza a verziót, alkalmazásazonosítót, Git-revíziót,
 a nem commitolt módosítások jelzését, SDK-verziót, fájlméretet, SHA-256
 azonosítót és az adott futás ellenőrzéseit. A fordítás és tesztelés naplója
@@ -251,6 +258,6 @@ Az AM-5 FR265 és Enduro API 3.4.0 profilon 94/94 teszttel, optimalizált
 builddel, natív vizuális és nyolckombinációs újraindítás/folytatás/eldobás
 próbával ellenőrizve; a régi klasszikus mentések olvashatók maradnak.
 Az S2-V2 valós órás próba továbbra is nyitott; az új statisztikalapok
-ellenőrzéséhez az aktuális fejlesztői buildet kell majd telepíteni.
+ellenőrzéséhez az 1.2.0 produkciós csomagot használd.
 
 Új fejlesztői munkamenethez: [átadási jegyzet](docs/development-handoff.md).
