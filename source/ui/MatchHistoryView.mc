@@ -87,8 +87,8 @@ class MatchHistoryView extends WatchUi.View {
 
     function drawStatsHint(dc, centerX) {
         dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
-        dc.drawText(centerX, 350, Graphics.FONT_XTINY, "HOLD UP: STATS",
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(centerX, 344, Graphics.FONT_XTINY, "HOLD UP: ALL STATS",
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     function drawRecord(dc, displayIndex, y) {

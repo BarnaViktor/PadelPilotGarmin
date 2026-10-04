@@ -69,3 +69,29 @@ majd őrizze meg a végeredményt és a később definiált alapstatisztikákat.
 4. A „labdamenet ideje” a megelőző pont lezárásától vagy külön indítással
    számolódjon?
 5. Kell-e a pontbevitelhez azonnali, rövid visszavonási képernyő?
+
+
+## Következő bővítés – Americano / Mexicano saját meccs
+
+2026-10-04-i felhasználói döntés: az óra kizárólag egy saját mérkőzés
+pontjait számolja és azt vezesse végig. A bővítés a saját csapat és az
+ellenfél pontállását, undo-t, szünetet, eredményt és meccsmentést kezeli.
+Tornaszervezés, párosítás, partnerrotáció, fordulósorozat, más pálya
+eredménye, játékoslista és ranglista nem része a funkciónak.
+
+AM-1 lezárva: meccs előtt választható közös összpontszám (A+B=X) vagy
+csapatcél (A=X vagy B=X), megadható pozitív egész X és kezdő csapat.
+A meccs a választott pontszabály teljesülésekor ér véget. A részletek és
+elfogadási példák az [AM-1 specifikációban](americano-mexicano-spec.md)
+vannak. AM-2 elkészült: önálló pontozási domain, két szabály, eredmény és
+20 pontos undo. AM-3 is elkészült: módválasztó, két szabály, egyesével
+állítható 1–999 X (alapérték 24), kezdő A/B és új 0–0-s meccs indítása.
+AM-4 elkészült: DOWN/UP pontbevitel 500 ms-os védelemmel, 20 pontos
+undo, szünet, aktív játékidő és WIN/LOSS/DRAW eredmény; a lezáró pont
+visszavonása újranyit. Eldobás külön megerősítéssel, NO alapértékkel.
+AM-5 is elkészült: verziózott aktív mentés, pontállás és pontos játékidő
+helyreállítása, újraindítás után szüneteltetett folytatás vagy eldobás.
+A korábbi klasszikus mentések olvashatók maradnak. Az undo-napló
+újraindításkor üres; a lezárt meccs eredménye és ideje megmarad.
+Az új módok előzménye és FIT-je AM-6/AM-7 feladata.
+Az első kiadás klasszikus meccsscope-ja változatlan.

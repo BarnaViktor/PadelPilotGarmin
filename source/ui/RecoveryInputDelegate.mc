@@ -21,19 +21,35 @@ class RecoveryInputDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function resumeMatch() {
+        var scoreView = createResumedView();
+        var engine = _view.getLoadedMatch()[0];
+        ActiveMatchSession.attach(engine, scoreView);
+        if (engine instanceof PointMatchEngine) {
+            WatchUi.switchToView(scoreView, new PointMatchStartInputDelegate(scoreView),
+                WatchUi.SLIDE_IMMEDIATE);
+            return;
+        }
+        PadelActivityRecorder.start(engine);
+        PadelActivityRecorder.pause();
+        WatchUi.switchToView(scoreView,
+            new ScoreInputDelegate(scoreView, engine, true), WatchUi.SLIDE_IMMEDIATE);
+    }
+
+    function createResumedView() {
         var loaded = _view.getLoadedMatch();
         var engine = loaded[0];
+        if (engine instanceof PointMatchEngine) {
+            var pointView = new PointMatchStartView(engine);
+            pointView.restoreSavedTime(loaded[1]);
+            return pointView;
+        }
         var scoreView = new ScoreView(engine, loaded[1], loaded[2]);
         if (engine.getMatchWinner() == null) {
             scoreView.setPaused(true);
         } else {
             scoreView.completeMatch();
         }
-        ActiveMatchSession.attach(engine, scoreView);
-        PadelActivityRecorder.start(engine);
-        PadelActivityRecorder.pause();
-        WatchUi.switchToView(scoreView,
-            new ScoreInputDelegate(scoreView, engine, true), WatchUi.SLIDE_IMMEDIATE);
+        return scoreView;
     }
 
     function discardMatch() {

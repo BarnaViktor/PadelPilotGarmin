@@ -5,6 +5,14 @@ bontja. Egy új Codex-munkamenet egyszerre csak **egy azonosítót** kapjon meg,
 például: „Folytasd az `S2-V1` egységgel”. Az egységek sorrendjét csak külön
 termékdöntéssel változtasd meg.
 
+**2026-10-04-i folytatás:** AM-1…AM-5 lezárva. Élő pontbevitel,
+undo, szünet, játékidő, eredmény, megerősített eldobás és verziózott
+aktív mentés/helyreállítás kész. FR265 és Enduro profilon 94/94 teszt,
+optimalizált build és natív ellenőrzés sikeres.
+Következő eszköz nélküli egység: AM-6, saját meccs eredménye és előzménye.
+S2-V2 és a D-kapuk nyitva maradnak,
+eszközkeresés nem szükséges.
+
 ## Munkamenet-szabály
 
 Minden egység elején:
@@ -58,6 +66,9 @@ miatti vágás 416 × 416 és 280 × 280 képponton.
 
 **Állapot:** FR265-re béta build felmásolva; az órás indítás és alapműködés
 sikeres. A pontsorozat, újraindítás és törlés mérése még nyitott.
+A 2026-10-04-i hatókörjelölések és egyedi statisztikalapok csak a helyi
+fejlesztői buildben vannak; az órás UI-próba előtt friss béta szükséges.
+Tesztóra hiányában ez az egység várakozik; AM-5 lezárva, AM-6 következik.
 
 Az ismételhető gombsor és az elvárt értékek:
 [valós órás pontstatisztikai próba](s2-v2-real-watch-point-test.md).
@@ -95,75 +106,115 @@ memória és akkumulátor. Egy munkamenet csak egy modellt dokumentáljon.
 `supported-devices.md` fájlban. Release manifest csak sikeres valós órás
 kapu után bővíthető, külön kiadási egységben.
 
-## AM – Americano / Mexicano
+## AM – Americano / Mexicano: egy saját meccs
 
-Az `AM` egységek az S2 ellenőrzések után következnek. Az első egység még nem
-ír termékkódot.
+**Felhasználói pontosítás, 2026-10-04:** kizárólag egy saját meccs
+pontozása és végigvezetése. Nincs tornalebonyolítás, többpályás bevitel,
+játékoslista, párosítás, partnerrotáció, fordulósorozat vagy ranglista.
+AM-1…AM-5 lezárva; AM-6 eszköz nélkül folytatható, az S2-V2 órás kapu nyitott.
 
-### AM-1 – Szabály- és termékdöntések
+### AM-1 – Saját meccs szabályai
 
-**Cél:** egy rövid specifikációban rögzíteni:
+**Állapot:** kész (2026-10-04). Az
+[egymeccses specifikáció](americano-mexicano-spec.md) rögzíti a felhasználó
+két lezárási szabályát (A+B=X vagy A=X/B=X), a meccs előtt megadható pozitív
+egész X-et és a kezdő csapat választását. X nem korlátozott 16/24/32-re.
 
-- Americano és Mexicano támogatott változata;
-- játékosok és pályák száma;
-- párosítás és partner-/ellenfél-rotáció;
-- fix pontszám vagy időlimit;
-- fordulók száma és lezárási feltétel;
-- holtverseny-kezelés;
-- órán tárolt játékosnevek/azonosítók;
-- egyéni és páros eredmények;
-- megszakítás, undo és helyreállítás szabálya.
+**Kimenet:** lezárt specifikáció pontbeviteli, lezárási, döntetlen-, undo-,
+kezdőcsapat- és hibásbemenet-példákkal, valamint a szünet, korai mentés és
+helyreállítás későbbi integrációs elfogadásával. Termékkód nem módosult.
+Az AM-2 domain is lezárult; következő azonosító: AM-3.
 
-**Kimenet:** új, jóváhagyott specifikáció a `docs/` alatt, elfogadási
-példákkal. Nyitott termékdöntés mellett ne induljon `AM-2`.
+### AM-2 – Tiszta, egymeccses pontozási domain
 
-### AM-2 – Tiszta domainmodell
+**Állapot:** kész (2026-10-04). `PointMatchEngine` és 11 új domain-teszt;
+FR265 és Enduro (API-minimum 3.4.0) 73/73 teszt, optimalizált build sikeres.
+A lezárás, döntetlen, 20 pontos undo, kezdő csapat és hibás bemenet ellenőrizve.
+UI/perzisztencia/FIT bekötés még nincs; következő azonosító AM-3.
 
-**Cél:** UI és perzisztencia nélkül megvalósítani a forduló-, párosítás- és
-pontozási modellt.
+**Bemenet:** az AM-1 lezárt specifikációja.
 
-**Elfogadás:** determinisztikus tesztek kis és maximális támogatott
-létszámra, páratlan/hibás bemenetekre és holtversenyre. A klasszikus
-`ScoringEngine` viselkedése változatlan marad.
+**Cél:** a két csapat pontjai, választott lezárási szabály (összpontszám
+vagy csapatcél), pozitív egész X, kezdő csapat, eredmény
+(győzelem/vereség/döntetlen) és undo, UI és perzisztencia nélkül.
 
-### AM-3 – Beállítás és navigáció
+**Elfogadás:** determinisztikus tesztek mindkét szabály határaira, azonos
+pontállás eltérő lezárására, egyedi X-re, döntetlenre, lezáró pont undo-jára,
+20 pontos undo-korlátra, mindkét kezdő csapatra, új meccsre és hibás bemenetre.
+A klasszikus ScoringEngine viselkedése változatlan.
 
-**Cél:** játékmódválasztás, játékos-/fordulóbeállítás és indítás, még teljes
-élő meccsképernyő nélkül.
+### AM-3 – Módválasztás és meccsbeállítás
 
-**Elfogadás:** BACK/cancel nem veszít jóváhagyott adatot; minden felirat
-elfér FR265 és Enduro elrendezési teszten.
+**Állapot:** kész (2026-10-04). CLASSIC/AMERICANO/MEXICANO választó;
+TOTAL X / TEAM X szabály, egyesével állítható 1–999 X (alapérték 24),
+kezdő A/B, mentés és BACK/cancel. Indításkor független engine,
+pontmódban 0–0-s kezdőnézet és BACK a megőrzött setupra. FR265 és Enduro
+(API 3.4.0) profilon 78/78 teszt, optimalizált build, natív vizuális
+ellenőrzés és mind a nyolc indítás/BACK kombináció sikeres.
+Élő pontbevitel még nincs; következő azonosító AM-4.
 
-### AM-4 – Élő fordulókezelés
+**Cél:** klasszikus / Americano / Mexicano mód; az új módokban a két
+lezárási szabály, egyesével állítható X és kezdő csapat választása, majd
+egyetlen saját meccs indítása. Az alapértékek és a számválasztó technikai
+felső határa megvalósítási részlet, nem új lezárási szabály.
 
-**Cél:** pontbevitel, aktuális párosítás, fordulóváltás, undo és szünet.
+**Elfogadás:** BACK/cancel megőrzi a beállítást; feliratok és kezelőszervek
+elférnek FR265 és Enduro elrendezésben.
 
-**Elfogadás:** egy teljes kisméretű torna végigjátszható, és minden
-állapotátmenet domain-teszttel fedett.
+### AM-4 – Élő meccspontozás
 
-### AM-5 – Mentés és helyreállítás
+**Állapot:** kész (2026-10-04). DOWN/UP, közös 500 ms-os védelem,
+20 pontos undo, START-szünet és aktív játékidő. Automatikus
+WIN/LOSS/DRAW eredmény, ponttiltás lezárás után; BACK visszavonja a
+lezáró pontot és újranyit, az eredményen töltött időt kihagyva.
+Szünetből és eredményről megerősített eldobás, NO alapértékkel,
+visszatérés a megőrzött setupra. FR265 és Enduro API 3.4.0 profilon
+85/85 teszt, optimalizált build, natív képernyők és mind a nyolc
+kombináció indítás/pontozás/szünet/undo/eldobás integrációs próbája
+sikeres. Következő azonosító AM-5.
 
-**Cél:** verziózott aktív tornaállapot, újraindítás utáni folytatás és hibás
-mentés biztonságos eldobása.
+**Cél:** MY TEAM / OPPONENT pontbevitel, undo, szünet és eredményre lépés.
 
-**Elfogadás:** régi normál meccsmentések változatlanul olvashatók; az új
-tornaformátum nem keveredik a `matchHistory` rekordjaival.
+**Elfogadás:** egy meccs végigpontozható; lezárás után további pont tiltott,
+a lezáró pont undo-ja visszanyitja a meccset. Nincs fordulóváltás.
 
-### AM-6 – Eredmény és előzmény
+### AM-5 – Aktív meccs mentése és helyreállítása
 
-**Cél:** végeredmény, rangsor és fordulóbontás megjelenítése, törlése és
-helyi tárolási korlátja.
+**Állapot:** kész (2026-10-04). Külön v4 aktív pontmeccsmentés,
+mód/szabály/X/kezdő csapat/pontállás és milliszekundumos játékidő.
+Mentés indításkor, pont/undo/szünet/folytatás után, elrejtéskor és
+alkalmazásleálláskor. Újraindítás után szüneteltetett folytatás; lezárt
+meccsnél fagyasztott WIN/LOSS/DRAW. Az undo-napló újraindításkor üres,
+a klasszikus meccshez igazodva. Eldobás csak az aktív mentést törli.
+Régi klasszikus v1/v2/v3 olvasható, hibás pontmentés az előzményt nem érinti.
+FR265 és Enduro API 3.4.0: 94/94 teszt, optimalizált build, natív
+vizuális próba és nyolckombinációs tényleges újraindítás/folytatás/eldobás.
+Következő azonosító AM-6.
 
-**Elfogadás:** előbb külön tárhely-/memóriadöntés készül az első Enduróra;
-csak utána rögzíthető a rekordkorlát.
+**Cél:** verziózott, játékmódot, lezárási szabályt, X-et és kezdő csapatot
+őrző aktív meccsmentés,
+újraindítás utáni szüneteltetett folytatás vagy eldobás.
 
-### AM-7 – FIT és készülékkapu
+**Elfogadás:** régi normál meccsmentés olvasható; hibás új mentés nem
+károsítja az előzményt. Pontállás és játékidő egyezik a mentett állapottal.
 
-**Cél:** eldönteni, egy torna egy vagy több FIT-aktivitás legyen-e, majd a
-jóváhagyott modellt implementálni.
+### AM-6 – Saját meccs eredménye és előzménye
 
-**Elfogadás:** FR265 és Enduro teszt/build, utána külön valós órás próba.
-Ebben az egységben ne bővíts release manifestet.
+**Cél:** mód, lezárási szabály, X, A/B pontszám, idő és eredmény
+megjelenítése/mentése/törlése;
+az összesítő pont- és időadatainak, valamint a döntetlennek a kezelése.
+
+**Elfogadás:** döntetlen befejezett meccs, nem vereség vagy félbehagyás;
+pont nem válik szetté/game-mé. Régi rekordok olvashatók, a 20 meccses korlát
+megmarad. Endurón az új mód és az előzmény memóriahasználata ellenőrzött.
+
+### AM-7 – Saját meccs FIT- és készülékkapuja
+
+**Cél:** egy saját meccshez egy FIT-aktivitás; a pontok, eredmény, szünet,
+mentés és a meglévő újraindítás utáni szegmenskezelés ellenőrzése.
+
+**Elfogadás:** FR265 és Enduro teszt/build és natív szimulátoros kör,
+majd később külön valós órás próba. Ne bővíts release manifestet.
 
 ## I2 – Instinct 2 monokróm adaptáció
 
@@ -195,8 +246,8 @@ Csak az Instinct 2 után induljon.
 
 ### W-1 – Adatszerződés
 
-Verziózott JSON-séma normál meccshez és később tornához; idempotencia,
-időzóna, törlés és konfliktuskezelés. Kódolás előtt minta payloadokkal
+Verziózott JSON-séma klasszikus és Americano/Mexicano saját meccshez;
+idempotencia, időzóna, törlés és konfliktuskezelés. Kódolás előtt minta payloadokkal
 jóváhagyandó.
 
 ### W-2 – Órás kimenő sor

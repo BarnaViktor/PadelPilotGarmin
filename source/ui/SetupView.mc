@@ -13,10 +13,16 @@ class SetupView extends WatchUi.View {
         dc = PadelTheme.canvas(dc);
         PadelTheme.clear(dc);
         var centerX = dc.getWidth() / 2;
-        PadelTheme.drawHeader(dc, "MATCH SETUP");
+        PadelTheme.drawHeader(dc, _setup.editing
+            ? _setup.titleFor(_setup.selectedField) : "MATCH SETUP");
 
         if (_setup.editing) {
             drawEditor(dc, centerX);
+            dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
+            dc.drawText(centerX, 328, Graphics.FONT_XTINY, "START: SAVE",
+                Graphics.TEXT_JUSTIFY_CENTER);
+            dc.drawText(centerX, 362, Graphics.FONT_XTINY, "BACK: CANCEL",
+                Graphics.TEXT_JUSTIFY_CENTER);
         } else {
             drawSettings(dc, centerX);
         }
@@ -38,6 +44,9 @@ class SetupView extends WatchUi.View {
             if (index == _setup.fieldCount()) {
                 PadelTheme.drawActionButton(dc, 72, y, 272, 48, selected,
                     "START");
+            } else if (_setup.fieldFor(index) == MatchSetupField.MODE) {
+                PadelTheme.drawActionButton(dc, 49, y, 318, 48, selected,
+                    "MODE: " + _setup.modeLabel());
             } else {
                 PadelTheme.drawSplitCard(dc, 49, y, 318, 48, selected,
                     shortTitle(index), shortValue(index));
@@ -49,22 +58,38 @@ class SetupView extends WatchUi.View {
 
     function drawEditor(dc, centerX) {
         var index = _setup.selectedField;
-        if (index == 2) {
+        var field = _setup.fieldFor(index);
+        if (field == MatchSetupField.MODE) {
+            var modes = [MatchMode.CLASSIC, MatchMode.AMERICANO, MatchMode.MEXICANO];
+            var labels = ["CLASSIC", "AMERICANO", "MEXICANO"];
+            for (var row = 0; row < 3; row += 1) {
+                PadelTheme.drawActionButton(dc, 58, 108 + row * 72, 300, 56,
+                    _setup.matchMode == modes[row], labels[row]);
+            }
+            return;
+        }
+        if (field == MatchSetupField.END_RULE) {
+            drawChoiceEditor(dc,
+                _setup.pointEndRule == PointMatchEndRule.TOTAL_POINTS,
+                "A + B = X", "A = X OR B = X");
+            return;
+        }
+        if (field == MatchSetupField.FIRST_SERVE) {
             drawTeamEditor(dc, centerX);
             return;
         }
 
-        if (index == 1) {
+        if (field == MatchSetupField.SCORING) {
             drawChoiceEditor(dc,
                 _setup.scoringMode == ScoringMode.ADVANTAGE,
                 "ADVANTAGE", "NO-AD");
             return;
-        } else if (index == 3) {
+        } else if (field == MatchSetupField.DECIDER) {
             drawChoiceEditor(dc,
                 _setup.decidingSetMode == DecidingSetMode.FULL_SET,
                 "FULL SET", "MATCH TIE-BREAK");
             return;
-        } else if (index == 6) {
+        } else if (field == MatchSetupField.MARGIN) {
             drawChoiceEditor(dc, _setup.requireTwoPointTieBreakMargin,
                 "ON", "OFF");
             return;
@@ -116,26 +141,31 @@ class SetupView extends WatchUi.View {
     }
 
     function shortTitle(index) {
-        var titles = ["SETS", "SCORING", "1ST SERVE", "FINAL SET",
-            "TIE-BREAK", "MATCH TB", "WIN BY TWO"];
-        return titles[index];
+        var titles = ["MODE", "SETS", "SCORING", "1ST SERVE", "FINAL SET",
+            "TIE-BREAK", "MATCH TB", "WIN BY TWO", "END AT", "POINTS X"];
+        return titles[_setup.fieldFor(index)];
     }
 
     function shortValue(index) {
-        if (index == 0) {
-            return _setup.bestOfSets + " SETS";
-        } else if (index == 1) {
-            return _setup.scoringMode == ScoringMode.ADVANTAGE ? "ADV" : "NO-AD";
-        } else if (index == 2) {
-            return _setup.startingServerTeam == 0 ? "A TEAM" : "B TEAM";
-        } else if (index == 3) {
-            return _setup.decidingSetMode == DecidingSetMode.FULL_SET
-                ? "FS" : "MTB";
-        } else if (index == 4) {
-            return _setup.regularTieBreakTarget.toString();
-        } else if (index == 5) {
-            return _setup.decidingTieBreakTarget.toString();
+        var field = _setup.fieldFor(index);
+        if (field == MatchSetupField.MODE) { return _setup.modeLabel(); }
+        if (field == MatchSetupField.END_RULE) {
+            return _setup.pointEndRule == PointMatchEndRule.TOTAL_POINTS
+                ? "TOTAL X" : "TEAM X";
         }
+        if (field == MatchSetupField.POINT_TARGET) { return _setup.pointTarget.toString(); }
+        if (field == MatchSetupField.SETS) { return _setup.bestOfSets + " SETS"; }
+        if (field == MatchSetupField.SCORING) {
+            return _setup.scoringMode == ScoringMode.ADVANTAGE ? "ADV" : "NO-AD";
+        }
+        if (field == MatchSetupField.FIRST_SERVE) {
+            return _setup.startingServerTeam == 0 ? "A TEAM" : "B TEAM";
+        }
+        if (field == MatchSetupField.DECIDER) {
+            return _setup.decidingSetMode == DecidingSetMode.FULL_SET ? "FS" : "MTB";
+        }
+        if (field == MatchSetupField.TIE_BREAK) { return _setup.regularTieBreakTarget.toString(); }
+        if (field == MatchSetupField.MATCH_TB) { return _setup.decidingTieBreakTarget.toString(); }
         return _setup.requireTwoPointTieBreakMargin ? "ON" : "OFF";
     }
 }

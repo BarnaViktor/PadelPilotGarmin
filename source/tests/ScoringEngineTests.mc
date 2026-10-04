@@ -457,6 +457,7 @@ function manualTieBreakServerChangeKeepsRotation(logger) {
 (:test)
 function setupEditorSavesAndCancelsValues(logger) {
     var setup = new MatchSetupState();
+    setup.selectedField = 1;
 
     Test.assert(setup.beginEditing());
     setup.changeSelected(1);

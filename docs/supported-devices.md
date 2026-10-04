@@ -14,6 +14,51 @@ A következő, első prioritású bővítés további Garmin órák támogatása
 További készülék a megjelenítési és működési kompatibilitás külön
 ellenőrzése után kerülhet a kiadási manifestbe.
 
+## 2026-10-04 – AM-4 élő pontozás ellenőrzése
+
+FR265 (416 × 416) és első Enduro (280 × 280, kísérleti API 3.4.0)
+profilon **85/85 teszt**, optimalizált build, 16-16 natív képernyő és
+mind a nyolc mód/szabály/kezdőcsapat kombináció integrációs próbája
+sikeres. Pontbevitel, 500 ms-os védelem, undo, szünet, időmérés,
+WIN/LOSS/DRAW, lezáró pont undo, eldobás és megőrzött setup ellenőrizve.
+A háromjegyű pontszámok és a javított alsó súgósorok elférnek.
+Az Enduro mintanézetes kör kb. 51,8–62,8 / 123,8 kB-t jelzett;
+ez nem a későbbi mentés/előzmény/FIT memóriakapuja.
+Képek, integrációs naplók és build-jegyzőkönyvek a
+[fejlesztési átadásban](development-handoff.md) szerepelnek.
+
+Pontmódban tárolás és FIT még nincs; a következő egység AM-5.
+Valós órás kapu és bétafrissítés nem történt; más modellre ez a kör
+nem ad új bizonyítékot.
+
+## 2026-10-04 – AM-3 setup ellenőrzése
+
+FR265 (416 × 416) és első Enduro (280 × 280, kísérleti API 3.4.0) profilon
+**78/78 teszt**, optimalizált build, natív mód-/szabály-/célpont-/kezdőcsapat-
+megjelenítés, valamint mind a nyolc START/BACK kombináció próbája sikeres.
+A 999-es célérték is elfér, átfedés vagy levágás nem látszott. Az Enduro
+fejlesztői képernyőbejárója kb. 57,6 / 123,8 kB-t jelzett; ez nem hosszú
+meccses mérés. Képek, integrációs naplók és build-bizonyítékok a
+[fejlesztési átadásban](development-handoff.md) szerepelnek.
+
+Ez helyi fejlesztői állapot: az új módok élő pontbevitele AM-4-ben
+következik, a valós órás kapuk továbbra is nyitottak, a béta nem frissült.
+Más készülékprofilra ez a kör nem ad új bizonyítékot.
+
+## 2026-10-04 – Statisztikai UI ellenőrzése
+
+FR265 és első generációs Enduro profilon a helyi fejlesztői változat
+**62/62 tesztje**, optimalizált buildje és az összesítő/egyedi
+statisztikalapok natív vizuális bejárása sikeres. Az Enduro kísérleti
+API-minimuma 3.4.0; a két kijelzőméret 416 × 416 és 280 × 280. A pontos
+build-jegyzőkönyvek és korlátok a
+[fejlesztési átadásban](development-handoff.md) szerepelnek.
+
+Ez a friss eredmény e két profilra vonatkozik; az alábbi táblázatok
+dátumozott, korábbi készülékbővítési bizonyítékok. Más modellre az új UI
+ellenőrzését még nem rögzítettük. A valós órás S2-V2 és a készülékkapuk
+nyitottak; a korábban telepített FR265 béta nem frissült.
+
 ## Első kör – fordítás és szimulátoros tesztek
 
 A Connect IQ SDK 9.2.0 helyi készülékprofiljai alapján az alábbi modellek

@@ -49,6 +49,30 @@ class LayoutBoundsDc {
 }
 
 (:debug)
+class HistoryTextDc extends LayoutBoundsDc {
+    var _text;
+
+    function initialize() {
+        LayoutBoundsDc.initialize(416);
+        _text = [];
+    }
+
+    function drawText(x, y, font, text, justification) {
+        point(x, y);
+        _text.add(text.toString());
+    }
+
+    function hasText(value) {
+        for (var index = 0; index < _text.size(); index += 1) {
+            if (_text[index].equals(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+(:debug)
 function assertLayoutBounds(view, size) {
     var dc = new LayoutBoundsDc(size);
     view.onUpdate(dc);
@@ -56,18 +80,35 @@ function assertLayoutBounds(view, size) {
 }
 
 (:debug)
+function captureHistoryText(view) {
+    var dc = new HistoryTextDc();
+    view.onUpdate(dc);
+    return dc;
+}
+
+(:debug)
 function checkSetupLayouts(size) {
     assertLayoutBounds(new HomeView(), size);
-    var setup = new MatchSetupState();
-    var view = new SetupView(setup);
-    for (var field = 0; field < setup.itemCount(); field += 1) {
-        setup.selectedField = field;
-        assertLayoutBounds(view, size);
-        if (setup.beginEditing()) {
+    for (var mode = MatchMode.CLASSIC; mode <= MatchMode.MEXICANO; mode += 1) {
+        var setup = new MatchSetupState();
+        setup.matchMode = mode;
+        var view = new SetupView(setup);
+        for (var field = 0; field < setup.itemCount(); field += 1) {
+            setup.selectedField = field;
             assertLayoutBounds(view, size);
-            setup.changeSelected(1);
+            if (setup.beginEditing()) {
+                assertLayoutBounds(view, size);
+                setup.changeSelected(1);
+                assertLayoutBounds(view, size);
+                setup.cancelEditing();
+            }
+        }
+        if (setup.isPointMatch()) {
+            setup.pointTarget = MatchSetupField.MAX_POINT_TARGET;
+            assertLayoutBounds(new PointMatchStartView(setup.createEngine()), size);
+            setup.selectedField = 2;
+            setup.beginEditing();
             assertLayoutBounds(view, size);
-            setup.cancelEditing();
         }
     }
 }
@@ -113,10 +154,13 @@ function checkHistoryLayouts(size) {
         [0, 0, 0, 0, false, false], [24, 8]];
     var stopped = [0, 0, -1, 30, [], [], 2, 1,
         [2, 1, 3, 2, false, false]];
+    var legacy = [0, 1, 1, 120, [[4, 6, false]]];
+    var zeroPoints = [0, 0, -1, 0, [], [], 3, 1,
+        [0, 0, 0, 0, false, false], [0, 0]];
     var history = new MatchHistoryView();
     history._history = [];
     assertLayoutBounds(history, size);
-    history._history = [completed, stopped];
+    history._history = [completed, stopped, legacy, zeroPoints];
     assertLayoutBounds(history, size);
     var stats = new MatchHistoryStatsView(history._history);
     for (var statsPage = 0; statsPage < stats.getPageCount();
@@ -124,7 +168,7 @@ function checkHistoryLayouts(size) {
         assertLayoutBounds(stats, size);
         stats.movePage(1);
     }
-    for (var index = 0; index < 2; index += 1) {
+    for (var index = 0; index < history._history.size(); index += 1) {
         var detail = new MatchHistoryDetailView(history._history[index]);
         for (var page = 0; page < detail.getPageCount(); page += 1) {
             assertLayoutBounds(detail, size);
@@ -135,6 +179,53 @@ function checkHistoryLayouts(size) {
         detail.moveDeleteSelection();
         assertLayoutBounds(detail, size);
     }
+}
+
+(:test)
+function matchDetailsDistinguishStatisticsAndMissingPointData(logger) {
+    var completed = [1, 0, 0, 120, [[6, 0, false]], [120], 3, 0,
+        [0, 0, 0, 0, false, false], [24, 8]];
+    var view = new MatchHistoryDetailView(completed);
+    // UP from the score summary wraps to this match's point statistics.
+    view.movePage(-1);
+    var dc = new HistoryTextDc();
+    view.onUpdate(dc);
+    Test.assert(dc.hasText("MATCH POINTS"));
+    Test.assert(dc.hasText("24") && dc.hasText("8") && dc.hasText("75%"));
+    Test.assert(!dc.hasText("POINT MATCHES") && !dc.hasText("ALL SAVED MATCHES"));
+    view.movePage(-1);
+    dc = new HistoryTextDc();
+    view.onUpdate(dc);
+    Test.assert(dc.hasText("MATCH SET STATS") && dc.hasText("100%"));
+    Test.assert(dc.hasText("MATCH TIME") && dc.hasText("2m"));
+    view.movePage(2);
+    Test.assertEqual(0, view._page);
+
+    var records = [
+        [0, 1, 1, 120, [[4, 6, false]]],
+        [0, 0, -1, 30, [], [], 2, 1, [2, 1, 3, 2, false, false]],
+        [0, 0, -1, 0, [], [], 3, 1,
+            [0, 0, 0, 0, false, false], [0, 0]]
+    ];
+    for (var index = 0; index < records.size(); index += 1) {
+        view = new MatchHistoryDetailView(records[index]);
+        view.movePage(-1);
+        dc = new HistoryTextDc();
+        view.onUpdate(dc);
+        Test.assert(dc.hasText("MATCH POINTS") && dc.hasText("--"));
+        Test.assertEqual(index < 2, dc.hasText("NO POINT DATA"));
+        if (index == 2) {
+            Test.assert(dc.hasText("0"));
+        }
+    }
+
+    var stats = new MatchHistoryStatsView([completed, records[0], records[1]]);
+    for (var page = 0; page < stats.getPageCount(); page += 1) {
+        dc = captureHistoryText(stats);
+        Test.assert(dc.hasText("ALL SAVED MATCHES"));
+        stats.movePage(1);
+    }
+    return true;
 }
 
 (:test)

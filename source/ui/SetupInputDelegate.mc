@@ -93,7 +93,14 @@ class SetupInputDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function startMatch() {
-        var engine = new ScoringEngine(_setup.toConfig());
+        var engine = _setup.createEngine();
+        if (_setup.isPointMatch()) {
+            var pointView = new PointMatchStartView(engine);
+            ActiveMatchSession.attach(engine, pointView);
+            WatchUi.pushView(pointView, new PointMatchStartInputDelegate(pointView),
+                WatchUi.SLIDE_IMMEDIATE);
+            return;
+        }
         var view = new ScoreView(engine, 0, []);
         ActiveMatchSession.attach(engine, view);
         PadelActivityRecorder.start(engine);

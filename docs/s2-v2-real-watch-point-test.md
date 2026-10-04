@@ -20,6 +20,35 @@ jelzett. Az órán való indulás sikeres; a kézi mérés még nyitott.
 2026-09-25-én idő hiányában az 1–3. mérési szakasz nem történt meg; innen
 kell folytatni a következő alkalommal.
 
+## 2026-10-04 – Új statisztikalapok ellenőrzése
+
+Tesztóra nincs csatlakoztatva; a mérés nyitott. A szeptember 25-én
+telepített béta nem tartalmazza a helyi fejlesztői változat új
+hatókörjelöléseit és egyedi meccsstatisztikalapjait. Ezek órás
+ellenőrzéséhez később aktuális béta build szükséges, a saját PRG SHA-256
+azonosítójának rögzítésével; a fenti telepítési bizonyíték történeti adat.
+
+Az új változatban a listán `HOLD UP: ALL STATS` nyitja az összes helyben
+tárolt, legfeljebb 20 meccs összesítőjét; mind a négy lap alján
+`ALL SAVED MATCHES` látható. START a kiválasztott meccs részleteit
+nyitja, ahol az eredmény- és szettlapok után `MATCH SET STATS` és
+`MATCH POINTS` következik. UP/DOWN mindkét nézetben körbelapoz, BACK
+az előzménylistára tér vissza. Az 1–3. mérési szakaszon felül ellenőrizd:
+
+- a félbehagyott tesztmeccs pontlapja **3–1, 75%**; szettadata **0–0,
+  --**, a `MATCH TIME` a mentett meccsidőt mutatja;
+- a lezárt tesztmeccs pontlapja **24–0, 100%**; szettadata **1–0,
+  100%**, meccsideje egyezik a rekordéval;
+- ha van korábbról pontadat nélküli rekord, azon **-- / --**, `POINT
+  RATE --` és `NO POINT DATA` jelenik meg; a teljes pontadattal, nulla
+  ponttal mentett új rekord ezzel szemben **0–0, --**;
+- a pontlapról UP-pal a szettstatisztikára, DOWN-nal körbe az
+  eredménylapra lehet lépni; a törlési megerősítés az új lapokról is
+  működik, és `NO`/BACK megőrzi a rekordot.
+
+A hiányzó/nulla pontadat esetét csak meglévő vagy külön, felhasználó által
+jóváhagyott tesztrekorddal ellenőrizd; valódi előzményt ne írj felül.
+
 ## Mérés előtt
 
 1. Jegyezd fel az óra modelljét, firmware-verzióját, a telepítés módját és a

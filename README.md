@@ -7,8 +7,10 @@ végigvezeti és rögzíti egy padelmérkőzés eredményét.
 
 Verzió: **1.1.0**, éles használatban a felhasználó megerősítése alapján.
 A felhasználó saját használatára teljesen megfelelőnek találja: működési
-hibát vagy zavaró viselkedést nem tapasztalt. Jelenleg nincs bejelentett
-működési hiba vagy használhatósági javítási igény.
+hibát vagy zavaró viselkedést nem tapasztalt. A bétatesztelés során
+felmerült az előzmény-összesítő hatókörének egyértelműsítése és az egyedi
+meccsek statisztikáinak megjelenítése; ezek a helyi fejlesztői változatban
+elkészültek.
 A Garmin Connect-megjelenítés és az erőforrásmérések részletes eredménye
 még nincs dokumentálva.
 
@@ -40,11 +42,12 @@ Az első helyi tesztkiadás elkészült:
 - aktuális, átlagos és maximális pulzus, Garmin által számított kalória és
   aktivitásidő rögzítése, amikor ezek az adatok elérhetők;
 - pontesemények, szetteredmények és győztes egyedi FIT-mezőkben;
-- 55 Monkey C teszt a pontozásra, mentésre, előzményre,
-  aktivitásrögzítésre és a 280/416 pixeles elrendezések rajzolási határaira.
+- 94 Monkey C teszt a klasszikus és pontmódos domainre, beállításokra,
+  mentésre, előzményre, aktivitásrögzítésre és a 280/416 pixeles elrendezésekre.
 
-A hőtérkép, az Americano, a Mexicano és a saját szerveres szinkron nem része
-ennek a checkpointnak.
+Az Americano/Mexicano a helyi fejlesztői változatban már pontozható és
+aktív meccsként helyreállítható; előzménye és FIT-je még hátravan.
+A hőtérkép és a saját szerveres szinkron későbbi bővítés.
 
 ## Projektstruktúra
 
@@ -144,9 +147,14 @@ Beállítás:
 - START GAME menüponton START: meccs indítása.
 - MATCH HISTORY menüponton START: a legutóbbi lezárt vagy félbehagyva mentett
   meccsek megnyitása;
-- az előzménylistán MENU / hosszan nyomott UP: a négylapos összesített
-  meccs-, szett-, idő- és pontstatisztika megnyitása; a pontlap csak az új,
-  teljes pontadattal mentett meccseket számolja;
+- az előzménylistán MENU / hosszan nyomott UP (`HOLD UP: ALL STATS`): az
+  összes helyben tárolt, legfeljebb 20 meccs négylapos meccs-, szett-, idő-
+  és pontstatisztikája; minden lap `ALL SAVED MATCHES` jelölést kap. Ez nem
+  napi összesítés; a pontlap csak a teljes pontadattal mentett meccseket számolja;
+- az előzménylistán START: a kiválasztott meccs részletei; UP/DOWN lapozza
+  az eredményt, a szetteket, majd az adott meccs szett- és pontstatisztikáját
+  (`MATCH SET STATS`, `MATCH POINTS`). Régi, pontadat nélküli rekordnál
+  `--` és `NO POINT DATA` jelenik meg;
 - az előzmény részletein START: az adott rekord törlése megerősítés után.
 
 Alkalmazás-újraindítás után:
@@ -208,7 +216,7 @@ A saját használatra bevált `1.1.0` után a jóváhagyott bővítési sorrend:
    modellekkel együtt – a szimulátoros kör kész, a valós órás kapu nyitott;
 2. meccstörténet és statisztikák – a meccs/szett/idő összesítő után a
    pontstatisztikai checkpoint is implementálva és automatikusan ellenőrizve;
-3. Americano / Mexicano játékmód;
+3. Americano / Mexicano játékmód – egy saját meccs pontozása;
 4. Instinct 2 támogatása, külön monokróm grafikai adaptációval;
 5. saját szinkron és webes felület.
 
@@ -216,5 +224,33 @@ Részletek: [docs/development-roadmap.md](docs/development-roadmap.md)
 
 Kis kontextusablakban, egyenként indítható következő egységek:
 [docs/next-work-units.md](docs/next-work-units.md).
+
+**AM-5 lezárva; következő eszköz nélküli egység: AM-6, saját meccs eredménye és előzménye.**
+Az [egymeccses specifikáció](docs/americano-mexicano-spec.md) két csapat
+saját meccsét kezeli: közös összpontszám (A+B=X) vagy csapatcél
+(A=X vagy B=X), meccs előtt beállítható 1–999 X és kezdő A/B.
+CLASSIC/AMERICANO/MEXICANO mód választható; pontmódban új 0–0-s
+meccs indul. DOWN pontot ad a MY TEAM, UP az OPPONENT csapatnak,
+500 ms-os közös bemenetvédelemmel. BACK az utolsó pontot vonja vissza,
+legfeljebb húsz pontból. START szüneteltet, szünetben START a RESUME
+soron vagy BACK folytat. Szünetben UP/DOWN csak a menüt mozgatja.
+Az aktív játékidő szünetben és az eredményen nem nő.
+Lezáráskor WIN/LOSS/DRAW, pontállás, mód, szabály, X és játékidő
+látszik; UP/DOWN már nem ad pontot, BACK visszanyitja a meccset.
+Az eredményen START, szünetben DISCARD MATCH külön megerősítéssel
+eldobja a meccset és visszatér a megőrzött setupra. A megerősítés
+alapértéke NO; BACK elveti a kilépést. Élő meccsben az érintés nem
+módosít állapotot. A pontmeccs aktív állapota automatikusan mentődik;
+újraindításkor START szünetben folytatja, DOWN eldobja. Mód, szabály, X,
+kezdő csapat, pontállás és játékidő megmarad. Az undo-napló újraindításkor
+üres, a klasszikus meccshez igazodva; a folytatás utáni pontok ismét
+visszavonhatók. Visszaállított lezárt meccsnél a fagyasztott eredmény látszik.
+A folytatott meccs megerősített eldobása a főmenübe lép vissza.
+Előzmény és FIT az AM-6/AM-7 egységben következik.
+Az AM-5 FR265 és Enduro API 3.4.0 profilon 94/94 teszttel, optimalizált
+builddel, natív vizuális és nyolckombinációs újraindítás/folytatás/eldobás
+próbával ellenőrizve; a régi klasszikus mentések olvashatók maradnak.
+Az S2-V2 valós órás próba továbbra is nyitott; az új statisztikalapok
+ellenőrzéséhez az aktuális fejlesztői buildet kell majd telepíteni.
 
 Új fejlesztői munkamenethez: [átadási jegyzet](docs/development-handoff.md).

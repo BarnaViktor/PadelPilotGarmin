@@ -31,10 +31,14 @@ class MatchHistoryStatsView extends WatchUi.View {
         } else if (_page == 1) {
             drawMatchRecord(dc);
         } else if (_page == 2) {
-            drawSetRecord(dc);
+            drawSetRecord(dc, false);
         } else {
-            drawPointRecord(dc);
+            drawPointRecord(dc, false);
         }
+        dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
+        dc.drawText(dc.getWidth() / 2, 350, Graphics.FONT_XTINY,
+            "ALL SAVED MATCHES",
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         PadelTheme.drawPageDots(dc, _page, PAGE_COUNT, 376);
     }
 
@@ -62,8 +66,8 @@ class MatchHistoryStatsView extends WatchUi.View {
         drawRate(dc, 253, "WIN RATE", matchRate);
     }
 
-    function drawSetRecord(dc) {
-        PadelTheme.drawHeader(dc, "SET RECORD");
+    function drawSetRecord(dc, singleMatch) {
+        PadelTheme.drawHeader(dc, singleMatch ? "MATCH SET STATS" : "SET RECORD");
         var won = _summary[MatchHistoryStatistics.SETS_WON];
         var lost = _summary[MatchHistoryStatistics.SETS_LOST];
         drawRecord(dc, won, lost);
@@ -72,14 +76,16 @@ class MatchHistoryStatsView extends WatchUi.View {
             setRate = MatchHistoryStatistics.percentage(won, won + lost) + "%";
         }
         drawRate(dc, 238, "SET WIN RATE", setRate);
-        drawTimeSummary(dc);
+        drawTimeSummary(dc, singleMatch);
     }
 
-    function drawPointRecord(dc) {
-        PadelTheme.drawHeader(dc, "POINT RECORD");
+    function drawPointRecord(dc, singleMatch) {
+        PadelTheme.drawHeader(dc, singleMatch ? "MATCH POINTS" : "POINT RECORD");
         var won = _summary[MatchHistoryStatistics.POINTS_WON];
         var lost = _summary[MatchHistoryStatistics.POINTS_LOST];
-        drawRecord(dc, won, lost);
+        var missingPoints = singleMatch
+            && _summary[MatchHistoryStatistics.POINT_DATA_MATCHES] == 0;
+        drawRecord(dc, missingPoints ? "--" : won, missingPoints ? "--" : lost);
 
         var pointRate = "--";
         if (won + lost > 0) {
@@ -87,8 +93,15 @@ class MatchHistoryStatsView extends WatchUi.View {
                 won, won + lost) + "%";
         }
         drawRate(dc, 238, "POINT RATE", pointRate);
-        drawRate(dc, 286, "POINT MATCHES",
-            _summary[MatchHistoryStatistics.POINT_DATA_MATCHES]);
+        if (missingPoints) {
+            dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
+            dc.drawText(dc.getWidth() / 2, 286, Graphics.FONT_XTINY,
+                "NO POINT DATA",
+                Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        } else if (!singleMatch) {
+            drawRate(dc, 286, "POINT MATCHES",
+                _summary[MatchHistoryStatistics.POINT_DATA_MATCHES]);
+        }
     }
 
     function drawMetric(dc, y, label, value, accent) {
@@ -127,16 +140,19 @@ class MatchHistoryStatsView extends WatchUi.View {
             Graphics.TEXT_JUSTIFY_RIGHT | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
-    function drawTimeSummary(dc) {
+    function drawTimeSummary(dc, singleMatch) {
         var centerX = dc.getWidth() / 2;
         dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
-        dc.drawText(centerX, 286, Graphics.FONT_XTINY, "TOTAL / AVG TIME",
+        dc.drawText(centerX, 286, Graphics.FONT_XTINY,
+            singleMatch ? "MATCH TIME" : "TOTAL / AVG TIME",
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.setColor(PadelTheme.WHITE, Graphics.COLOR_BLACK);
-        dc.drawText(centerX, 320, Graphics.FONT_XTINY,
-            compactDuration(_summary[MatchHistoryStatistics.TOTAL_SECONDS])
-                + " / " + compactDuration(
-                    MatchHistoryStatistics.averageDuration(_summary)),
+        var timeLabel = compactDuration(_summary[MatchHistoryStatistics.TOTAL_SECONDS]);
+        if (!singleMatch) {
+            timeLabel += " / " + compactDuration(
+                MatchHistoryStatistics.averageDuration(_summary));
+        }
+        dc.drawText(centerX, 320, Graphics.FONT_XTINY, timeLabel,
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 

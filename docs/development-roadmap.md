@@ -168,8 +168,9 @@ felhasználó által meghatározott sorrendje:
    az Enduro 3-é `enduro3`.
 2. **Meccstörténet és statisztikák.** A meglévő helyi előzmények bővítése,
    többmeccses összesítések; a pontos mutatók a munka kezdetén választandók ki.
-3. **Americano / Mexicano játékmód.** Lebonyolítás és kapcsolódó pontozás;
-   a részletes szabályok a fejlesztési egység elején rögzítendők.
+3. **Americano / Mexicano játékmód.** Egyetlen saját meccs pontozása és
+   végigvezetése, a 2026-10-04-i felhasználói pontosítás szerint.
+   Tornaszervezés, párosítás és ranglista nem része a feladatnak.
 4. **Instinct 2 támogatása, külön grafikai adaptációval.** 176 × 176-as
    monokróm MIP-elrendezés, színektől független jelölések, kisebb grafikák
    és szövegek, API 3.4-kompatibilitás és 96 KiB-os memóriakeret vizsgálata.
@@ -179,8 +180,10 @@ felhasználó által meghatározott sorrendje:
 5. **Saját szinkron és webes felület.** Saját Laravel API és Vue
    statisztikai webalkalmazás a korábbi elképzelések szerint.
 
-Aktív fejlesztési egység: **meccstörténet és statisztikák bővítése**.
-A készüléktámogatás valós órás kapuja továbbra is nyitott; a
+**AM-5 lezárva; következő eszköz nélküli egység: AM-6, saját meccs eredménye és előzménye.**
+A felhasználó 2026-10-04-én két választható lezárási szabályt, meccs előtt
+megadható X-et és kezdő csapatot kért. Tesztóra nincs csatlakoztatva.
+Az S2-V2 és a készüléktámogatás valós órás kapuja nyitva marad; a
 készülékenkénti állapot: [supported-devices.md](supported-devices.md).
 
 2026-09-18-i folytatási állapot: az Enduro család és a hat 416 × 416-as
@@ -209,8 +212,10 @@ Az első mutatók:
 - megnyert–elvesztett befejezett szettek és szettgyőzelmi arány;
 - teljes és átlagos játékidő az összes mentett bejegyzésből.
 
-Az előzménylistán a MENU / hosszan nyomott UP gomb nyitja meg a háromlapos
-statisztikai nézetet; UP/DOWN lapoz, BACK visszalép. Üres előzménynél a
+Az első checkpointban az előzménylistán a MENU / hosszan nyomott UP gomb
+nyitotta meg a háromlapos statisztikai nézetet (a második checkpointban
+a pontlap hozzáadásával négylapos lett); UP/DOWN lapoz, BACK visszalép.
+Üres előzménynél a
 darabszámok nullák, a nem értelmezhető arányok `--` jelölést kapnak.
 
 Elfogadási állapot: **lezárva**. FR265 és első generációs Enduro profilon,
@@ -273,8 +278,91 @@ verzióból folytatott meccs pontszáma nem rekonstruálható, ezért az ilyen
 meccs később is v2 előzményként, pontadat nélkül mentődik, és nem torzítja a
 pontarányt. Újonnan indított meccsnél a lezárt és félbehagyott v3 rekord is
 teljes pontösszesítést kap. Valós órás vizuális és gombos ismétlés továbbra
-is a készüléktámogatási kapu része; régi és vegyes rekordos natív
-szimulátoros ismétlés még nyitott.
+is a készüléktámogatási kapu része. A régi és vegyes rekordos natív
+szimulátoros ismétlés (S2-V1) 2026-09-25-én FR265 és Enduro skinen
+lezárult; a valós órás pontsorozat (S2-V2) nyitott.
+
+### 2026-10-04 – Az összesítő hatóköre és az egyedi meccslapok
+
+Az előzménylista `HOLD UP: ALL STATS` súgója az összes helyben tárolt,
+legfeljebb 20 meccs négylapos összesítőjét nyitja; minden lap
+`ALL SAVED MATCHES` jelölést kap. A kiválasztott meccs részletei között
+az eredmény- és szettlapok után `MATCH SET STATS` és `MATCH POINTS`
+található. Az egyedi pontlap régi, pontadat nélküli rekordnál `--`
+értékeket és `NO POINT DATA` jelölést ad; az új, nulla ponttal mentett
+meccs pontjai `0–0`, aránya `--`.
+
+FR265 és Enduro profilon **62/62 teszt**, optimalizált build és natív
+vizuális bejárás sikeres; a build-jegyzőkönyvek az átadási jegyzetben
+vannak. Az Enduro kísérleti API-minimuma 3.4.0. A változás helyi
+fejlesztői állapot; a korábban telepített béta nem frissült.
+
+### AM-1 – Americano/Mexicano szabályai lezárva
+
+Az [egymeccses specifikáció](americano-mexicano-spec.md) 2026-10-04-én
+lezárult: saját meccs, két választható pontszabály (A+B=X vagy A=X/B=X),
+meccs előtt megadható pozitív egész X és kezdő csapat. A korábbi
+16/24/32-es javaslat helyett X egyesével állítható. Közös pontszámnál
+döntetlen lehetséges, csapatcélnál egy pont különbség is elég a győzelemhez.
+Elfogadási példák készültek mindkét szabályra, a lezárás visszavonására,
+egyedi X-re, kezdő csapatra és hibás bemenetre. Termékkód nem változott.
+Az ezt követő AM-2 domain is elkészült; az S2-V2 külön, későbbi valós órás
+ellenőrzés marad.
+
+### AM-2 – Egymeccses pontozási domain lezárva
+
+A `PointMatchEngine` közös domain kezeli az Americano és Mexicano módot,
+a két pontszabályt, X-et, a kezdő csapatot és a saját csapathoz viszonyított
+aktív/győzelem/vereség/döntetlen eredményt. A legutóbbi 20 pont visszavonható,
+a lezáró pont undo-ja újranyitja a meccset. Érvénytelen beállítás elutasítva,
+hibás vagy lezárás utáni pontbevitel nem módosít állapotot.
+
+FR265 és Enduro (kísérleti API-minimum 3.4.0) profilon 73/73 teszt és
+optimalizált build sikeres, 11 új domain-teszttel. UI, tárolás és FIT bekötés
+későbbi egység; következő azonosító AM-3. A klasszikus ScoringEngine és a
+kiadási manifestek változatlanok.
+
+### AM-3 – Módválasztás és meccsbeállítás lezárva
+
+CLASSIC/AMERICANO/MEXICANO választó, a pontmódokban TOTAL X / TEAM X,
+egyesével állítható 1–999 célérték (alapérték 24) és kezdő A/B kész.
+START elfogad, BACK/cancel visszaállít; módváltásnál a rejtett beállítások
+megmaradnak. Indításkor új engine az elfogadott értékekkel, pontmódban
+0–0-s kezdőnézet; BACK ugyanarra a setupra tér vissza.
+
+FR265 és Enduro (kísérleti API-minimum 3.4.0) profilon 78/78 teszt,
+optimalizált build, 25-25 natív vizuális képernyő és mind a nyolc
+START/BACK kombináció ellenőrzése sikeres. Az új módok élő pontbeviteli,
+időmérési, tárolási és FIT-bekötése még hátravan. Következő azonosító AM-4;
+a részletes bizonyítékok a fejlesztési átadásban vannak.
+
+### AM-4 – Élő meccspontozás lezárva
+
+DOWN/UP pontbevitel közös 500 ms-os védelemmel, 20 pontos undo,
+szünet és aktív játékidő kész. Automatikus WIN/LOSS/DRAW eredmény,
+lezárás után ponttiltás, BACK-kel visszanyitás. A szünet és az eredményen
+eltöltött idő nem számít játékidőnek. Eldobás megerősítéssel és NO
+alapértékkel; visszatérés ugyanarra a setupra. Érintés nem ad pontot.
+
+FR265 és Enduro API 3.4.0 profilon 85/85 teszt, optimalizált build,
+16-16 natív képernyő és nyolc mód/szabály/kezdőcsapat kombináció
+integrációs próbája sikeres. Aktív tárolás, előzmény és FIT következő
+feladat; következő azonosító AM-5. A bizonyítékok és a valós órás kapuk
+korlátai a fejlesztési átadásban szerepelnek.
+
+### AM-5 – Aktív mentés és helyreállítás lezárva
+
+Külön v4 aktív pontmeccsmentés őrzi a módot, szabályt, X-et, kezdő
+csapatot, pontállást és milliszekundumos játékidőt. Mentés indításkor,
+minden elfogadott változáskor, elrejtéskor és alkalmazásleálláskor.
+Újraindítás után szüneteltetett folytatás vagy eldobás; lezárt meccs
+fagyasztott eredményre tér vissza. Undo-napló újraindításkor üres.
+Régi klasszikus v1/v2/v3 olvasható, hibás új mentés az előzményt nem érinti.
+
+FR265 és Enduro API 3.4.0: 94/94 teszt, optimalizált build, natív vizuális
+és nyolckombinációs tényleges újraindítás/folytatás/eldobás.
+Következő azonosító AM-6: saját meccs eredménye és előzménye.
+A bizonyítékok és a valós órás kapuk korlátai a fejlesztési átadásban vannak.
 
 ## Codex munkamenet egy checkpointon belül
 

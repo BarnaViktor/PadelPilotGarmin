@@ -4,6 +4,7 @@ using Toybox.Lang as Lang;
 module ActiveMatchStore {
     const ACTIVE_KEY = "activeMatch";
     const SCHEMA_VERSION = 3;
+    const POINT_SCHEMA_VERSION = 4;
 
     function save(engine, elapsedSeconds, setEndTimes) {
         var config = engine.getConfig();
@@ -24,6 +25,34 @@ module ActiveMatchStore {
         ]);
     }
 
+    // Point matches use milliseconds and direct points, never classic sets.
+    function savePointMatch(engine, elapsedMs) {
+        Storage.setValue(ACTIVE_KEY, [
+            POINT_SCHEMA_VERSION,
+            elapsedMs.toNumber(),
+            [engine.getMode(), engine.getEndRule(), engine.getTarget(),
+                engine.getStartingServerTeam()],
+            engine.exportState()
+        ]);
+    }
+
+    function loadPointMatch(stored) {
+        if (stored.size() != 4 || !(stored[1] instanceof Lang.Number)
+                || stored[1] < 0 || !(stored[2] instanceof Lang.Array)
+                || stored[2].size() != 4) {
+            clear();
+            return null;
+        }
+        var values = stored[2];
+        // The constructor checks all four settings, including their types.
+        var engine = new PointMatchEngine(values[0], values[1], values[2], values[3]);
+        if (!engine.restoreState(stored[3])) {
+            clear();
+            return null;
+        }
+        return [engine, stored[1], []];
+    }
+
     function load() {
         var stored = Storage.getValue(ACTIVE_KEY);
         if (stored == null) {
@@ -32,7 +61,14 @@ module ActiveMatchStore {
 
         try {
             if (!(stored instanceof Lang.Array)
-                    || (stored[0] == 1 && stored.size() != 4)
+                    || stored.size() == 0 || !(stored[0] instanceof Lang.Number)) {
+                clear();
+                return null;
+            }
+            if (stored[0] == POINT_SCHEMA_VERSION) {
+                return loadPointMatch(stored);
+            }
+            if ((stored[0] == 1 && stored.size() != 4)
                     || ((stored[0] == 2 || stored[0] == SCHEMA_VERSION)
                         && stored.size() != 5)
                     || (stored[0] != 1 && stored[0] != 2
@@ -121,8 +157,18 @@ module ActiveMatchSession {
 
     function persist() {
         if (_engine != null && _view != null) {
-            ActiveMatchStore.save(_engine, _view.getDurationSeconds(),
-                _view.getSetEndTimes());
+            if (_engine instanceof PointMatchEngine) {
+                ActiveMatchStore.savePointMatch(_engine, _view.getElapsedMilliseconds());
+            } else {
+                ActiveMatchStore.save(_engine, _view.getDurationSeconds(),
+                    _view.getSetEndTimes());
+            }
+        }
+    }
+
+    function persistIfAttached(view) {
+        if (_view == view) {
+            persist();
         }
     }
 

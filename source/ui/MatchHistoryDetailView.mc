@@ -3,6 +3,7 @@ using Toybox.WatchUi as WatchUi;
 
 class MatchHistoryDetailView extends WatchUi.View {
     var _record;
+    var _stats;
     var _page;
     var _deleteConfirm;
     var _deleteDecisionIndex;
@@ -10,6 +11,7 @@ class MatchHistoryDetailView extends WatchUi.View {
     function initialize(record) {
         View.initialize();
         _record = record;
+        _stats = new MatchHistoryStatsView([record]);
         _page = 0;
         _deleteConfirm = false;
         _deleteDecisionIndex = 1;
@@ -21,6 +23,10 @@ class MatchHistoryDetailView extends WatchUi.View {
     }
 
     function getPageCount() {
+        return getScorePageCount() + 2;
+    }
+
+    function getScorePageCount() {
         return _record[4].size() + 1
             + (MatchHistoryStore.isStopped(_record) ? 1 : 0);
     }
@@ -58,8 +64,12 @@ class MatchHistoryDetailView extends WatchUi.View {
             drawMatchSummary(dc, centerX);
         } else if (_page <= completedSetCount) {
             drawSetSummary(dc, centerX, _page - 1);
-        } else {
+        } else if (_page < getScorePageCount()) {
             drawStoppedSetSummary(dc, centerX);
+        } else if (_page == getScorePageCount()) {
+            _stats.drawSetRecord(dc, true);
+        } else {
+            _stats.drawPointRecord(dc, true);
         }
         drawDeleteHint(dc, centerX);
         PadelTheme.drawPageDots(dc, _page, getPageCount(), 376);
@@ -203,8 +213,8 @@ class MatchHistoryDetailView extends WatchUi.View {
 
     function drawDeleteHint(dc, centerX) {
         dc.setColor(PadelTheme.RED, Graphics.COLOR_BLACK);
-        dc.drawText(centerX, 326, Graphics.FONT_XTINY, "START: DELETE",
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(centerX, 350, Graphics.FONT_XTINY, "START: DELETE",
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     function drawDeleteConfirmation(dc, centerX) {
