@@ -4,13 +4,21 @@ using Toybox.System as System;
 using Toybox.Timer as Timer;
 using Toybox.WatchUi as WatchUi;
 
-// Live point match with active recovery. History/FIT belong to later units.
+// Live point match with active recovery and local history.
 class PointMatchStartView extends WatchUi.View {
     var _engine as PointMatchEngine;
     var _session as PointMatchSession;
     var _pauseSelection;
     var _discardConfirm;
     var _discardYes;
+    var _saveConfirm;
+    var _saveYes;
+    var _saveError;
+    var _finishMenu;
+    var _activitySaved;
+    var _activityStartFailed;
+    var _discardError;
+    var _saveErrorMessage;
     var _clockTimer;
     var _visible;
     var _clockTimerRunning;
@@ -23,6 +31,14 @@ class PointMatchStartView extends WatchUi.View {
         _pauseSelection = 0;
         _discardConfirm = false;
         _discardYes = false;
+        _saveConfirm = false;
+        _saveYes = false;
+        _saveError = false;
+        _finishMenu = false;
+        _activitySaved = false;
+        _activityStartFailed = false;
+        _discardError = false;
+        _saveErrorMessage = "HISTORY SAVE FAILED";
         _clockTimer = new Timer.Timer();
         _visible = false;
         _clockTimerRunning = false;
@@ -70,20 +86,54 @@ class PointMatchStartView extends WatchUi.View {
         _session.setPaused(paused, System.getTimer());
         _pauseSelection = 0;
         _discardConfirm = false;
+        _saveConfirm = false;
+        _saveError = false;
         syncClockTimer();
         persist();
     }
 
     function showDiscardConfirm() {
+        _saveConfirm = false;
         _discardConfirm = true;
         _discardYes = false;
+        _discardError = false;
+    }
+
+    function showSaveConfirm() {
+        _discardConfirm = false;
+        _saveConfirm = true;
+        _saveYes = false;
+        _saveError = false;
+    }
+
+    function startActivity() {
+        if (_activitySaved) { return true; }
+        if (!PadelActivityRecorder.start(_engine)) {
+            _activityStartFailed = true;
+            setPaused(true);
+            return false;
+        }
+        _activityStartFailed = false;
+        if ((_session.isPaused() || _engine.isComplete()) && !PadelActivityRecorder.pause()) {
+            _activityStartFailed = true;
+            return false;
+        }
+        return true;
     }
 
     function onUpdate(dc) {
         dc = PadelTheme.canvas(dc);
         PadelTheme.clear(dc);
-        if (_discardConfirm) {
+        if (_saveConfirm) {
+            drawSaveConfirm(dc);
+        } else if (_discardConfirm) {
             drawDiscardConfirm(dc);
+        } else if (_activityStartFailed) {
+            PadelTheme.drawHeader(dc, "ACTIVITY ERROR");
+            PadelTheme.drawActionButton(dc, 63, 174, 290, 68, true, "RETRY ACTIVITY");
+            drawHelp(dc, "START: RETRY", "BACK: DISCARD");
+        } else if (_finishMenu) {
+            drawFinishMenu(dc);
         } else if (_engine.isComplete()) {
             drawMatch(dc, true);
         } else if (_session.isPaused()) {
@@ -135,18 +185,20 @@ class PointMatchStartView extends WatchUi.View {
         dc.setColor(PadelTheme.WHITE, Graphics.COLOR_BLACK);
         dc.drawText(208, 310, Graphics.FONT_XTINY, durationLabel(),
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        drawHelp(dc, completed ? "START: DISCARD" : "START: PAUSE", "BACK: UNDO");
+        drawHelp(dc, completed ? "START: SAVE / END" : "START: PAUSE", "BACK: UNDO");
     }
 
     function drawPause(dc) {
         PadelTheme.drawHeader(dc, "PAUSED");
-        PadelTheme.drawActionButton(dc, 63, 118, 290, 56, _pauseSelection == 0,
+        PadelTheme.drawActionButton(dc, 63, 106, 290, 48, _pauseSelection == 0,
             "RESUME");
-        PadelTheme.drawActionButton(dc, 63, 190, 290, 56, _pauseSelection == 1,
+        PadelTheme.drawActionButton(dc, 63, 168, 290, 48, _pauseSelection == 1,
+            "SAVE & END");
+        PadelTheme.drawActionButton(dc, 63, 230, 290, 48, _pauseSelection == 2,
             "DISCARD MATCH");
         dc.setColor(PadelTheme.WHITE, Graphics.COLOR_BLACK);
-        dc.drawText(208, 284, Graphics.FONT_XTINY, durationLabel(),
-            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(208, 304, Graphics.FONT_XTINY, durationLabel(),
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         drawHelp(dc, "START: SELECT", "BACK: RESUME");
     }
 
@@ -154,7 +206,39 @@ class PointMatchStartView extends WatchUi.View {
         PadelTheme.drawHeader(dc, "DISCARD MATCH?");
         PadelTheme.drawActionButton(dc, 42, 174, 156, 68, _discardYes, "YES");
         PadelTheme.drawActionButton(dc, 218, 174, 156, 68, !_discardYes, "NO");
+        if (_discardError) {
+            dc.setColor(PadelTheme.RED, Graphics.COLOR_BLACK);
+            dc.drawText(208, 286, Graphics.FONT_XTINY, "DISCARD FAILED",
+                Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        }
         drawHelp(dc, "START: SELECT", "BACK: CANCEL");
+    }
+
+    function drawFinishMenu(dc) {
+        PadelTheme.drawHeader(dc, "MATCH OVER");
+        PadelTheme.drawActionButton(dc, 63, 118, 290, 56, _pauseSelection == 0,
+            "SAVE MATCH");
+        PadelTheme.drawActionButton(dc, 63, 190, 290, 56, _pauseSelection == 1,
+            "DISCARD MATCH");
+        drawHelp(dc, "START: SELECT", "BACK: RESULT");
+    }
+
+    function drawSaveConfirm(dc) {
+        PadelTheme.drawHeader(dc, _activitySaved ? "FINISH SAVE"
+            : (_engine.isComplete() ? "SAVE MATCH?" : "SAVE & END?"));
+        if (_activitySaved) {
+            PadelTheme.drawActionButton(dc, 63, 174, 290, 68, true, "RETRY SAVE");
+        } else {
+            PadelTheme.drawActionButton(dc, 42, 174, 156, 68, _saveYes, "YES");
+            PadelTheme.drawActionButton(dc, 218, 174, 156, 68, !_saveYes, "NO");
+        }
+        if (_saveError) {
+            dc.setColor(PadelTheme.RED, Graphics.COLOR_BLACK);
+            dc.drawText(208, 286, Graphics.FONT_XTINY, _saveErrorMessage,
+                Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        }
+        drawHelp(dc, (_saveError && _saveYes) || _activitySaved
+            ? "START: TRY AGAIN" : "START: SELECT", _activitySaved ? "" : "BACK: CANCEL");
     }
 
     function drawHelp(dc, first, second) {

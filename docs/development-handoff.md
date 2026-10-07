@@ -1,13 +1,183 @@
-# Fejlesztési átadás – 2026-10-04
+# Fejlesztési átadás – 2026-10-07
 
-> Aktuális kiadás: **1.2.0 stabil**, 2026-10-04. A produkciós csomag,
-> verziózás, Store-szöveg és képek: [kiadási jegyzet](releases/1.2.0.md).
+> Aktuális kiadási csomag: **1.3.0 produkció**, 2026-10-07. A produkciós csomag,
+> verziózás és Store-szöveg: [kiadási jegyzet](releases/1.3.0.md).
 > Az alábbi korábbi checkpointok dátumozott fejlesztési bizonyítékok;
 > az 1.1.0 fájlnevek és a korábbi béta telepítése történeti adatok.
-> Következő fejlesztés: AM-6 (pontmódos lezárt előzmény), majd AM-7 (FIT).
+> Következő egység: I2-1 (Instinct 2 korlátok és vizuális tokenek); AM-7 automatikus kapu lezárva 2026-10-07-én.
 
 
-## Aktuális folytatási pont – AM-6
+## Aktuális folytatási pont – I2-1
+
+**AM-7 automatikus kapu lezárva, 2026-10-07.**
+
+2026-10-07: a pontmódos FIT az indítás, pont/undo, szünet/folytatás,
+automatikus eredmény, mentés és eldobás teljes útjára bekötve.
+A 11 tényleges mező közvetlen pontokat őriz, szett/game mezők nélkül.
+A mezők és a mintavételezés: [FIT-adatszerződés](am7-fit-contract.md).
+
+Sikertelen indításkor ACTIVITY ERROR / RETRY ACTIVITY jelenik meg.
+A false indítás ugyanazzal az inicializált rögzítővel újrapróbálható;
+a rögzítő korai eldobása és újralétrehozása a szimulátorban elvesző
+felvételeket okozott. Mentési/eldobási hiba megtartja az aktív meccset.
+Sikeres FIT után v5 aktív checkpoint jelzi a még helyi mentésre váró
+állapotot. Újraindítás FINISH SAVE nézetet ad, új FIT és undo nélkül.
+
+Az onStop megkísérli a már leállított FIT mentését akkor is, ha az időzítő
+újraindítása false értéket ad. A natív VM-cserés bejáró ezért kifejezetten
+befejezi a termék onStop callbackjét az új VM indítása előtt; a szimulátor
+monkeydo appcseréje versenyezhet a leállással.
+
+Tizenhárom új teszt a mezőformátumra, 999-es pontokra, eredményekre,
+undo/időzítőre, közös debounce-ra, false/exception save/discard hibákra,
+FIT utáni historyhibára és újraindításra, v4/v5 migrációra, tulajdonosra,
+indítási/stop hibákra és a két kijelzőméretre. **FR265 és Enduro: 116/116 teszt**, optimalizált build és `git diff --check` sikeres.
+
+Mindkét profil natív eredménye: 8 újraindítási, 8 teljes és 4 korai mentés/eldobás
+folyamat; külön valós FIT-siker + előzményhiba után újraindított befejezés.
+Profilonként mind a 27 várt FIT-fájl CRC-je és developer mezői ellenőrizve a Garmin
+Python SDK-val. Külön visszaállított DRAW meccs 0 / 0,001 másodperces új
+szegmense is menthető (FR265 / Enduro). A 20 rekordos előzmény, 920 pontos állapot és
+20 elemű undo mellett megfigyelt Enduro-memória: 86,9 / 123,8 kB.
+Ez szimulátoros, fejlesztői bejárós mérés; valós órás FIT/Connect kapu nyitott.
+
+Naplók, képek, FIT-fájlok, CRC/mező jegyzőkönyvek és dekóder:
+`build/am7-review/`. Az indító minden alkalommal külön XDG_CONFIG_HOME-ot
+használ a virtuális compositorhoz, a felhasználó asztali beállításaihoz
+nem nyúl. Indítás: `python3 build/am7-review/start.py`; bejáró:
+`python3 build/am7-review/review.py <fr265|enduro>`.
+A tesztapp külön alkalmazásazonosítóval dolgozik; csak saját aktív,
+előzmény- és driver tesztkulcsait kezeli.
+
+Verzió, kiadási manifest és az archivált 1.2.0 csomag változatlan.
+Commit/push, Store-kiadás és órára másolás nem történt.
+
+Végleges build-bizonyítékok (SDK 9.2.0, API-minimum 3.4.0):
+
+- `build/test-1.2.0-fr265-vz8_x742/build-info.json`;
+- `build/test-1.2.0-enduro-h6jkvvte/build-info.json`;
+- `build/build-1.2.0-fr265-n3p87_0h/build-info.json` (64 604 bájt);
+- `build/build-1.2.0-enduro-bltf0p73/build-info.json` (74 108 bájt).
+
+A natív bejáró KeyEvent-helyettesítő és ideiglenes diagnosztikai logging
+miatt `-l 0` fordítással készül. A termék és a tesztek normál típusellenőrzést
+használnak. Az Enduro végső vizuális ismétlése 9 képet, a FR265 teljes
+bejárója 37 képet rögzít; a flow naplók az összes végigjárt kombinációt őrzik.
+A végső FIT-listák: `enduro-fit-verification.json`, `fr265-fit-verification.json`;
+a külön lezárt helyreállítás: `*-completed-verification.json` és `*-completed.fit`.
+A mezők CRC-ellenőrzése után külön új streamből dekódolunk.
+A gyors pontok utolsó record-frissítése mintavétel miatt kimaradhat;
+a session pontok és eredmény ezért külön is ellenőrzöttek.
+
+**Következő azonosító: I2-1**, Instinct 2 API 3.4 / 176 × 176 / 96 KiB /
+monokróm korlátok és vizuális tokenek. Ebben még nincs implementáció vagy
+release manifest bővítés. S2-V2, D-kapuk és az AM-7 valós órás FIT/Connect,
+memória- és akkumulátorpróbája nyitott, eszközkeresés nem szükséges.
+A saját háttérszimulátor a munkamenet végén leállt.
+
+## AM-6 – Előző checkpoint
+
+**AM-6 lezárva, 2026-10-07.** Az Americano/Mexicano meccs végén START
+nyitja a SAVE MATCH / DISCARD MATCH menüt. Szünetben RESUME / SAVE & END /
+DISCARD MATCH választható, UP felfelé, DOWN lefelé lép és körbefordul.
+Mentés és eldobás külön YES/NO megerősítéssel, NO alapértékkel működik;
+BACK vagy NO visszatér a menübe, onnan BACK az eredményre vagy a játékba.
+Az eredményről BACK továbbra is visszavonja a lezáró pontot.
+
+A v4 pontelőzmény külön nyolcelemű séma:
+`[4, mode, endRule, X, startingTeam, [A, B], durationSeconds, result]`.
+ACTIVE az előzményben félbehagyva mentett, WIN/LOSS/DRAW befejezett rekord.
+Betöltéskor a domain ellenőrzi a beállításokat, a pontok lehetségességét
+és a tárolt eredmény egyezését. Régi v1/v2/v3 klasszikus rekordok
+olvashatók maradnak; a közös tároló legfeljebb 20 meccset őriz.
+Az aktív v4 séma nem változott. Az előzmény egész másodperces,
+az aktív helyreállítás továbbra is milliszekundumos időt őriz.
+
+A pontmódos előzménylistán a mód és WIN/LOSS/DRAW/STOPPED felirat,
+A/B pontok és idő látható. A részletekben két lap van: mód/szabály/X,
+eredmény, A/B pontok, kezdő csapat és idő; majd pontarány és meccsidő.
+Nincs fiktív szett/game lap. A meglévő, NO alapértékű törlési megerősítés
+és az összesítő frissülése mindkét rekordfajtán működik.
+
+Az összesítő külön DRAWS mutatót kapott. Döntetlen befejezett meccs,
+a győzelmi arány nevezőjében is szerepel; félbehagyott meccs nem.
+A pontmódok pontjai és ideje növelik az összesítést, szettet nem hoznak létre.
+Régi, pontadat nélküli rekord nem növeli a pontstatisztika nevezőjét.
+Az ötjegyű pontösszegek kisebb betűvel jelennek meg; 20 darab 998–998-as
+rekord 19 960–19 960-as összesítése is olvasható mindkét kijelzőméreten.
+
+Sikertelen előzménymentésnél az aktív meccs és a megerősítés megmarad,
+HISTORY SAVE FAILED / START: TRY AGAIN jelenik meg. Siker után az aktív
+mentés törlődik, a nézetelrejtés és az onStop nem hozza vissza.
+A már kilépett delegate további gombjai/mentése nem hoznak létre második
+előzményrekordot. Új meccs mentése a megőrzött setupra, helyreállított
+meccsé a főmenübe tér vissza.
+
+Kilenc új teszt ellenőrzi a nyolc mód/szabály/kezdőcsapat kombinációt,
+győzelmet/vereséget/döntetlent/félbehagyást, sérült és lehetetlen rekordokat,
+v1/v2/v3/v4 együttolvasást, a közös 20-as korlátot és törlést,
+vegyes összesítést és nulla nevezőt, fizikai save/NO/BACK/YES ágakat,
+hibás mentés újrapróbálását és az eldobás melletti érintetlen előzményt.
+A 280/416 pixeles elrendezéseket és az ötjegyű pontösszegeket is ellenőrzik.
+A felhasználó által jelzett módválasztó UP/DOWN csere javítása megmaradt;
+a gombteszt mindkét irányt, körbefordulást, save/cancel-t és a numerikus
+UP-növelés/DOWN-csökkentés viselkedést ellenőrzi.
+
+A natív bejáró külön alkalmazásazonosítóval dolgozik, a termék domain/UI
+forrását használja. Mindkét profilon nyolc kombinációt indít a tényleges
+setup START ágon, 900 pont után 20 undo-val, majd fizikai DOWN/UP-val
+441–441-re jut. Feltöltött 20-as előzmény mellett ellenőrzi a szünetből
+indított NO/cancel és YES/SAVE & END ágat, majd egy befejezett WIN mentését
+999-es X-szel és 100 órás idővel. A sikeres mentés utáni onHide nem
+hozza vissza az aktív meccset. A helyreállított meccs és a DRAW/LOSS mentés
+gombágait az egységtesztek ellenőrzik.
+
+Profilonként 27 natív képernyő: szünet, mentési/eldobási menü és megerősítés,
+mentési hiba, vegyes teljes előzmény, DRAW/LOSS/WIN/STOPPED részletek,
+pontlap, törlési YES/NO, négy összesítő és 20 pontrekord ötjegyű összesítése.
+Az utolsó térközjavítás után külön, hétképes natív ismétlés is sikeres
+mindkét profilon: 100 órás szünetképernyő, pontmódos részletek és ötjegyű
+összesítés. A FR265 hosszú szünetidő-feliratának gombsúgóval való átfedése
+függőleges középre igazítással javítva; a részletek alsó feliratai több
+térközt kaptak. A végleges képek `*-layout-visual-*.png` néven vannak.
+Endurón a 35 rögzített stressz-/vizuális képen **73,1–78,5 / 123,8 kB**
+memória látható. Ez a fejlesztői bejáró szimulátoros mérése, nem valós órás
+FIT-/akkumulátormérés. A terhelés előkészítése egyetlen Storage-írással
+történik; a termék mentési ága egy rekordot ír a gördülő előzménybe.
+
+Újrafuttatás: `python3 build/am6-review/start.py`, majd
+`python3 build/am6-review/review.py <fr265|enduro>`; profilváltás vagy
+tesztapp-váltás előtt a saját háttérszimulátort indítsd újra.
+Csak az utolsó elrendezési körhöz add meg a `--layout-only` kapcsolót.
+A KeyEvent-helyettesítő miatt a bejáró `-l 0` fordítással készül;
+a termék és az egységtesztek normál típusellenőrzéssel fordulnak.
+Naplók, képek és memóriacsíkok a gitignored `build/am6-review/` alatt.
+A tesztapp a saját aktív/előzmény tesztadatait törli, a termékazonosító
+adattárolóját nem használja.
+
+Végleges forrás: **FR265 és Enduro profilon 103/103 teszt**, optimalizált
+build és `git diff --check` sikeres. SDK 9.2.0, API-minimum 3.4.0.
+Az SDK dinamikus konténerekhez kapcsolódó típusfigyelmeztetései megmaradnak;
+fordítási hiba nincs. A PRG mérete FR265-ön 60 572, Endurón 69 084 bájt.
+Build-bizonyítékok:
+
+- `build/test-1.2.0-fr265-ahtefwf_/build-info.json`;
+- `build/test-1.2.0-enduro-cf43bnot/build-info.json`;
+- `build/build-1.2.0-fr265-oue9w2mo/build-info.json`;
+- `build/build-1.2.0-enduro-tsejf73s/build-info.json`.
+
+A végleges forráshash-ek és az összesített ellenőrzési jegyzőkönyv:
+`build/am6-review/source-hashes.json`, `build/am6-review/verification.json`.
+A saját háttérszimulátor a munkamenet végén leállt.
+
+**Következő azonosító: AM-7**, pontmódos FIT-indítás, események,
+szünet/folytatás, mentés/eldobás és újraindítás utáni szegmenskezelés.
+S2-V2 és a D-kapuk külön valós órás ellenőrzések maradnak.
+Verzió és kiadási manifest nem változott; az archivált 1.2.0 csomag
+nem tartalmazza ezt a fejlesztést. Commit/push, Store-kiadás és órára
+másolás nem történt.
+
+## AM-5 – Előző checkpoint
 
 **AM-5 lezárva, 2026-10-04.** Az Americano/Mexicano saját meccs most
 verziózott aktív mentést és újraindítás utáni helyreállítást kapott.

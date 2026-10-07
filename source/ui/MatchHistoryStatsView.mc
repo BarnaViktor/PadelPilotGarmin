@@ -63,7 +63,8 @@ class MatchHistoryStatsView extends WatchUi.View {
             matchRate = MatchHistoryStatistics.percentage(
                 _summary[MatchHistoryStatistics.MATCH_WINS], completed) + "%";
         }
-        drawRate(dc, 253, "WIN RATE", matchRate);
+        drawRate(dc, 245, "DRAWS", _summary[MatchHistoryStatistics.MATCH_DRAWS]);
+        drawRate(dc, 290, "WIN RATE", matchRate);
     }
 
     function drawSetRecord(dc, singleMatch) {
@@ -115,19 +116,22 @@ class MatchHistoryStatsView extends WatchUi.View {
     }
 
     function drawRecord(dc, won, lost) {
+        // Twenty point matches can produce five-digit totals on a 280px display.
+        var scoreFont = won.toString().length() > 3 || lost.toString().length() > 3
+            ? Graphics.FONT_TINY : Graphics.FONT_MEDIUM;
         dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
         dc.drawText(146, 124, Graphics.FONT_XTINY, "W",
             Graphics.TEXT_JUSTIFY_CENTER);
         dc.drawText(270, 124, Graphics.FONT_XTINY, "L",
             Graphics.TEXT_JUSTIFY_CENTER);
         dc.setColor(PadelTheme.CYAN, Graphics.COLOR_BLACK);
-        dc.drawText(146, 164, Graphics.FONT_MEDIUM, won,
+        dc.drawText(146, 164, scoreFont, won,
             Graphics.TEXT_JUSTIFY_CENTER);
         dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
         dc.drawText(208, 173, Graphics.FONT_TINY, "–",
             Graphics.TEXT_JUSTIFY_CENTER);
         dc.setColor(PadelTheme.RED, Graphics.COLOR_BLACK);
-        dc.drawText(270, 164, Graphics.FONT_MEDIUM, lost,
+        dc.drawText(270, 164, scoreFont, lost,
             Graphics.TEXT_JUSTIFY_CENTER);
     }
 

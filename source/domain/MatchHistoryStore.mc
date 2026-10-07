@@ -6,8 +6,31 @@ module MatchHistoryStore {
     const MAX_HISTORY_SIZE = 20;
     const LEGACY_RECORD_VERSION = 2;
     const RECORD_VERSION = 3;
+    const POINT_RECORD_VERSION = 4;
     const STATUS_COMPLETE = 0;
     const STATUS_STOPPED = 1;
+
+    // v4: [version, mode, endRule, target, firstServer, [A, B], seconds, result].
+    // ACTIVE is an explicitly stopped match; DRAW is a completed match.
+    function savePointCompleted(engine, durationSeconds) {
+        if (!engine.isComplete()) { return false; }
+        return savePointRecord(engine, durationSeconds);
+    }
+
+    function savePointStopped(engine, durationSeconds) {
+        if (engine.isComplete()) { return false; }
+        return savePointRecord(engine, durationSeconds);
+    }
+
+    function savePointRecord(engine, durationSeconds) {
+        if (!(durationSeconds instanceof Lang.Number) || durationSeconds < 0) {
+            return false;
+        }
+        var record = [POINT_RECORD_VERSION, engine.getMode(), engine.getEndRule(),
+            engine.getTarget(), engine.getStartingServerTeam(), engine.getPoints(),
+            durationSeconds, engine.getResult()] as Lang.Array<Storage.ValueType>;
+        return appendRecord(record);
+    }
 
     function save(engine, durationSeconds, setEndTimes) {
         return saveCompleted(engine, durationSeconds, setEndTimes);
@@ -30,8 +53,6 @@ module MatchHistoryStore {
     }
 
     function saveRecord(engine, durationSeconds, setEndTimes, status) {
-        var history = load();
-
         var completedSets = [] as Lang.Array<Storage.ValueType>;
         for (var index = 0; index < engine.getCompletedSets().size(); index += 1) {
             var completedSet = engine.getCompletedSets()[index];
@@ -74,8 +95,12 @@ module MatchHistoryStore {
                 engine.getPointTotals()[1].toNumber()
             ] as Lang.Array<Storage.ValueType>);
         }
-        history.add(record);
+        return appendRecord(record);
+    }
 
+    function appendRecord(record) {
+        var history = load();
+        history.add(record);
         if (history.size() > MAX_HISTORY_SIZE) {
             history = history.slice(history.size() - MAX_HISTORY_SIZE, history.size());
         }
@@ -129,8 +154,38 @@ module MatchHistoryStore {
     }
 
     function isStopped(record) {
+        if (isPointRecord(record)) {
+            return record[7] == PointMatchResult.ACTIVE;
+        }
         return isVersionedRecord(record)
             && record[7] == STATUS_STOPPED;
+    }
+
+    function isPointRecord(record) {
+        return record instanceof Lang.Array && record.size() == 8
+            && record[0] == POINT_RECORD_VERSION;
+    }
+
+    function getDurationSeconds(record) {
+        return isPointRecord(record) ? record[6] : record[3];
+    }
+
+    function getResult(record) {
+        if (isPointRecord(record)) { return record[7]; }
+        if (isStopped(record)) { return PointMatchResult.ACTIVE; }
+        return record[2] == 0 ? PointMatchResult.WIN : PointMatchResult.LOSS;
+    }
+
+    function resultLabel(record) {
+        var result = getResult(record);
+        if (result == PointMatchResult.ACTIVE) { return "STOPPED"; }
+        if (result == PointMatchResult.DRAW) { return "DRAW"; }
+        return result == PointMatchResult.WIN ? "WIN" : "LOSS";
+    }
+
+    function modeLabel(record) {
+        if (!isPointRecord(record)) { return "CLASSIC"; }
+        return record[1] == PointMatchMode.AMERICANO ? "AMERICANO" : "MEXICANO";
     }
 
     function getCurrentState(record) {
@@ -141,11 +196,13 @@ module MatchHistoryStore {
     }
 
     function hasPointTotals(record) {
-        return record instanceof Lang.Array && record.size() == 10
-            && record[6] == RECORD_VERSION;
+        return isPointRecord(record)
+            || (record instanceof Lang.Array && record.size() == 10
+                && record[6] == RECORD_VERSION);
     }
 
     function getPointTotals(record) {
+        if (isPointRecord(record)) { return record[5]; }
         if (hasPointTotals(record)) {
             return record[9];
         }
@@ -161,6 +218,10 @@ module MatchHistoryStore {
     }
 
     function isValidRecord(record) {
+        // The distinct eight-element shape cannot be confused with v1/v2/v3.
+        if (record instanceof Lang.Array && record.size() == 8) {
+            return isValidPointRecord(record);
+        }
         if (!(record instanceof Lang.Array)
                 || (record.size() != 5 && record.size() != 6
                     && record.size() != 9 && record.size() != 10)) {
@@ -225,6 +286,22 @@ module MatchHistoryStore {
             }
         }
         return true;
+    }
+
+    function isValidPointRecord(record) {
+        if (!isPointRecord(record)) { return false; }
+        for (var index = 0; index < record.size(); index += 1) {
+            if (index != 5 && !(record[index] instanceof Lang.Number)) {
+                return false;
+            }
+        }
+        if (record[6] < 0) { return false; }
+        try {
+            var engine = new PointMatchEngine(record[1], record[2], record[3], record[4]);
+            return engine.restoreState(record[5]) && engine.getResult() == record[7];
+        } catch (error) {
+            return false;
+        }
     }
 
     function isValidCurrentState(state) {

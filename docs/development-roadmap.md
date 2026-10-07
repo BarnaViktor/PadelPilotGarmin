@@ -1,10 +1,10 @@
 # Fejlesztési ütemterv
 
-> Aktuális kiadás: **1.2.0 stabil**, 2026-10-04. A produkciós csomag,
-> verziózás, Store-szöveg és képek: [kiadási jegyzet](releases/1.2.0.md).
+> Aktuális kiadási csomag: **1.3.0 produkció**, 2026-10-07. A produkciós csomag,
+> verziózás és Store-szöveg: [kiadási jegyzet](releases/1.3.0.md).
 > Az alábbi korábbi checkpointok dátumozott fejlesztési bizonyítékok;
 > az 1.1.0 fájlnevek és a korábbi béta telepítése történeti adatok.
-> Következő fejlesztés: AM-6 (pontmódos lezárt előzmény), majd AM-7 (FIT).
+> Következő egység: I2-1 (Instinct 2 korlátok és vizuális tokenek); AM-7 automatikus kapu lezárva 2026-10-07-én.
 
 
 ## C0 – Projektalap és szabálymotor
@@ -187,7 +187,7 @@ felhasználó által meghatározott sorrendje:
 5. **Saját szinkron és webes felület.** Saját Laravel API és Vue
    statisztikai webalkalmazás a korábbi elképzelések szerint.
 
-**AM-5 lezárva; következő eszköz nélküli egység: AM-6, saját meccs eredménye és előzménye.**
+**AM-7 automatikus kapu lezárva; következő eszköz nélküli egység: I2-1, Instinct 2 korlátok és vizuális tokenek.**
 A felhasználó 2026-10-04-én két választható lezárási szabályt, meccs előtt
 megadható X-et és kezdő csapatot kért. Tesztóra nincs csatlakoztatva.
 Az S2-V2 és a készüléktámogatás valós órás kapuja nyitva marad; a
@@ -370,6 +370,33 @@ FR265 és Enduro API 3.4.0: 94/94 teszt, optimalizált build, natív vizuális
 és nyolckombinációs tényleges újraindítás/folytatás/eldobás.
 Következő azonosító AM-6: saját meccs eredménye és előzménye.
 A bizonyítékok és a valós órás kapuk korlátai a fejlesztési átadásban vannak.
+
+### AM-6 – Saját meccs előzménye és összesítése lezárva
+
+2026-10-07: a pontmódos SAVE MATCH / SAVE & END és a megerősített
+eldobás elkészült. A v4 pontrekord külön tárolja a módot, szabályt, X-et,
+kezdő csapatot, A/B pontokat, időt és eredményt. A régi v1/v2/v3 előzmények
+olvashatók; a közös 20 meccses korlát és törlés megmarad.
+A döntetlen befejezett meccs, külön DRAWS mutatóval, és része a győzelmi
+arány nevezőjének. Pontmód nem növeli a szettstatisztikát.
+Mentési hiba után az aktív meccs megmarad és a művelet újrapróbálható.
+A FR265/Enduro teszt-, build-, natív vizuális/gombos és Enduro
+memóriaellenőrzési bizonyítékok a fejlesztési átadásban vannak.
+Következő azonosító: AM-7; az archivált 1.2.0 kiadás nem módosult.
+
+### AM-7 – Saját meccs FIT-integrációja
+
+2026-10-07: a pontmódos FIT teljes életciklusa bekötve, 11 tényleges
+developer mezővel. Szünet/eredmény megállítja az időzítőt, undo/folytatás
+újraindítja. Mentési és indítási hibák ugyanazzal a sessionnel
+újrapróbálhatók. FIT után előzményhiba esetén v5 aktív checkpoint és
+FINISH SAVE visszaállítás akadályozza meg a második FIT-et.
+FR265/Enduro: 116/116 teszt, optimalizált build, 27-27 CRC-ellenőrzött és
+visszaolvasott FIT, teljes/cold/pending mentési és natív vizuális kör.
+Enduro-memória a tesztelt 20 rekordos FIT-terhelés mellett 86,9 / 123,8 kB.
+A részletes [adatszerződés](am7-fit-contract.md) rögzíti a mintavételezés
+és a több FIT-szegmens korlátait. Valós órás FIT/Connect próba külön, később.
+Következő egység: I2-1; kiadási manifest és verzió nem módosult.
 
 ## Codex munkamenet egy checkpointon belül
 

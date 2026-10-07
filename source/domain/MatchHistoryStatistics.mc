@@ -13,18 +13,21 @@ module MatchHistoryStatistics {
     const POINT_DATA_MATCHES = 8;
     const POINTS_WON = 9;
     const POINTS_LOST = 10;
+    const MATCH_DRAWS = 11;
 
     function summarize(history as Lang.Array<Storage.ValueType>)
             as Lang.Array<Lang.Number> {
-        var summary = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        var summary = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             as Lang.Array<Lang.Number>;
 
         for (var index = 0; index < history.size(); index += 1) {
             var record = history[index] as Lang.Array<Storage.ValueType>;
             summary[TOTAL_MATCHES] += 1;
-            summary[TOTAL_SECONDS] += record[3];
-            summary[SETS_WON] += record[0];
-            summary[SETS_LOST] += record[1];
+            summary[TOTAL_SECONDS] += MatchHistoryStore.getDurationSeconds(record);
+            if (!MatchHistoryStore.isPointRecord(record)) {
+                summary[SETS_WON] += record[0];
+                summary[SETS_LOST] += record[1];
+            }
 
             var pointTotals = MatchHistoryStore.getPointTotals(record);
             if (pointTotals != null) {
@@ -37,10 +40,13 @@ module MatchHistoryStatistics {
                 summary[STOPPED_MATCHES] += 1;
             } else {
                 summary[COMPLETED_MATCHES] += 1;
-                if (record[2] == 0) {
+                var result = MatchHistoryStore.getResult(record);
+                if (result == PointMatchResult.WIN) {
                     summary[MATCH_WINS] += 1;
-                } else {
+                } else if (result == PointMatchResult.LOSS) {
                     summary[MATCH_LOSSES] += 1;
+                } else {
+                    summary[MATCH_DRAWS] += 1;
                 }
             }
         }

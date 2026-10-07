@@ -1,0 +1,1400 @@
+[
+  {
+    "file": "2026-10-07-21-51-57.fit",
+    "sha256": "f363f10e067ca8bd8ead09aa89a06c341a78b56b8168b6e80e11d26d127e2a1a",
+    "values": {
+      "winner": "Interrupted",
+      "match_mode": "AMERICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 17,
+      "first_server": 0,
+      "my_match_points": 1,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.952,
+    "records": [
+      {
+        "point_event": 1,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 1,
+        "timestamp": "2026-10-07 19:51:57+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:51:58+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:51:57+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:51:59+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-52-09.fit",
+    "sha256": "4543b2a56273690654f53a4955c9341abed815a6e5986fa483f3a705f4857afd",
+    "values": {
+      "winner": "Stopped",
+      "match_mode": "AMERICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 17,
+      "first_server": 0,
+      "my_match_points": 2,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.302,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:52:09+00:00"
+      },
+      {
+        "point_event": 0,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:52:10+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:52:09+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:52:09+00:00"
+      },
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:52:10+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:52:11+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-52-22.fit",
+    "sha256": "48ee65b8252ede4e0551ea8a9c785bc4e0eed77410df1f410f25842589d31330",
+    "values": {
+      "winner": "Interrupted",
+      "match_mode": "AMERICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 17,
+      "first_server": 1,
+      "my_match_points": 1,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.952,
+    "records": [
+      {
+        "point_event": 1,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 1,
+        "timestamp": "2026-10-07 19:52:22+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:52:23+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:52:22+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:52:24+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-52-34.fit",
+    "sha256": "139b3b6b583fe78947d66a744ef8517ae930f79fd4eceb617c72307b4fde6ffd",
+    "values": {
+      "winner": "Stopped",
+      "match_mode": "AMERICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 17,
+      "first_server": 1,
+      "my_match_points": 2,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.301,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:52:34+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 2,
+        "opponent_points": 1,
+        "point_sequence": 1,
+        "timestamp": "2026-10-07 19:52:35+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:52:34+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:52:34+00:00"
+      },
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:52:35+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:52:36+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-52-47.fit",
+    "sha256": "24706e71648623e2d96c318560eb49ea3c449e283a370e2117095d9e25cdae81",
+    "values": {
+      "winner": "Interrupted",
+      "match_mode": "AMERICANO",
+      "end_rule": "TEAM_TARGET",
+      "point_target": 17,
+      "first_server": 0,
+      "my_match_points": 1,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.952,
+    "records": [
+      {
+        "point_event": 1,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 1,
+        "timestamp": "2026-10-07 19:52:47+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:52:48+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:52:47+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:52:49+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-52-59.fit",
+    "sha256": "ac249f9ea482a810d8660cdd67d7b6cae655e7240cc3972765c2345c81dda597",
+    "values": {
+      "winner": "Stopped",
+      "match_mode": "AMERICANO",
+      "end_rule": "TEAM_TARGET",
+      "point_target": 17,
+      "first_server": 0,
+      "my_match_points": 2,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.301,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:52:59+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 2,
+        "opponent_points": 1,
+        "point_sequence": 1,
+        "timestamp": "2026-10-07 19:53:00+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:52:59+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:52:59+00:00"
+      },
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:53:00+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:53:01+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-53-11.fit",
+    "sha256": "87f6998ba4d033c16620aa7a2c3c9359146b991e3c3bc670d7017b5dbfb448b9",
+    "values": {
+      "winner": "Interrupted",
+      "match_mode": "AMERICANO",
+      "end_rule": "TEAM_TARGET",
+      "point_target": 17,
+      "first_server": 1,
+      "my_match_points": 1,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.951,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:53:11+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 1,
+        "timestamp": "2026-10-07 19:53:12+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:53:11+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:53:13+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-53-24.fit",
+    "sha256": "716cb60ad956cc96a0d3ad072db83e82a37405658c6eb6f5a16b86cc5695b78f",
+    "values": {
+      "winner": "Stopped",
+      "match_mode": "AMERICANO",
+      "end_rule": "TEAM_TARGET",
+      "point_target": 17,
+      "first_server": 1,
+      "my_match_points": 2,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.953,
+    "timer_seconds": 1.301,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:53:24+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 2,
+        "opponent_points": 1,
+        "point_sequence": 1,
+        "timestamp": "2026-10-07 19:53:25+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:53:24+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:53:24+00:00"
+      },
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:53:25+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:53:26+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-53-36.fit",
+    "sha256": "56fbd94f0999722323ea39cfc91fda840103aa6378a367ee8b5b98543a8f3b19",
+    "values": {
+      "winner": "Interrupted",
+      "match_mode": "MEXICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 17,
+      "first_server": 0,
+      "my_match_points": 1,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.952,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:53:36+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 1,
+        "timestamp": "2026-10-07 19:53:37+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:53:36+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:53:38+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-53-49.fit",
+    "sha256": "cda286fec460c69e2e3d020bbb0fc6dbd6bcabe6d7fa23c5cce7aacf4b4dfa18",
+    "values": {
+      "winner": "Stopped",
+      "match_mode": "MEXICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 17,
+      "first_server": 0,
+      "my_match_points": 2,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.301,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:53:49+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 2,
+        "opponent_points": 1,
+        "point_sequence": 1,
+        "timestamp": "2026-10-07 19:53:50+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:53:49+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:53:51+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-54-01.fit",
+    "sha256": "eb54e95593e41384434e02cd6003f58a1ad380c8ad07cf6657074833bd4e303b",
+    "values": {
+      "winner": "Interrupted",
+      "match_mode": "MEXICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 17,
+      "first_server": 1,
+      "my_match_points": 1,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.952,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:54:01+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 1,
+        "timestamp": "2026-10-07 19:54:02+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:54:01+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:54:03+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-54-14.fit",
+    "sha256": "1147dac9898cab43ca65de3d4289920531eb439ef21ada78c1b75bccbe94eaf3",
+    "values": {
+      "winner": "Stopped",
+      "match_mode": "MEXICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 17,
+      "first_server": 1,
+      "my_match_points": 2,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.302,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:54:14+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 2,
+        "opponent_points": 1,
+        "point_sequence": 1,
+        "timestamp": "2026-10-07 19:54:15+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:54:14+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:54:16+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-54-26.fit",
+    "sha256": "89cbf116257c5bb263da6d7198be6cf9a0573cb263d4f727f74bb9e9ee11d11e",
+    "values": {
+      "winner": "Interrupted",
+      "match_mode": "MEXICANO",
+      "end_rule": "TEAM_TARGET",
+      "point_target": 17,
+      "first_server": 0,
+      "my_match_points": 1,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.952,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:54:26+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:54:27+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:54:26+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:54:28+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-54-39.fit",
+    "sha256": "0cb0ef98ada5cc2aa694df516f5f358c13279859a227432f573908abb5f17aed",
+    "values": {
+      "winner": "Stopped",
+      "match_mode": "MEXICANO",
+      "end_rule": "TEAM_TARGET",
+      "point_target": 17,
+      "first_server": 0,
+      "my_match_points": 2,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.302,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:54:39+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:54:39+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:54:40+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-54-51.fit",
+    "sha256": "3c672e386042688cad8cbd2e8e183610f6c203c2c2f295a3c2f2713d35f677b8",
+    "values": {
+      "winner": "Interrupted",
+      "match_mode": "MEXICANO",
+      "end_rule": "TEAM_TARGET",
+      "point_target": 17,
+      "first_server": 1,
+      "my_match_points": 1,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.952,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:54:51+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:54:52+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:54:51+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:54:53+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-55-03.fit",
+    "sha256": "9733feb16b676871f578ca21eb9ac99f52161210ffa473204e8fb5b7da1afef8",
+    "values": {
+      "winner": "Stopped",
+      "match_mode": "MEXICANO",
+      "end_rule": "TEAM_TARGET",
+      "point_target": 17,
+      "first_server": 1,
+      "my_match_points": 2,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.952,
+    "timer_seconds": 1.302,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:55:03+00:00"
+      },
+      {
+        "point_event": 0,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:55:04+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:55:03+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:55:03+00:00"
+      },
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:55:04+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:55:05+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-55-16.fit",
+    "sha256": "37f7d7b81acb27f76a85ce6e86d966b6ddcc06de03c5e84a0b29a04ca053c4a4",
+    "values": {
+      "winner": "Draw",
+      "match_mode": "AMERICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 4,
+      "first_server": 0,
+      "my_match_points": 2,
+      "opponent_match_points": 2
+    },
+    "elapsed_seconds": 6.505,
+    "timer_seconds": 4.554,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:55:16+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:55:17+00:00"
+      },
+      {
+        "point_event": 3,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 3,
+        "timestamp": "2026-10-07 19:55:19+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 2,
+        "opponent_points": 1,
+        "point_sequence": 5,
+        "timestamp": "2026-10-07 19:55:20+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 2,
+        "opponent_points": 2,
+        "point_sequence": 6,
+        "timestamp": "2026-10-07 19:55:21+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:55:16+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:55:21+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-55-23.fit",
+    "sha256": "f38976023d550b8d077b72da43c3ee320f751921bf8d1dbe9d99cd8314ab14f3",
+    "values": {
+      "winner": "My team",
+      "match_mode": "AMERICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 4,
+      "first_server": 1,
+      "my_match_points": 3,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 6.504,
+    "timer_seconds": 4.552,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:55:23+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:55:24+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:55:25+00:00"
+      },
+      {
+        "point_event": 3,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 3,
+        "timestamp": "2026-10-07 19:55:26+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 2,
+        "opponent_points": 0,
+        "point_sequence": 4,
+        "timestamp": "2026-10-07 19:55:27+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 3,
+        "opponent_points": 1,
+        "point_sequence": 6,
+        "timestamp": "2026-10-07 19:55:28+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:55:23+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:55:25+00:00"
+      },
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:55:26+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:55:28+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-55-31.fit",
+    "sha256": "2a2f4e3753ed1cf52ae4a2bda40e962f248c214ec870d99f804d21c14df0325a",
+    "values": {
+      "winner": "My team",
+      "match_mode": "AMERICANO",
+      "end_rule": "TEAM_TARGET",
+      "point_target": 3,
+      "first_server": 0,
+      "my_match_points": 3,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 6.506,
+    "timer_seconds": 4.553,
+    "records": [
+      {
+        "point_event": 1,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 1,
+        "timestamp": "2026-10-07 19:55:31+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:55:32+00:00"
+      },
+      {
+        "point_event": 3,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 3,
+        "timestamp": "2026-10-07 19:55:34+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 2,
+        "opponent_points": 1,
+        "point_sequence": 5,
+        "timestamp": "2026-10-07 19:55:35+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 3,
+        "opponent_points": 1,
+        "point_sequence": 6,
+        "timestamp": "2026-10-07 19:55:36+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:55:31+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:55:36+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-55-38.fit",
+    "sha256": "27b7189403f9001e203c3c416562f9a571baafa11ad17a300e81df96e60c5bce",
+    "values": {
+      "winner": "Opponent",
+      "match_mode": "AMERICANO",
+      "end_rule": "TEAM_TARGET",
+      "point_target": 3,
+      "first_server": 1,
+      "my_match_points": 2,
+      "opponent_match_points": 3
+    },
+    "elapsed_seconds": 6.506,
+    "timer_seconds": 5.204,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:55:38+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:55:39+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:55:40+00:00"
+      },
+      {
+        "point_event": 3,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 3,
+        "timestamp": "2026-10-07 19:55:41+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 2,
+        "opponent_points": 0,
+        "point_sequence": 4,
+        "timestamp": "2026-10-07 19:55:42+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 2,
+        "opponent_points": 2,
+        "point_sequence": 6,
+        "timestamp": "2026-10-07 19:55:43+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:55:38+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:55:40+00:00"
+      },
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:55:41+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:55:44+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-55-45.fit",
+    "sha256": "a34936585d260e3c94db0488435045c33053b31abb9f4a66d0492ea9cbbf5cad",
+    "values": {
+      "winner": "Draw",
+      "match_mode": "MEXICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 4,
+      "first_server": 0,
+      "my_match_points": 2,
+      "opponent_match_points": 2
+    },
+    "elapsed_seconds": 6.504,
+    "timer_seconds": 4.552,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:55:45+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:55:46+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:55:47+00:00"
+      },
+      {
+        "point_event": 3,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 3,
+        "timestamp": "2026-10-07 19:55:48+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 2,
+        "opponent_points": 0,
+        "point_sequence": 4,
+        "timestamp": "2026-10-07 19:55:49+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 2,
+        "opponent_points": 2,
+        "point_sequence": 6,
+        "timestamp": "2026-10-07 19:55:50+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:55:45+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:55:47+00:00"
+      },
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:55:48+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:55:50+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-55-53.fit",
+    "sha256": "b324c4619dc7472900e369fe42e889c9c1e9f5bba6be087b103d65a45be0ba8a",
+    "values": {
+      "winner": "My team",
+      "match_mode": "MEXICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 4,
+      "first_server": 1,
+      "my_match_points": 3,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 6.504,
+    "timer_seconds": 4.553,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:55:53+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:55:54+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:55:55+00:00"
+      },
+      {
+        "point_event": 3,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 3,
+        "timestamp": "2026-10-07 19:55:56+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 2,
+        "opponent_points": 0,
+        "point_sequence": 4,
+        "timestamp": "2026-10-07 19:55:57+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 3,
+        "opponent_points": 1,
+        "point_sequence": 6,
+        "timestamp": "2026-10-07 19:55:58+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:55:53+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:55:55+00:00"
+      },
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:55:56+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:55:58+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-56-00.fit",
+    "sha256": "3bd5611ba33211ce761110a5b35bccb112f2a54110cd3f30ad26ca2799c216c6",
+    "values": {
+      "winner": "My team",
+      "match_mode": "MEXICANO",
+      "end_rule": "TEAM_TARGET",
+      "point_target": 3,
+      "first_server": 0,
+      "my_match_points": 3,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 6.504,
+    "timer_seconds": 4.552,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:56:00+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:56:01+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:56:02+00:00"
+      },
+      {
+        "point_event": 3,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 3,
+        "timestamp": "2026-10-07 19:56:03+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 2,
+        "opponent_points": 0,
+        "point_sequence": 4,
+        "timestamp": "2026-10-07 19:56:04+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 3,
+        "opponent_points": 1,
+        "point_sequence": 6,
+        "timestamp": "2026-10-07 19:56:05+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:56:00+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:56:02+00:00"
+      },
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:56:03+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:56:05+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-56-08.fit",
+    "sha256": "25b1aa4827229ca50b4aad037574d51f3508738308efee80f0cbd94350528d3b",
+    "values": {
+      "winner": "Opponent",
+      "match_mode": "MEXICANO",
+      "end_rule": "TEAM_TARGET",
+      "point_target": 3,
+      "first_server": 1,
+      "my_match_points": 2,
+      "opponent_match_points": 3
+    },
+    "elapsed_seconds": 6.506,
+    "timer_seconds": 5.204,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:56:08+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:56:09+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:56:10+00:00"
+      },
+      {
+        "point_event": 3,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 3,
+        "timestamp": "2026-10-07 19:56:11+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 2,
+        "opponent_points": 1,
+        "point_sequence": 5,
+        "timestamp": "2026-10-07 19:56:12+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 2,
+        "opponent_points": 2,
+        "point_sequence": 6,
+        "timestamp": "2026-10-07 19:56:13+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:56:08+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:56:10+00:00"
+      },
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:56:11+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:56:14+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-56-15.fit",
+    "sha256": "5ed572fa02935cf65f1aaae5d5cc6e6591efdc7b36b1aa33b689e97e32bd377c",
+    "values": {
+      "winner": "Stopped",
+      "match_mode": "AMERICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 999,
+      "first_server": 0,
+      "my_match_points": 1,
+      "opponent_match_points": 0
+    },
+    "elapsed_seconds": 1.953,
+    "timer_seconds": 1.301,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:56:15+00:00"
+      },
+      {
+        "point_event": 1,
+        "my_points": 1,
+        "opponent_points": 0,
+        "point_sequence": 1,
+        "timestamp": "2026-10-07 19:56:16+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:56:15+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:56:16+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-56-18.fit",
+    "sha256": "24efe61218db11cc7cbce2e134b2dc4e99666a8c8f8f0b75517a523248c86fdd",
+    "values": {
+      "winner": "Stopped",
+      "match_mode": "MEXICANO",
+      "end_rule": "TEAM_TARGET",
+      "point_target": 999,
+      "first_server": 1,
+      "my_match_points": 998,
+      "opponent_match_points": 997
+    },
+    "elapsed_seconds": 1.953,
+    "timer_seconds": 1.302,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 998,
+        "opponent_points": 997,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:56:18+00:00"
+      },
+      {
+        "point_event": 0,
+        "my_points": 998,
+        "opponent_points": 997,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:56:19+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:56:18+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:56:19+00:00"
+      }
+    ]
+  },
+  {
+    "file": "2026-10-07-21-56-26.fit",
+    "sha256": "654042d33d4b84b2276083d099413df67bb97a1108f8bb9d6c69e0bde6d71ac4",
+    "values": {
+      "winner": "Draw",
+      "match_mode": "AMERICANO",
+      "end_rule": "TOTAL_POINTS",
+      "point_target": 2,
+      "first_server": 0,
+      "my_match_points": 1,
+      "opponent_match_points": 1
+    },
+    "elapsed_seconds": 1.951,
+    "timer_seconds": 1.3,
+    "records": [
+      {
+        "point_event": 0,
+        "my_points": 0,
+        "opponent_points": 0,
+        "point_sequence": 0,
+        "timestamp": "2026-10-07 19:56:26+00:00"
+      },
+      {
+        "point_event": 2,
+        "my_points": 1,
+        "opponent_points": 1,
+        "point_sequence": 2,
+        "timestamp": "2026-10-07 19:56:27+00:00"
+      }
+    ],
+    "timer_events": [
+      {
+        "type": "start",
+        "timestamp": "2026-10-07 19:56:26+00:00"
+      },
+      {
+        "type": "stop_all",
+        "timestamp": "2026-10-07 19:56:27+00:00"
+      }
+    ]
+  }
+]

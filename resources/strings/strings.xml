@@ -12,4 +12,16 @@
     <string id="FitWinnerUnit">team</string>
     <string id="FitSetScores">Set scores</string>
     <string id="FitNoUnit">score</string>
+    <string id="FitEmptyUnit"></string>
+    <string id="FitMatchMode">Match mode</string>
+    <string id="FitEndRule">End rule</string>
+    <string id="FitPointTarget">Point target</string>
+    <string id="FitFirstServer">First server (0=A, 1=B)</string>
+    <string id="FitMyPoints">My points</string>
+    <string id="FitOpponentPoints">Opponent points</string>
+    <string id="FitMyMatchPoints">My match points</string>
+    <string id="FitOpponentMatchPoints">Opponent match points</string>
+    <string id="FitPointSequence">Point event sequence</string>
+    <string id="FitPointsUnit">points</string>
+    <string id="FitEventsUnit">events</string>
 </strings>

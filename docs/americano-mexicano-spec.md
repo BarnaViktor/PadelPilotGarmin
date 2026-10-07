@@ -1,17 +1,18 @@
 # AM-1 – Americano / Mexicano: egy saját meccs pontozása
 
-> Aktuális kiadás: **1.2.0 stabil**, 2026-10-04. A produkciós csomag,
-> verziózás, Store-szöveg és képek: [kiadási jegyzet](releases/1.2.0.md).
+> Aktuális kiadási csomag: **1.3.0 produkció**, 2026-10-07. A produkciós csomag,
+> verziózás és Store-szöveg: [kiadási jegyzet](releases/1.3.0.md).
 > Az alábbi korábbi checkpointok dátumozott fejlesztési bizonyítékok;
 > az 1.1.0 fájlnevek és a korábbi béta telepítése történeti adatok.
-> Következő fejlesztés: AM-6 (pontmódos lezárt előzmény), majd AM-7 (FIT).
+> Következő egység: I2-1 (Instinct 2 korlátok és vizuális tokenek); AM-7 automatikus kapu lezárva 2026-10-07-én.
 
 
 **Állapot:** AM-1 lezárva, 2026-10-04. A felhasználó két választható
 pontszám-alapú lezárást, meccs előtt megadható X pontszámot és kezdő
 csapatot kért. AM-2 domain és AM-3 módválasztás/meccsbeállítás elkészült
-és ellenőrizve. AM-4 élő pontozása is kész; következő egység AM-5,
-aktív mentés és helyreállítás.
+és ellenőrizve. Az AM-4 élő pontozása, az AM-5 aktív mentése/helyreállítása
+és az AM-6 lezárt/félbehagyott előzménye is kész. Az AM-7 FIT-integráció
+automatikus kapuja lezárva; a valós órás FIT/Connect próba külön nyitott.
 
 ## Jóváhagyott használati cél
 
@@ -99,6 +100,18 @@ normál előzmények olvashatóságának megtartásával. A jelenlegi v3 formát
 befejezett rekordhoz csak 0/1 győztest enged; a -1 félbehagyott állapothoz
 tartozik, ezért döntetlenre nem használható változtatás nélkül.
 A legfeljebb 20 helyi meccs korlátja megmarad; külön tornaelőzmény nincs.
+
+Az AM-6 v4 előzménysémája:
+`[4, mode, endRule, X, startingTeam, [A, B], durationSeconds, result]`.
+Ez külön nyolcelemű rekord, nem használ klasszikus szett/game mezőket.
+`result`: ACTIVE = félbehagyva mentett, WIN/LOSS/DRAW = befejezett;
+az ACTIVE csak előzményben jelenti a félbehagyást. A betöltés ellenőrzi,
+hogy az eredmény a szabály, X és a pontok alapján valóban lehetséges-e.
+Az aktív v4 mentés ettől külön formátum marad, milliszekundumos idővel.
+Az AM-7 külön v5 checkpointja a már elmentett FIT után még helyi mentésre
+váró meccset őrzi; normál folytatás továbbra is v4.
+A mezők, mintavételezés és újraindítási szabályok: [AM-7 FIT-adatszerződés](am7-fit-contract.md).
+Az előzmény a klasszikus rekordokkal egyezően egész másodperceket tárol.
 
 Az összesítőbe az új mód saját meccseinek pontjai és ideje kerülhetnek.
 Az AM-6 rögzítse a döntetlen megjelenítését, valamint azt, hogy a győzelmi

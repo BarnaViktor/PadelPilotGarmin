@@ -1,0 +1,13 @@
+{
+  "values": {
+    "winner": "Draw",
+    "match_mode": "AMERICANO",
+    "end_rule": "TOTAL_POINTS",
+    "point_target": 2,
+    "first_server": 1,
+    "my_match_points": 1,
+    "opponent_match_points": 1
+  },
+  "timer_seconds": 0.001,
+  "elapsed_seconds": 1.301
+}

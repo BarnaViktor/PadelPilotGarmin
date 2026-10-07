@@ -1,10 +1,10 @@
 # Következő, kis kontextusú munkamenetek
 
-> Aktuális kiadás: **1.2.0 stabil**, 2026-10-04. A produkciós csomag,
-> verziózás, Store-szöveg és képek: [kiadási jegyzet](releases/1.2.0.md).
+> Aktuális kiadási csomag: **1.3.0 produkció**, 2026-10-07. A produkciós csomag,
+> verziózás és Store-szöveg: [kiadási jegyzet](releases/1.3.0.md).
 > Az alábbi korábbi checkpointok dátumozott fejlesztési bizonyítékok;
 > az 1.1.0 fájlnevek és a korábbi béta telepítése történeti adatok.
-> Következő fejlesztés: AM-6 (pontmódos lezárt előzmény), majd AM-7 (FIT).
+> Következő egység: I2-1 (Instinct 2 korlátok és vizuális tokenek); AM-7 automatikus kapu lezárva 2026-10-07-én.
 
 
 Ez a lista a hátralévő munkát egymástól elválasztható fejlesztési egységekre
@@ -12,11 +12,11 @@ bontja. Egy új Codex-munkamenet egyszerre csak **egy azonosítót** kapjon meg,
 például: „Folytasd az `S2-V1` egységgel”. Az egységek sorrendjét csak külön
 termékdöntéssel változtasd meg.
 
-**2026-10-04-i folytatás:** AM-1…AM-5 lezárva. Élő pontbevitel,
+**2026-10-07-i folytatás:** AM-1…AM-7 automatikus kapuja lezárva. Élő pontbevitel,
 undo, szünet, játékidő, eredmény, megerősített eldobás és verziózott
-aktív mentés/helyreállítás kész. FR265 és Enduro profilon 94/94 teszt,
-optimalizált build és natív ellenőrzés sikeres.
-Következő eszköz nélküli egység: AM-6, saját meccs eredménye és előzménye.
+aktív mentés/helyreállítás, lezárt és félbehagyott pontmódos előzmény,
+döntetlen és vegyes statisztika kész. Az ellenőrzések az átadási jegyzetben vannak.
+Következő eszköz nélküli egység: I2-1, Instinct 2 korlátok és vizuális tokenek.
 S2-V2 és a D-kapuk nyitva maradnak,
 eszközkeresés nem szükséges.
 
@@ -75,7 +75,7 @@ miatti vágás 416 × 416 és 280 × 280 képponton.
 sikeres. A pontsorozat, újraindítás és törlés mérése még nyitott.
 A 2026-10-04-i hatókörjelölések és egyedi statisztikalapok csak a helyi
 fejlesztői buildben vannak; az órás UI-próba előtt friss béta szükséges.
-Tesztóra hiányában ez az egység várakozik; AM-5 lezárva, AM-6 következik.
+Tesztóra hiányában ez az egység várakozik; AM-7 automatikus kapuja lezárva, I2-1 következik.
 
 Az ismételhető gombsor és az elvárt értékek:
 [valós órás pontstatisztikai próba](s2-v2-real-watch-point-test.md).
@@ -118,7 +118,7 @@ kapu után bővíthető, külön kiadási egységben.
 **Felhasználói pontosítás, 2026-10-04:** kizárólag egy saját meccs
 pontozása és végigvezetése. Nincs tornalebonyolítás, többpályás bevitel,
 játékoslista, párosítás, partnerrotáció, fordulósorozat vagy ranglista.
-AM-1…AM-5 lezárva; AM-6 eszköz nélkül folytatható, az S2-V2 órás kapu nyitott.
+AM-1…AM-7 automatikus kapuja lezárva; I2-1 eszköz nélkül folytatható, az S2-V2 és a FIT órás kapuja nyitott.
 
 ### AM-1 – Saját meccs szabályai
 
@@ -207,6 +207,13 @@ károsítja az előzményt. Pontállás és játékidő egyezik a mentett állap
 
 ### AM-6 – Saját meccs eredménye és előzménye
 
+**Állapot:** kész (2026-10-07). Külön v4 pontrekord, SAVE MATCH és korai
+SAVE & END, megerősített eldobás/törlés; régi v1/v2/v3 olvasható, közös
+20 meccses korlát. Döntetlen külön befejezett eredmény és DRAWS mutató,
+a pontmódok csak a pont- és időösszesítést növelik. Mentési hiba mellett
+az aktív meccs megmarad. FR265/Enduro ellenőrzési bizonyítékok a
+`development-handoff.md` fájlban. Következő azonosító: AM-7.
+
 **Cél:** mód, lezárási szabály, X, A/B pontszám, idő és eredmény
 megjelenítése/mentése/törlése;
 az összesítő pont- és időadatainak, valamint a döntetlennek a kezelése.
@@ -216,6 +223,13 @@ pont nem válik szetté/game-mé. Régi rekordok olvashatók, a 20 meccses korl�
 megmarad. Endurón az új mód és az előzmény memóriahasználata ellenőrzött.
 
 ### AM-7 – Saját meccs FIT- és készülékkapuja
+
+**Állapot:** automatikus kapu lezárva (2026-10-07). FR265/Enduro: 116/116
+teszt, optimalizált build, 27-27 dekódolt FIT a nyolc cold restart és nyolc
+befejezett meccs, korai mentés/eldobás és FIT utáni historyhiba újraindítása
+mellett. Külön visszaállított DRAW mentés is sikeres. Enduro-memória a
+natív, 20 rekordos FIT-terhelés mellett 86,9 / 123,8 kB. Valós órás
+FIT/Connect/memória/akkumulátor kapu nyitott. Következő egység: I2-1.
 
 **Cél:** egy saját meccshez egy FIT-aktivitás; a pontok, eredmény, szünet,
 mentés és a meglévő újraindítás utáni szegmenskezelés ellenőrzése.

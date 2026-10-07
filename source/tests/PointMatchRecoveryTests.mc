@@ -241,6 +241,7 @@ function pointLivePersistenceFollowsPointsUndoPauseStopAndDiscard(logger) {
     new PadelApp().onStop(null);
     Test.assertEqual(time, ActiveMatchStore.load()[1]);
     delegate.handleKey(WatchUi.KEY_DOWN);
+    delegate.handleKey(WatchUi.KEY_DOWN);
     delegate.handleKey(WatchUi.KEY_ENTER);
     delegate.handleKey(WatchUi.KEY_ENTER);
     Test.assert(ActiveMatchStore.load() != null && !delegate.left);

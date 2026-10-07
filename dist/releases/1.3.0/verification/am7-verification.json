@@ -1,0 +1,145 @@
+{
+  "stage": "AM-7",
+  "date": "2026-10-07",
+  "builds": {
+    "fr265_tests": {
+      "version": "1.2.0",
+      "action": "test",
+      "device": "fr265",
+      "devices": [
+        "fr265"
+      ],
+      "experimental": false,
+      "min_api_level": "3.4.0",
+      "application_id": "e6b2455dd36646098e6f53e16d77df8f",
+      "built_at_utc": "2026-10-07T20:14:26.857479+00:00",
+      "git_revision": "10656a3db618adf0bae8277e0b431ada56c5f9ff",
+      "working_tree_dirty": true,
+      "compiler": "Connect IQ Compiler version: 9.2.0",
+      "artifact": "padel-pilot-1.2.0-tests-fr265.prg",
+      "size_bytes": 335436,
+      "sha256": "4b0114517e75790cb7d2da941562141a0b19ebcf64cb01b51e05e9f9ae5f8544",
+      "checks": {
+        "build": "passed",
+        "tests_passed": 116
+      }
+    },
+    "enduro_tests": {
+      "version": "1.2.0",
+      "action": "test",
+      "device": "enduro",
+      "devices": [
+        "enduro"
+      ],
+      "experimental": false,
+      "min_api_level": "3.4.0",
+      "application_id": "e6b2455dd36646098e6f53e16d77df8f",
+      "built_at_utc": "2026-10-07T19:49:54.958793+00:00",
+      "git_revision": "10656a3db618adf0bae8277e0b431ada56c5f9ff",
+      "working_tree_dirty": true,
+      "compiler": "Connect IQ Compiler version: 9.2.0",
+      "artifact": "padel-pilot-1.2.0-tests-enduro.prg",
+      "size_bytes": 363388,
+      "sha256": "9b082258c8e6dc3c5b69517cd34265f56d31405ab76f28e36029551fcbb5921c",
+      "checks": {
+        "build": "passed",
+        "tests_passed": 116
+      }
+    },
+    "fr265_build": {
+      "version": "1.2.0",
+      "action": "build",
+      "device": "fr265",
+      "devices": [
+        "fr265"
+      ],
+      "experimental": false,
+      "min_api_level": "3.4.0",
+      "application_id": "e6b2455dd36646098e6f53e16d77df8f",
+      "built_at_utc": "2026-10-07T19:49:44.098130+00:00",
+      "git_revision": "10656a3db618adf0bae8277e0b431ada56c5f9ff",
+      "working_tree_dirty": true,
+      "compiler": "Connect IQ Compiler version: 9.2.0",
+      "artifact": "padel-pilot-1.2.0-fr265.prg",
+      "size_bytes": 64604,
+      "sha256": "0d954334dcc055d5cb04fa19759fe7fa3b5eb77df284afad8af3665b1e7f3f74",
+      "checks": {
+        "build": "passed"
+      }
+    },
+    "enduro_build": {
+      "version": "1.2.0",
+      "action": "build",
+      "device": "enduro",
+      "devices": [
+        "enduro"
+      ],
+      "experimental": false,
+      "min_api_level": "3.4.0",
+      "application_id": "e6b2455dd36646098e6f53e16d77df8f",
+      "built_at_utc": "2026-10-07T19:49:44.892490+00:00",
+      "git_revision": "10656a3db618adf0bae8277e0b431ada56c5f9ff",
+      "working_tree_dirty": true,
+      "compiler": "Connect IQ Compiler version: 9.2.0",
+      "artifact": "padel-pilot-1.2.0-enduro.prg",
+      "size_bytes": 74108,
+      "sha256": "02cfa52d40a3070a74e937eda539ed8b68494e4c472aa7577be98fc3392120df",
+      "checks": {
+        "build": "passed"
+      }
+    }
+  },
+  "native": {
+    "fr265": {
+      "fit_files": 27,
+      "completed_recovery": {
+        "values": {
+          "winner": "Draw",
+          "match_mode": "AMERICANO",
+          "end_rule": "TOTAL_POINTS",
+          "point_target": 2,
+          "first_server": 1,
+          "my_match_points": 1,
+          "opponent_match_points": 1
+        },
+        "timer_seconds": 0.0,
+        "elapsed_seconds": 1.301
+      },
+      "fit_results": {
+        "Interrupted": 8,
+        "Stopped": 10,
+        "My team": 4,
+        "Opponent": 2,
+        "Draw": 3
+      }
+    },
+    "enduro": {
+      "fit_files": 27,
+      "completed_recovery": {
+        "values": {
+          "winner": "Draw",
+          "match_mode": "AMERICANO",
+          "end_rule": "TOTAL_POINTS",
+          "point_target": 2,
+          "first_server": 1,
+          "my_match_points": 1,
+          "opponent_match_points": 1
+        },
+        "timer_seconds": 0.001,
+        "elapsed_seconds": 1.301
+      },
+      "fit_results": {
+        "Interrupted": 8,
+        "Stopped": 10,
+        "My team": 4,
+        "Opponent": 2,
+        "Draw": 3
+      }
+    }
+  },
+  "enduro_observed_memory_kb": {
+    "maximum": 86.9,
+    "available": 123.8
+  },
+  "next_stage": "I2-1"
+}

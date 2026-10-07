@@ -1,6 +1,8 @@
-# Padel Pilot 1.2.0 assets
+# Padel Pilot assets — 1.2.0 screenshot archive
 
-Current stable version: 1.2.0. Store screenshots use Forerunner 265, 416×416;
+Current release package: 1.3.0. These screenshots were captured for 1.2.0
+and must be reviewed before the 1.3.0 Store submission. They use
+Forerunner 265, 416×416;
 the release also supports the tested 416×416 AMOLED and 280×280 MIP profiles.
 The unchanged icons contain no version or beta text and remain the app brand:
 `padel-pilot-store-icon-500.png` (500×500) and
@@ -27,6 +29,6 @@ a separate capture identity; they are not live-user match records.
 | `screenshots/10-mexicano-result.png` | Team target, loss result |
 | `screenshots/11-point-recovery.png` | Active point-match recovery |
 
-Suggested Store selection: 00, 01, 02, 07, 09. Use the current 1.2.0
-[Store text](../store-listing.md) and its mode-specific feature scope.
+Suggested Store selection: 00, 01, 02, 07, 09. The current [Store text](../store-listing.md) describes 1.3.0;
+the screenshots are historical and do not document the new point-mode save flows.
 Asset hashes and source provenance are recorded in the release folder.

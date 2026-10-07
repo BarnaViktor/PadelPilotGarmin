@@ -13,13 +13,16 @@ class SetupInputDelegate extends WatchUi.BehaviorDelegate {
 
         if (key == WatchUi.KEY_UP) {
             if (_setup.editing) {
-                _setup.changeSelected(1);
+                // Mode choices are vertical rows; numeric values increase with UP.
+                _setup.changeSelected(_setup.fieldFor(_setup.selectedField)
+                    == MatchSetupField.MODE ? -1 : 1);
             } else {
                 _setup.moveSelection(-1);
             }
         } else if (key == WatchUi.KEY_DOWN) {
             if (_setup.editing) {
-                _setup.changeSelected(-1);
+                _setup.changeSelected(_setup.fieldFor(_setup.selectedField)
+                    == MatchSetupField.MODE ? 1 : -1);
             } else {
                 _setup.moveSelection(1);
             }
@@ -97,6 +100,7 @@ class SetupInputDelegate extends WatchUi.BehaviorDelegate {
         if (_setup.isPointMatch()) {
             var pointView = new PointMatchStartView(engine);
             ActiveMatchSession.attach(engine, pointView);
+            pointView.startActivity();
             WatchUi.pushView(pointView, new PointMatchStartInputDelegate(pointView),
                 WatchUi.SLIDE_IMMEDIATE);
             return;

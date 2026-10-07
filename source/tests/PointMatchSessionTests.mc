@@ -13,6 +13,8 @@ function pointScore(engine, team) {
 class SilentPointMatchDelegate extends PointMatchStartInputDelegate {
     function initialize(view) { PointMatchStartInputDelegate.initialize(view); }
     function vibrate(duration) {}
+    // Session/input tests are independent of recording availability.
+    function resumeActivity() { return true; }
 }
 
 (:test)
@@ -126,6 +128,8 @@ function pointLiveButtonsPauseConfirmCancelAndUndoResult(logger) {
     delegate.onKey(new SetupKeyEvent(WatchUi.KEY_DOWN));
     Test.assertEqual(0, pointScore(engine, 0));
     Test.assertEqual(1, view._pauseSelection);
+    delegate.handleKey(WatchUi.KEY_DOWN);
+    Test.assertEqual(2, view._pauseSelection);
     delegate.handleKey(WatchUi.KEY_ENTER);
     Test.assert(view._discardConfirm && !view._discardYes);
     delegate.handleKey(WatchUi.KEY_DOWN);
@@ -145,9 +149,14 @@ function pointLiveButtonsPauseConfirmCancelAndUndoResult(logger) {
     Test.assertEqual(0, pointScore(engine, 0));
     Test.assertEqual(1, pointScore(engine, 1));
     delegate.handleKey(WatchUi.KEY_ENTER);
+    Test.assert(view._finishMenu);
+    delegate.handleKey(WatchUi.KEY_DOWN);
+    delegate.handleKey(WatchUi.KEY_ENTER);
     Test.assert(view._discardConfirm && !view._discardYes);
     delegate.handleKey(WatchUi.KEY_ESC);
     Test.assert(engine.isComplete());
+    delegate.handleKey(WatchUi.KEY_ESC);
+    Test.assert(!view._finishMenu);
     delegate.onKey(new SetupKeyEvent(WatchUi.KEY_ESC));
     Test.assert(!engine.isComplete());
     delegate.onKey(new SetupKeyEvent(WatchUi.KEY_DOWN));
@@ -191,6 +200,14 @@ function checkPointMatchLayouts(size) {
             view.setPaused(true);
             assertLayoutBounds(view, size);
             view._pauseSelection = 1;
+            assertLayoutBounds(view, size);
+            view.showSaveConfirm();
+            assertLayoutBounds(view, size);
+            view._saveYes = true;
+            view._saveError = true;
+            assertLayoutBounds(view, size);
+            view._saveConfirm = false;
+            view._pauseSelection = 2;
             assertLayoutBounds(view, size);
             view.showDiscardConfirm();
             assertLayoutBounds(view, size);

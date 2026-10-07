@@ -1,0 +1,21 @@
+{
+  "version": "1.3.0",
+  "action": "build",
+  "device": "d2mach1",
+  "devices": [
+    "d2mach1"
+  ],
+  "experimental": false,
+  "min_api_level": "3.4.0",
+  "application_id": "e6b2455dd36646098e6f53e16d77df8f",
+  "built_at_utc": "2026-10-07T20:32:28.477273+00:00",
+  "git_revision": "10656a3db618adf0bae8277e0b431ada56c5f9ff",
+  "working_tree_dirty": true,
+  "compiler": "Connect IQ Compiler version: 9.2.0",
+  "artifact": "padel-pilot-1.3.0-d2mach1.prg",
+  "size_bytes": 64604,
+  "sha256": "92d6de3c67f8243bceb9d05387441226342746abcb84e34fde3fb8f785dcb119",
+  "checks": {
+    "build": "passed"
+  }
+}

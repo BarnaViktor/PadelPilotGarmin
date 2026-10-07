@@ -1,0 +1,22 @@
+
+7-Zip 25.01 (x64) : Copyright (c) 1999-2025 Igor Pavlov : 2025-08-03
+ 64-bit locale=C.UTF-8 Threads:12 OPEN_MAX:524288
+
+Scanning the drive for archives:
+1 file, 768366 bytes (751 KiB)
+
+Testing archive: /home/viktor/projects/padel-pilot/padel-pilot-garmin/build/release-1.3.0-export-qf2b4myq/padel-pilot-1.3.0.iq
+--
+Path = /home/viktor/projects/padel-pilot/padel-pilot-garmin/build/release-1.3.0-export-qf2b4myq/padel-pilot-1.3.0.iq
+Type = 7z
+Physical Size = 768366
+Headers Size = 5452
+Method = LZMA2:23
+Solid = -
+Blocks = 49
+
+Everything is Ok
+
+Files: 49
+Size:       12369054
+Compressed: 768366

@@ -12,4 +12,16 @@
     <string id="FitWinnerUnit">csapat</string>
     <string id="FitSetScores">Szetteredmények</string>
     <string id="FitNoUnit">eredmény</string>
+    <string id="FitEmptyUnit"></string>
+    <string id="FitMatchMode">Játékmód</string>
+    <string id="FitEndRule">Lezárási szabály</string>
+    <string id="FitPointTarget">Célpontszám</string>
+    <string id="FitFirstServer">Kezdő adogató (0=A, 1=B)</string>
+    <string id="FitMyPoints">Saját pontok</string>
+    <string id="FitOpponentPoints">Ellenfél pontjai</string>
+    <string id="FitMyMatchPoints">Saját meccspontok</string>
+    <string id="FitOpponentMatchPoints">Ellenfél meccspontjai</string>
+    <string id="FitPointSequence">Pontesemény sorszáma</string>
+    <string id="FitPointsUnit">pont</string>
+    <string id="FitEventsUnit">esemény</string>
 </strings>

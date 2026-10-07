@@ -97,24 +97,33 @@ class MatchHistoryView extends WatchUi.View {
         PadelTheme.drawCard(dc, 52, y, 312, 64, selected, PadelTheme.CYAN);
         var centerY = y + 32;
         var stopped = MatchHistoryStore.isStopped(record);
-        var scoreY = stopped ? centerY - 11 : centerY;
+        var pointMatch = MatchHistoryStore.isPointRecord(record);
+        var scoreY = pointMatch ? centerY + 14 : (stopped ? centerY - 11 : centerY);
+        var score = pointMatch ? MatchHistoryStore.getPointTotals(record) : record;
+        if (pointMatch) {
+            dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
+            dc.drawText(208, centerY - 15, Graphics.FONT_XTINY,
+                MatchHistoryStore.modeLabel(record) + " " + MatchHistoryStore.resultLabel(record),
+                Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        }
 
         dc.setColor(PadelTheme.CYAN, Graphics.COLOR_BLACK);
-        dc.drawText(126, scoreY, Graphics.FONT_XTINY, record[0],
+        dc.drawText(126, scoreY, Graphics.FONT_XTINY, score[0],
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
         dc.drawText(172, scoreY, Graphics.FONT_XTINY, "–",
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         dc.setColor(PadelTheme.RED, Graphics.COLOR_BLACK);
-        dc.drawText(218, scoreY, Graphics.FONT_XTINY, record[1],
+        dc.drawText(218, scoreY, Graphics.FONT_XTINY, score[1],
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
-        if (stopped) {
+        if (stopped && !pointMatch) {
             dc.setColor(PadelTheme.LIME, Graphics.COLOR_BLACK);
             dc.drawText(172, centerY + 17, Graphics.FONT_XTINY, "STOPPED",
                 Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
         }
         dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
-        dc.drawText(312, centerY, Graphics.FONT_XTINY, durationLabel(record[3]),
+        dc.drawText(312, pointMatch ? scoreY : centerY, Graphics.FONT_XTINY,
+            durationLabel(MatchHistoryStore.getDurationSeconds(record)),
             Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 

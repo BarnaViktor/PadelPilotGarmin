@@ -23,10 +23,11 @@ class MatchHistoryDetailView extends WatchUi.View {
     }
 
     function getPageCount() {
-        return getScorePageCount() + 2;
+        return getScorePageCount() + (MatchHistoryStore.isPointRecord(_record) ? 1 : 2);
     }
 
     function getScorePageCount() {
+        if (MatchHistoryStore.isPointRecord(_record)) { return 1; }
         return _record[4].size() + 1
             + (MatchHistoryStore.isStopped(_record) ? 1 : 0);
     }
@@ -59,8 +60,15 @@ class MatchHistoryDetailView extends WatchUi.View {
             return;
         }
 
-        var completedSetCount = _record[4].size();
-        if (_page == 0) {
+        var pointMatch = MatchHistoryStore.isPointRecord(_record);
+        var completedSetCount = pointMatch ? 0 : _record[4].size();
+        if (pointMatch) {
+            if (_page == 0) { drawPointMatchSummary(dc, centerX); }
+            else {
+                _stats.drawPointRecord(dc, true);
+                _stats.drawTimeSummary(dc, true);
+            }
+        } else if (_page == 0) {
             drawMatchSummary(dc, centerX);
         } else if (_page <= completedSetCount) {
             drawSetSummary(dc, centerX, _page - 1);
@@ -73,6 +81,34 @@ class MatchHistoryDetailView extends WatchUi.View {
         }
         drawDeleteHint(dc, centerX);
         PadelTheme.drawPageDots(dc, _page, getPageCount(), 376);
+    }
+
+    function drawPointMatchSummary(dc, centerX) {
+        PadelTheme.drawHeader(dc, MatchHistoryStore.modeLabel(_record));
+        dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
+        dc.drawText(centerX, 112, Graphics.FONT_XTINY,
+            (_record[2] == PointMatchEndRule.TOTAL_POINTS ? "TOTAL POINTS: " : "TEAM TARGET: ")
+                + _record[3], Graphics.TEXT_JUSTIFY_CENTER);
+        var result = MatchHistoryStore.getResult(_record);
+        dc.setColor(result == PointMatchResult.WIN ? PadelTheme.CYAN
+            : (result == PointMatchResult.LOSS ? PadelTheme.RED : PadelTheme.LIME),
+            Graphics.COLOR_BLACK);
+        dc.drawText(centerX, 150, Graphics.FONT_XTINY, MatchHistoryStore.resultLabel(_record),
+            Graphics.TEXT_JUSTIFY_CENTER);
+        dc.setColor(PadelTheme.CYAN, Graphics.COLOR_BLACK);
+        dc.drawText(116, 188, Graphics.FONT_XTINY, "MY TEAM", Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(116, 220, Graphics.FONT_MEDIUM, _record[5][0], Graphics.TEXT_JUSTIFY_CENTER);
+        dc.setColor(PadelTheme.RED, Graphics.COLOR_BLACK);
+        dc.drawText(300, 188, Graphics.FONT_XTINY, "OPPONENT", Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(300, 220, Graphics.FONT_MEDIUM, _record[5][1], Graphics.TEXT_JUSTIFY_CENTER);
+        dc.setColor(PadelTheme.MUTED, Graphics.COLOR_BLACK);
+        dc.drawText(centerX, 284, Graphics.FONT_XTINY,
+            "1ST SERVE: " + (_record[4] == 0 ? "A" : "B"),
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+        dc.setColor(PadelTheme.WHITE, Graphics.COLOR_BLACK);
+        dc.drawText(centerX, 316, Graphics.FONT_XTINY,
+            durationLabel(MatchHistoryStore.getDurationSeconds(_record)),
+            Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
     }
 
     function drawMatchSummary(dc, centerX) {

@@ -22,6 +22,16 @@ module PadelActivityRecorder {
     const FIELD_OPPONENT_SETS = 4;
     const FIELD_WINNER = 5;
     const FIELD_SET_SCORES = 6;
+    // Keep the classic 0..6 field identifiers stable in existing FIT files.
+    const FIELD_MATCH_MODE = 7;
+    const FIELD_END_RULE = 8;
+    const FIELD_POINT_TARGET = 9;
+    const FIELD_FIRST_SERVER = 10;
+    const FIELD_MY_POINTS = 11;
+    const FIELD_OPPONENT_POINTS = 12;
+    const FIELD_MY_MATCH_POINTS = 13;
+    const FIELD_OPPONENT_MATCH_POINTS = 14;
+    const FIELD_POINT_SEQUENCE = 15;
 
     const EVENT_MY_POINT = 1;
     const EVENT_OPPONENT_POINT = 2;
@@ -36,42 +46,84 @@ module PadelActivityRecorder {
     var _opponentSetsField = null;
     var _winnerField = null;
     var _setScoresField = null;
+    var _pointFields = null;
+    var _pointSequence = 0;
     var _recordedSetCount = 0;
     var _positioningEnabled = false;
     var _positionListener = null;
 
     function start(engine) {
         if (_session != null) {
-            return true;
+            return _engine == engine && resume();
         }
 
         try {
             Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);
             enablePositioning();
 
-            _session = ActivityRecording.createSession({
+            var session = ActivityRecording.createSession({
                 :name => "Padel",
                 :sport => Activity.SPORT_RACKET,
                 :subSport => Activity.SUB_SPORT_PADEL
             });
-            _engine = engine;
-            // A recovered match starts a new FIT segment. Sets already present
-            // in the restored engine were written by the previous segment and
-            // must not be announced again on the next point.
-            _recordedSetCount = engine.getCompletedSets().size();
-            createFields();
-            updateSummary(engine, null);
-            return _session.start();
+            return startWithSession(engine, session);
         } catch (error) {
-            reset();
+            abortStart();
             return false;
         }
+    }
+
+    function isAttached(engine) {
+        return _session != null && _engine == engine;
+    }
+
+    // The API-shaped session parameter also lets tests exercise failed saves.
+    function startWithSession(engine, session) {
+        if (_session != null) { return _engine == engine; }
+        try {
+            _session = session;
+            _engine = engine;
+            _pointSequence = 0;
+            // Recovered classic sets belong to the previous FIT segment.
+            _recordedSetCount = engine instanceof PointMatchEngine
+                ? 0 : engine.getCompletedSets().size();
+            createFields();
+            updateSummary(engine, null);
+            // A false start is retryable on the same initialized session.
+            // Discarding it and immediately creating another session can race
+            // native cleanup and lose the later recording in the simulator.
+            if (!_session.start()) {
+                if (!(engine instanceof PointMatchEngine)) { abortStart(); }
+                return false;
+            }
+            if (engine instanceof PointMatchEngine && engine.isComplete() && !pause()) {
+                abortStart(); return false;
+            }
+            return true;
+        } catch (error) {
+            abortStart();
+            return false;
+        }
+    }
+
+    function abortStart() {
+        try { if (_session != null) { _session.discard(); } }
+        catch (error) {}
+        reset();
     }
 
     function createFields() {
         _pointEventField = _session.createField("point_event", FIELD_POINT_EVENT,
             FitContributor.DATA_TYPE_UINT8,
             {:mesgType => FitContributor.MESG_TYPE_RECORD, :units => "code"});
+        _pointEventField.setData(0);
+        _winnerField = _session.createField("winner", FIELD_WINNER,
+            FitContributor.DATA_TYPE_STRING,
+            {:count => 16, :mesgType => FitContributor.MESG_TYPE_SESSION, :units => ""});
+        if (_engine instanceof PointMatchEngine) {
+            createPointFields();
+            return;
+        }
         _mySetScoreField = _session.createField("my_set_games", FIELD_MY_SET_SCORE,
             FitContributor.DATA_TYPE_UINT8,
             {:mesgType => FitContributor.MESG_TYPE_LAP, :units => "games"});
@@ -84,19 +136,50 @@ module PadelActivityRecorder {
         _opponentSetsField = _session.createField("opponent_sets", FIELD_OPPONENT_SETS,
             FitContributor.DATA_TYPE_UINT8,
             {:mesgType => FitContributor.MESG_TYPE_SESSION, :units => "sets"});
-        _winnerField = _session.createField("winner", FIELD_WINNER,
-            FitContributor.DATA_TYPE_STRING,
-            {:count => 16, :mesgType => FitContributor.MESG_TYPE_SESSION, :units => ""});
         _setScoresField = _session.createField("set_scores", FIELD_SET_SCORES,
             FitContributor.DATA_TYPE_STRING,
             {:count => 64, :mesgType => FitContributor.MESG_TYPE_SESSION, :units => ""});
     }
 
+    function createPointFields() {
+        // Point matches create no set/game fields and never add fictitious laps.
+        _pointFields = [
+            _session.createField("match_mode", FIELD_MATCH_MODE, FitContributor.DATA_TYPE_STRING,
+                {:count => 16, :mesgType => FitContributor.MESG_TYPE_SESSION, :units => ""}),
+            _session.createField("end_rule", FIELD_END_RULE, FitContributor.DATA_TYPE_STRING,
+                {:count => 16, :mesgType => FitContributor.MESG_TYPE_SESSION, :units => ""}),
+            _session.createField("point_target", FIELD_POINT_TARGET, FitContributor.DATA_TYPE_UINT32,
+                {:mesgType => FitContributor.MESG_TYPE_SESSION, :units => "points"}),
+            _session.createField("first_server", FIELD_FIRST_SERVER, FitContributor.DATA_TYPE_UINT8,
+                {:mesgType => FitContributor.MESG_TYPE_SESSION, :units => "team"}),
+            _session.createField("my_points", FIELD_MY_POINTS, FitContributor.DATA_TYPE_UINT32,
+                {:mesgType => FitContributor.MESG_TYPE_RECORD, :units => "points"}),
+            _session.createField("opponent_points", FIELD_OPPONENT_POINTS, FitContributor.DATA_TYPE_UINT32,
+                {:mesgType => FitContributor.MESG_TYPE_RECORD, :units => "points"}),
+            _session.createField("my_match_points", FIELD_MY_MATCH_POINTS, FitContributor.DATA_TYPE_UINT32,
+                {:mesgType => FitContributor.MESG_TYPE_SESSION, :units => "points"}),
+            _session.createField("opponent_match_points", FIELD_OPPONENT_MATCH_POINTS, FitContributor.DATA_TYPE_UINT32,
+                {:mesgType => FitContributor.MESG_TYPE_SESSION, :units => "points"}),
+            _session.createField("point_sequence", FIELD_POINT_SEQUENCE, FitContributor.DATA_TYPE_UINT32,
+                {:mesgType => FitContributor.MESG_TYPE_RECORD, :units => "events"})
+        ];
+        _pointFields[0].setData(_engine.getMode() == PointMatchMode.AMERICANO ? "AMERICANO" : "MEXICANO");
+        _pointFields[1].setData(_engine.getEndRule() == PointMatchEndRule.TOTAL_POINTS ? "TOTAL_POINTS" : "TEAM_TARGET");
+        _pointFields[2].setData(_engine.getTarget());
+        _pointFields[3].setData(_engine.getStartingServerTeam());
+    }
+
     function recordPoint(team, engine) {
-        if (_session == null) {
+        if (!isAttached(engine)) {
             return;
         }
         _pointEventField.setData(team == 0 ? EVENT_MY_POINT : EVENT_OPPONENT_POINT);
+        if (engine instanceof PointMatchEngine) {
+            _pointSequence += 1;
+            updateSummary(engine, null);
+            if (engine.isComplete()) { pause(); }
+            return;
+        }
         updateSummary(engine, null);
         flushPendingSets(engine, engine.getCompletedSets().size());
 
@@ -106,8 +189,13 @@ module PadelActivityRecorder {
     }
 
     function recordUndo(engine) {
-        if (_session != null) {
+        if (isAttached(engine)) {
             _pointEventField.setData(EVENT_UNDO);
+            if (engine instanceof PointMatchEngine) {
+                _pointSequence += 1;
+                updateSummary(engine, null);
+                return;
+            }
             updateSummary(engine, null);
             // addLap() cannot be removed from an ActivityRecording session,
             // but the set-ending feedback must fire again if the user undoes
@@ -134,6 +222,16 @@ module PadelActivityRecorder {
     }
 
     function updateSummary(engine, endState) {
+        if (engine instanceof PointMatchEngine) {
+            var points = engine.getPoints();
+            _pointFields[4].setData(points[0]);
+            _pointFields[5].setData(points[1]);
+            _pointFields[6].setData(points[0]);
+            _pointFields[7].setData(points[1]);
+            _pointFields[8].setData(_pointSequence);
+            _winnerField.setData(pointResultLabel(engine, endState));
+            return;
+        }
         _mySetsField.setData(engine.getSets()[0]);
         _opponentSetsField.setData(engine.getSets()[1]);
         var winner = engine.getMatchWinner();
@@ -143,6 +241,14 @@ module PadelActivityRecorder {
         _setScoresField.setData(winner == null && endState != null
             ? buildIncompleteSetScores(engine, endState)
             : buildSetScores(engine));
+    }
+
+    function pointResultLabel(engine, endState) {
+        var result = engine.getResult();
+        if (result == PointMatchResult.WIN) { return "My team"; }
+        if (result == PointMatchResult.LOSS) { return "Opponent"; }
+        if (result == PointMatchResult.DRAW) { return "Draw"; }
+        return endState == null ? "-" : endState;
     }
 
     function buildSetScores(engine) {
@@ -197,39 +303,38 @@ module PadelActivityRecorder {
     }
 
     function pause() {
-        if (_session != null && _session.isRecording()) {
-            _session.stop();
-        }
+        if (_session == null) { return false; }
+        try { return !_session.isRecording() || _session.stop(); }
+        catch (error) { return false; }
     }
 
     function resume() {
-        if (_session != null && !_session.isRecording()) {
-            _session.start();
-        }
+        if (_session == null) { return false; }
+        try { return _session.isRecording() || _session.start(); }
+        catch (error) { return false; }
     }
 
     function finish(engine, shouldSave, stopped) {
-        if (_session == null) {
+        if (!isAttached(engine)) {
             return false;
         }
 
         try {
-            if (!_session.isRecording()) {
-                _session.start();
+            // Some devices flush session fields only after a start/stop pair.
+            if (!resume()) { return false; }
+            if (!(engine instanceof PointMatchEngine)) {
+                flushPendingSets(engine, engine.getCompletedSets().size());
             }
-            flushPendingSets(engine, engine.getCompletedSets().size());
             updateSummary(engine, stopped ? "Stopped" : null);
-            pause();
+            if (!pause()) { return false; }
             var result = shouldSave ? _session.save() : _session.discard();
-            // A failed save stays retryable and the active match snapshot is
-            // deliberately kept by the caller. Discard is explicit, so its
-            // in-memory recorder state is always released.
-            if (result || !shouldSave) {
+            // Point matches retain failed save/discard sessions for retry.
+            if (result || (!shouldSave && !(engine instanceof PointMatchEngine))) {
                 reset();
             }
             return result;
         } catch (error) {
-            if (!shouldSave) {
+            if (!shouldSave && !(engine instanceof PointMatchEngine)) {
                 reset();
             }
             return false;
@@ -241,10 +346,12 @@ module PadelActivityRecorder {
             return;
         }
         try {
-            if (!_session.isRecording()) {
-                _session.start();
+            // During onStop a device may refuse to restart the timer. The
+            // already stopped session must still be saved and released.
+            resume();
+            if (!(_engine instanceof PointMatchEngine)) {
+                flushPendingSets(_engine, _engine.getCompletedSets().size());
             }
-            flushPendingSets(_engine, _engine.getCompletedSets().size());
             updateSummary(_engine, "Interrupted");
             pause();
             _session.save();
@@ -263,6 +370,8 @@ module PadelActivityRecorder {
         _opponentSetsField = null;
         _winnerField = null;
         _setScoresField = null;
+        _pointFields = null;
+        _pointSequence = 0;
         _recordedSetCount = 0;
         try {
             Position.enableLocationEvents(Position.LOCATION_DISABLE, null);
@@ -270,6 +379,8 @@ module PadelActivityRecorder {
         }
         _positioningEnabled = false;
         _positionListener = null;
-        Sensor.setEnabledSensors([]);
+        // Cleanup cannot turn a confirmed FIT save into a failed save/retry.
+        try { Sensor.setEnabledSensors([]); }
+        catch (error) {}
     }
 }

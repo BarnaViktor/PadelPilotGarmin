@@ -15,5 +15,23 @@
             dataLabel="@Strings.FitWinner" unitLabel="@Strings.FitWinnerUnit"/>
         <fitField id="6" displayInChart="false" displayInActivitySummary="true" sortOrder="6"
             dataLabel="@Strings.FitSetScores" unitLabel="@Strings.FitNoUnit"/>
+        <fitField id="7" displayInChart="false" displayInActivitySummary="true" sortOrder="7"
+            dataLabel="@Strings.FitMatchMode" unitLabel="@Strings.FitEmptyUnit"/>
+        <fitField id="8" displayInChart="false" displayInActivitySummary="true" sortOrder="8"
+            dataLabel="@Strings.FitEndRule" unitLabel="@Strings.FitEmptyUnit"/>
+        <fitField id="9" displayInChart="false" displayInActivitySummary="true" sortOrder="9"
+            dataLabel="@Strings.FitPointTarget" unitLabel="@Strings.FitPointsUnit"/>
+        <fitField id="10" displayInChart="false" displayInActivitySummary="true" sortOrder="10"
+            dataLabel="@Strings.FitFirstServer" unitLabel="@Strings.FitWinnerUnit"/>
+        <fitField id="11" displayInChart="true" sortOrder="11" chartTitle="@Strings.FitMyPoints" fillColor="#08C7EE"
+            dataLabel="@Strings.FitMyPoints" unitLabel="@Strings.FitPointsUnit"/>
+        <fitField id="12" displayInChart="true" sortOrder="12" chartTitle="@Strings.FitOpponentPoints" fillColor="#FF3850"
+            dataLabel="@Strings.FitOpponentPoints" unitLabel="@Strings.FitPointsUnit"/>
+        <fitField id="13" displayInChart="false" displayInActivitySummary="true" sortOrder="13"
+            dataLabel="@Strings.FitMyMatchPoints" unitLabel="@Strings.FitPointsUnit"/>
+        <fitField id="14" displayInChart="false" displayInActivitySummary="true" sortOrder="14"
+            dataLabel="@Strings.FitOpponentMatchPoints" unitLabel="@Strings.FitPointsUnit"/>
+        <fitField id="15" displayInChart="false" sortOrder="15"
+            dataLabel="@Strings.FitPointSequence" unitLabel="@Strings.FitEventsUnit"/>
     </fitContributions>
 </resources>

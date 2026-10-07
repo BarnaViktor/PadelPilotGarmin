@@ -5,6 +5,7 @@ module ActiveMatchStore {
     const ACTIVE_KEY = "activeMatch";
     const SCHEMA_VERSION = 3;
     const POINT_SCHEMA_VERSION = 4;
+    const FINALIZING_POINT_SCHEMA_VERSION = 5;
 
     function save(engine, elapsedSeconds, setEndTimes) {
         var config = engine.getConfig();
@@ -37,7 +38,11 @@ module ActiveMatchStore {
     }
 
     function loadPointMatch(stored) {
-        if (stored.size() != 4 || !(stored[1] instanceof Lang.Number)
+        var finalizing = stored[0] == FINALIZING_POINT_SCHEMA_VERSION;
+        if ((!finalizing && stored.size() != 4)
+                || (finalizing && (stored.size() != 5
+                    || !(stored[4] instanceof Lang.Boolean) || !stored[4]))
+                || !(stored[1] instanceof Lang.Number)
                 || stored[1] < 0 || !(stored[2] instanceof Lang.Array)
                 || stored[2].size() != 4) {
             clear();
@@ -50,7 +55,17 @@ module ActiveMatchStore {
             clear();
             return null;
         }
-        return [engine, stored[1], []];
+        var loaded = [engine, stored[1], []];
+        if (finalizing) { loaded.add(true); }
+        return loaded;
+    }
+
+    // FIT is already saved: restart must retry only the local history write.
+    function saveFinalizingPointMatch(engine, elapsedMs) {
+        Storage.setValue(ACTIVE_KEY, [FINALIZING_POINT_SCHEMA_VERSION,
+            elapsedMs.toNumber(), [engine.getMode(), engine.getEndRule(),
+                engine.getTarget(), engine.getStartingServerTeam()],
+            engine.exportState(), true]);
     }
 
     function load() {
@@ -65,7 +80,7 @@ module ActiveMatchStore {
                 clear();
                 return null;
             }
-            if (stored[0] == POINT_SCHEMA_VERSION) {
+            if (stored[0] == POINT_SCHEMA_VERSION || stored[0] == FINALIZING_POINT_SCHEMA_VERSION) {
                 return loadPointMatch(stored);
             }
             if ((stored[0] == 1 && stored.size() != 4)
@@ -158,7 +173,11 @@ module ActiveMatchSession {
     function persist() {
         if (_engine != null && _view != null) {
             if (_engine instanceof PointMatchEngine) {
-                ActiveMatchStore.savePointMatch(_engine, _view.getElapsedMilliseconds());
+                if (_view._activitySaved) {
+                    ActiveMatchStore.saveFinalizingPointMatch(_engine, _view.getElapsedMilliseconds());
+                } else {
+                    ActiveMatchStore.savePointMatch(_engine, _view.getElapsedMilliseconds());
+                }
             } else {
                 ActiveMatchStore.save(_engine, _view.getDurationSeconds(),
                     _view.getSetEndTimes());

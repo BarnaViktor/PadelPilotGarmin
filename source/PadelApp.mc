@@ -10,6 +10,11 @@ class PadelApp extends Application.AppBase {
         var loadedMatch = ActiveMatchStore.load();
         if (loadedMatch != null) {
             var recoveryView = new RecoveryView(loadedMatch);
+            if (loadedMatch[0] instanceof PointMatchEngine && loadedMatch.size() == 4) {
+                var pendingView = new RecoveryInputDelegate(recoveryView).createResumedView();
+                ActiveMatchSession.attach(loadedMatch[0], pendingView);
+                return [pendingView, new PointMatchStartInputDelegate(pendingView)];
+            }
             return [recoveryView, new RecoveryInputDelegate(recoveryView)];
         }
 

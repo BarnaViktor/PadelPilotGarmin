@@ -1,0 +1,22 @@
+{
+  "version": "1.3.0",
+  "action": "test",
+  "device": "fenix843mm",
+  "devices": [
+    "fenix843mm"
+  ],
+  "experimental": false,
+  "min_api_level": "3.4.0",
+  "application_id": "e6b2455dd36646098e6f53e16d77df8f",
+  "built_at_utc": "2026-10-07T20:33:51.187426+00:00",
+  "git_revision": "10656a3db618adf0bae8277e0b431ada56c5f9ff",
+  "working_tree_dirty": true,
+  "compiler": "Connect IQ Compiler version: 9.2.0",
+  "artifact": "padel-pilot-1.3.0-tests-fenix843mm.prg",
+  "size_bytes": 335436,
+  "sha256": "484f0cb86898393810bcc97ede5cea115be464cd671df8bd9c1c52c0e3e60325",
+  "checks": {
+    "build": "passed",
+    "tests_passed": 116
+  }
+}

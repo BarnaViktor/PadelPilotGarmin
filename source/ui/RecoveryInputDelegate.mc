@@ -25,6 +25,7 @@ class RecoveryInputDelegate extends WatchUi.BehaviorDelegate {
         var engine = _view.getLoadedMatch()[0];
         ActiveMatchSession.attach(engine, scoreView);
         if (engine instanceof PointMatchEngine) {
+            scoreView.startActivity();
             WatchUi.switchToView(scoreView, new PointMatchStartInputDelegate(scoreView),
                 WatchUi.SLIDE_IMMEDIATE);
             return;
@@ -41,6 +42,11 @@ class RecoveryInputDelegate extends WatchUi.BehaviorDelegate {
         if (engine instanceof PointMatchEngine) {
             var pointView = new PointMatchStartView(engine);
             pointView.restoreSavedTime(loaded[1]);
+            if (loaded.size() == 4 && loaded[3]) {
+                pointView._activitySaved = true;
+                pointView.showSaveConfirm();
+                pointView._saveYes = true;
+            }
             return pointView;
         }
         var scoreView = new ScoreView(engine, loaded[1], loaded[2]);

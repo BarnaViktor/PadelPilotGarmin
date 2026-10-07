@@ -1,0 +1,22 @@
+{
+  "version": "1.3.0",
+  "action": "test",
+  "device": "fenix7x",
+  "devices": [
+    "fenix7x"
+  ],
+  "experimental": false,
+  "min_api_level": "3.4.0",
+  "application_id": "e6b2455dd36646098e6f53e16d77df8f",
+  "built_at_utc": "2026-10-07T20:35:17.231833+00:00",
+  "git_revision": "10656a3db618adf0bae8277e0b431ada56c5f9ff",
+  "working_tree_dirty": true,
+  "compiler": "Connect IQ Compiler version: 9.2.0",
+  "artifact": "padel-pilot-1.3.0-tests-fenix7x.prg",
+  "size_bytes": 329676,
+  "sha256": "cb14f106484c986a40cb21f96f729d08adb6159d89a39380872a035db4bdb0e3",
+  "checks": {
+    "build": "passed",
+    "tests_passed": 116
+  }
+}

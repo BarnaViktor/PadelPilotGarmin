@@ -139,14 +139,30 @@ function setupPhysicalButtonsSaveAndCancelAcrossModes(logger) {
     var setup = new MatchSetupState();
     var delegate = new SetupInputDelegate(setup);
     Test.assert(delegate.onKey(new SetupKeyEvent(WatchUi.KEY_ENTER)));
+    // Follow the displayed CLASSIC / AMERICANO / MEXICANO row order,
+    // including wrapping at both ends while the visible setup fields change.
+    var downwardModes = [MatchMode.AMERICANO, MatchMode.MEXICANO, MatchMode.CLASSIC];
+    var upwardModes = [MatchMode.MEXICANO, MatchMode.AMERICANO, MatchMode.CLASSIC];
+    for (var i = 0; i < downwardModes.size(); i += 1) {
+        Test.assert(delegate.onKey(new SetupKeyEvent(WatchUi.KEY_DOWN)));
+        Test.assertEqual(downwardModes[i], setup.matchMode);
+        Test.assertEqual(0, setup.selectedField);
+        Test.assert(setup.editing);
+    }
+    for (var i = 0; i < upwardModes.size(); i += 1) {
+        Test.assert(delegate.onKey(new SetupKeyEvent(WatchUi.KEY_UP)));
+        Test.assertEqual(upwardModes[i], setup.matchMode);
+        Test.assertEqual(0, setup.selectedField);
+        Test.assert(setup.editing);
+    }
     Test.assert(delegate.onKey(new SetupKeyEvent(WatchUi.KEY_UP)));
-    Test.assertEqual(MatchMode.AMERICANO, setup.matchMode);
+    Test.assertEqual(MatchMode.MEXICANO, setup.matchMode);
     Test.assert(delegate.onKey(new SetupKeyEvent(WatchUi.KEY_ESC)));
     Test.assertEqual(MatchMode.CLASSIC, setup.matchMode);
     delegate.onKey(new SetupKeyEvent(WatchUi.KEY_ENTER));
     delegate.onKey(new SetupKeyEvent(WatchUi.KEY_DOWN));
     delegate.onKey(new SetupKeyEvent(WatchUi.KEY_ENTER));
-    Test.assertEqual(MatchMode.MEXICANO, setup.matchMode);
+    Test.assertEqual(MatchMode.AMERICANO, setup.matchMode);
     // Rule, target and team: modify, cancel, modify again, then save.
     for (var field = 1; field < setup.fieldCount(); field += 1) {
         delegate.onKey(new SetupKeyEvent(WatchUi.KEY_DOWN));
@@ -159,6 +175,13 @@ function setupPhysicalButtonsSaveAndCancelAcrossModes(logger) {
         delegate.onKey(new SetupKeyEvent(WatchUi.KEY_UP));
         delegate.onKey(new SetupKeyEvent(WatchUi.KEY_ENTER));
         Test.assert(setup.valueFor(field) != original);
+        if (setup.fieldFor(field) == MatchSetupField.POINT_TARGET) {
+            Test.assertEqual(original + 1, setup.pointTarget);
+            delegate.onKey(new SetupKeyEvent(WatchUi.KEY_ENTER));
+            delegate.onKey(new SetupKeyEvent(WatchUi.KEY_DOWN));
+            delegate.onKey(new SetupKeyEvent(WatchUi.KEY_ENTER));
+            Test.assertEqual(original, setup.pointTarget);
+        }
     }
     Test.assert(!delegate.onKey(new SetupKeyEvent(WatchUi.KEY_ESC)));
     return true;

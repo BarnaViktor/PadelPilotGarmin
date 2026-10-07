@@ -5,21 +5,29 @@ végigvezeti és rögzíti egy padelmérkőzés eredményét.
 
 ## Jelenlegi állapot
 
-Verzió: **1.2.0**, stabil produkciós kiadási csomag (2026-10-04).
-A korábbi, saját használatra bevált éles verzió 1.1.0 volt.
-Az új kiadás az összesített és meccsenkénti statisztikai nézeteket,
-valamint az Americano/Mexicano saját meccs pontozását és aktív
-helyreállítását tartalmazza. A főmenü a VERSION fájlból származó verziót mutatja.
+Verzió: **1.3.0**, produkciós kiadási csomag (2026-10-07).
+Az 1.2.0 óta elkészült az Americano/Mexicano lezárt és félbehagyott
+előzménye, döntetlenstatisztikája és Garmin FIT-integrációja, valamint
+javult a módválasztó UP/DOWN iránya. A főmenü a VERSION fájlból származó
+verziót mutatja.
 
 Kiadási fájl és telepítési tudnivalók:
-[1.2.0 kiadási jegyzet](docs/releases/1.2.0.md),
+[1.3.0 kiadási jegyzet](docs/releases/1.3.0.md),
 [Store ellenőrzőlista](store/release-checklist.md).
-A csomag helyben elkészült; Store-publikálás és az 1.2.0 valós órás
-FIT/Connect ellenőrzése még nem történt.
+A helyi produkciós export elkészülte nem jelent Store-publikálást;
+a valós órás FIT/Connect és készülékkapuk külön nyitottak.
 
-A kiadások közös helye a `dist/releases/`, verziónként külön mappával:
-az `1.1.0/` a korábbi éles és béta IQ-csomagot, az `1.2.0/` az új
-kiadási csomagot és a hozzá tartozó dokumentációt tartalmazza.
+Az Americano/Mexicano eredményéről START nyitja a SAVE MATCH / DISCARD MATCH
+menüt; szünetben RESUME / SAVE & END / DISCARD MATCH választható.
+A közös előzmény legfeljebb 20 meccset őriz. A döntetlen befejezett meccs,
+külön DRAWS mutatóval. A pontmódok pont- és időadatot adnak az összesítőhöz,
+a szettstatisztikát csak a klasszikus meccsek növelik.
+A FIT utáni előzményhibát újraindításból is új felvétel nélkül lehet befejezni.
+Részletek: [FIT-adatszerződés](docs/am7-fit-contract.md).
+
+A kiadások közös helye a `dist/releases/`, verziónként külön mappával.
+Az `1.1.0/` és `1.2.0/` megőrzi a korábbi csomagokat;
+az `1.3.0/` a jelenlegi IQ-t és ellenőrzési jegyzőkönyveit tartalmazza.
 
 A kiadás funkciói:
 
@@ -49,13 +57,12 @@ A kiadás funkciói:
 - aktuális, átlagos és maximális pulzus, Garmin által számított kalória és
   aktivitásidő rögzítése, amikor ezek az adatok elérhetők;
 - pontesemények, szetteredmények és győztes egyedi FIT-mezőkben;
-- 94 Monkey C teszt a klasszikus és pontmódos domainre, beállításokra,
+- 116 Monkey C teszt a klasszikus és pontmódos domainre, beállításokra,
   mentésre, előzményre, aktivitásrögzítésre és a 280/416 pixeles elrendezésekre.
 
-Az Americano/Mexicano az 1.2.0-ban egy saját meccset pontoz és aktív
-meccsként helyreállít. Ebben a módban nincs lezárt helyi előzmény,
-SAVE & END vagy FIT-aktivitás; az eredmény a megerősített eldobásig
-megmarad. Nem kezel versenysorsolást, partnerváltást vagy rangsort.
+Az Americano/Mexicano egy saját meccset pontoz, ment és helyreállít,
+helyi előzménnyel és FIT-aktivitással. Nem kezel versenysorsolást,
+partnerváltást vagy rangsort.
 A hőtérkép és a saját szerveres szinkron későbbi bővítés.
 
 ## Projektstruktúra
@@ -82,7 +89,7 @@ Szükséges:
 4. Garmin developer key a fordításhoz.
 
 A fejlesztés alapértelmezett célkészüléke a Forerunner 265 (`fr265`),
-az 1.2.0 kiadási csomag a [támogatott készülékek](docs/supported-devices.md)
+az 1.3.0 kiadási csomag a [támogatott készülékek](docs/supported-devices.md)
 listájában szereplő további kilenc SDK-profilt is tartalmazza. A Garmin
 kompatibilitási táblája szerint a Forerunner 265 Connect IQ API level 5.2
 eszköz, 416 x 416 pixeles kerek AMOLED kijelzővel. Részletek:
@@ -238,7 +245,7 @@ Részletek: [docs/development-roadmap.md](docs/development-roadmap.md)
 Kis kontextusablakban, egyenként indítható következő egységek:
 [docs/next-work-units.md](docs/next-work-units.md).
 
-**AM-5 lezárva; következő eszköz nélküli egység: AM-6, saját meccs eredménye és előzménye.**
+**AM-7 automatikus kapu lezárva; következő eszköz nélküli egység: I2-1, Instinct 2 korlátok és vizuális tokenek.**
 Az [egymeccses specifikáció](docs/americano-mexicano-spec.md) két csapat
 saját meccsét kezeli: közös összpontszám (A+B=X) vagy csapatcél
 (A=X vagy B=X), meccs előtt beállítható 1–999 X és kezdő A/B.
@@ -258,12 +265,11 @@ módosít állapotot. A pontmeccs aktív állapota automatikusan mentődik;
 kezdő csapat, pontállás és játékidő megmarad. Az undo-napló újraindításkor
 üres, a klasszikus meccshez igazodva; a folytatás utáni pontok ismét
 visszavonhatók. Visszaállított lezárt meccsnél a fagyasztott eredmény látszik.
-A folytatott meccs megerősített eldobása a főmenübe lép vissza.
-Előzmény és FIT az AM-6/AM-7 egységben következik.
-Az AM-5 FR265 és Enduro API 3.4.0 profilon 94/94 teszttel, optimalizált
-builddel, natív vizuális és nyolckombinációs újraindítás/folytatás/eldobás
-próbával ellenőrizve; a régi klasszikus mentések olvashatók maradnak.
+A folytatott meccs megerősített eldobása vagy mentése a főmenübe lép vissza.
+Az AM-6 az előzményt és a korai mentést is beköti; az AM-7 a pontmódos FIT-et is kezeli.
+Az AM-6/AM-7 ellenőrzése és a build-jegyzőkönyvek az átadási jegyzetben vannak;
+a régi klasszikus mentések olvashatók maradnak.
 Az S2-V2 valós órás próba továbbra is nyitott; az új statisztikalapok
-ellenőrzéséhez az 1.2.0 produkciós csomagot használd.
+ellenőrzéséhez az 1.3.0 produkciós csomagot használd.
 
 Új fejlesztői munkamenethez: [átadási jegyzet](docs/development-handoff.md).
